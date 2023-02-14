@@ -22,7 +22,7 @@ class _HomePageHostState extends State<HomePageHost> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(actions: [
-        IconButton(onPressed: signUserOut, icon: Icon(Icons.logout))
+        IconButton(onPressed: signUserOut, icon: const Icon(Icons.logout))
       ]),
       body: const Center(
         child: Text("You are logged in!"),
