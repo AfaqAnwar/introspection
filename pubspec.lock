@@ -9,14 +9,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.13"
-  animated_page_transition:
-    dependency: "direct main"
-    description:
-      name: animated_page_transition
-      sha256: cc94d1a096d652abeac54459144fbd39f8f7dcdec533cf8e05c11824a58be598
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.0.1+2"
   archive:
     dependency: transitive
     description:
