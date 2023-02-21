@@ -39,7 +39,6 @@ dependencies:
   lottie: ^2.2.0
   page_transition: ^2.0.9
   im_stepper: ^1.0.1+1
-  form_field_validator: ^1.1.0
 
 dev_dependencies:
   flutter_test:

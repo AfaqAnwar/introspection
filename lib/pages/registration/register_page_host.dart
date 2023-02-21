@@ -1,6 +1,5 @@
 import 'package:datingapp/pages/registration/registration_tabs/name_tab.dart';
 import 'package:datingapp/style/app_style.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:im_stepper/stepper.dart';
 
