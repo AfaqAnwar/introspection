@@ -24,7 +24,7 @@ class _RegisterLoadState extends State<RegisterLoad>
     super.initState();
     _composition = _loadComposition();
     _controller =
-        AnimationController(vsync: this, duration: const Duration(seconds: 3))
+        AnimationController(vsync: this, duration: const Duration(seconds: 4))
           ..addStatusListener((status) {
             if (status == AnimationStatus.completed) {
               setState(() {
@@ -42,7 +42,7 @@ class _RegisterLoadState extends State<RegisterLoad>
   }
 
   Future<LottieComposition> _loadComposition() async {
-    var assetData = await rootBundle.load('assets/animations/love.json');
+    var assetData = await rootBundle.load('assets/animations/loveglass.json');
     return await LottieComposition.fromByteData(assetData);
   }
 
@@ -82,13 +82,13 @@ class _RegisterLoadState extends State<RegisterLoad>
               ),
             ),
             backgroundColor: Colors.white,
-            body: Center(
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Expanded(child: Container()),
-                    SafeArea(
+            body: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(child: Container()),
+                  SafeArea(
+                    child: Center(
                       child: Text(
                         "Welcome To Introspection",
                         textAlign: TextAlign.center,
@@ -100,17 +100,15 @@ class _RegisterLoadState extends State<RegisterLoad>
                         ),
                       ),
                     ),
-                    SafeArea(
-                      child: Lottie(
-                        composition: composition,
-                        controller: _controller,
-                        width: 250,
-                        height: 250,
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                    Expanded(child: Container()),
-                    GestureDetector(
+                  ),
+                  Lottie(
+                    composition: composition,
+                    controller: _controller,
+                    fit: BoxFit.fill,
+                  ),
+                  Expanded(child: Container()),
+                  Center(
+                    child: GestureDetector(
                       onTap: continueToRegister,
                       child: Container(
                         padding: const EdgeInsets.all(35),
@@ -127,8 +125,8 @@ class _RegisterLoadState extends State<RegisterLoad>
                         )),
                       ),
                     ),
-                  ]),
-            ),
+                  ),
+                ]),
           );
         } else {
           return const Center(
