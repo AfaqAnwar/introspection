@@ -20,17 +20,9 @@
 		<data>
 		TREwjcofRl4LMHoVPz8ensmQ/JI=
 		</data>
-		<key>flutter_assets/assets/animations/heart-load-2.json</key>
-		<data>
-		Rbj7uWD7/KNrbowm1dq8sb5pUOs=
-		</data>
-		<key>flutter_assets/assets/animations/heart-load.json</key>
-		<data>
-		1ehn80cY36F7+Gu40MzL1lNQFw8=
-		</data>
 		<key>flutter_assets/assets/animations/love.json</key>
 		<data>
-		Rbj7uWD7/KNrbowm1dq8sb5pUOs=
+		oiolZnGs1iNx3psuMJObcb0fm3w=
 		</data>
 		<key>flutter_assets/assets/fonts/Charter/Charter-Bold-Italic.ttf</key>
 		<data>
@@ -114,7 +106,7 @@
 		</data>
 		<key>flutter_assets/kernel_blob.bin</key>
 		<data>
-		zlDvqBTusg2Su3dRE2NSz9lwfrA=
+		XgU5tR15JuWO9TwDQkj/z4+pR48=
 		</data>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<data>
@@ -152,25 +144,11 @@
 			99hrfCqOqzYE9Jp5CWCakG5SVN9OmGYAmFJcJctyv40=
 			</data>
 		</dict>
-		<key>flutter_assets/assets/animations/heart-load-2.json</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			T+xtLyRfGfchvSmbetQsoXhBr8KaFBUAgW2/LeeeWQQ=
-			</data>
-		</dict>
-		<key>flutter_assets/assets/animations/heart-load.json</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			tFXlrbvKDNHr3ihCAvBQBSeXeZ8R6IuuvQ/ykqcVdio=
-			</data>
-		</dict>
 		<key>flutter_assets/assets/animations/love.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			T+xtLyRfGfchvSmbetQsoXhBr8KaFBUAgW2/LeeeWQQ=
+			ZNdlCD3KSnHKeUIRPz0395Dcv8XGvOwL4W8/IdGCa0w=
 			</data>
 		</dict>
 		<key>flutter_assets/assets/fonts/Charter/Charter-Bold-Italic.ttf</key>
@@ -317,7 +295,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			eYr7b2fZAVkH6oqwWWpWhvUNI+ZczhaTa8anQRcHU90=
+			MJySFpIe93o8a4m9j0LynFH5IqJur6AOE4x/rBpNr2E=
 			</data>
 		</dict>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>

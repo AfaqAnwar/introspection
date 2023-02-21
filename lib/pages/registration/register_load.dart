@@ -1,9 +1,11 @@
 import 'package:datingapp/components/login_page_components/styled_button.dart';
 import 'package:datingapp/pages/registration/register_page_.dart';
+import 'package:datingapp/pages/signin_signup/login_or_register.dart';
 import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart';
+import 'package:page_transition/page_transition.dart';
 
 class RegisterLoad extends StatefulWidget {
   const RegisterLoad({super.key});
@@ -13,7 +15,7 @@ class RegisterLoad extends StatefulWidget {
 }
 
 class _RegisterLoadState extends State<RegisterLoad>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
   late final AnimationController _controller;
   bool animationEnded = false;
   late final Future<LottieComposition> _composition;
@@ -47,7 +49,20 @@ class _RegisterLoadState extends State<RegisterLoad>
 
   void continueToRegister() {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => const RegisterPage()));
+        context,
+        PageTransition(
+            child: const RegisterPage(),
+            childCurrent: const RegisterLoad(),
+            type: PageTransitionType.rightToLeftPop));
+  }
+
+  void goBackToLogin() {
+    Navigator.push(
+        context,
+        PageTransition(
+            child: const LoginOrRegisterPage(),
+            childCurrent: const RegisterLoad(),
+            type: PageTransitionType.leftToRightPop));
   }
 
   @override
@@ -58,14 +73,24 @@ class _RegisterLoadState extends State<RegisterLoad>
         var composition = snapshot.data;
         if (composition != null) {
           return Scaffold(
+            appBar: AppBar(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              leading: IconButton(
+                icon: const Icon(Icons.arrow_back_ios),
+                color: AppStyle.red800,
+                onPressed: goBackToLogin,
+              ),
+            ),
             backgroundColor: Colors.white,
-            body: SafeArea(
-              child: Center(
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
+            body: Center(
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(child: Container()),
+                    SafeArea(
+                      child: Text(
                         "Welcome To Introspection",
                         textAlign: TextAlign.center,
                         style: TextStyle(
@@ -75,19 +100,35 @@ class _RegisterLoadState extends State<RegisterLoad>
                           fontWeight: FontWeight.w800,
                         ),
                       ),
-                      Lottie(
+                    ),
+                    SafeArea(
+                      child: Lottie(
                         composition: composition,
                         controller: _controller,
                         width: 250,
                         height: 250,
                         fit: BoxFit.fill,
                       ),
-                      StyledButton(
-                          onTap: continueToRegister,
-                          buttonColor: AppStyle.red800,
-                          buttonText: "Let's Get Started!")
-                    ]),
-              ),
+                    ),
+                    Expanded(child: Container()),
+                    GestureDetector(
+                      onTap: continueToRegister,
+                      child: Container(
+                        padding: const EdgeInsets.all(35),
+                        decoration: BoxDecoration(
+                          color: AppStyle.red800,
+                        ),
+                        child: const Center(
+                            child: Text(
+                          "Let's Gets Started!",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16),
+                        )),
+                      ),
+                    ),
+                  ]),
             ),
           );
         } else {

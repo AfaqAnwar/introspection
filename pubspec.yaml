@@ -37,6 +37,8 @@ dependencies:
   firebase_core: ^2.5.0
   firebase_auth: ^4.2.6
   lottie: ^2.2.0
+  page_transition: ^2.0.9
+  animated_page_transition: ^0.0.1+2
 
 dev_dependencies:
   flutter_test:

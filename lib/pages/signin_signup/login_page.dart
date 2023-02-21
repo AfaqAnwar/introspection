@@ -1,14 +1,15 @@
 import 'package:datingapp/components/login_page_components/login_textfield.dart';
 import 'package:datingapp/components/login_page_components/login_tile.dart';
 import 'package:datingapp/components/login_page_components/styled_button.dart';
+import 'package:datingapp/pages/registration/register_load.dart';
 import 'package:datingapp/style/app_style.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 
 class LoginPage extends StatefulWidget {
-  final Function()? onTap;
-  const LoginPage({super.key, required this.onTap});
+  const LoginPage({super.key});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -102,6 +103,15 @@ class _LoginPageState extends State<LoginPage> {
                 ));
       }
     }
+  }
+
+  void goToRegister() {
+    Navigator.push(
+        context,
+        PageTransition(
+            child: const RegisterLoad(),
+            childCurrent: const LoginPage(),
+            type: PageTransitionType.rightToLeftPop));
   }
 
   @override
@@ -225,7 +235,7 @@ class _LoginPageState extends State<LoginPage> {
                     const Text("Not a member?"),
                     const SizedBox(width: 4),
                     GestureDetector(
-                      onTap: widget.onTap,
+                      onTap: goToRegister,
                       child: Text(
                         "Register Now!",
                         style: TextStyle(
