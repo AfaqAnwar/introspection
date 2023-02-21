@@ -10,15 +10,91 @@
 		</data>
 		<key>flutter_assets/AssetManifest.json</key>
 		<data>
-		jXJiUtsTPqzMhgQd4dDHxQOfxBc=
+		jjO8Ilu0734O0M4XbLIKVYaBEe8=
 		</data>
 		<key>flutter_assets/FontManifest.json</key>
 		<data>
-		vKJkVIcw+LGHFnKJGwrQwCREv68=
+		33niwcgI12gYM4LBDudh1M32M2U=
 		</data>
 		<key>flutter_assets/NOTICES.Z</key>
 		<data>
-		fZ29alBP/1zpMf4g1Kd/lt+7nR0=
+		TREwjcofRl4LMHoVPz8ensmQ/JI=
+		</data>
+		<key>flutter_assets/assets/animations/heart-load-2.json</key>
+		<data>
+		Rbj7uWD7/KNrbowm1dq8sb5pUOs=
+		</data>
+		<key>flutter_assets/assets/animations/heart-load.json</key>
+		<data>
+		1ehn80cY36F7+Gu40MzL1lNQFw8=
+		</data>
+		<key>flutter_assets/assets/animations/love.json</key>
+		<data>
+		Rbj7uWD7/KNrbowm1dq8sb5pUOs=
+		</data>
+		<key>flutter_assets/assets/fonts/Charter/Charter-Bold-Italic.ttf</key>
+		<data>
+		CsaE8Z+YR9SqVLr98VuU/+MY0D8=
+		</data>
+		<key>flutter_assets/assets/fonts/Charter/Charter-Bold.ttf</key>
+		<data>
+		HuQcGUlfiMUFgs5jfy4Xf7qVLoU=
+		</data>
+		<key>flutter_assets/assets/fonts/Charter/Charter-Italic.ttf</key>
+		<data>
+		Note3SqXuxalnKWzVyRFBFboU6o=
+		</data>
+		<key>flutter_assets/assets/fonts/Charter/Charter-Regular.ttf</key>
+		<data>
+		YrjtErXhgXcBX3cE/Cju6bUTYdg=
+		</data>
+		<key>flutter_assets/assets/fonts/Modern-Era/Modern-Era-Black-Italic.ttf</key>
+		<data>
+		EjqZgGjIqmiJstxTWuqBDAfx6uw=
+		</data>
+		<key>flutter_assets/assets/fonts/Modern-Era/Modern-Era-Black.ttf</key>
+		<data>
+		INx3xGGS9S24i6eF3enRT4OfyUU=
+		</data>
+		<key>flutter_assets/assets/fonts/Modern-Era/Modern-Era-Bold-Italic.ttf</key>
+		<data>
+		W6iqzxL7xJxp9hKKaYw5yD0HWpw=
+		</data>
+		<key>flutter_assets/assets/fonts/Modern-Era/Modern-Era-Bold.otf</key>
+		<data>
+		+admufwTjPwSWGqv/tKa07YpYbk=
+		</data>
+		<key>flutter_assets/assets/fonts/Modern-Era/Modern-Era-Extra-Bold-Italic.ttf</key>
+		<data>
+		mqGjfmXAE4/ooRxHJ0+VZ1IS7Y8=
+		</data>
+		<key>flutter_assets/assets/fonts/Modern-Era/Modern-Era-Extra-Bold.ttf</key>
+		<data>
+		pO244yNTtjm+50GjwvgHmgSrXkA=
+		</data>
+		<key>flutter_assets/assets/fonts/Modern-Era/Modern-Era-Light-Italic.ttf</key>
+		<data>
+		+jZuBMB2sVA/rqYiDOIZPtnrloY=
+		</data>
+		<key>flutter_assets/assets/fonts/Modern-Era/Modern-Era-Light.ttf</key>
+		<data>
+		8smqECciVGGoQUIXyz1sD1LJlqs=
+		</data>
+		<key>flutter_assets/assets/fonts/Modern-Era/Modern-Era-Medium-Italic.ttf</key>
+		<data>
+		PMJQfkDXpASsh9YWrNUELthefNw=
+		</data>
+		<key>flutter_assets/assets/fonts/Modern-Era/Modern-Era-Medium.otf</key>
+		<data>
+		ZB5QSOD0ByyshuO3oojwEmI2Kws=
+		</data>
+		<key>flutter_assets/assets/fonts/Modern-Era/Modern-Era-Regular-Italic.ttf</key>
+		<data>
+		jiIJnJwO77635LcR5l1PVcuHxTY=
+		</data>
+		<key>flutter_assets/assets/fonts/Modern-Era/Modern-Era-Regular.ttf</key>
+		<data>
+		5tkmF3baK72nuq4cKZSnbIOVPt8=
 		</data>
 		<key>flutter_assets/assets/images/apple.png</key>
 		<data>
@@ -38,7 +114,7 @@
 		</data>
 		<key>flutter_assets/kernel_blob.bin</key>
 		<data>
-		7Xsn97giTNE027qTJMR8VEmTCng=
+		zlDvqBTusg2Su3dRE2NSz9lwfrA=
 		</data>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<data>
@@ -59,21 +135,154 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			xfUSupJyrrUvTvA3cdcTR5yJ9crfCVV14c97kcIbwgU=
+			SgNgAsdFFSzPZwVwvSIWxXjMTSfNhz9nyjb7tuzMhyU=
 			</data>
 		</dict>
 		<key>flutter_assets/FontManifest.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			zX4DZFvESy3Ue3y2JvUcTsv1Whl6t3JBYotHrBZfviE=
+			TO06tYnEAziblIDdAWXX2qgk94Pzj+RJPJit0RBe8Oo=
 			</data>
 		</dict>
 		<key>flutter_assets/NOTICES.Z</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			xq5ZIseF+0xZ7BIkW/+q0M5feROrbZJFtr2Sh/64vdk=
+			99hrfCqOqzYE9Jp5CWCakG5SVN9OmGYAmFJcJctyv40=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/animations/heart-load-2.json</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			T+xtLyRfGfchvSmbetQsoXhBr8KaFBUAgW2/LeeeWQQ=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/animations/heart-load.json</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			tFXlrbvKDNHr3ihCAvBQBSeXeZ8R6IuuvQ/ykqcVdio=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/animations/love.json</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			T+xtLyRfGfchvSmbetQsoXhBr8KaFBUAgW2/LeeeWQQ=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/fonts/Charter/Charter-Bold-Italic.ttf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			9prF+m5JCNXInRZHes6ZSJPELrLO7JxMv4dzrOZiLZg=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/fonts/Charter/Charter-Bold.ttf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			gEJGMb05CO+tilSJ30c8rnt1VvkLtrYyUe4ioKzk9hU=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/fonts/Charter/Charter-Italic.ttf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			9FnZt6rUJlmE2H7Q448skSExSI+KO5ECfvC+1WcjlQY=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/fonts/Charter/Charter-Regular.ttf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			X614nFbiTTI9+gF9/6UwUiDwP4m45DsoWUKEVU33BDc=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/fonts/Modern-Era/Modern-Era-Black-Italic.ttf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			5i3lvCnU5mdyFcZQld4PHJhpxdljNaAlcVgRFVBPHM0=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/fonts/Modern-Era/Modern-Era-Black.ttf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			pUt3n6Lvmrc9D9fv3S4i0PFV6VYgG8JSZuGj2/f6XaA=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/fonts/Modern-Era/Modern-Era-Bold-Italic.ttf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			KAKYuQkG3JNyCxZHadUspKfXvN598mCRsMRoAEsHApo=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/fonts/Modern-Era/Modern-Era-Bold.otf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			Zb6djBZDVcdmWpybF8lvKTOQeldRiGuXIDiAsx8lrLc=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/fonts/Modern-Era/Modern-Era-Extra-Bold-Italic.ttf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			xtUql8pC0iCUKQj4ck8HT8Uva+N7Ux9j7oPtGKIQ81M=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/fonts/Modern-Era/Modern-Era-Extra-Bold.ttf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			ezabsYxAEsYQUSeJKxmzQ8TgkfZNTsckRdW3/aDGzhE=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/fonts/Modern-Era/Modern-Era-Light-Italic.ttf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			MqpCRLT8wByycYkD6cWZJQhzADbd9Ff8cIrwlKwpcM4=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/fonts/Modern-Era/Modern-Era-Light.ttf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			zU3zT1TDJ7pO5PRURbWfjPljuxz++Xgyj0NInIDOcBo=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/fonts/Modern-Era/Modern-Era-Medium-Italic.ttf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			F/FxIA9hnPOLmCb8VqrQz/tkui+d8OTfmpUq6KpPKkY=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/fonts/Modern-Era/Modern-Era-Medium.otf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			iNRx/hGv9nUMLDmqSWay5ZAmJnawiM8MQYa/vBxeawM=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/fonts/Modern-Era/Modern-Era-Regular-Italic.ttf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			w/42Q3XDkdSdjWV8k2jzJnz2JCM//eauupfHQ1sP5WY=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/fonts/Modern-Era/Modern-Era-Regular.ttf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			VfhycRsNnFsSI92SPggea31aiMzbGC2v1dxcoW5PZ60=
 			</data>
 		</dict>
 		<key>flutter_assets/assets/images/apple.png</key>
@@ -108,7 +317,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			+ibzmBb7nVQ6fcVPoMAl//chzE+1W4hn2E4tdOK2Cz4=
+			eYr7b2fZAVkH6oqwWWpWhvUNI+ZczhaTa8anQRcHU90=
 			</data>
 		</dict>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>

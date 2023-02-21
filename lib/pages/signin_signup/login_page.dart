@@ -1,6 +1,6 @@
 import 'package:datingapp/components/login_page_components/login_textfield.dart';
 import 'package:datingapp/components/login_page_components/login_tile.dart';
-import 'package:datingapp/components/login_page_components/login_button.dart';
+import 'package:datingapp/components/login_page_components/styled_button.dart';
 import 'package:datingapp/style/app_style.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -127,7 +127,10 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 Text(
                   "Welcome back! You've been missed!",
-                  style: TextStyle(color: AppStyle.red800, fontSize: 16),
+                  style: TextStyle(
+                    color: AppStyle.red800,
+                    fontSize: 16,
+                  ),
                 ),
                 const SizedBox(
                   height: 25,
@@ -160,7 +163,11 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(
                   height: 25,
                 ),
-                SignInButton(onTap: signUserIn, buttonColor: AppStyle.red900),
+                StyledButton(
+                  onTap: signUserIn,
+                  buttonColor: AppStyle.red900,
+                  buttonText: 'Sign In',
+                ),
                 const SizedBox(
                   height: 50,
                 ),

@@ -14,9 +14,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: AuthPage(),
-    );
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: const AuthPage(),
+        theme: ThemeData(fontFamily: 'Modern-Era'));
   }
 }

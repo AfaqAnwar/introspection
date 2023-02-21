@@ -17,7 +17,7 @@ class _RegisterPageState extends State<RegisterPage> {
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
+                children: const [
                   Text('Register Page'),
                 ]),
           ),
