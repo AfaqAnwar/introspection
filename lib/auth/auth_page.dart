@@ -1,5 +1,5 @@
 import 'package:datingapp/pages/home_page_host.dart';
-import 'package:datingapp/pages/signin_signup/login_or_register.dart';
+import 'package:datingapp/pages/signin_signup/login_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +16,7 @@ class AuthPage extends StatelessWidget {
             if (snapshot.hasData) {
               return const HomePageHost();
             } else {
-              return const LoginOrRegisterPage();
+              return const LoginPage();
             }
           }),
     );
