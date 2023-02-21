@@ -1,4 +1,4 @@
-import 'package:datingapp/pages/registration/register_page_.dart';
+import 'package:datingapp/pages/registration/register_page_host.dart';
 import 'package:datingapp/pages/signin_signup/login_page.dart';
 import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/material.dart';
@@ -50,7 +50,7 @@ class _RegisterLoadState extends State<RegisterLoad>
     Navigator.push(
         context,
         PageTransition(
-            child: const RegisterPage(),
+            child: const RegisterPageHost(),
             childCurrent: const RegisterLoad(),
             type: PageTransitionType.rightToLeftPop));
   }
@@ -77,6 +77,7 @@ class _RegisterLoadState extends State<RegisterLoad>
               elevation: 0,
               leading: IconButton(
                 icon: const Icon(Icons.arrow_back_ios),
+                splashRadius: 0.1,
                 color: AppStyle.red800,
                 onPressed: goBackToLogin,
               ),

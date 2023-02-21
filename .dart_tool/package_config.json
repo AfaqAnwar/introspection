@@ -128,10 +128,22 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "form_field_validator",
+      "rootUri": "file:///Users/afaq/.pub-cache/hosted/pub.dev/form_field_validator-1.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "http_parser",
       "rootUri": "file:///Users/afaq/.pub-cache/hosted/pub.dev/http_parser-4.0.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
+    },
+    {
+      "name": "im_stepper",
+      "rootUri": "file:///Users/afaq/.pub-cache/hosted/pub.dev/im_stepper-1.0.1+1",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
     },
     {
       "name": "intl",
@@ -260,7 +272,7 @@
       "languageVersion": "2.19"
     }
   ],
-  "generated": "2023-02-21T05:41:50.593307Z",
+  "generated": "2023-02-21T19:50:02.264217Z",
   "generator": "pub",
   "generatorVersion": "2.19.0"
 }
