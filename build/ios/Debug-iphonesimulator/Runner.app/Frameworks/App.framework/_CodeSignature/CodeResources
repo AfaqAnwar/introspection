@@ -10,19 +10,23 @@
 		</data>
 		<key>flutter_assets/AssetManifest.json</key>
 		<data>
-		jjO8Ilu0734O0M4XbLIKVYaBEe8=
+		jkB831kMVgEufTp4mcGt1yepzXk=
 		</data>
 		<key>flutter_assets/FontManifest.json</key>
 		<data>
-		33niwcgI12gYM4LBDudh1M32M2U=
+		BmlncQxkE++0g1l8ofiroK8e+oU=
 		</data>
 		<key>flutter_assets/NOTICES.Z</key>
 		<data>
-		TREwjcofRl4LMHoVPz8ensmQ/JI=
+		IKJteScnnVxXLMf2YB8pkokqi4E=
 		</data>
 		<key>flutter_assets/assets/animations/love.json</key>
 		<data>
 		oiolZnGs1iNx3psuMJObcb0fm3w=
+		</data>
+		<key>flutter_assets/assets/animations/loveglass.json</key>
+		<data>
+		HD1AdgVNFLrMaIfsFmpmFKKQoSI=
 		</data>
 		<key>flutter_assets/assets/fonts/Charter/Charter-Bold-Italic.ttf</key>
 		<data>
@@ -39,6 +43,26 @@
 		<key>flutter_assets/assets/fonts/Charter/Charter-Regular.ttf</key>
 		<data>
 		YrjtErXhgXcBX3cE/Cju6bUTYdg=
+		</data>
+		<key>flutter_assets/assets/fonts/Marlide-Display/MarlideDisplay_Bold.ttf</key>
+		<data>
+		7SxVVe8HPWORD+b2humIZ+PN5jw=
+		</data>
+		<key>flutter_assets/assets/fonts/Marlide-Display/MarlideDisplay_ExtraBold.ttf</key>
+		<data>
+		tSFHNgBU/Q6vTIiH2EedDvhV7OI=
+		</data>
+		<key>flutter_assets/assets/fonts/Marlide-Display/MarlideDisplay_Heavy.ttf</key>
+		<data>
+		Lvi5n+GJS3IhRBrlfdwgnIRXeEw=
+		</data>
+		<key>flutter_assets/assets/fonts/Marlide-Display/MarlideDisplay_Light.ttf</key>
+		<data>
+		lyumh6Ze7a4pmRMduVoQaQvqwo4=
+		</data>
+		<key>flutter_assets/assets/fonts/Marlide-Display/MarlideDisplay_Regular.ttf</key>
+		<data>
+		BKgHt0TazaR2by8J0iLLNLhtT1s=
 		</data>
 		<key>flutter_assets/assets/fonts/Modern-Era/Modern-Era-Black-Italic.ttf</key>
 		<data>
@@ -106,7 +130,7 @@
 		</data>
 		<key>flutter_assets/kernel_blob.bin</key>
 		<data>
-		XgU5tR15JuWO9TwDQkj/z4+pR48=
+		Yh55eohooxkfZtLbpDX7NimAXhI=
 		</data>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<data>
@@ -127,21 +151,21 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			SgNgAsdFFSzPZwVwvSIWxXjMTSfNhz9nyjb7tuzMhyU=
+			CKdV6KeWlZL4ztkptc6gcog/Vb8UuwQSXYGKG+ZLRGM=
 			</data>
 		</dict>
 		<key>flutter_assets/FontManifest.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			TO06tYnEAziblIDdAWXX2qgk94Pzj+RJPJit0RBe8Oo=
+			uKw7LsrnOe8/gZUmwgK764rgo35NNwQPX2DIJ0zm1xI=
 			</data>
 		</dict>
 		<key>flutter_assets/NOTICES.Z</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			99hrfCqOqzYE9Jp5CWCakG5SVN9OmGYAmFJcJctyv40=
+			dsvO+r2obfehb2CCY+1PW2brCFZmLrNJa8VIF3W6Vvo=
 			</data>
 		</dict>
 		<key>flutter_assets/assets/animations/love.json</key>
@@ -149,6 +173,13 @@
 			<key>hash2</key>
 			<data>
 			ZNdlCD3KSnHKeUIRPz0395Dcv8XGvOwL4W8/IdGCa0w=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/animations/loveglass.json</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			vcOYf7T2Lpx0B84HRzh2va67xFj2So3BRhxd6ARAC1U=
 			</data>
 		</dict>
 		<key>flutter_assets/assets/fonts/Charter/Charter-Bold-Italic.ttf</key>
@@ -177,6 +208,41 @@
 			<key>hash2</key>
 			<data>
 			X614nFbiTTI9+gF9/6UwUiDwP4m45DsoWUKEVU33BDc=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/fonts/Marlide-Display/MarlideDisplay_Bold.ttf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			mnSOdxRWMFsODUdVgEZH7CwqeJhOT1DmoQb4mnDp1yI=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/fonts/Marlide-Display/MarlideDisplay_ExtraBold.ttf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			k127Nii10zdHbfYTqYtpvp243u2OZiFyS4FBYsSEhwk=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/fonts/Marlide-Display/MarlideDisplay_Heavy.ttf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			VjO5xTEmjxzTQOVAnJf0Iu+lO1XxtJjQfiUyizxzaeI=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/fonts/Marlide-Display/MarlideDisplay_Light.ttf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			bofCYW6A9C6G3d2JXCguAunDdUKcd33GHX62yyMlbbU=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/fonts/Marlide-Display/MarlideDisplay_Regular.ttf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			zDw340hcushCjG0zS94lsWMydbUPkYbphLi/Ml6Eg9w=
 			</data>
 		</dict>
 		<key>flutter_assets/assets/fonts/Modern-Era/Modern-Era-Black-Italic.ttf</key>
@@ -295,7 +361,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			MJySFpIe93o8a4m9j0LynFH5IqJur6AOE4x/rBpNr2E=
+			3/04uBCyNfBInV1LvbCUAjtYxVDrDL8TSt/IZ50Mfzg=
 			</data>
 		</dict>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>

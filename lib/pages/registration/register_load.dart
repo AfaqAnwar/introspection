@@ -94,9 +94,9 @@ class _RegisterLoadState extends State<RegisterLoad>
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: AppStyle.red800,
-                          fontSize: 48,
-                          fontFamily: 'Charter',
-                          fontWeight: FontWeight.w800,
+                          fontSize: 64,
+                          fontFamily: 'Marlide-Display',
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                     ),
