@@ -41,6 +41,7 @@ class _RegisterPageState extends State<RegisterPageHost> {
                   strokeColor: AppStyle.red500,
                   strokeWidth: 1),
             ),
+            const SizedBox(height: 50),
             Expanded(
               child: Container(),
             ),
