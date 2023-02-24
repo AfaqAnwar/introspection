@@ -1,6 +1,7 @@
 import 'package:datingapp/components/registration_components/registration_navigation_button.dart';
 import 'package:datingapp/components/registration_components/registration_textfield.dart';
 import 'package:datingapp/data/user.dart';
+import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/material.dart';
 
 class NameTab extends StatefulWidget {
@@ -100,8 +101,9 @@ class _NameTabState extends State<NameTab> {
                             actions: [
                               TextButton(
                                 onPressed: () => Navigator.pop(context),
-                                child: const Text(
+                                child: Text(
                                   "Okay",
+                                  style: TextStyle(color: AppStyle.red800),
                                 ),
                               )
                             ],

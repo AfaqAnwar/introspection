@@ -1,7 +1,9 @@
 import 'package:datingapp/pages/registration/registration_tabs/name_tab.dart';
+import 'package:datingapp/pages/signin_signup/login_page.dart';
 import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:im_stepper/stepper.dart';
+import 'package:page_transition/page_transition.dart';
 import '../../data/user.dart';
 
 class RegisterPageHost extends StatefulWidget {
@@ -30,9 +32,62 @@ class _RegisterPageState extends State<RegisterPageHost> {
     }
   }
 
+  void updateIndexBackwards() {
+    if (currentIndex > 0) {
+      setState(() {
+        currentIndex--;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back_ios),
+            splashRadius: 0.1,
+            color: AppStyle.red800,
+            onPressed: () {
+              if (currentIndex == 0) {
+                showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                          shape: const RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(15.0))),
+                          title: const Text('Woah There!'),
+                          content: const Text("Are you sure you want to exit?"),
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.pop(context),
+                              child: Text("Cancel",
+                                  style: TextStyle(color: AppStyle.red400)),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    PageTransition(
+                                        child: const LoginPage(),
+                                        childCurrent: const RegisterPageHost(),
+                                        type:
+                                            PageTransitionType.leftToRightPop));
+                              },
+                              child: Text(
+                                "Yes Take Me Back!",
+                                style: TextStyle(color: AppStyle.red800),
+                              ),
+                            )
+                          ],
+                        ));
+              }
+              updateIndexBackwards();
+            },
+          ),
+        ),
         backgroundColor: Colors.white,
         body: SafeArea(
           child: Column(children: [

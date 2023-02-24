@@ -41,8 +41,9 @@ class _LoginPageState extends State<LoginPage> {
                 actions: [
                   TextButton(
                     onPressed: () => Navigator.pop(context),
-                    child: const Text(
+                    child: Text(
                       "Okay",
+                      style: TextStyle(color: AppStyle.red800),
                     ),
                   )
                 ],
@@ -95,8 +96,9 @@ class _LoginPageState extends State<LoginPage> {
                   actions: [
                     TextButton(
                       onPressed: () => Navigator.pop(context),
-                      child: const Text(
+                      child: Text(
                         "Okay",
+                        style: TextStyle(color: AppStyle.red800),
                       ),
                     )
                   ],
