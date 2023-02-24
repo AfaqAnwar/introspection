@@ -94,10 +94,10 @@ class _RegisterPageState extends State<RegisterPageHost> {
             DotStepper(
               tappingEnabled: false,
               dotCount: totalIndex,
-              dotRadius: 8,
+              dotRadius: 6,
               activeStep: currentIndex,
               shape: Shape.circle,
-              spacing: 12,
+              spacing: 10,
               indicator: Indicator.shift,
               fixedDotDecoration: FixedDotDecoration(
                   color: Colors.grey.shade400,
