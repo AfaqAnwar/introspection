@@ -21,9 +21,10 @@ class RegistrationNavigationButton extends StatelessWidget {
         splashRadius: 0.1,
         onPressed: () {
           if (secondaryFunction != null) {
-            secondaryFunction!();
+            if (secondaryFunction!() == true) {
+              updateIndexFunction();
+            }
           }
-          updateIndexFunction();
         },
       ),
     );

@@ -17,6 +17,40 @@ class _NameTabState extends State<NameTab> {
   final firstNameController = TextEditingController();
   final lastNameController = TextEditingController();
 
+  String errorMessage = "";
+
+  bool textFieldValidation() {
+    if (firstNameController.text.trim().isEmpty) {
+      errorMessage = "Please enter your first name.";
+      return false;
+    } else if (isNumeric(firstNameController.text.trim())) {
+      errorMessage = "Please enter a valid first name.";
+      return false;
+    } else if (lastNameController.text.trim().isNotEmpty) {
+      if (isNumeric(lastNameController.text.trim())) {
+        errorMessage = "Please enter a valid last name.";
+        return false;
+      }
+    }
+    return true;
+  }
+
+  final RegExp _numeric = RegExp(r'^-?[0-9]+$');
+
+  /// Check if the string contains only numbers
+  bool isNumeric(String str) {
+    return _numeric.hasMatch(str);
+  }
+
+  bool nameValidation() {
+    if (textFieldValidation() == true) {
+      widget.currentUser.setFirstName = firstNameController.text;
+      widget.currentUser.setLastName = lastNameController.text;
+      return true;
+    }
+    return false;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -54,8 +88,27 @@ class _NameTabState extends State<NameTab> {
           RegistrationNavigationButton(
               updateIndexFunction: widget.updateIndex,
               secondaryFunction: () {
-                widget.currentUser.setFirstName = firstNameController.text;
-                widget.currentUser.setLastName = lastNameController.text;
+                if (nameValidation() == false) {
+                  showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                            shape: const RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(15.0))),
+                            title: const Text('Whoops!'),
+                            content: Text(errorMessage.toString()),
+                            actions: [
+                              TextButton(
+                                onPressed: () => Navigator.pop(context),
+                                child: const Text(
+                                  "Okay",
+                                ),
+                              )
+                            ],
+                          ));
+                } else {
+                  return true;
+                }
               })
         ]),
       ],
