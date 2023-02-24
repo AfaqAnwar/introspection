@@ -60,7 +60,7 @@ class _NameTabState extends State<NameTab> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: const [
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
+              padding: EdgeInsets.symmetric(horizontal: 25.0),
               child: Text(
                 "What's Your Name?",
                 textAlign: TextAlign.left,
