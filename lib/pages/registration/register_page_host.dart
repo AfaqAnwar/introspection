@@ -37,17 +37,13 @@ class _RegisterPageState extends State<RegisterPageHost> {
         body: SafeArea(
           child: Column(children: [
             DotStepper(
+              tappingEnabled: false,
               dotCount: totalIndex,
               dotRadius: 8,
               activeStep: currentIndex,
               shape: Shape.circle,
               spacing: 12,
               indicator: Indicator.shift,
-              onDotTapped: (tappedDotIndex) {
-                setState(() {
-                  currentIndex = tappedDotIndex;
-                });
-              },
               fixedDotDecoration: FixedDotDecoration(
                   color: Colors.grey.shade400,
                   strokeColor: Colors.grey.shade400,
