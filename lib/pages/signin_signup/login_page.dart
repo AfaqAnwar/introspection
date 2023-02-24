@@ -129,10 +129,12 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(
                   height: 50,
                 ),
-                Icon(
-                  CupertinoIcons.heart,
-                  size: 100,
-                  color: AppStyle.red700,
+                Container(
+                  padding: const EdgeInsets.all(20),
+                  child: Image.asset(
+                    "assets/images/logo.png",
+                    height: 100,
+                  ),
                 ),
                 const SizedBox(
                   height: 50,
