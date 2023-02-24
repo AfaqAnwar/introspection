@@ -2,6 +2,7 @@ import 'package:datingapp/pages/registration/registration_tabs/name_tab.dart';
 import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:im_stepper/stepper.dart';
+import '../../data/user.dart';
 
 class RegisterPageHost extends StatefulWidget {
   const RegisterPageHost({super.key});
@@ -11,8 +12,23 @@ class RegisterPageHost extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPageHost> {
+  late User user;
   int currentIndex = 0;
   int totalIndex = 2;
+
+  @override
+  void initState() {
+    super.initState();
+    user = User();
+  }
+
+  void updateIndex() {
+    if (currentIndex < totalIndex - 1) {
+      setState(() {
+        currentIndex++;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,31 +62,10 @@ class _RegisterPageState extends State<RegisterPageHost> {
               child: Container(),
             ),
             updateBodyContent(),
-            const SizedBox(height: 200),
+            const SizedBox(height: 100),
             Expanded(
               child: Container(),
             ),
-            // Icon button that is aligned to the right that navigates to next tab.
-            Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: IconButton(
-                  icon: const Icon(
-                    Icons.arrow_circle_right,
-                  ),
-                  color: AppStyle.red800,
-                  iconSize: 48,
-                  splashRadius: 0.1,
-                  onPressed: () {
-                    if (currentIndex < totalIndex - 1) {
-                      setState(() {
-                        currentIndex++;
-                      });
-                    }
-                  },
-                ),
-              ),
-            ]),
             const SizedBox(height: 50)
           ]),
         ));
@@ -79,7 +74,10 @@ class _RegisterPageState extends State<RegisterPageHost> {
   Widget updateBodyContent() {
     switch (currentIndex) {
       case 0:
-        return const NameTab();
+        return NameTab(
+          currentUser: user,
+          updateIndex: updateIndex,
+        );
       case 1:
         return const Text('Register Page');
       case 2:

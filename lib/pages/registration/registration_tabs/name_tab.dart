@@ -1,8 +1,13 @@
+import 'package:datingapp/components/registration_components/registration_navigation_button.dart';
 import 'package:datingapp/components/registration_components/registration_textfield.dart';
+import 'package:datingapp/data/user.dart';
 import 'package:flutter/material.dart';
 
 class NameTab extends StatefulWidget {
-  const NameTab({super.key});
+  final User currentUser;
+  final Function() updateIndex;
+  const NameTab(
+      {super.key, required this.currentUser, required this.updateIndex});
 
   @override
   State<NameTab> createState() => _NameTabState();
@@ -44,6 +49,15 @@ class _NameTabState extends State<NameTab> {
             controller: lastNameController,
             hintText: "Last Name (optional)",
             obscureText: false),
+        const SizedBox(height: 200),
+        Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+          RegistrationNavigationButton(
+              updateIndexFunction: widget.updateIndex,
+              secondaryFunction: () {
+                widget.currentUser.setFirstName = firstNameController.text;
+                widget.currentUser.setLastName = lastNameController.text;
+              })
+        ]),
       ],
     );
   }
