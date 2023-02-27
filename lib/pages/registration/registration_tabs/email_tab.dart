@@ -73,7 +73,6 @@ class _EmailTabState extends State<EmailTab> {
             controller: emailTextController,
             hintText: "Email",
             obscureText: false),
-        const SizedBox(height: 200),
         Row(mainAxisAlignment: MainAxisAlignment.end, children: [
           RegistrationNavigationButton(
               updateIndexFunction: widget.updateIndex,

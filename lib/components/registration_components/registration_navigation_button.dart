@@ -13,12 +13,10 @@ class RegistrationNavigationButton extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25.0),
       child: IconButton(
-        icon: const Icon(
-          Icons.arrow_circle_right,
-        ),
+        icon: const Icon(Icons.arrow_forward_ios),
         color: AppStyle.red800,
-        iconSize: 48,
-        splashRadius: 0.1,
+        iconSize: 28,
+        splashRadius: 0.01,
         onPressed: () {
           if (secondaryFunction != null) {
             if (secondaryFunction!() == true) {

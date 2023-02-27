@@ -90,36 +90,33 @@ class _RegisterPageState extends State<RegisterPageHost> {
           ),
         ),
         backgroundColor: Colors.white,
-        body: SafeArea(
-          child: Column(children: [
-            DotStepper(
-              tappingEnabled: false,
-              dotCount: totalIndex,
-              dotRadius: 6,
-              activeStep: currentIndex,
-              shape: Shape.circle,
-              spacing: 10,
-              indicator: Indicator.shift,
-              fixedDotDecoration: FixedDotDecoration(
-                  color: Colors.grey.shade400,
-                  strokeColor: Colors.grey.shade400,
-                  strokeWidth: 1),
-              indicatorDecoration: IndicatorDecoration(
-                  color: AppStyle.red500,
-                  strokeColor: AppStyle.red500,
-                  strokeWidth: 1),
+        body: SingleChildScrollView(
+          child: SizedBox(
+            child: SafeArea(
+              child: Column(children: [
+                const SizedBox(height: 10),
+                DotStepper(
+                  tappingEnabled: false,
+                  dotCount: totalIndex,
+                  dotRadius: 6,
+                  activeStep: currentIndex,
+                  shape: Shape.circle,
+                  spacing: 10,
+                  indicator: Indicator.shift,
+                  fixedDotDecoration: FixedDotDecoration(
+                      color: Colors.grey.shade400,
+                      strokeColor: Colors.grey.shade400,
+                      strokeWidth: 1),
+                  indicatorDecoration: IndicatorDecoration(
+                      color: AppStyle.red500,
+                      strokeColor: AppStyle.red500,
+                      strokeWidth: 1),
+                ),
+                const SizedBox(height: 80),
+                updateBodyContent(),
+              ]),
             ),
-            const SizedBox(height: 50),
-            Expanded(
-              child: Container(),
-            ),
-            updateBodyContent(),
-            const SizedBox(height: 100),
-            Expanded(
-              child: Container(),
-            ),
-            const SizedBox(height: 50)
-          ]),
+          ),
         ));
   }
 
