@@ -4,7 +4,6 @@ import 'package:datingapp/components/login_page_components/styled_button.dart';
 import 'package:datingapp/pages/registration/register_load.dart';
 import 'package:datingapp/style/app_style.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 
