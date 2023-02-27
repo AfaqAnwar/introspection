@@ -96,32 +96,36 @@ class _NameTabState extends State<NameTab> {
             controller: lastNameController,
             hintText: "Last Name (optional)",
             obscureText: false),
-        RegistrationNavigationButton(
-            updateIndexFunction: widget.updateIndex,
-            secondaryFunction: () {
-              if (nameValidation() == false) {
-                showDialog(
-                    context: context,
-                    builder: (context) => AlertDialog(
-                          shape: const RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(15.0))),
-                          title: const Text('Whoops!'),
-                          content: Text(errorMessage.toString()),
-                          actions: [
-                            TextButton(
-                              onPressed: () => Navigator.pop(context),
-                              child: Text(
-                                "Okay",
-                                style: TextStyle(color: AppStyle.red800),
-                              ),
-                            )
-                          ],
-                        ));
-              } else {
-                return true;
-              }
-            }),
+        const SizedBox(height: 50),
+        Align(
+          alignment: AlignmentDirectional.centerEnd,
+          child: RegistrationNavigationButton(
+              updateIndexFunction: widget.updateIndex,
+              secondaryFunction: () {
+                if (nameValidation() == false) {
+                  showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                            shape: const RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(15.0))),
+                            title: const Text('Whoops!'),
+                            content: Text(errorMessage.toString()),
+                            actions: [
+                              TextButton(
+                                onPressed: () => Navigator.pop(context),
+                                child: Text(
+                                  "Okay",
+                                  style: TextStyle(color: AppStyle.red800),
+                                ),
+                              )
+                            ],
+                          ));
+                } else {
+                  return true;
+                }
+              }),
+        ),
       ],
     );
   }

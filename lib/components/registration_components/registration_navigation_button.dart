@@ -11,7 +11,7 @@ class RegistrationNavigationButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+      padding: const EdgeInsets.symmetric(horizontal: 12.0),
       child: IconButton(
         icon: const Icon(Icons.arrow_forward_ios),
         color: AppStyle.red800,
