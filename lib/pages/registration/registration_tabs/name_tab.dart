@@ -96,10 +96,9 @@ class _NameTabState extends State<NameTab> {
             controller: lastNameController,
             hintText: "Last Name (optional)",
             obscureText: false),
-        const SizedBox(height: 50),
-        Align(
-          alignment: AlignmentDirectional.centerEnd,
-          child: RegistrationNavigationButton(
+        const SizedBox(height: 100),
+        Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+          RegistrationNavigationButton(
               updateIndexFunction: widget.updateIndex,
               secondaryFunction: () {
                 if (nameValidation() == false) {
@@ -124,8 +123,8 @@ class _NameTabState extends State<NameTab> {
                 } else {
                   return true;
                 }
-              }),
-        ),
+              })
+        ]),
       ],
     );
   }
