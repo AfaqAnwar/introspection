@@ -1,3 +1,4 @@
+import 'package:datingapp/pages/registration/registration_tabs/email_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/name_tab.dart';
 import 'package:datingapp/pages/signin_signup/login_page.dart';
 import 'package:datingapp/style/app_style.dart';
@@ -16,7 +17,7 @@ class RegisterPageHost extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPageHost> {
   late User user;
   int currentIndex = 0;
-  int totalIndex = 2;
+  int totalIndex = 3;
 
   @override
   void initState() {
@@ -130,7 +131,7 @@ class _RegisterPageState extends State<RegisterPageHost> {
           updateIndex: updateIndex,
         );
       case 1:
-        return const Text('Register Page');
+        return EmailTab(currentUser: user, updateIndex: updateIndex);
       case 2:
         return const Text('Register Page');
       default:
