@@ -1,7 +1,5 @@
-import 'package:datingapp/components/registration_components/registration_navigation_button.dart';
 import 'package:datingapp/components/registration_components/registration_textfield.dart';
 import 'package:datingapp/data/user.dart';
-import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/material.dart';
 
 class NameTab extends StatefulWidget {
@@ -11,10 +9,10 @@ class NameTab extends StatefulWidget {
       {super.key, required this.currentUser, required this.updateIndex});
 
   @override
-  State<NameTab> createState() => _NameTabState();
+  State<NameTab> createState() => NameTabState();
 }
 
-class _NameTabState extends State<NameTab> {
+class NameTabState extends State<NameTab> {
   final firstNameController = TextEditingController();
   final lastNameController = TextEditingController();
 
@@ -64,6 +62,10 @@ class _NameTabState extends State<NameTab> {
     return false;
   }
 
+  String getErrorMessage() {
+    return errorMessage;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -96,35 +98,6 @@ class _NameTabState extends State<NameTab> {
             controller: lastNameController,
             hintText: "Last Name (optional)",
             obscureText: false),
-        const SizedBox(height: 100),
-        Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-          RegistrationNavigationButton(
-              updateIndexFunction: widget.updateIndex,
-              secondaryFunction: () {
-                if (nameValidation() == false) {
-                  showDialog(
-                      context: context,
-                      builder: (context) => AlertDialog(
-                            shape: const RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(15.0))),
-                            title: const Text('Whoops!'),
-                            content: Text(errorMessage.toString()),
-                            actions: [
-                              TextButton(
-                                onPressed: () => Navigator.pop(context),
-                                child: Text(
-                                  "Okay",
-                                  style: TextStyle(color: AppStyle.red800),
-                                ),
-                              )
-                            ],
-                          ));
-                } else {
-                  return true;
-                }
-              })
-        ]),
       ],
     );
   }

@@ -18,6 +18,9 @@ class _RegisterPageState extends State<RegisterPageHost> {
   late User user;
   int currentIndex = 0;
   int totalIndex = 3;
+  final GlobalKey<NameTabState> _nameTabKey = GlobalKey();
+  final GlobalKey<EmailTabState> _emailTabKey = GlobalKey();
+  String errorMessage = "";
 
   @override
   void initState() {
@@ -41,6 +44,52 @@ class _RegisterPageState extends State<RegisterPageHost> {
     }
   }
 
+  bool checkFieldsUpdateUser() {
+    switch (currentIndex) {
+      case 0:
+        _nameTabKey.currentState!.nameValidation();
+        return _nameTabKey.currentState!.textFieldValidation();
+      case 1:
+        _emailTabKey.currentState!.emailValidation();
+        return _emailTabKey.currentState!.emailTextValidation();
+      case 2:
+        return false;
+      default:
+        return false;
+    }
+  }
+
+  void destroyData() {
+    switch (currentIndex) {
+      case 0:
+        user.setFirstName = "";
+        user.setLastName = "";
+        break;
+      case 1:
+        user.setEmail = "";
+        break;
+      case 2:
+        break;
+      default:
+        break;
+    }
+  }
+
+  void updateErrorMessage() {
+    switch (currentIndex) {
+      case 0:
+        errorMessage = _nameTabKey.currentState!.getErrorMessage();
+        break;
+      case 1:
+        errorMessage = _emailTabKey.currentState!.getErrorMessage();
+        break;
+      case 2:
+        break;
+      default:
+        break;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,6 +101,7 @@ class _RegisterPageState extends State<RegisterPageHost> {
             splashRadius: 0.1,
             color: AppStyle.red800,
             onPressed: () {
+              destroyData();
               if (currentIndex == 0) {
                 showDialog(
                     context: context,
@@ -89,6 +139,46 @@ class _RegisterPageState extends State<RegisterPageHost> {
             },
           ),
         ),
+        bottomNavigationBar: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20),
+          child: SafeArea(
+            child: Padding(
+              padding: MediaQuery.of(context).viewInsets,
+              child: IconButton(
+                alignment: Alignment.bottomRight,
+                icon: const Icon(Icons.arrow_forward_ios),
+                color: AppStyle.red800,
+                iconSize: 28,
+                splashRadius: 0.01,
+                onPressed: () {
+                  if (checkFieldsUpdateUser()) {
+                    updateIndex();
+                  } else {
+                    updateErrorMessage();
+                    showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                              shape: const RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(15.0))),
+                              title: const Text('Whoops!'),
+                              content: Text(errorMessage.toString()),
+                              actions: [
+                                TextButton(
+                                  onPressed: () => Navigator.pop(context),
+                                  child: Text(
+                                    "Okay",
+                                    style: TextStyle(color: AppStyle.red800),
+                                  ),
+                                )
+                              ],
+                            ));
+                  }
+                },
+              ),
+            ),
+          ),
+        ),
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
           child: SizedBox(
@@ -124,11 +214,13 @@ class _RegisterPageState extends State<RegisterPageHost> {
     switch (currentIndex) {
       case 0:
         return NameTab(
+          key: _nameTabKey,
           currentUser: user,
           updateIndex: updateIndex,
         );
       case 1:
-        return EmailTab(currentUser: user, updateIndex: updateIndex);
+        return EmailTab(
+            key: _emailTabKey, currentUser: user, updateIndex: updateIndex);
       case 2:
         return const Text('Register Page');
       default:

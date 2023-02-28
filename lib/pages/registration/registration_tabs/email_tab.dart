@@ -1,7 +1,5 @@
-import 'package:datingapp/components/registration_components/registration_navigation_button.dart';
 import 'package:datingapp/components/registration_components/registration_textfield.dart';
 import 'package:datingapp/data/user.dart';
-import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/material.dart';
 
 class EmailTab extends StatefulWidget {
@@ -11,10 +9,10 @@ class EmailTab extends StatefulWidget {
       {super.key, required this.currentUser, required this.updateIndex});
 
   @override
-  State<EmailTab> createState() => _EmailTabState();
+  State<EmailTab> createState() => EmailTabState();
 }
 
-class _EmailTabState extends State<EmailTab> {
+class EmailTabState extends State<EmailTab> {
   final emailTextController = TextEditingController();
 
   String errorMessage = "";
@@ -46,6 +44,10 @@ class _EmailTabState extends State<EmailTab> {
     return false;
   }
 
+  String getErrorMessage() {
+    return errorMessage;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -74,34 +76,6 @@ class _EmailTabState extends State<EmailTab> {
             hintText: "Email",
             obscureText: false),
         const SizedBox(height: 100),
-        Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-          RegistrationNavigationButton(
-              updateIndexFunction: widget.updateIndex,
-              secondaryFunction: () {
-                if (emailValidation() == false) {
-                  showDialog(
-                      context: context,
-                      builder: (context) => AlertDialog(
-                            shape: const RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(15.0))),
-                            title: const Text('Whoops!'),
-                            content: Text(errorMessage.toString()),
-                            actions: [
-                              TextButton(
-                                onPressed: () => Navigator.pop(context),
-                                child: Text(
-                                  "Okay",
-                                  style: TextStyle(color: AppStyle.red800),
-                                ),
-                              )
-                            ],
-                          ));
-                } else {
-                  return true;
-                }
-              })
-        ]),
       ],
     );
   }
