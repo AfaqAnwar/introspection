@@ -17,13 +17,17 @@ class RegistrationTextField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25.0),
       child: TextField(
+        style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
         controller: controller,
         obscureText: obscureText,
         decoration: InputDecoration(
             fillColor: Colors.white,
             filled: true,
             hintText: hintText,
-            hintStyle: TextStyle(color: Colors.grey.shade400, fontSize: 18),
+            hintStyle: TextStyle(
+                fontStyle: FontStyle.italic,
+                color: Colors.grey.shade400,
+                fontSize: 18),
             enabledBorder: UnderlineInputBorder(
                 borderSide:
                     BorderSide(color: Colors.grey.shade600, width: 1.5)),

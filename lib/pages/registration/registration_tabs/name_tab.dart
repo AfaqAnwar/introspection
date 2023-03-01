@@ -82,7 +82,7 @@ class NameTabState extends State<NameTab> {
                   color: Colors.black,
                   fontSize: 36,
                   fontFamily: 'Marlide-Display',
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.w800,
                 ),
               ),
             ),
@@ -91,12 +91,12 @@ class NameTabState extends State<NameTab> {
         const SizedBox(height: 25),
         RegistrationTextField(
             controller: firstNameController,
-            hintText: "First Name",
+            hintText: "First Name (Required)",
             obscureText: false),
         const SizedBox(height: 50),
         RegistrationTextField(
             controller: lastNameController,
-            hintText: "Last Name (optional)",
+            hintText: "Last Name",
             obscureText: false),
       ],
     );

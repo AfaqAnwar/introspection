@@ -64,7 +64,7 @@ class EmailTabState extends State<EmailTab> {
                   color: Colors.black,
                   fontSize: 36,
                   fontFamily: 'Marlide-Display',
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.w800,
                 ),
               ),
             ),
