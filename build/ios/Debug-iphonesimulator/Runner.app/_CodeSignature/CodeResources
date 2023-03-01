@@ -46,7 +46,7 @@
 		</data>
 		<key>Frameworks/App.framework/App</key>
 		<data>
-		aFpeBpT5Z0G5cZo4adIOiuwnhPc=
+		jlb6j+xTJ/8wAqiol26OAAuly10=
 		</data>
 		<key>Frameworks/App.framework/Info.plist</key>
 		<data>
@@ -54,7 +54,7 @@
 		</data>
 		<key>Frameworks/App.framework/_CodeSignature/CodeResources</key>
 		<data>
-		sGbPrFofMjsAa77g1InDGIvEQSU=
+		AINfxKYlGiM5tkkYUx6nRkFI4+c=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.json</key>
 		<data>
@@ -178,7 +178,7 @@
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/kernel_blob.bin</key>
 		<data>
-		yPIR80nKDXfkgcmJXn6sIQYsnVE=
+		HPTKhtQUMqenHxC/umFKtfMGz+4=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<data>
@@ -210,7 +210,7 @@
 		</data>
 		<key>Frameworks/FirebaseAuth.framework/FirebaseAuth</key>
 		<data>
-		OA4lqou3NS9r28nqoBP3E9yZFcU=
+		Q5iAGJo6hv6qEVuAp7A6F1XqauE=
 		</data>
 		<key>Frameworks/FirebaseAuth.framework/Info.plist</key>
 		<data>
@@ -222,7 +222,7 @@
 		</data>
 		<key>Frameworks/FirebaseCore.framework/FirebaseCore</key>
 		<data>
-		64itPhE/9dtC7tD6T70TuNqQd9E=
+		Ff9OzkahB0efdfKhZRWPcuxVUBY=
 		</data>
 		<key>Frameworks/FirebaseCore.framework/Info.plist</key>
 		<data>
@@ -441,7 +441,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			WO90AuyO7TusrSdeBmTCAk7G+CdwIybfI2xkKn2/Anw=
+			yAbxNpx2ZF+WTAH8wFgkdBd0IR4CxA/7iqm5HiMlJ48=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/Info.plist</key>
@@ -455,7 +455,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			QHTrD4HNEnen7m3GVEFSlzvOb4fRsqpSGxUhG9alYlE=
+			cho5BqiVbTZhRw7YZn32dC8MLOXFot5iUpYN7ZcEPC8=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.json</key>
@@ -672,7 +672,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Nqaq3CAKJa7mr15pa/5JzmYLZ41sOcxyfE4N5Jn54Tw=
+			fYvrQzWodjdfHiLGnp/tKXe20VtZfuYMLpn4qhNXqcg=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
@@ -728,7 +728,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			1jbUXsvlIdbUKPsOqCi7DN066fjJ30poAfSusX+exvo=
+			Jl4s03qIoPtLpHDrm2jiA3TQj6FskToYajrdsPAQtPM=
 			</data>
 		</dict>
 		<key>Frameworks/FirebaseAuth.framework/Info.plist</key>
@@ -749,7 +749,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			ZeBVbZcfrZR2GgqW4bo53zgg5sdg1aObm7A0nJDXf54=
+			EdVxrL6zsXfKPgbF93Atz9mwZO6PGnJ61+rodtsZM1s=
 			</data>
 		</dict>
 		<key>Frameworks/FirebaseCore.framework/Info.plist</key>
