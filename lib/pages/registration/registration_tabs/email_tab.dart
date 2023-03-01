@@ -58,7 +58,7 @@ class EmailTabState extends State<EmailTab> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 25.0),
               child: Text(
-                "What's Your Email?",
+                "What's your email?",
                 textAlign: TextAlign.left,
                 style: TextStyle(
                   color: Colors.black,

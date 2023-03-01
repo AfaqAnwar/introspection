@@ -1,3 +1,4 @@
+import 'package:datingapp/pages/registration/registration_tabs/age_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/email_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/name_tab.dart';
 import 'package:datingapp/pages/signin_signup/login_page.dart';
@@ -222,7 +223,7 @@ class _RegisterPageState extends State<RegisterPageHost> {
         return EmailTab(
             key: _emailTabKey, currentUser: user, updateIndex: updateIndex);
       case 2:
-        return const Text('Register Page');
+        return AgeTab(currentUser: user, updateIndex: updateIndex);
       default:
         return const Text('Register Page');
     }

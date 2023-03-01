@@ -76,7 +76,7 @@ class NameTabState extends State<NameTab> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 25.0),
               child: Text(
-                "What's Your Name?",
+                "What's your name?",
                 textAlign: TextAlign.left,
                 style: TextStyle(
                   color: Colors.black,
