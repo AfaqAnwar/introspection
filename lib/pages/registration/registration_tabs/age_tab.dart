@@ -18,6 +18,12 @@ class AgeTabState extends State<AgeTab> {
 
   @override
   void initState() {
+    if (widget.currentUser.getDob.isNotEmpty) {
+      age = DateTime.now().year -
+          int.parse(widget.currentUser.getDob.split("-")[2]);
+    } else {
+      age = 0;
+    }
     super.initState();
   }
 
