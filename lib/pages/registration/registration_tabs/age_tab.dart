@@ -13,11 +13,29 @@ class AgeTab extends StatefulWidget {
 }
 
 class AgeTabState extends State<AgeTab> {
+  late int age;
   String errorMessage = "";
 
   @override
   void initState() {
     super.initState();
+  }
+
+  String getDobProper(DateTime selectedDate) {
+    String finalDob = selectedDate.toString();
+    finalDob = finalDob.split(" ")[0];
+    List splitDob = finalDob.split("-");
+    String year = splitDob[0];
+    String month = splitDob[1];
+    String day = splitDob[2];
+    finalDob = "$month-$day-$year";
+    return finalDob;
+  }
+
+  void updateAgeOnUI(DateTime selectedDate) {
+    setState(() {
+      age = DateTime.now().year - selectedDate.year;
+    });
   }
 
   @override
@@ -53,7 +71,8 @@ class AgeTabState extends State<AgeTab> {
             child: CupertinoDatePicker(
                 mode: CupertinoDatePickerMode.date,
                 onDateTimeChanged: (DateTime date) {
-                  print(date);
+                  updateAgeOnUI(date);
+                  print(getDobProper(date));
                 }),
           ),
         ),
@@ -68,8 +87,8 @@ class AgeTabState extends State<AgeTab> {
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            Text(
+          children: [
+            const Text(
               "Age ",
               textAlign: TextAlign.center,
               style: TextStyle(
@@ -79,13 +98,13 @@ class AgeTabState extends State<AgeTab> {
                 fontWeight: FontWeight.w800,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               width: 10,
             ),
             Text(
-              "0",
+              age.toString(),
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.black,
                 fontSize: 36,
                 fontFamily: 'Modern-Era',
