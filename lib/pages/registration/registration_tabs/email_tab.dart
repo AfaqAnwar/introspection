@@ -36,12 +36,10 @@ class EmailTabState extends State<EmailTab> {
     return true;
   }
 
-  bool emailValidation() {
+  void updateUserEmail() {
     if (emailTextValidation() == true) {
       widget.currentUser.setEmail = emailTextController.text.toString().trim();
-      return true;
     }
-    return false;
   }
 
   String getErrorMessage() {

@@ -18,9 +18,10 @@ class RegisterPageHost extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPageHost> {
   late User user;
   int currentIndex = 0;
-  int totalIndex = 3;
+  int totalIndex = 4;
   final GlobalKey<NameTabState> _nameTabKey = GlobalKey();
   final GlobalKey<EmailTabState> _emailTabKey = GlobalKey();
+  final GlobalKey<AgeTabState> _ageTabKey = GlobalKey();
   String errorMessage = "";
 
   @override
@@ -45,16 +46,17 @@ class _RegisterPageState extends State<RegisterPageHost> {
     }
   }
 
-  bool checkFieldsUpdateUser() {
+  bool checkFieldsAndUpdateCurrentUser() {
     switch (currentIndex) {
       case 0:
-        _nameTabKey.currentState!.nameValidation();
+        _nameTabKey.currentState!.updateNameOfUser();
         return _nameTabKey.currentState!.textFieldValidation();
       case 1:
-        _emailTabKey.currentState!.emailValidation();
+        _emailTabKey.currentState!.updateUserEmail();
         return _emailTabKey.currentState!.emailTextValidation();
       case 2:
-        return false;
+        _ageTabKey.currentState!.updateUserDob();
+        return _ageTabKey.currentState!.validateAge();
       default:
         return false;
     }
@@ -70,6 +72,9 @@ class _RegisterPageState extends State<RegisterPageHost> {
         user.setEmail = "";
         break;
       case 2:
+        user.setDob = "";
+        break;
+      case 3:
         break;
       default:
         break;
@@ -85,6 +90,7 @@ class _RegisterPageState extends State<RegisterPageHost> {
         errorMessage = _emailTabKey.currentState!.getErrorMessage();
         break;
       case 2:
+        errorMessage = _ageTabKey.currentState!.getErrorMessage();
         break;
       default:
         break;
@@ -152,7 +158,7 @@ class _RegisterPageState extends State<RegisterPageHost> {
                 iconSize: 28,
                 splashRadius: 0.01,
                 onPressed: () {
-                  if (checkFieldsUpdateUser()) {
+                  if (checkFieldsAndUpdateCurrentUser()) {
                     updateIndex();
                   } else {
                     updateErrorMessage();
@@ -223,7 +229,10 @@ class _RegisterPageState extends State<RegisterPageHost> {
         return EmailTab(
             key: _emailTabKey, currentUser: user, updateIndex: updateIndex);
       case 2:
-        return AgeTab(currentUser: user, updateIndex: updateIndex);
+        return AgeTab(
+            key: _ageTabKey, currentUser: user, updateIndex: updateIndex);
+      case 3:
+        return const Text('Register Page');
       default:
         return const Text('Register Page');
     }

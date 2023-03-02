@@ -14,15 +14,20 @@ class AgeTab extends StatefulWidget {
 
 class AgeTabState extends State<AgeTab> {
   late int age;
-  String errorMessage = "";
+  late String dob;
+  late DateTime selectedDob;
 
   @override
   void initState() {
     if (widget.currentUser.getDob.isNotEmpty) {
       age = DateTime.now().year -
           int.parse(widget.currentUser.getDob.split("-")[2]);
+      List<String> splitDob = widget.currentUser.getDob.split("-");
+      String userDob = "${splitDob[2]}-${splitDob[0]}-${splitDob[1]}";
+      selectedDob = DateTime.parse(userDob);
     } else {
       age = 0;
+      selectedDob = DateTime.now().subtract(const Duration(hours: 1));
     }
     super.initState();
   }
@@ -42,6 +47,23 @@ class AgeTabState extends State<AgeTab> {
     setState(() {
       age = DateTime.now().year - selectedDate.year;
     });
+  }
+
+  bool validateAge() {
+    if (age < 18) {
+      return false;
+    }
+    return true;
+  }
+
+  void updateUserDob() {
+    if (validateAge() == true) {
+      widget.currentUser.setDob = getDobProper(selectedDob);
+    }
+  }
+
+  String getErrorMessage() {
+    return "You must be at least 18 years old to use this app.";
   }
 
   @override
@@ -75,10 +97,12 @@ class AgeTabState extends State<AgeTab> {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25.0),
             child: CupertinoDatePicker(
+                initialDateTime: selectedDob,
+                maximumDate: DateTime.now(),
                 mode: CupertinoDatePickerMode.date,
                 onDateTimeChanged: (DateTime date) {
                   updateAgeOnUI(date);
-                  print(getDobProper(date));
+                  selectedDob = date;
                 }),
           ),
         ),

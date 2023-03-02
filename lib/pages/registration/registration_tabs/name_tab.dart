@@ -51,15 +51,13 @@ class NameTabState extends State<NameTab> {
     return _numeric.hasMatch(str);
   }
 
-  bool nameValidation() {
+  void updateNameOfUser() {
     if (textFieldValidation() == true) {
       widget.currentUser.setFirstName =
           firstNameController.text.toString().trim();
       widget.currentUser.setLastName =
           lastNameController.text.toString().trim();
-      return true;
     }
-    return false;
   }
 
   String getErrorMessage() {
