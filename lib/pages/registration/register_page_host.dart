@@ -1,6 +1,7 @@
 import 'package:datingapp/pages/registration/registration_tabs/age_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/email_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/name_tab.dart';
+import 'package:datingapp/pages/registration/registration_tabs/registration_buffer.dart';
 import 'package:datingapp/pages/signin_signup/login_page.dart';
 import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/cupertino.dart';
@@ -19,7 +20,7 @@ class RegisterPageHost extends StatefulWidget {
 class RegisterPageState extends State<RegisterPageHost> {
   late User user;
   int currentIndex = 0;
-  int totalIndex = 4;
+  int totalIndex = 5;
   final GlobalKey<NameTabState> _nameTabKey = GlobalKey();
   final GlobalKey<EmailTabState> _emailTabKey = GlobalKey();
   final GlobalKey<AgeTabState> _ageTabKey = GlobalKey();
@@ -63,6 +64,8 @@ class RegisterPageState extends State<RegisterPageHost> {
           changeScreen = await _ageTabKey.currentState!.showConfirmation();
         }
         return changeScreen;
+      case 3:
+        return true;
       default:
         return false;
     }
@@ -176,6 +179,7 @@ class RegisterPageState extends State<RegisterPageHost> {
                 onPressed: () async {
                   if (await checkFieldsAndUpdateCurrentUser()) {
                     updateIndex();
+                    // Checks to see if we're in the age tab and did not confirm our age.
                   } else if ((currentIndex == 2 &&
                           _ageTabKey.currentState?.isConfirmed() == false &&
                           !_ageTabKey.currentState!.isEditing()) ||
@@ -262,7 +266,7 @@ class RegisterPageState extends State<RegisterPageHost> {
         return AgeTab(
             key: _ageTabKey, currentUser: user, updateIndex: updateIndex);
       case 3:
-        return const Text('Register Page');
+        return const RegisterBuffer();
       default:
         return const Text('Register Page');
     }
