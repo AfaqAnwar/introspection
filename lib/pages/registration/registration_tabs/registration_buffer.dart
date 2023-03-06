@@ -1,6 +1,5 @@
 import 'package:datingapp/pages/registration/register_page_host.dart';
 import 'package:datingapp/pages/signin_signup/login_page.dart';
-import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart';
@@ -10,10 +9,10 @@ class RegisterBuffer extends StatefulWidget {
   const RegisterBuffer({super.key});
 
   @override
-  State<RegisterBuffer> createState() => _RegisterBufferState();
+  State<RegisterBuffer> createState() => RegisterBufferState();
 }
 
-class _RegisterBufferState extends State<RegisterBuffer>
+class RegisterBufferState extends State<RegisterBuffer>
     with TickerProviderStateMixin {
   late final AnimationController _controller;
   bool animationEnded = false;
@@ -23,8 +22,10 @@ class _RegisterBufferState extends State<RegisterBuffer>
   void initState() {
     super.initState();
     _composition = _loadComposition();
+
     _controller =
-        AnimationController(vsync: this, duration: const Duration(seconds: 2));
+        AnimationController(vsync: this, duration: const Duration(seconds: 3));
+
     _controller.repeat();
   }
 
@@ -35,7 +36,8 @@ class _RegisterBufferState extends State<RegisterBuffer>
   }
 
   Future<LottieComposition> _loadComposition() async {
-    var assetData = await rootBundle.load('assets/animations/personalize.json');
+    var assetData =
+        await rootBundle.load('assets/animations/heartpersonalize.json');
     return await LottieComposition.fromByteData(assetData);
   }
 
@@ -70,8 +72,8 @@ class _RegisterBufferState extends State<RegisterBuffer>
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 10),
                     child: Text(
                       "Let's get to know you!",
                       textAlign: TextAlign.start,
@@ -84,8 +86,8 @@ class _RegisterBufferState extends State<RegisterBuffer>
                     ),
                   ),
                   const SizedBox(height: 100),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 10),
+                  const Padding(
+                    padding: EdgeInsets.only(right: 10),
                     child: Text(
                       "We'll try our best to find you a match",
                       textAlign: TextAlign.right,
@@ -100,6 +102,7 @@ class _RegisterBufferState extends State<RegisterBuffer>
                   SizedBox(
                     height: 350,
                     child: Lottie(
+                      repeat: true,
                       composition: composition,
                       controller: _controller,
                       fit: BoxFit.fill,

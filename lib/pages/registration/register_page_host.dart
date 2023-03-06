@@ -24,6 +24,7 @@ class RegisterPageState extends State<RegisterPageHost> {
   final GlobalKey<NameTabState> _nameTabKey = GlobalKey();
   final GlobalKey<EmailTabState> _emailTabKey = GlobalKey();
   final GlobalKey<AgeTabState> _ageTabKey = GlobalKey();
+  final GlobalKey<RegisterBufferState> _registerBufferKey = GlobalKey();
   String errorMessage = "";
 
   @override
