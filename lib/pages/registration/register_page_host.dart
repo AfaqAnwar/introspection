@@ -12,10 +12,10 @@ class RegisterPageHost extends StatefulWidget {
   const RegisterPageHost({super.key});
 
   @override
-  State<RegisterPageHost> createState() => _RegisterPageState();
+  State<RegisterPageHost> createState() => RegisterPageState();
 }
 
-class _RegisterPageState extends State<RegisterPageHost> {
+class RegisterPageState extends State<RegisterPageHost> {
   late User user;
   int currentIndex = 0;
   int totalIndex = 4;
@@ -46,7 +46,7 @@ class _RegisterPageState extends State<RegisterPageHost> {
     }
   }
 
-  bool checkFieldsAndUpdateCurrentUser() {
+  Future<bool> checkFieldsAndUpdateCurrentUser() async {
     switch (currentIndex) {
       case 0:
         _nameTabKey.currentState!.updateNameOfUser();
@@ -55,8 +55,12 @@ class _RegisterPageState extends State<RegisterPageHost> {
         _emailTabKey.currentState!.updateUserEmail();
         return _emailTabKey.currentState!.emailTextValidation();
       case 2:
-        _ageTabKey.currentState!.updateUserDob();
-        return _ageTabKey.currentState!.validateAge();
+        bool changeScreen = false;
+        if (_ageTabKey.currentState?.validateAge() == true) {
+          _ageTabKey.currentState!.updateUserDob();
+          changeScreen = await _ageTabKey.currentState!.showConfirmation();
+        }
+        return changeScreen;
       default:
         return false;
     }
@@ -107,7 +111,7 @@ class _RegisterPageState extends State<RegisterPageHost> {
             icon: const Icon(Icons.arrow_back_ios),
             splashRadius: 0.1,
             color: AppStyle.red800,
-            onPressed: () {
+            onPressed: () async {
               destroyData();
               if (currentIndex == 0) {
                 showDialog(
@@ -157,11 +161,13 @@ class _RegisterPageState extends State<RegisterPageHost> {
                 color: AppStyle.red800,
                 iconSize: 28,
                 splashRadius: 0.01,
-                onPressed: () {
-                  if (checkFieldsAndUpdateCurrentUser()) {
+                onPressed: () async {
+                  if (await checkFieldsAndUpdateCurrentUser()) {
                     updateIndex();
-                  } else {
+                  } else if (currentIndex == 2 &&
+                      _ageTabKey.currentState?.isConfirmed() == false) {
                     updateErrorMessage();
+                    // ignore: use_build_context_synchronously
                     showDialog(
                         context: context,
                         builder: (context) => AlertDialog(

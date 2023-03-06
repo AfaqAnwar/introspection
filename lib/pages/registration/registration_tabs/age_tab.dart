@@ -1,4 +1,6 @@
 import 'package:datingapp/data/user.dart';
+import 'package:datingapp/pages/registration/register_page_host.dart';
+import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -16,6 +18,7 @@ class AgeTabState extends State<AgeTab> {
   late int age;
   late String dob;
   late DateTime selectedDob;
+  bool confirmed = false;
 
   @override
   void initState() {
@@ -52,8 +55,9 @@ class AgeTabState extends State<AgeTab> {
   bool validateAge() {
     if (age < 18) {
       return false;
+    } else {
+      return true;
     }
-    return true;
   }
 
   void updateUserDob() {
@@ -64,6 +68,81 @@ class AgeTabState extends State<AgeTab> {
 
   String getErrorMessage() {
     return "You must be at least 18 years old to use this app.";
+  }
+
+  bool isConfirmed() {
+    return confirmed;
+  }
+
+  Future<bool> showConfirmation() async {
+    await showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (context) => CupertinoAlertDialog(
+              title: const Text(
+                "Please confirm your information",
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                  fontFamily: 'Marlide-Display',
+                  color: Colors.black,
+                  fontSize: 28,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+              content: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 30),
+                  Text("$age years old.",
+                      textAlign: TextAlign.left,
+                      style: const TextStyle(
+                        fontFamily: 'Modern-Era',
+                        color: Colors.black,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w400,
+                      )),
+                  const SizedBox(height: 5),
+                  Text("Born ${getDobProper(selectedDob)}",
+                      textAlign: TextAlign.left,
+                      style: const TextStyle(
+                        fontFamily: 'Modern-Era',
+                        color: Colors.black,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w400,
+                      )),
+                ],
+              ),
+              actions: [
+                CupertinoDialogAction(
+                  child: const Text(
+                    "Edit",
+                    style: TextStyle(
+                        fontFamily: 'Modern-Era',
+                        fontWeight: FontWeight.w100,
+                        color: Colors.black),
+                  ),
+                  onPressed: () {
+                    confirmed = false;
+                    Navigator.pop(context, false);
+                  },
+                ),
+                CupertinoDialogAction(
+                  child: Text(
+                    "Confirm",
+                    style: TextStyle(
+                        fontFamily: 'Modern-Era',
+                        fontWeight: FontWeight.w500,
+                        color: AppStyle.red700),
+                  ),
+                  onPressed: () {
+                    confirmed = true;
+                    Navigator.pop(context, true);
+                  },
+                ),
+              ],
+            ));
+    return confirmed;
   }
 
   @override
