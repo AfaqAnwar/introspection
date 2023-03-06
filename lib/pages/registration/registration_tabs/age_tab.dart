@@ -19,6 +19,7 @@ class AgeTabState extends State<AgeTab> {
   late String dob;
   late DateTime selectedDob;
   bool confirmed = false;
+  bool editing = false;
 
   @override
   void initState() {
@@ -74,6 +75,15 @@ class AgeTabState extends State<AgeTab> {
     return confirmed;
   }
 
+  bool isEditing() {
+    return editing;
+  }
+
+  void reset() {
+    confirmed = false;
+    editing = false;
+  }
+
   Future<bool> showConfirmation() async {
     await showDialog(
         barrierDismissible: false,
@@ -124,6 +134,7 @@ class AgeTabState extends State<AgeTab> {
                   ),
                   onPressed: () {
                     confirmed = false;
+                    editing = true;
                     Navigator.pop(context, false);
                   },
                 ),

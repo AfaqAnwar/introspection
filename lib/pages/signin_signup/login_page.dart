@@ -4,6 +4,7 @@ import 'package:datingapp/components/login_page_components/styled_button.dart';
 import 'package:datingapp/pages/registration/register_load.dart';
 import 'package:datingapp/style/app_style.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -31,12 +32,22 @@ class _LoginPageState extends State<LoginPage> {
     if (checkFields() == false) {
       showDialog(
           context: context,
-          builder: (context) => AlertDialog(
-                shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(20.0))),
-                title: const Text('Login Input Error'),
-                content: const Text(
-                    'Please fill out both your email & password before attempting to sign in.'),
+          builder: (context) => CupertinoAlertDialog(
+                title: const Text(
+                  'Login Input Error',
+                  style: TextStyle(fontSize: 18),
+                ),
+                content: Column(
+                  children: const [
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Text(
+                      'Please fill out both your email & password.',
+                      style: TextStyle(fontSize: 14),
+                    ),
+                  ],
+                ),
                 actions: [
                   TextButton(
                     onPressed: () => Navigator.pop(context),
@@ -87,11 +98,20 @@ class _LoginPageState extends State<LoginPage> {
         }
         showDialog(
             context: context,
-            builder: (context) => AlertDialog(
-                  shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                  title: const Text('Login Error'),
-                  content: Text(errorMessage.toString()),
+            builder: (context) => CupertinoAlertDialog(
+                  title: const Text(
+                    'Login Error',
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  content: Column(
+                    children: [
+                      const SizedBox(height: 10),
+                      Text(
+                        errorMessage.toString(),
+                        style: const TextStyle(fontSize: 14),
+                      ),
+                    ],
+                  ),
                   actions: [
                     TextButton(
                       onPressed: () => Navigator.pop(context),

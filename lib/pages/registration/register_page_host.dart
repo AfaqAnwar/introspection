@@ -3,6 +3,7 @@ import 'package:datingapp/pages/registration/registration_tabs/email_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/name_tab.dart';
 import 'package:datingapp/pages/signin_signup/login_page.dart';
 import 'package:datingapp/style/app_style.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:im_stepper/stepper.dart';
 import 'package:page_transition/page_transition.dart';
@@ -55,6 +56,7 @@ class RegisterPageState extends State<RegisterPageHost> {
         _emailTabKey.currentState!.updateUserEmail();
         return _emailTabKey.currentState!.emailTextValidation();
       case 2:
+        _ageTabKey.currentState!.reset();
         bool changeScreen = false;
         if (_ageTabKey.currentState?.validateAge() == true) {
           _ageTabKey.currentState!.updateUserDob();
@@ -116,12 +118,22 @@ class RegisterPageState extends State<RegisterPageHost> {
               if (currentIndex == 0) {
                 showDialog(
                     context: context,
-                    builder: (context) => AlertDialog(
-                          shape: const RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(15.0))),
-                          title: const Text('Woah There!'),
-                          content: const Text("Are you sure you want to exit?"),
+                    builder: (context) => CupertinoAlertDialog(
+                          title: const Text(
+                            'Woah There!',
+                            style: TextStyle(fontSize: 18),
+                          ),
+                          content: Column(
+                            children: const [
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                "Are you sure you want to exit?",
+                                style: TextStyle(fontSize: 14),
+                              ),
+                            ],
+                          ),
                           actions: [
                             TextButton(
                               onPressed: () => Navigator.pop(context),
@@ -164,18 +176,30 @@ class RegisterPageState extends State<RegisterPageHost> {
                 onPressed: () async {
                   if (await checkFieldsAndUpdateCurrentUser()) {
                     updateIndex();
-                  } else if (currentIndex == 2 &&
-                      _ageTabKey.currentState?.isConfirmed() == false) {
+                  } else if ((currentIndex == 2 &&
+                          _ageTabKey.currentState?.isConfirmed() == false &&
+                          !_ageTabKey.currentState!.isEditing()) ||
+                      currentIndex != 2) {
                     updateErrorMessage();
                     // ignore: use_build_context_synchronously
                     showDialog(
                         context: context,
-                        builder: (context) => AlertDialog(
-                              shape: const RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(15.0))),
-                              title: const Text('Whoops!'),
-                              content: Text(errorMessage.toString()),
+                        builder: (context) => CupertinoAlertDialog(
+                              title: const Text(
+                                'Whoops!',
+                                style: TextStyle(fontSize: 18),
+                              ),
+                              content: Column(
+                                children: [
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(
+                                    errorMessage.toString(),
+                                    style: const TextStyle(fontSize: 14),
+                                  ),
+                                ],
+                              ),
                               actions: [
                                 TextButton(
                                   onPressed: () => Navigator.pop(context),
