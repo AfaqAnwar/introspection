@@ -36,8 +36,7 @@ class RegisterBufferState extends State<RegisterBuffer>
   }
 
   Future<LottieComposition> _loadComposition() async {
-    var assetData =
-        await rootBundle.load('assets/animations/heartpersonalize.json');
+    var assetData = await rootBundle.load('assets/animations/buffer.json');
     return await LottieComposition.fromByteData(assetData);
   }
 
