@@ -1,4 +1,5 @@
 import 'package:datingapp/pages/registration/registration_buffer.dart';
+import 'package:datingapp/pages/registration/registration_tabs/basic_information/location_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/initial_information/age_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/initial_information/email_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/initial_information/name_tab.dart';
@@ -363,6 +364,8 @@ class RegisterPageState extends State<RegisterPageHost> {
             key: _ageTabKey, currentUser: user, updateIndex: updateIndex);
       case 3:
         return buildBufferPage();
+      case 4:
+        return LocationTab(currentUser: user, updateIndex: updateIndex);
       default:
         return const Text('Register Page');
     }
