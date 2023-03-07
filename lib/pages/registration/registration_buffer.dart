@@ -72,33 +72,35 @@ class RegisterBufferState extends State<RegisterBuffer>
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const Padding(
-                    padding: EdgeInsets.only(left: 10),
+                    padding: EdgeInsets.only(left: 25),
                     child: Text(
-                      "Let's get to know you!",
+                      "Let's get to know more about you!",
                       textAlign: TextAlign.start,
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 42,
-                        fontFamily: 'Marlide-Display',
-                        fontWeight: FontWeight.w800,
+                        fontFamily: 'Modern-Era',
+                        fontWeight: FontWeight.w900,
                       ),
                     ),
                   ),
                   const SizedBox(height: 100),
                   const Padding(
-                    padding: EdgeInsets.only(right: 10),
+                    padding: EdgeInsets.only(left: 40),
                     child: Text(
-                      "We'll try our best to find you a match",
-                      textAlign: TextAlign.right,
+                      "Adding basic info leads to better matches!",
+                      textAlign: TextAlign.start,
                       style: TextStyle(
                         color: Colors.black,
-                        fontSize: 38,
-                        fontFamily: 'Marlide-Display',
+                        fontSize: 28,
+                        fontFamily: 'Modern-Era',
                         fontWeight: FontWeight.w800,
                       ),
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  Expanded(
+                    child: Container(),
+                  ),
                   SizedBox(
                     height: 350,
                     child: Lottie(

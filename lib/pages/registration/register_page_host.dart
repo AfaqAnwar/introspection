@@ -1,7 +1,7 @@
-import 'package:datingapp/pages/registration/registration_tabs/age_tab.dart';
-import 'package:datingapp/pages/registration/registration_tabs/email_tab.dart';
-import 'package:datingapp/pages/registration/registration_tabs/name_tab.dart';
-import 'package:datingapp/pages/registration/registration_tabs/registration_buffer.dart';
+import 'package:datingapp/pages/registration/registration_buffer.dart';
+import 'package:datingapp/pages/registration/registration_tabs/initial_information/age_tab.dart';
+import 'package:datingapp/pages/registration/registration_tabs/initial_information/email_tab.dart';
+import 'package:datingapp/pages/registration/registration_tabs/initial_information/name_tab.dart';
 import 'package:datingapp/pages/signin_signup/login_page.dart';
 import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/cupertino.dart';
@@ -20,11 +20,10 @@ class RegisterPageHost extends StatefulWidget {
 class RegisterPageState extends State<RegisterPageHost> {
   late User user;
   int currentIndex = 0;
-  int totalIndex = 5;
+  int totalIndex = 8;
   final GlobalKey<NameTabState> _nameTabKey = GlobalKey();
   final GlobalKey<EmailTabState> _emailTabKey = GlobalKey();
   final GlobalKey<AgeTabState> _ageTabKey = GlobalKey();
-  final GlobalKey<RegisterBufferState> _registerBufferKey = GlobalKey();
   String errorMessage = "";
 
   @override
@@ -108,15 +107,40 @@ class RegisterPageState extends State<RegisterPageHost> {
   }
 
   Widget showDotStepper() {
-    if (currentIndex != 3) {
+    if (currentIndex < 3) {
       return Column(
         children: [
           const SizedBox(height: 10),
           DotStepper(
             tappingEnabled: false,
-            dotCount: totalIndex,
+            dotCount: 3,
             dotRadius: 6,
             activeStep: currentIndex,
+            shape: Shape.circle,
+            spacing: 10,
+            indicator: Indicator.shift,
+            fixedDotDecoration: FixedDotDecoration(
+                color: Colors.grey.shade400,
+                strokeColor: Colors.grey.shade400,
+                strokeWidth: 1),
+            indicatorDecoration: IndicatorDecoration(
+                color: AppStyle.red500,
+                strokeColor: AppStyle.red500,
+                strokeWidth: 1),
+          ),
+          const SizedBox(height: 80),
+        ],
+      );
+    }
+    if (currentIndex > 3) {
+      return Column(
+        children: [
+          const SizedBox(height: 10),
+          DotStepper(
+            tappingEnabled: false,
+            dotCount: totalIndex - 4,
+            dotRadius: 6,
+            activeStep: currentIndex - 4,
             shape: Shape.circle,
             spacing: 10,
             indicator: Indicator.shift,
