@@ -107,6 +107,38 @@ class RegisterPageState extends State<RegisterPageHost> {
     }
   }
 
+  Widget showDotStepper() {
+    if (currentIndex != 3) {
+      return Column(
+        children: [
+          const SizedBox(height: 10),
+          DotStepper(
+            tappingEnabled: false,
+            dotCount: totalIndex,
+            dotRadius: 6,
+            activeStep: currentIndex,
+            shape: Shape.circle,
+            spacing: 10,
+            indicator: Indicator.shift,
+            fixedDotDecoration: FixedDotDecoration(
+                color: Colors.grey.shade400,
+                strokeColor: Colors.grey.shade400,
+                strokeWidth: 1),
+            indicatorDecoration: IndicatorDecoration(
+                color: AppStyle.red500,
+                strokeColor: AppStyle.red500,
+                strokeWidth: 1),
+          ),
+          const SizedBox(height: 80),
+        ],
+      );
+    } else {
+      return const SizedBox(
+        height: 40,
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -166,90 +198,129 @@ class RegisterPageState extends State<RegisterPageHost> {
             },
           ),
         ),
-        bottomNavigationBar: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20),
-          child: SafeArea(
-            child: Padding(
-              padding: MediaQuery.of(context).viewInsets,
-              child: IconButton(
-                alignment: Alignment.bottomRight,
-                icon: const Icon(Icons.arrow_forward_ios),
-                color: AppStyle.red800,
-                iconSize: 28,
-                splashRadius: 0.01,
-                onPressed: () async {
-                  if (await checkFieldsAndUpdateCurrentUser()) {
-                    updateIndex();
-                    // Checks to see if we're in the age tab and did not confirm our age.
-                  } else if ((currentIndex == 2 &&
-                          _ageTabKey.currentState?.isConfirmed() == false &&
-                          !_ageTabKey.currentState!.isEditing()) ||
-                      currentIndex != 2) {
-                    updateErrorMessage();
-                    // ignore: use_build_context_synchronously
-                    showDialog(
-                        context: context,
-                        builder: (context) => CupertinoAlertDialog(
-                              title: const Text(
-                                'Whoops!',
-                                style: TextStyle(fontSize: 18),
-                              ),
-                              content: Column(
-                                children: [
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  Text(
-                                    errorMessage.toString(),
-                                    style: const TextStyle(fontSize: 14),
-                                  ),
-                                ],
-                              ),
-                              actions: [
-                                TextButton(
-                                  onPressed: () => Navigator.pop(context),
-                                  child: Text(
-                                    "Okay",
-                                    style: TextStyle(color: AppStyle.red800),
-                                  ),
-                                )
-                              ],
-                            ));
-                  }
-                },
-              ),
-            ),
-          ),
-        ),
+        bottomNavigationBar: buildBottomNavigationBar(),
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
+          physics: const NeverScrollableScrollPhysics(),
           child: SizedBox(
             child: SafeArea(
               child: Column(children: [
-                const SizedBox(height: 10),
-                DotStepper(
-                  tappingEnabled: false,
-                  dotCount: totalIndex,
-                  dotRadius: 6,
-                  activeStep: currentIndex,
-                  shape: Shape.circle,
-                  spacing: 10,
-                  indicator: Indicator.shift,
-                  fixedDotDecoration: FixedDotDecoration(
-                      color: Colors.grey.shade400,
-                      strokeColor: Colors.grey.shade400,
-                      strokeWidth: 1),
-                  indicatorDecoration: IndicatorDecoration(
-                      color: AppStyle.red500,
-                      strokeColor: AppStyle.red500,
-                      strokeWidth: 1),
-                ),
-                const SizedBox(height: 80),
+                showDotStepper(),
                 updateBodyContent(),
               ]),
             ),
           ),
         ));
+  }
+
+  Widget buildBottomNavigationBar() {
+    if (currentIndex != 3) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20),
+        child: SafeArea(
+          child: Padding(
+            padding: MediaQuery.of(context).viewInsets,
+            child: IconButton(
+              alignment: Alignment.bottomRight,
+              icon: const Icon(Icons.arrow_forward_ios),
+              color: AppStyle.red800,
+              iconSize: 28,
+              splashRadius: 0.01,
+              onPressed: () async {
+                updateTab();
+              },
+            ),
+          ),
+        ),
+      );
+    }
+    return const SizedBox(
+      height: 0,
+    );
+  }
+
+  void showError() {
+    showDialog(
+        context: context,
+        builder: (context) => CupertinoAlertDialog(
+              title: const Text(
+                'Whoops!',
+                style: TextStyle(fontSize: 18),
+              ),
+              content: Column(
+                children: [
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    errorMessage.toString(),
+                    style: const TextStyle(fontSize: 14),
+                  ),
+                ],
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: Text(
+                    "Okay",
+                    style: TextStyle(color: AppStyle.red800),
+                  ),
+                )
+              ],
+            ));
+  }
+
+  Future<void> updateTab() async {
+    if (await checkFieldsAndUpdateCurrentUser()) {
+      updateIndex();
+      // Checks to see if we're in the age tab and did not confirm our age.
+    } else if ((currentIndex == 2 &&
+            _ageTabKey.currentState?.isConfirmed() == false &&
+            !_ageTabKey.currentState!.isEditing()) ||
+        currentIndex != 2) {
+      updateErrorMessage();
+      showError();
+    }
+  }
+
+  Widget buildBufferPage() {
+    final availableHeight = MediaQuery.of(context).size.height -
+        AppBar().preferredSize.height -
+        MediaQuery.of(context).padding.top -
+        MediaQuery.of(context).padding.bottom;
+
+    return SizedBox(
+      height: availableHeight,
+      child: Column(
+        children: [
+          const RegisterBuffer(),
+          Expanded(
+            child: Container(),
+          ),
+          Center(
+            child: GestureDetector(
+              onTap: () {
+                updateIndex();
+              },
+              child: Container(
+                padding: const EdgeInsets.all(35),
+                decoration: BoxDecoration(
+                  color: AppStyle.red800,
+                ),
+                child: const Center(
+                    child: Text(
+                  "Enter Basic Information",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16),
+                )),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   Widget updateBodyContent() {
@@ -267,7 +338,7 @@ class RegisterPageState extends State<RegisterPageHost> {
         return AgeTab(
             key: _ageTabKey, currentUser: user, updateIndex: updateIndex);
       case 3:
-        return const RegisterBuffer();
+        return buildBufferPage();
       default:
         return const Text('Register Page');
     }

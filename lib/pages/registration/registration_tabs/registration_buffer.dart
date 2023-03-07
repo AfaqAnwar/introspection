@@ -98,6 +98,7 @@ class RegisterBufferState extends State<RegisterBuffer>
                       ),
                     ),
                   ),
+                  const SizedBox(height: 20),
                   SizedBox(
                     height: 350,
                     child: Lottie(

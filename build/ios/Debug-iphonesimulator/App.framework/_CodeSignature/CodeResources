@@ -24,10 +24,6 @@
 		<data>
 		eMukzVm3Q/NNx9zdtIqSXVJO0io=
 		</data>
-		<key>flutter_assets/assets/animations/heartpersonalize.json</key>
-		<data>
-		fni1NKGFSyrLuOTKa7AqDO/l7fo=
-		</data>
 		<key>flutter_assets/assets/animations/loveglass.json</key>
 		<data>
 		HD1AdgVNFLrMaIfsFmpmFKKQoSI=
@@ -138,7 +134,7 @@
 		</data>
 		<key>flutter_assets/kernel_blob.bin</key>
 		<data>
-		K6saZL8Vlphnnr0t0fiHMhtJFeI=
+		mo3imY7u5gWNaFRAuCSFJswLap8=
 		</data>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<data>
@@ -185,13 +181,6 @@
 			<key>hash2</key>
 			<data>
 			gHQKs99EJ4J08RB4HiBV5fK0g93JWhcvCG9ZSAxBb8A=
-			</data>
-		</dict>
-		<key>flutter_assets/assets/animations/heartpersonalize.json</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			LtODIi29gA5nzEGUTrZ9Fc5FoibURKp9RsYrlOg/VAw=
 			</data>
 		</dict>
 		<key>flutter_assets/assets/animations/loveglass.json</key>
@@ -387,7 +376,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			r1EOKPChUxgl56PsqwDWPhPFPlUxK9aCpUDNcJk0PYU=
+			O74f8M8hXFF4lYYb/PvNMS7lCrYkxnbP12JPh/BPb3A=
 			</data>
 		</dict>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
