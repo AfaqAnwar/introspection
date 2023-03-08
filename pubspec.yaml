@@ -70,6 +70,7 @@ flutter:
     - assets/images/
     - assets/animations/loveglass.json
     - assets/animations/buffer.json
+    - assets/mapstyle/map_style.txt
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

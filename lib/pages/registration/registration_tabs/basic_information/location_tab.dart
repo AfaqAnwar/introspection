@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:datingapp/data/user.dart';
+import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -18,8 +20,8 @@ class LocationTab extends StatefulWidget {
 }
 
 class LocationTabState extends State<LocationTab> {
+  late String _mapStyle;
   String addressStatus = "";
-  String? _currentAddress;
   Position? _currentPosition;
   late CameraPosition cameraPosition;
   final _controller = Completer<GoogleMapController>();
@@ -38,6 +40,9 @@ class LocationTabState extends State<LocationTab> {
 
   @override
   void initState() {
+    rootBundle.loadString('assets/mapstyle/map_style.txt').then((string) {
+      _mapStyle = string;
+    });
     super.initState();
   }
 
@@ -121,8 +126,8 @@ class LocationTabState extends State<LocationTab> {
                 height: 300,
                 child: MapPicker(
                   // pass icon widget
-                  iconWidget: const Icon(Icons.location_on,
-                      color: Colors.red, size: 40),
+                  iconWidget:
+                      Icon(Icons.location_on, color: AppStyle.red500, size: 40),
                   //add map picker controller
                   mapPickerController: mapPickerController,
                   child: GoogleMap(
@@ -135,6 +140,7 @@ class LocationTabState extends State<LocationTab> {
                     initialCameraPosition: cameraPosition,
                     onMapCreated: (GoogleMapController controller) {
                       _controller.complete(controller);
+                      controller.setMapStyle(_mapStyle);
                     },
                     onCameraMoveStarted: () {
                       // notify map is moving
