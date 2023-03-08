@@ -39,6 +39,10 @@ dependencies:
   lottie: ^2.2.0
   page_transition: ^2.0.9
   im_stepper: ^1.0.1+1
+  google_maps_flutter: ^2.2.5
+  map_picker: ^0.0.3
+  geolocator: ^9.0.2
+  geocoding: ^2.0.5
 
 dev_dependencies:
   flutter_test:
