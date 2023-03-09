@@ -1,6 +1,7 @@
 import 'package:datingapp/pages/registration/registration_buffer.dart';
-import 'package:datingapp/pages/registration/registration_tabs/basic_information/gender_preference.dart';
+import 'package:datingapp/pages/registration/registration_tabs/basic_information/gender_preference_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/basic_information/gender_tab.dart';
+import 'package:datingapp/pages/registration/registration_tabs/basic_information/height_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/basic_information/location_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/initial_information/age_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/initial_information/email_tab.dart';
@@ -23,7 +24,7 @@ class RegisterPageHost extends StatefulWidget {
 class RegisterPageState extends State<RegisterPageHost> {
   late User user;
   int currentIndex = 0;
-  int totalIndex = 8;
+  int totalIndex = 20;
   final GlobalKey<NameTabState> _nameTabKey = GlobalKey();
   final GlobalKey<EmailTabState> _emailTabKey = GlobalKey();
   final GlobalKey<AgeTabState> _ageTabKey = GlobalKey();
@@ -31,6 +32,7 @@ class RegisterPageState extends State<RegisterPageHost> {
   final GlobalKey<GenderTabState> _genderTabKey = GlobalKey();
   final GlobalKey<GenderPreferenceTabState> _genderPreferenceTabKey =
       GlobalKey();
+  final GlobalKey<HeightTabState> _heightTabKey = GlobalKey();
   String errorMessage = "";
 
   @override
@@ -82,6 +84,9 @@ class RegisterPageState extends State<RegisterPageHost> {
       case 6:
         _genderPreferenceTabKey.currentState!.updateUserGenderPreference();
         return _genderPreferenceTabKey.currentState!.validateGenderPreference();
+      case 7:
+        _heightTabKey.currentState!.updateUserHeight();
+        return true;
       default:
         return false;
     }
@@ -110,6 +115,12 @@ class RegisterPageState extends State<RegisterPageHost> {
       case 5:
         user.setGender = "";
         break;
+      case 6:
+        user.setGenderPreference = "";
+        break;
+      case 7:
+        user.setHeight = "";
+        break;
       default:
         break;
     }
@@ -134,6 +145,9 @@ class RegisterPageState extends State<RegisterPageHost> {
         break;
       case 6:
         errorMessage = _genderPreferenceTabKey.currentState!.getErrorMessage();
+        break;
+      case 7:
+        errorMessage = _heightTabKey.currentState!.getErrorMessage();
         break;
       default:
         break;
@@ -447,6 +461,9 @@ class RegisterPageState extends State<RegisterPageHost> {
             key: _genderPreferenceTabKey,
             currentUser: user,
             updateIndex: updateIndex);
+      case 7:
+        return HeightTab(
+            key: _heightTabKey, currentUser: user, updateIndex: updateIndex);
       default:
         return const Text('Register Page');
     }
