@@ -147,7 +147,7 @@ class RegisterPageState extends State<RegisterPageHost> {
         errorMessage = _genderPreferenceTabKey.currentState!.getErrorMessage();
         break;
       case 7:
-        errorMessage = _heightTabKey.currentState!.getErrorMessage();
+        errorMessage = "Unknown Error Occured";
         break;
       default:
         break;

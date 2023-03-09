@@ -15,7 +15,6 @@ class HeightTab extends StatefulWidget {
 
 class HeightTabState extends State<HeightTab> {
   List<CupertinoPickerObject> heights = [];
-  String errorMessage = "Please select which genders you would like to date.";
   String selectedHeight = "";
 
   @override
@@ -43,10 +42,6 @@ class HeightTabState extends State<HeightTab> {
 
   void updateUserHeight() {
     widget.currentUser.setHeight = selectedHeight;
-  }
-
-  String getErrorMessage() {
-    return errorMessage;
   }
 
   @override
