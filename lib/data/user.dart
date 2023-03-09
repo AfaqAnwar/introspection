@@ -3,40 +3,52 @@ class User {
   late String lastName;
   late String email;
   late String dob;
-  late String gender;
-  late String sexuality;
-  late String genderPreference;
-  late String experiencePreference;
-  late String childrenPreference;
-  late String height;
   late String zipcode;
   late String city;
   late String state;
   late String country;
-  late String drugPreference;
-  late String weedPreference;
-  late String smokePreference;
+  late String gender;
+  late String genderPreference;
+  late String height;
+  late String ethnicity;
+  late String hometown;
+  late String work;
+  late String jobTitle;
+  late String school;
+  late String educationLevel;
+  late String religion;
+  late String politicalBelief;
+  late String childrenPreference;
   late String alcoholPreference;
+  late String smokePreference;
+  late String weedPreference;
+  late String drugPreference;
 
   User() {
     firstName = "";
     lastName = "";
     email = "";
     dob = "";
-    gender = "";
-    sexuality = "";
-    genderPreference = "";
-    experiencePreference = "";
-    childrenPreference = "";
-    height = "";
     zipcode = "";
     city = "";
     state = "";
     country = "";
-    drugPreference = "";
-    weedPreference = "";
-    smokePreference = "";
+    gender = "";
+    genderPreference = "";
+    height = "";
+    ethnicity = "";
+    hometown = "";
+    work = "";
+    jobTitle = "";
+    school = "";
+    educationLevel = "";
+    religion = "";
+    politicalBelief = "";
+    childrenPreference = "";
     alcoholPreference = "";
+    smokePreference = "";
+    weedPreference = "";
+    drugPreference = "";
   }
 
   String get getFirstName {
@@ -71,54 +83,6 @@ class User {
     this.dob = dob;
   }
 
-  String get getGender {
-    return gender;
-  }
-
-  set setGender(String gender) {
-    this.gender = gender;
-  }
-
-  String get getSexuality {
-    return sexuality;
-  }
-
-  set setSexuality(String sexuality) {
-    this.sexuality = sexuality;
-  }
-
-  String get getGenderPreference {
-    return genderPreference;
-  }
-
-  set setGenderPreference(String genderPreference) {
-    this.genderPreference = genderPreference;
-  }
-
-  String get getExperiencePreference {
-    return experiencePreference;
-  }
-
-  set setExperiencePreference(String experiencePreference) {
-    this.experiencePreference = experiencePreference;
-  }
-
-  String get getChildrenPreference {
-    return childrenPreference;
-  }
-
-  set setChildrenPreference(String childrenPreference) {
-    this.childrenPreference = childrenPreference;
-  }
-
-  String get getHeight {
-    return height;
-  }
-
-  set setHeight(String height) {
-    this.height = height;
-  }
-
   String get getZipcode {
     return zipcode;
   }
@@ -151,20 +115,108 @@ class User {
     this.country = country;
   }
 
-  String get getDrugPreference {
-    return drugPreference;
+  String get getGender {
+    return gender;
   }
 
-  set setDrugPreference(String drugPreference) {
-    this.drugPreference = drugPreference;
+  set setGender(String gender) {
+    this.gender = gender;
   }
 
-  String get getWeedPreference {
-    return weedPreference;
+  String get getGenderPreference {
+    return genderPreference;
   }
 
-  set setWeedPreference(String weedPreference) {
-    this.weedPreference = weedPreference;
+  set setGenderPreference(String genderPreference) {
+    this.genderPreference = genderPreference;
+  }
+
+  String get getHeight {
+    return height;
+  }
+
+  set setHeight(String height) {
+    this.height = height;
+  }
+
+  String get getEthnicity {
+    return ethnicity;
+  }
+
+  set setEthnicity(String ethnicity) {
+    this.ethnicity = ethnicity;
+  }
+
+  String get getHometown {
+    return hometown;
+  }
+
+  set setHometown(String hometown) {
+    this.hometown = hometown;
+  }
+
+  String get getWork {
+    return work;
+  }
+
+  set setWork(String work) {
+    this.work = work;
+  }
+
+  String get getJobTitle {
+    return jobTitle;
+  }
+
+  set setJobTitle(String jobTitle) {
+    this.jobTitle = jobTitle;
+  }
+
+  String get getSchool {
+    return school;
+  }
+
+  set setSchool(String school) {
+    this.school = school;
+  }
+
+  String get getEducationLevel {
+    return educationLevel;
+  }
+
+  set setEducationLevel(String educationLevel) {
+    this.educationLevel = educationLevel;
+  }
+
+  String get getReligion {
+    return religion;
+  }
+
+  set setReligion(String religion) {
+    this.religion = religion;
+  }
+
+  String get getPoliticalBelief {
+    return politicalBelief;
+  }
+
+  set setPoliticalBelief(String politicalBelief) {
+    this.politicalBelief = politicalBelief;
+  }
+
+  String get getChildrenPreference {
+    return childrenPreference;
+  }
+
+  set setChildrenPreference(String childrenPreference) {
+    this.childrenPreference = childrenPreference;
+  }
+
+  String get getAlcoholPreference {
+    return alcoholPreference;
+  }
+
+  set setAlcoholPreference(String alcoholPreference) {
+    this.alcoholPreference = alcoholPreference;
   }
 
   String get getSmokePreference {
@@ -175,11 +227,19 @@ class User {
     this.smokePreference = smokePreference;
   }
 
-  String get getAlcoholPreference {
-    return alcoholPreference;
+  String get getWeedPreference {
+    return weedPreference;
   }
 
-  set setAlcoholPreference(String alcoholPreference) {
-    this.alcoholPreference = alcoholPreference;
+  set setWeedPreference(String weedPreference) {
+    this.weedPreference = weedPreference;
+  }
+
+  String get getDrugPreference {
+    return drugPreference;
+  }
+
+  set setDrugPreference(String drugPreference) {
+    this.drugPreference = drugPreference;
   }
 }
