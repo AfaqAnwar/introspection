@@ -71,7 +71,7 @@ class User {
     this.dob = dob;
   }
 
-  String get setGender {
+  String get getGender {
     return gender;
   }
 

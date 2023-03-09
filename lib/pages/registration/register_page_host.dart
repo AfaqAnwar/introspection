@@ -1,4 +1,5 @@
 import 'package:datingapp/pages/registration/registration_buffer.dart';
+import 'package:datingapp/pages/registration/registration_tabs/basic_information/gender_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/basic_information/location_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/initial_information/age_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/initial_information/email_tab.dart';
@@ -26,6 +27,7 @@ class RegisterPageState extends State<RegisterPageHost> {
   final GlobalKey<EmailTabState> _emailTabKey = GlobalKey();
   final GlobalKey<AgeTabState> _ageTabKey = GlobalKey();
   final GlobalKey<LocationTabState> _locationTabKey = GlobalKey();
+  final GlobalKey<GenderTabState> _genderTabKey = GlobalKey();
   String errorMessage = "";
 
   @override
@@ -71,6 +73,9 @@ class RegisterPageState extends State<RegisterPageHost> {
       case 4:
         _locationTabKey.currentState!.updateUserAddress();
         return _locationTabKey.currentState!.validateLocation();
+      case 5:
+        _genderTabKey.currentState!.updateUserGender();
+        return _genderTabKey.currentState!.validateGender();
       default:
         return false;
     }
@@ -96,6 +101,9 @@ class RegisterPageState extends State<RegisterPageHost> {
         user.setState = "";
         user.setCountry = "";
         break;
+      case 5:
+        user.setGender = "";
+        break;
       default:
         break;
     }
@@ -111,6 +119,12 @@ class RegisterPageState extends State<RegisterPageHost> {
         break;
       case 2:
         errorMessage = _ageTabKey.currentState!.getErrorMessage();
+        break;
+      case 4:
+        errorMessage = _locationTabKey.currentState!.getErrorMessage();
+        break;
+      case 5:
+        errorMessage = _genderTabKey.currentState!.getErrorMessage();
         break;
       default:
         break;
@@ -402,6 +416,9 @@ class RegisterPageState extends State<RegisterPageHost> {
       case 4:
         return LocationTab(
             key: _locationTabKey, currentUser: user, updateIndex: updateIndex);
+      case 5:
+        return GenderTab(
+            key: _genderTabKey, currentUser: user, updateIndex: updateIndex);
       default:
         return const Text('Register Page');
     }
