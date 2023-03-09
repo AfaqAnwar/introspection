@@ -25,6 +25,7 @@ class RegisterPageState extends State<RegisterPageHost> {
   final GlobalKey<NameTabState> _nameTabKey = GlobalKey();
   final GlobalKey<EmailTabState> _emailTabKey = GlobalKey();
   final GlobalKey<AgeTabState> _ageTabKey = GlobalKey();
+  final GlobalKey<LocationTabState> _locationTabKey = GlobalKey();
   String errorMessage = "";
 
   @override
@@ -67,6 +68,9 @@ class RegisterPageState extends State<RegisterPageHost> {
         return changeScreen;
       case 3:
         return true;
+      case 4:
+        _locationTabKey.currentState!.updateUserAddress();
+        return _locationTabKey.currentState!.validateLocation();
       default:
         return false;
     }
@@ -85,6 +89,12 @@ class RegisterPageState extends State<RegisterPageHost> {
         user.setDob = "";
         break;
       case 3:
+        break;
+      case 4:
+        user.setZipcode = "";
+        user.setCity = "";
+        user.setState = "";
+        user.setCountry = "";
         break;
       default:
         break;
@@ -133,7 +143,32 @@ class RegisterPageState extends State<RegisterPageHost> {
         ],
       );
     }
-    if (currentIndex > 3) {
+    if (currentIndex == 4) {
+      return Column(
+        children: [
+          const SizedBox(height: 10),
+          DotStepper(
+            tappingEnabled: false,
+            dotCount: totalIndex - 4,
+            dotRadius: 6,
+            activeStep: currentIndex - 4,
+            shape: Shape.circle,
+            spacing: 10,
+            indicator: Indicator.shift,
+            fixedDotDecoration: FixedDotDecoration(
+                color: Colors.grey.shade400,
+                strokeColor: Colors.grey.shade400,
+                strokeWidth: 1),
+            indicatorDecoration: IndicatorDecoration(
+                color: AppStyle.red500,
+                strokeColor: AppStyle.red500,
+                strokeWidth: 1),
+          ),
+          const SizedBox(height: 40),
+        ],
+      );
+    }
+    if (currentIndex > 4) {
       return Column(
         children: [
           const SizedBox(height: 10),
@@ -365,7 +400,8 @@ class RegisterPageState extends State<RegisterPageHost> {
       case 3:
         return buildBufferPage();
       case 4:
-        return LocationTab(currentUser: user, updateIndex: updateIndex);
+        return LocationTab(
+            key: _locationTabKey, currentUser: user, updateIndex: updateIndex);
       default:
         return const Text('Register Page');
     }

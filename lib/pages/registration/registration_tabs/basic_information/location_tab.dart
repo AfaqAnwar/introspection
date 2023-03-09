@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:datingapp/data/user.dart';
 import 'package:datingapp/style/app_style.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:geocoding/geocoding.dart';
@@ -12,6 +13,7 @@ import 'package:map_picker/map_picker.dart';
 class LocationTab extends StatefulWidget {
   final User currentUser;
   final Function() updateIndex;
+
   const LocationTab(
       {super.key, required this.currentUser, required this.updateIndex});
 
@@ -20,12 +22,15 @@ class LocationTab extends StatefulWidget {
 }
 
 class LocationTabState extends State<LocationTab> {
+  late final Future currentPositionAvailable;
   late String _mapStyle;
   String addressStatus = "";
   Position? _currentPosition;
   late CameraPosition cameraPosition;
   final _controller = Completer<GoogleMapController>();
   MapPickerController mapPickerController = MapPickerController();
+  String errorMessage = "";
+  late List<Placemark> finalLocation;
 
   Future getLocationOnLoad() async {
     await _getCurrentPosition();
@@ -43,6 +48,7 @@ class LocationTabState extends State<LocationTab> {
     rootBundle.loadString('assets/mapstyle/map_style.txt').then((string) {
       _mapStyle = string;
     });
+    currentPositionAvailable = getLocationOnLoad();
     super.initState();
   }
 
@@ -52,24 +58,21 @@ class LocationTabState extends State<LocationTab> {
 
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          content: Text(
-              'Location services are disabled. Please enable the services')));
+      errorMessage =
+          'Location services are disabled. Please enable the services';
       return false;
     }
     permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
-        ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Location permissions are denied')));
+        errorMessage = 'Location permissions are denied';
         return false;
       }
     }
     if (permission == LocationPermission.deniedForever) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          content: Text(
-              'Location permissions are permanently denied, we cannot request permissions.')));
+      errorMessage =
+          'Location permissions are permanently denied, we cannot request permissions.';
       return false;
     }
     return true;
@@ -86,18 +89,74 @@ class LocationTabState extends State<LocationTab> {
     });
   }
 
-  String errorMessage = "";
-
-  void updateLocationOfUser() {}
+  void updateAddress(List<Placemark> placemarks) {
+    setState(() {
+      addressStatus =
+          '${placemarks.first.name}, ${placemarks.first.administrativeArea}, ${placemarks.first.country}';
+    });
+  }
 
   String getErrorMessage() {
     return errorMessage;
   }
 
+  bool validateLocation() {
+    if (finalLocation.isNotEmpty) {
+      return true;
+    }
+    return false;
+  }
+
+  void updateUserAddress() {
+    if (finalLocation.isNotEmpty) {
+      widget.currentUser.setCity = finalLocation.first.locality.toString();
+      widget.currentUser.setState =
+          finalLocation.first.administrativeArea.toString();
+      widget.currentUser.setCountry = finalLocation.first.country.toString();
+      widget.currentUser.setZipcode = finalLocation.first.postalCode.toString();
+    }
+  }
+
+  void showErrorDialog() {
+    showDialog(
+        context: context,
+        builder: (context) => CupertinoAlertDialog(
+              title: const Text(
+                'Whoops!',
+                style: TextStyle(fontSize: 18),
+              ),
+              content: Column(
+                children: [
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    errorMessage.toString(),
+                    style: const TextStyle(fontSize: 14),
+                  ),
+                ],
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: Text(
+                    "Okay",
+                    style: TextStyle(color: AppStyle.red800),
+                  ),
+                )
+              ],
+            ));
+  }
+
   @override
   Widget build(BuildContext context) {
+    final availableHeight = MediaQuery.of(context).size.height -
+        AppBar().preferredSize.height -
+        MediaQuery.of(context).padding.top -
+        MediaQuery.of(context).padding.bottom;
+
     return FutureBuilder(
-      future: getLocationOnLoad(),
+      future: currentPositionAvailable,
       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
         if (snapshot.data == true) {
           return Column(
@@ -123,7 +182,7 @@ class LocationTabState extends State<LocationTab> {
               const SizedBox(height: 25),
               SizedBox(
                 width: MediaQuery.of(context).size.width - 50,
-                height: 300,
+                height: availableHeight - 400,
                 child: MapPicker(
                   // pass icon widget
                   iconWidget:
@@ -134,7 +193,7 @@ class LocationTabState extends State<LocationTab> {
                     myLocationEnabled: true,
                     zoomControlsEnabled: false,
                     // hide location button
-                    myLocationButtonEnabled: false,
+                    myLocationButtonEnabled: true,
                     mapType: MapType.normal,
                     //  camera position
                     initialCameraPosition: cameraPosition,
@@ -154,16 +213,14 @@ class LocationTabState extends State<LocationTab> {
                       // notify map stopped moving
                       mapPickerController.mapFinishedMoving!();
                       //get address name from camera position
-
                       List<Placemark> placemarks =
                           await placemarkFromCoordinates(
                         cameraPosition.target.latitude,
                         cameraPosition.target.longitude,
                       );
 
-                      // update the ui with the address
-                      addressStatus =
-                          '${placemarks.first.name}, ${placemarks.first.administrativeArea}, ${placemarks.first.country}';
+                      finalLocation = placemarks;
+                      updateAddress(placemarks);
                     },
                   ),
                 ),

@@ -9,8 +9,10 @@ class User {
   late String experiencePreference;
   late String childrenPreference;
   late String height;
+  late String zipcode;
   late String city;
   late String state;
+  late String country;
   late String drugPreference;
   late String weedPreference;
   late String smokePreference;
@@ -27,8 +29,10 @@ class User {
     experiencePreference = "";
     childrenPreference = "";
     height = "";
+    zipcode = "";
     city = "";
     state = "";
+    country = "";
     drugPreference = "";
     weedPreference = "";
     smokePreference = "";
@@ -115,6 +119,14 @@ class User {
     this.height = height;
   }
 
+  String get getZipcode {
+    return zipcode;
+  }
+
+  set setZipcode(String zipcode) {
+    this.zipcode = zipcode;
+  }
+
   String get getCity {
     return city;
   }
@@ -129,6 +141,14 @@ class User {
 
   set setState(String state) {
     this.state = state;
+  }
+
+  String get getCountry {
+    return country;
+  }
+
+  set setCountry(String country) {
+    this.country = country;
   }
 
   String get getDrugPreference {
