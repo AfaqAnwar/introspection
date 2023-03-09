@@ -107,7 +107,7 @@ class LocationTabState extends State<LocationTab> {
     return false;
   }
 
-  void updateUserAddress() {
+  Future<void> updateUserAddress() async {
     if (finalLocation.isNotEmpty) {
       widget.currentUser.setCity = finalLocation.first.locality.toString();
       widget.currentUser.setState =
