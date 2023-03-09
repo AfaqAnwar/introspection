@@ -284,7 +284,7 @@ class RegisterPageState extends State<RegisterPageHost> {
                                             PageTransitionType.leftToRightPop));
                               },
                               child: Text(
-                                "Yes Take Me Back!",
+                                "Yes, take me back!",
                                 style: TextStyle(color: AppStyle.red800),
                               ),
                             )
