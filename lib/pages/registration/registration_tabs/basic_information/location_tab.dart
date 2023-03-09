@@ -190,21 +190,36 @@ class LocationTabState extends State<LocationTab> {
                   //add map picker controller
                   mapPickerController: mapPickerController,
                   child: GoogleMap(
+                    cameraTargetBounds: CameraTargetBounds(
+                      // bound camera so user can't spoof location.
+                      LatLngBounds(
+                        southwest: LatLng(
+                          _currentPosition!.latitude - 0.008,
+                          _currentPosition!.longitude - 0.008,
+                        ),
+                        northeast: LatLng(
+                          _currentPosition!.latitude + 0.008,
+                          _currentPosition!.longitude + 0.008,
+                        ),
+                      ),
+                    ),
+                    compassEnabled: false,
+                    zoomGesturesEnabled: false,
+                    mapToolbarEnabled: false,
                     myLocationEnabled: true,
                     zoomControlsEnabled: false,
-                    // hide location button
                     myLocationButtonEnabled: true,
                     mapType: MapType.normal,
-                    //  camera position
                     initialCameraPosition: cameraPosition,
                     onMapCreated: (GoogleMapController controller) {
                       _controller.complete(controller);
                       controller.setMapStyle(_mapStyle);
                     },
                     onCameraMoveStarted: () {
-                      // notify map is moving
                       mapPickerController.mapMoving!();
-                      addressStatus = "checking ...";
+                      setState(() {
+                        addressStatus = "Finding your location...";
+                      });
                     },
                     onCameraMove: (cameraPosition) {
                       this.cameraPosition = cameraPosition;
