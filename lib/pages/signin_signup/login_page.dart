@@ -34,7 +34,7 @@ class _LoginPageState extends State<LoginPage> {
           context: context,
           builder: (context) => CupertinoAlertDialog(
                 title: const Text(
-                  'Login Input Error',
+                  'Login Error',
                   style: TextStyle(fontSize: 18),
                 ),
                 content: Column(
