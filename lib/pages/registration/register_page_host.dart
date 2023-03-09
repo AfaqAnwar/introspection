@@ -1,4 +1,5 @@
 import 'package:datingapp/pages/registration/registration_buffer.dart';
+import 'package:datingapp/pages/registration/registration_tabs/basic_information/gender_preference.dart';
 import 'package:datingapp/pages/registration/registration_tabs/basic_information/gender_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/basic_information/location_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/initial_information/age_tab.dart';
@@ -28,6 +29,8 @@ class RegisterPageState extends State<RegisterPageHost> {
   final GlobalKey<AgeTabState> _ageTabKey = GlobalKey();
   final GlobalKey<LocationTabState> _locationTabKey = GlobalKey();
   final GlobalKey<GenderTabState> _genderTabKey = GlobalKey();
+  final GlobalKey<GenderPreferenceTabState> _genderPreferenceTabKey =
+      GlobalKey();
   String errorMessage = "";
 
   @override
@@ -76,6 +79,9 @@ class RegisterPageState extends State<RegisterPageHost> {
       case 5:
         _genderTabKey.currentState!.updateUserGender();
         return _genderTabKey.currentState!.validateGender();
+      case 6:
+        _genderPreferenceTabKey.currentState!.updateUserGenderPreference();
+        return _genderPreferenceTabKey.currentState!.validateGenderPreference();
       default:
         return false;
     }
@@ -125,6 +131,9 @@ class RegisterPageState extends State<RegisterPageHost> {
         break;
       case 5:
         errorMessage = _genderTabKey.currentState!.getErrorMessage();
+        break;
+      case 6:
+        errorMessage = _genderPreferenceTabKey.currentState!.getErrorMessage();
         break;
       default:
         break;
@@ -290,19 +299,33 @@ class RegisterPageState extends State<RegisterPageHost> {
   Widget buildBottomNavigationBar() {
     if (currentIndex != 3) {
       return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 30),
         child: SafeArea(
           child: Padding(
             padding: MediaQuery.of(context).viewInsets,
-            child: IconButton(
-              alignment: Alignment.bottomRight,
-              icon: const Icon(Icons.arrow_forward_ios),
-              color: AppStyle.red800,
-              iconSize: 28,
-              splashRadius: 0.01,
-              onPressed: () async {
-                updateTab();
-              },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  RawMaterialButton(
+                    elevation: 0,
+                    constraints: const BoxConstraints(
+                      minWidth: 50,
+                      minHeight: 50,
+                    ),
+                    fillColor: AppStyle.red900,
+                    shape: const CircleBorder(),
+                    onPressed: () async {
+                      updateTab();
+                    },
+                    child: const Icon(
+                      Icons.arrow_forward_ios,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -419,6 +442,11 @@ class RegisterPageState extends State<RegisterPageHost> {
       case 5:
         return GenderTab(
             key: _genderTabKey, currentUser: user, updateIndex: updateIndex);
+      case 6:
+        return GenderPreferenceTab(
+            key: _genderPreferenceTabKey,
+            currentUser: user,
+            updateIndex: updateIndex);
       default:
         return const Text('Register Page');
     }

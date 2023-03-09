@@ -3,30 +3,32 @@ import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:group_button/group_button.dart';
 
-class GenderTab extends StatefulWidget {
+class GenderPreferenceTab extends StatefulWidget {
   final User currentUser;
   final Function() updateIndex;
-  const GenderTab(
+  const GenderPreferenceTab(
       {super.key, required this.currentUser, required this.updateIndex});
 
   @override
-  State<GenderTab> createState() => GenderTabState();
+  State<GenderPreferenceTab> createState() => GenderPreferenceTabState();
 }
 
-class GenderTabState extends State<GenderTab> {
+class GenderPreferenceTabState extends State<GenderPreferenceTab> {
   final controller = GroupButtonController();
 
   String selectedGender = "";
-  String errorMessage = "Please select your gender.";
+  String errorMessage = "Please select which genders you would like to date.";
 
   @override
   void initState() {
-    if (widget.currentUser.getGender.isNotEmpty) {
-      selectedGender = widget.currentUser.getGender;
-      if (selectedGender == "Man") {
+    if (widget.currentUser.getGenderPreference.isNotEmpty) {
+      selectedGender = widget.currentUser.getGenderPreference;
+      if (selectedGender == "Men") {
         controller.selectIndex(0);
-      } else {
+      } else if (selectedGender == "Women") {
         controller.selectIndex(1);
+      } else {
+        controller.selectIndex(2);
       }
     }
     super.initState();
@@ -36,7 +38,7 @@ class GenderTabState extends State<GenderTab> {
     return errorMessage;
   }
 
-  bool validateGender() {
+  bool validateGenderPreference() {
     if (selectedGender.isNotEmpty) {
       return true;
     } else {
@@ -44,8 +46,8 @@ class GenderTabState extends State<GenderTab> {
     }
   }
 
-  void updateUserGender() {
-    widget.currentUser.setGender = selectedGender;
+  void updateUserGenderPreference() {
+    widget.currentUser.setGenderPreference = selectedGender;
   }
 
   @override
@@ -58,7 +60,7 @@ class GenderTabState extends State<GenderTab> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 25.0),
               child: Text(
-                "What's your gender?",
+                "Who do you want to date?",
                 textAlign: TextAlign.left,
                 style: TextStyle(
                   color: Colors.black,
@@ -92,7 +94,7 @@ class GenderTabState extends State<GenderTab> {
                     selectedGender = "";
                   }
                 },
-                buttons: const ["Man", "Woman"],
+                buttons: const ["Men", "Women", "Everyone"],
               ),
             )
           ],
