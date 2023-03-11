@@ -112,8 +112,9 @@ class EthnicityTabState extends State<EthnicityTab> {
         ),
         const SizedBox(height: 25),
         Align(
-          alignment: Alignment.centerLeft,
+          alignment: Alignment.topLeft,
           child: Wrap(
+            alignment: WrapAlignment.start,
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),

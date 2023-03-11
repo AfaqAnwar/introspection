@@ -1,4 +1,5 @@
 import 'package:datingapp/pages/registration/registration_buffer.dart';
+import 'package:datingapp/pages/registration/registration_tabs/basic_information/children_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/basic_information/ethnicity_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/basic_information/gender_preference_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/basic_information/gender_tab.dart';
@@ -35,6 +36,7 @@ class RegisterPageState extends State<RegisterPageHost> {
       GlobalKey();
   final GlobalKey<HeightTabState> _heightTabKey = GlobalKey();
   final GlobalKey<EthnicityTabState> _ethnicityTabKey = GlobalKey();
+  final GlobalKey<ChildrenTabState> _childrenTabKey = GlobalKey();
   String errorMessage = "";
 
   @override
@@ -92,6 +94,9 @@ class RegisterPageState extends State<RegisterPageHost> {
       case 8:
         _ethnicityTabKey.currentState!.updateUserEthnicities();
         return _ethnicityTabKey.currentState!.validateEthnicities();
+      case 9:
+        _childrenTabKey.currentState!.updateChildrenQuestions();
+        return _childrenTabKey.currentState!.validateChildrenQuestions();
       default:
         return false;
     }
@@ -129,6 +134,10 @@ class RegisterPageState extends State<RegisterPageHost> {
       case 8:
         user.setEthnicities = [];
         break;
+      case 9:
+        user.hasChildren = null;
+        user.setChildrenPreference = "";
+        break;
       default:
         break;
     }
@@ -159,6 +168,9 @@ class RegisterPageState extends State<RegisterPageHost> {
         break;
       case 8:
         errorMessage = _ethnicityTabKey.currentState!.getErrorMessage();
+        break;
+      case 9:
+        errorMessage = _childrenTabKey.currentState!.getErrorMessage();
         break;
       default:
         break;
@@ -259,49 +271,7 @@ class RegisterPageState extends State<RegisterPageHost> {
             color: AppStyle.red800,
             onPressed: () async {
               destroyData();
-              if (currentIndex == 0) {
-                showDialog(
-                    context: context,
-                    builder: (context) => CupertinoAlertDialog(
-                          title: const Text(
-                            'Woah There!',
-                            style: TextStyle(fontSize: 18),
-                          ),
-                          content: Column(
-                            children: const [
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                "Are you sure you want to exit?",
-                                style: TextStyle(fontSize: 14),
-                              ),
-                            ],
-                          ),
-                          actions: [
-                            TextButton(
-                              onPressed: () => Navigator.pop(context),
-                              child: Text("Cancel",
-                                  style: TextStyle(color: AppStyle.red400)),
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    PageTransition(
-                                        child: const LoginPage(),
-                                        childCurrent: const RegisterPageHost(),
-                                        type:
-                                            PageTransitionType.leftToRightPop));
-                              },
-                              child: Text(
-                                "Yes, take me back!",
-                                style: TextStyle(color: AppStyle.red800),
-                              ),
-                            )
-                          ],
-                        ));
-              }
+              checkAndReturnToLogin();
               updateIndexBackwards();
             },
           ),
@@ -392,6 +362,51 @@ class RegisterPageState extends State<RegisterPageHost> {
             ));
   }
 
+  void checkAndReturnToLogin() {
+    if (currentIndex == 0) {
+      showDialog(
+          context: context,
+          builder: (context) => CupertinoAlertDialog(
+                title: const Text(
+                  'Woah There!',
+                  style: TextStyle(fontSize: 18),
+                ),
+                content: Column(
+                  children: const [
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      "Are you sure you want to exit?",
+                      style: TextStyle(fontSize: 14),
+                    ),
+                  ],
+                ),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: Text("Cancel",
+                        style: TextStyle(color: AppStyle.red400)),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          PageTransition(
+                              child: const LoginPage(),
+                              childCurrent: const RegisterPageHost(),
+                              type: PageTransitionType.leftToRightPop));
+                    },
+                    child: Text(
+                      "Yes, take me back!",
+                      style: TextStyle(color: AppStyle.red800),
+                    ),
+                  )
+                ],
+              ));
+    }
+  }
+
   Future<void> updateTab() async {
     if (await checkFieldsAndUpdateCurrentUser()) {
       updateIndex();
@@ -478,6 +493,10 @@ class RegisterPageState extends State<RegisterPageHost> {
       case 8:
         return EthnicityTab(
             key: _ethnicityTabKey, currentUser: user, updateIndex: updateIndex);
+
+      case 9:
+        return ChildrenTab(
+            key: _childrenTabKey, currentUser: user, updateIndex: updateIndex);
       default:
         return const Text('Register Page');
     }

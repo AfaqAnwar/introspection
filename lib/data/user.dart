@@ -11,6 +11,8 @@ class User {
   late String genderPreference;
   late String height;
   late List<String> ethnicities;
+  late bool? hasChildren;
+  late String childrenPreference;
   late String hometown;
   late String work;
   late String jobTitle;
@@ -18,7 +20,6 @@ class User {
   late String educationLevel;
   late String religion;
   late String politicalBelief;
-  late String childrenPreference;
   late String alcoholPreference;
   late String smokePreference;
   late String weedPreference;
@@ -37,6 +38,8 @@ class User {
     genderPreference = "";
     height = "";
     ethnicities = [];
+    hasChildren = null;
+    childrenPreference = "";
     hometown = "";
     work = "";
     jobTitle = "";
@@ -44,7 +47,6 @@ class User {
     educationLevel = "";
     religion = "";
     politicalBelief = "";
-    childrenPreference = "";
     alcoholPreference = "";
     smokePreference = "";
     weedPreference = "";
@@ -147,6 +149,22 @@ class User {
     this.ethnicities = ethnicities;
   }
 
+  bool? get getHasChildren {
+    return hasChildren;
+  }
+
+  set setHasChildren(bool? hasChildren) {
+    this.hasChildren = hasChildren;
+  }
+
+  String get getChildrenPreference {
+    return childrenPreference;
+  }
+
+  set setChildrenPreference(String childrenPreference) {
+    this.childrenPreference = childrenPreference;
+  }
+
   String get getHometown {
     return hometown;
   }
@@ -201,14 +219,6 @@ class User {
 
   set setPoliticalBelief(String politicalBelief) {
     this.politicalBelief = politicalBelief;
-  }
-
-  String get getChildrenPreference {
-    return childrenPreference;
-  }
-
-  set setChildrenPreference(String childrenPreference) {
-    this.childrenPreference = childrenPreference;
   }
 
   String get getAlcoholPreference {
