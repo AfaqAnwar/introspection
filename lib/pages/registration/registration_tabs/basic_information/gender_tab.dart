@@ -71,31 +71,34 @@ class GenderTabState extends State<GenderTab> {
           ],
         ),
         const SizedBox(height: 25),
-        Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 25.0),
-              child: GroupButton(
-                controller: controller,
-                options: GroupButtonOptions(
-                  unselectedColor: Colors.grey,
-                  selectedColor: AppStyle.red800,
-                  borderRadius: const BorderRadius.all(Radius.circular(25)),
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Wrap(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                child: GroupButton(
+                  controller: controller,
+                  options: GroupButtonOptions(
+                    unselectedColor: Colors.grey,
+                    selectedColor: AppStyle.red800,
+                    borderRadius: const BorderRadius.all(Radius.circular(25)),
+                  ),
+                  maxSelected: 1,
+                  enableDeselect: true,
+                  isRadio: false,
+                  onSelected: (value, index, isSelected) {
+                    if (isSelected) {
+                      selectedGender = value;
+                    } else {
+                      selectedGender = "";
+                    }
+                  },
+                  buttons: const ["Man", "Woman"],
                 ),
-                maxSelected: 1,
-                enableDeselect: true,
-                isRadio: false,
-                onSelected: (value, index, isSelected) {
-                  if (isSelected) {
-                    selectedGender = value;
-                  } else {
-                    selectedGender = "";
-                  }
-                },
-                buttons: const ["Man", "Woman"],
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         )
       ],
     );

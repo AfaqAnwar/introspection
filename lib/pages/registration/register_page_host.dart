@@ -1,4 +1,5 @@
 import 'package:datingapp/pages/registration/registration_buffer.dart';
+import 'package:datingapp/pages/registration/registration_tabs/basic_information/ethnicity_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/basic_information/gender_preference_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/basic_information/gender_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/basic_information/height_tab.dart';
@@ -33,6 +34,7 @@ class RegisterPageState extends State<RegisterPageHost> {
   final GlobalKey<GenderPreferenceTabState> _genderPreferenceTabKey =
       GlobalKey();
   final GlobalKey<HeightTabState> _heightTabKey = GlobalKey();
+  final GlobalKey<EthnicityTabState> _ethnicityTabKey = GlobalKey();
   String errorMessage = "";
 
   @override
@@ -87,6 +89,9 @@ class RegisterPageState extends State<RegisterPageHost> {
       case 7:
         _heightTabKey.currentState!.updateUserHeight();
         return true;
+      case 8:
+        _ethnicityTabKey.currentState!.updateUserEthnicities();
+        return _ethnicityTabKey.currentState!.validateEthnicities();
       default:
         return false;
     }
@@ -121,6 +126,9 @@ class RegisterPageState extends State<RegisterPageHost> {
       case 7:
         user.setHeight = "";
         break;
+      case 8:
+        user.setEthnicities = [];
+        break;
       default:
         break;
     }
@@ -148,6 +156,9 @@ class RegisterPageState extends State<RegisterPageHost> {
         break;
       case 7:
         errorMessage = "Unknown Error Occured";
+        break;
+      case 8:
+        errorMessage = _ethnicityTabKey.currentState!.getErrorMessage();
         break;
       default:
         break;
@@ -464,6 +475,9 @@ class RegisterPageState extends State<RegisterPageHost> {
       case 7:
         return HeightTab(
             key: _heightTabKey, currentUser: user, updateIndex: updateIndex);
+      case 8:
+        return EthnicityTab(
+            key: _ethnicityTabKey, currentUser: user, updateIndex: updateIndex);
       default:
         return const Text('Register Page');
     }

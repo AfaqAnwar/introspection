@@ -10,7 +10,7 @@ class User {
   late String gender;
   late String genderPreference;
   late String height;
-  late String ethnicity;
+  late List<String> ethnicities;
   late String hometown;
   late String work;
   late String jobTitle;
@@ -36,7 +36,7 @@ class User {
     gender = "";
     genderPreference = "";
     height = "";
-    ethnicity = "";
+    ethnicities = [];
     hometown = "";
     work = "";
     jobTitle = "";
@@ -139,12 +139,12 @@ class User {
     this.height = height;
   }
 
-  String get getEthnicity {
-    return ethnicity;
+  List<String> get getEthnicities {
+    return ethnicities;
   }
 
-  set setEthnicity(String ethnicity) {
-    this.ethnicity = ethnicity;
+  set setEthnicities(List<String> ethnicities) {
+    this.ethnicities = ethnicities;
   }
 
   String get getHometown {
