@@ -71,6 +71,11 @@ class ChildrenTabState extends State<ChildrenTab> {
   }
 
   @override
+  String toStringShort() {
+    return getErrorMessage();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [

@@ -49,6 +49,11 @@ class GenderTabState extends State<GenderTab> {
   }
 
   @override
+  String toStringShort() {
+    return errorMessage;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [

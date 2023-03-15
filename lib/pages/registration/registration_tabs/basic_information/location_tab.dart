@@ -117,6 +117,11 @@ class LocationTabState extends State<LocationTab> {
     }
   }
 
+  @override
+  String toStringShort() {
+    return errorMessage;
+  }
+
   void showErrorDialog() {
     showDialog(
         context: context,

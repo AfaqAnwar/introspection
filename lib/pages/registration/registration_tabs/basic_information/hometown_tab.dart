@@ -2,43 +2,50 @@ import 'package:datingapp/components/registration_components/registration_textfi
 import 'package:datingapp/data/user.dart';
 import 'package:flutter/material.dart';
 
-class EmailTab extends StatefulWidget {
+class HometownTab extends StatefulWidget {
   final User currentUser;
   final Function() updateIndex;
-  const EmailTab(
+  const HometownTab(
       {super.key, required this.currentUser, required this.updateIndex});
 
   @override
-  State<EmailTab> createState() => EmailTabState();
+  State<HometownTab> createState() => HometownTabState();
 }
 
-class EmailTabState extends State<EmailTab> {
-  final emailTextController = TextEditingController();
+class HometownTabState extends State<HometownTab> {
+  final hometownController = TextEditingController();
 
   String errorMessage = "";
 
   @override
   void initState() {
     super.initState();
-    if (widget.currentUser.firstName.isNotEmpty) {
-      emailTextController.text = widget.currentUser.getEmail;
+    if (widget.currentUser.hometown.isNotEmpty) {
+      hometownController.text = widget.currentUser.getHometown;
     }
   }
 
-  bool emailTextValidation() {
-    if (!emailTextController.text.toString().trim().contains("@")) {
-      errorMessage = "Please enter a valid email address.";
+  bool textFieldValidation() {
+    if (hometownController.text.trim().isEmpty) {
+      errorMessage = "Please enter your hometown.";
       return false;
-    } else if (!emailTextController.text.toString().trim().contains(".")) {
-      errorMessage = "Please enter a valid email address.";
+    } else if (isNumeric(hometownController.text.trim())) {
+      errorMessage = "Please enter a valid hometown.";
       return false;
     }
     return true;
   }
 
-  void updateUserEmail() {
-    if (emailTextValidation() == true) {
-      widget.currentUser.setEmail = emailTextController.text.toString().trim();
+  final RegExp _numeric = RegExp(r'^-?[0-9]+$');
+
+  bool isNumeric(String str) {
+    return _numeric.hasMatch(str);
+  }
+
+  void updateHometownOfUser() {
+    if (textFieldValidation() == true) {
+      widget.currentUser.setHometown =
+          hometownController.text.toString().trim();
     }
   }
 
@@ -61,7 +68,7 @@ class EmailTabState extends State<EmailTab> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 25.0),
               child: Text(
-                "What's your email?",
+                "Where's your hometown?",
                 textAlign: TextAlign.left,
                 style: TextStyle(
                   color: Colors.black,
@@ -75,10 +82,9 @@ class EmailTabState extends State<EmailTab> {
         ),
         const SizedBox(height: 25),
         RegistrationTextField(
-            controller: emailTextController,
-            hintText: "Email",
+            controller: hometownController,
+            hintText: "Queens, NY",
             obscureText: false),
-        const SizedBox(height: 100),
       ],
     );
   }

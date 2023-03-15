@@ -4,6 +4,7 @@ import 'package:datingapp/pages/registration/registration_tabs/basic_information
 import 'package:datingapp/pages/registration/registration_tabs/basic_information/gender_preference_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/basic_information/gender_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/basic_information/height_tab.dart';
+import 'package:datingapp/pages/registration/registration_tabs/basic_information/hometown_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/basic_information/location_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/initial_information/age_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/initial_information/email_tab.dart';
@@ -26,7 +27,10 @@ class RegisterPageHost extends StatefulWidget {
 class RegisterPageState extends State<RegisterPageHost> {
   late User user;
   int currentIndex = 0;
+  int currentKeyIndex = 0;
   int totalIndex = 20;
+  late GlobalKey _currentKey;
+  List<GlobalKey> keys = [];
   final GlobalKey<NameTabState> _nameTabKey = GlobalKey();
   final GlobalKey<EmailTabState> _emailTabKey = GlobalKey();
   final GlobalKey<AgeTabState> _ageTabKey = GlobalKey();
@@ -37,18 +41,38 @@ class RegisterPageState extends State<RegisterPageHost> {
   final GlobalKey<HeightTabState> _heightTabKey = GlobalKey();
   final GlobalKey<EthnicityTabState> _ethnicityTabKey = GlobalKey();
   final GlobalKey<ChildrenTabState> _childrenTabKey = GlobalKey();
+  final GlobalKey<HometownTabState> _hometownTabKey = GlobalKey();
+
   String errorMessage = "";
 
   @override
   void initState() {
     super.initState();
     user = User();
+    keys = [
+      _nameTabKey,
+      _emailTabKey,
+      _ageTabKey,
+      _locationTabKey,
+      _genderTabKey,
+      _genderPreferenceTabKey,
+      _heightTabKey,
+      _ethnicityTabKey,
+      _childrenTabKey,
+      _hometownTabKey
+    ];
+    _currentKey = keys[currentKeyIndex];
   }
 
   void updateIndex() {
     if (currentIndex < totalIndex - 1) {
       setState(() {
+        // Check to see if we're crossing a UI seperator screen next (index of (3) comes after (2)).
+        if (currentIndex != 2) {
+          currentKeyIndex++;
+        }
         currentIndex++;
+        updateKey(currentKeyIndex);
       });
     }
   }
@@ -56,9 +80,18 @@ class RegisterPageState extends State<RegisterPageHost> {
   void updateIndexBackwards() {
     if (currentIndex > 0) {
       setState(() {
+        // Check to see if we're crossing a UI seperator screen (index of 3).
+        if (currentIndex != 3) {
+          currentKeyIndex--;
+        }
         currentIndex--;
+        updateKey(currentKeyIndex);
       });
     }
+  }
+
+  void updateKey(int index) {
+    _currentKey = keys[index];
   }
 
   Future<bool> checkFieldsAndUpdateCurrentUser() async {
@@ -97,6 +130,9 @@ class RegisterPageState extends State<RegisterPageHost> {
       case 9:
         _childrenTabKey.currentState!.updateChildrenQuestions();
         return _childrenTabKey.currentState!.validateChildrenQuestions();
+      case 10:
+        _hometownTabKey.currentState!.updateHometownOfUser();
+        return _hometownTabKey.currentState!.textFieldValidation();
       default:
         return false;
     }
@@ -138,43 +174,16 @@ class RegisterPageState extends State<RegisterPageHost> {
         user.hasChildren = null;
         user.setChildrenPreference = "";
         break;
+      case 10:
+        user.setHometown = "";
+        break;
       default:
         break;
     }
   }
 
   void updateErrorMessage() {
-    switch (currentIndex) {
-      case 0:
-        errorMessage = _nameTabKey.currentState!.getErrorMessage();
-        break;
-      case 1:
-        errorMessage = _emailTabKey.currentState!.getErrorMessage();
-        break;
-      case 2:
-        errorMessage = _ageTabKey.currentState!.getErrorMessage();
-        break;
-      case 4:
-        errorMessage = _locationTabKey.currentState!.getErrorMessage();
-        break;
-      case 5:
-        errorMessage = _genderTabKey.currentState!.getErrorMessage();
-        break;
-      case 6:
-        errorMessage = _genderPreferenceTabKey.currentState!.getErrorMessage();
-        break;
-      case 7:
-        errorMessage = "Unknown Error Occured";
-        break;
-      case 8:
-        errorMessage = _ethnicityTabKey.currentState!.getErrorMessage();
-        break;
-      case 9:
-        errorMessage = _childrenTabKey.currentState!.getErrorMessage();
-        break;
-      default:
-        break;
-    }
+    errorMessage = _currentKey.currentState!.toStringShort();
   }
 
   Widget showDotStepper() {
@@ -497,6 +506,9 @@ class RegisterPageState extends State<RegisterPageHost> {
       case 9:
         return ChildrenTab(
             key: _childrenTabKey, currentUser: user, updateIndex: updateIndex);
+      case 10:
+        return HometownTab(
+            key: _hometownTabKey, currentUser: user, updateIndex: updateIndex);
       default:
         return const Text('Register Page');
     }

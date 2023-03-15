@@ -37,6 +37,11 @@ class EthnicityTabState extends State<EthnicityTab> {
     return errorMessage;
   }
 
+  @override
+  String toStringShort() {
+    return errorMessage;
+  }
+
   bool validateEthnicities() {
     if (selectedEthnicities.isNotEmpty) {
       return true;

@@ -66,10 +66,6 @@ class AgeTabState extends State<AgeTab> {
     }
   }
 
-  String getErrorMessage() {
-    return "You must be at least 18 years old to use this app.";
-  }
-
   bool isConfirmed() {
     return confirmed;
   }
@@ -81,6 +77,11 @@ class AgeTabState extends State<AgeTab> {
   void reset() {
     confirmed = false;
     editing = false;
+  }
+
+  @override
+  String toStringShort() {
+    return "You must be at least 18 years old to use this app.";
   }
 
   Future<bool> showConfirmation() async {
