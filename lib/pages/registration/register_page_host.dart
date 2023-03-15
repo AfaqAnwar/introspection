@@ -5,7 +5,9 @@ import 'package:datingapp/pages/registration/registration_tabs/basic_information
 import 'package:datingapp/pages/registration/registration_tabs/basic_information/gender_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/basic_information/height_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/basic_information/hometown_tab.dart';
+import 'package:datingapp/pages/registration/registration_tabs/basic_information/job_title_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/basic_information/location_tab.dart';
+import 'package:datingapp/pages/registration/registration_tabs/basic_information/work_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/initial_information/age_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/initial_information/email_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/initial_information/name_tab.dart';
@@ -26,11 +28,15 @@ class RegisterPageHost extends StatefulWidget {
 
 class RegisterPageState extends State<RegisterPageHost> {
   late User user;
+
   int currentIndex = 0;
   int currentKeyIndex = 0;
   int totalIndex = 20;
+
   late GlobalKey _currentKey;
   List<GlobalKey> keys = [];
+
+  // Global Keys for each tab
   final GlobalKey<NameTabState> _nameTabKey = GlobalKey();
   final GlobalKey<EmailTabState> _emailTabKey = GlobalKey();
   final GlobalKey<AgeTabState> _ageTabKey = GlobalKey();
@@ -42,6 +48,8 @@ class RegisterPageState extends State<RegisterPageHost> {
   final GlobalKey<EthnicityTabState> _ethnicityTabKey = GlobalKey();
   final GlobalKey<ChildrenTabState> _childrenTabKey = GlobalKey();
   final GlobalKey<HometownTabState> _hometownTabKey = GlobalKey();
+  final GlobalKey<WorkTabState> _workTabKey = GlobalKey();
+  final GlobalKey<JobTitleTabState> _jobTitleTabKey = GlobalKey();
 
   String errorMessage = "";
 
@@ -59,7 +67,9 @@ class RegisterPageState extends State<RegisterPageHost> {
       _heightTabKey,
       _ethnicityTabKey,
       _childrenTabKey,
-      _hometownTabKey
+      _hometownTabKey,
+      _workTabKey,
+      _jobTitleTabKey,
     ];
     _currentKey = keys[currentKeyIndex];
   }
@@ -133,6 +143,12 @@ class RegisterPageState extends State<RegisterPageHost> {
       case 10:
         _hometownTabKey.currentState!.updateHometownOfUser();
         return _hometownTabKey.currentState!.textFieldValidation();
+      case 11:
+        _workTabKey.currentState!.updateWorkOfUser();
+        return true;
+      case 12:
+        _jobTitleTabKey.currentState!.updateJobTitleOfUser();
+        return _jobTitleTabKey.currentState!.textFieldValidation();
       default:
         return false;
     }
@@ -176,6 +192,12 @@ class RegisterPageState extends State<RegisterPageHost> {
         break;
       case 10:
         user.setHometown = "";
+        break;
+      case 11:
+        user.setWork = "";
+        break;
+      case 12:
+        user.setJobTitle = "";
         break;
       default:
         break;
@@ -509,6 +531,12 @@ class RegisterPageState extends State<RegisterPageHost> {
       case 10:
         return HometownTab(
             key: _hometownTabKey, currentUser: user, updateIndex: updateIndex);
+      case 11:
+        return WorkTab(
+            key: _workTabKey, currentUser: user, updateIndex: updateIndex);
+      case 12:
+        return JobTitleTab(
+            key: _jobTitleTabKey, currentUser: user, updateIndex: updateIndex);
       default:
         return const Text('Register Page');
     }
