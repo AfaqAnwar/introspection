@@ -7,6 +7,7 @@ import 'package:datingapp/pages/registration/registration_tabs/basic_information
 import 'package:datingapp/pages/registration/registration_tabs/basic_information/hometown_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/basic_information/job_title_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/basic_information/location_tab.dart';
+import 'package:datingapp/pages/registration/registration_tabs/basic_information/school_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/basic_information/work_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/initial_information/age_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/initial_information/email_tab.dart';
@@ -50,6 +51,7 @@ class RegisterPageState extends State<RegisterPageHost> {
   final GlobalKey<HometownTabState> _hometownTabKey = GlobalKey();
   final GlobalKey<WorkTabState> _workTabKey = GlobalKey();
   final GlobalKey<JobTitleTabState> _jobTitleTabKey = GlobalKey();
+  final GlobalKey<SchoolTabState> _schoolTabKey = GlobalKey();
 
   String errorMessage = "";
 
@@ -70,6 +72,7 @@ class RegisterPageState extends State<RegisterPageHost> {
       _hometownTabKey,
       _workTabKey,
       _jobTitleTabKey,
+      _schoolTabKey,
     ];
     _currentKey = keys[currentKeyIndex];
   }
@@ -149,6 +152,9 @@ class RegisterPageState extends State<RegisterPageHost> {
       case 12:
         _jobTitleTabKey.currentState!.updateJobTitleOfUser();
         return _jobTitleTabKey.currentState!.textFieldValidation();
+      case 13:
+        _schoolTabKey.currentState!.updateSchoolOfUser();
+        return _schoolTabKey.currentState!.textFieldValidation();
       default:
         return false;
     }
@@ -198,6 +204,9 @@ class RegisterPageState extends State<RegisterPageHost> {
         break;
       case 12:
         user.setJobTitle = "";
+        break;
+      case 13:
+        user.setSchool = "";
         break;
       default:
         break;
@@ -537,6 +546,9 @@ class RegisterPageState extends State<RegisterPageHost> {
       case 12:
         return JobTitleTab(
             key: _jobTitleTabKey, currentUser: user, updateIndex: updateIndex);
+      case 13:
+        return SchoolTab(
+            key: _schoolTabKey, currentUser: user, updateIndex: updateIndex);
       default:
         return const Text('Register Page');
     }

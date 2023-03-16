@@ -2,50 +2,40 @@ import 'package:datingapp/components/registration_components/registration_textfi
 import 'package:datingapp/data/user.dart';
 import 'package:flutter/material.dart';
 
-class HometownTab extends StatefulWidget {
+class SchoolTab extends StatefulWidget {
   final User currentUser;
   final Function() updateIndex;
-  const HometownTab(
+  const SchoolTab(
       {super.key, required this.currentUser, required this.updateIndex});
 
   @override
-  State<HometownTab> createState() => HometownTabState();
+  State<SchoolTab> createState() => SchoolTabState();
 }
 
-class HometownTabState extends State<HometownTab> {
-  final hometownController = TextEditingController();
+class SchoolTabState extends State<SchoolTab> {
+  final schoolController = TextEditingController();
 
   String errorMessage = "";
 
   @override
   void initState() {
     super.initState();
-    if (widget.currentUser.getHometown.isNotEmpty) {
-      hometownController.text = widget.currentUser.getHometown;
+    if (widget.currentUser.getSchool.isNotEmpty) {
+      schoolController.text = widget.currentUser.getSchool;
     }
   }
 
   bool textFieldValidation() {
-    if (hometownController.text.trim().isEmpty) {
-      errorMessage = "Please enter your hometown.";
-      return false;
-    } else if (isNumeric(hometownController.text.trim())) {
-      errorMessage = "Please enter a valid hometown.";
+    if (schoolController.text.trim().isEmpty) {
+      errorMessage = "Please enter where you went to school.";
       return false;
     }
     return true;
   }
 
-  final RegExp _numeric = RegExp(r'^-?[0-9]+$');
-
-  bool isNumeric(String str) {
-    return _numeric.hasMatch(str);
-  }
-
-  void updateHometownOfUser() {
+  void updateSchoolOfUser() {
     if (textFieldValidation() == true) {
-      widget.currentUser.setHometown =
-          hometownController.text.toString().trim();
+      widget.currentUser.setHometown = schoolController.text.toString().trim();
     }
   }
 
@@ -82,7 +72,7 @@ class HometownTabState extends State<HometownTab> {
         ),
         const SizedBox(height: 25),
         RegistrationTextField(
-            controller: hometownController,
+            controller: schoolController,
             hintText: "Queens, NY",
             obscureText: false),
       ],
