@@ -3,34 +3,36 @@ import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:group_button/group_button.dart';
 
-class EducationLevelTab extends StatefulWidget {
+class PoliticalBeliefTab extends StatefulWidget {
   final User currentUser;
   final Function() updateIndex;
-  const EducationLevelTab(
+  const PoliticalBeliefTab(
       {super.key, required this.currentUser, required this.updateIndex});
 
   @override
-  State<EducationLevelTab> createState() => EducationLevelTabState();
+  State<PoliticalBeliefTab> createState() => PoliticalBeliefTabState();
 }
 
-class EducationLevelTabState extends State<EducationLevelTab> {
+class PoliticalBeliefTabState extends State<PoliticalBeliefTab> {
   final controller = GroupButtonController();
 
-  String selectedEducationLevel = "";
-  String errorMessage = "Please select your higest level of education.";
+  String selectedPoliticalBelief = "";
+  String errorMessage = "Please select your political belief, if any.";
 
   @override
   void initState() {
-    if (widget.currentUser.getEducationLevel.isNotEmpty) {
-      selectedEducationLevel = widget.currentUser.getEducationLevel;
-      if (selectedEducationLevel == "High School") {
+    if (widget.currentUser.getPoliticalBelief.isNotEmpty) {
+      selectedPoliticalBelief = widget.currentUser.getPoliticalBelief;
+      if (selectedPoliticalBelief == "Liberal") {
         controller.selectIndex(0);
-      } else if (selectedEducationLevel == "Under Graduate") {
+      } else if (selectedPoliticalBelief == "Moderate") {
         controller.selectIndex(1);
-      } else if (selectedEducationLevel == "Post Graduate") {
+      } else if (selectedPoliticalBelief == "Conservative") {
         controller.selectIndex(2);
-      } else if (selectedEducationLevel == "Other") {
+      } else if (selectedPoliticalBelief == "Other") {
         controller.selectIndex(4);
+      } else if (selectedPoliticalBelief == "None") {
+        controller.selectIndex(5);
       }
     }
     super.initState();
@@ -40,16 +42,16 @@ class EducationLevelTabState extends State<EducationLevelTab> {
     return errorMessage;
   }
 
-  bool validateEducationLevel() {
-    if (selectedEducationLevel.isNotEmpty) {
+  bool validatePoliticalBelief() {
+    if (selectedPoliticalBelief.isNotEmpty) {
       return true;
     } else {
       return false;
     }
   }
 
-  void updateEducationLevelOfUser() {
-    widget.currentUser.setEducationLevel = selectedEducationLevel;
+  void updatePoliticalBeliefOfUser() {
+    widget.currentUser.setPoliticalBelief = selectedPoliticalBelief;
   }
 
   @override
@@ -68,7 +70,7 @@ class EducationLevelTabState extends State<EducationLevelTab> {
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 25.0),
                 child: Text(
-                  "What's your highest level of education?",
+                  "What are your political beliefs?",
                   textAlign: TextAlign.left,
                   style: TextStyle(
                     color: Colors.black,
@@ -105,14 +107,15 @@ class EducationLevelTabState extends State<EducationLevelTab> {
                     isRadio: true,
                     onSelected: (value, index, isSelected) {
                       if (isSelected) {
-                        selectedEducationLevel = value;
+                        selectedPoliticalBelief = value;
                       }
                     },
                     buttons: const [
-                      "High School",
-                      "Under Graduate",
-                      "Post Graduate",
+                      "Liberal",
+                      "Moderate",
+                      "Conservative",
                       "Other",
+                      "None",
                     ],
                   ),
                 ),

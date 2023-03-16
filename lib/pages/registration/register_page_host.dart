@@ -1,5 +1,7 @@
 import 'package:datingapp/pages/registration/registration_buffer.dart';
+import 'package:datingapp/pages/registration/registration_tabs/basic_information/alcohol_preference_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/basic_information/children_tab.dart';
+import 'package:datingapp/pages/registration/registration_tabs/basic_information/drug_preference_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/basic_information/education_level_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/basic_information/ethnicity_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/basic_information/gender_preference_tab.dart';
@@ -8,8 +10,11 @@ import 'package:datingapp/pages/registration/registration_tabs/basic_information
 import 'package:datingapp/pages/registration/registration_tabs/basic_information/hometown_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/basic_information/job_title_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/basic_information/location_tab.dart';
+import 'package:datingapp/pages/registration/registration_tabs/basic_information/political_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/basic_information/religion_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/basic_information/school_tab.dart';
+import 'package:datingapp/pages/registration/registration_tabs/basic_information/smoke_preference_tab.dart';
+import 'package:datingapp/pages/registration/registration_tabs/basic_information/weed_preference_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/basic_information/work_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/initial_information/age_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/initial_information/email_tab.dart';
@@ -34,7 +39,7 @@ class RegisterPageState extends State<RegisterPageHost> {
 
   int currentIndex = 0;
   int currentKeyIndex = 0;
-  int totalIndex = 20;
+  int totalIndex = 21;
 
   late GlobalKey _currentKey;
   List<GlobalKey> keys = [];
@@ -56,6 +61,12 @@ class RegisterPageState extends State<RegisterPageHost> {
   final GlobalKey<SchoolTabState> _schoolTabKey = GlobalKey();
   final GlobalKey<EducationLevelTabState> _educationLevelTabKey = GlobalKey();
   final GlobalKey<ReligionTabState> _religionTabKey = GlobalKey();
+  final GlobalKey<PoliticalBeliefTabState> _politicalBeliefTabKey = GlobalKey();
+  final GlobalKey<AlcoholPreferenceTabState> _alcoholPreferenceTabKey =
+      GlobalKey();
+  final GlobalKey<SmokePreferenceTabState> _smokePreferenceTabKey = GlobalKey();
+  final GlobalKey<WeedPreferenceTabState> _weedPreferenceTabKey = GlobalKey();
+  final GlobalKey<DrugPreferenceTabState> _drugPreferenceTabKey = GlobalKey();
 
   String errorMessage = "";
 
@@ -79,6 +90,11 @@ class RegisterPageState extends State<RegisterPageHost> {
       _schoolTabKey,
       _educationLevelTabKey,
       _religionTabKey,
+      _politicalBeliefTabKey,
+      _alcoholPreferenceTabKey,
+      _smokePreferenceTabKey,
+      _weedPreferenceTabKey,
+      _drugPreferenceTabKey,
     ];
     _currentKey = keys[currentKeyIndex];
   }
@@ -167,6 +183,22 @@ class RegisterPageState extends State<RegisterPageHost> {
       case 15:
         _religionTabKey.currentState!.updateReligionOfUser();
         return _religionTabKey.currentState!.validateReligion();
+      case 16:
+        _politicalBeliefTabKey.currentState!.updatePoliticalBeliefOfUser();
+        return _politicalBeliefTabKey.currentState!.validatePoliticalBelief();
+      case 17:
+        _alcoholPreferenceTabKey.currentState!.updateAlcoholPreferenceOfUser();
+        return _alcoholPreferenceTabKey.currentState!
+            .validateAlcoholPreference();
+      case 18:
+        _smokePreferenceTabKey.currentState!.updateSmokePreferenceOfUser();
+        return _smokePreferenceTabKey.currentState!.validateSmokePreference();
+      case 19:
+        _weedPreferenceTabKey.currentState!.updateWeedPreferenceOfUser();
+        return _weedPreferenceTabKey.currentState!.validateWeedPreference();
+      case 20:
+        _drugPreferenceTabKey.currentState!.updateDrugPreferenceOfUser();
+        return _drugPreferenceTabKey.currentState!.validateDrugPreference();
       default:
         return false;
     }
@@ -225,6 +257,21 @@ class RegisterPageState extends State<RegisterPageHost> {
         break;
       case 15:
         user.setReligion = "";
+        break;
+      case 16:
+        user.setPoliticalBelief = "";
+        break;
+      case 17:
+        user.setAlcoholPreference = "";
+        break;
+      case 18:
+        user.setSmokePreference = "";
+        break;
+      case 19:
+        user.setWeedPreference = "";
+        break;
+      case 20:
+        user.setDrugPreference = "";
         break;
       default:
         break;
@@ -575,8 +622,34 @@ class RegisterPageState extends State<RegisterPageHost> {
       case 15:
         return ReligionTab(
             key: _religionTabKey, currentUser: user, updateIndex: updateIndex);
+      case 16:
+        return PoliticalBeliefTab(
+            key: _politicalBeliefTabKey,
+            currentUser: user,
+            updateIndex: updateIndex);
+      case 17:
+        return AlcoholPreferenceTab(
+            key: _alcoholPreferenceTabKey,
+            currentUser: user,
+            updateIndex: updateIndex);
+      case 18:
+        return SmokePreferenceTab(
+            key: _smokePreferenceTabKey,
+            currentUser: user,
+            updateIndex: updateIndex);
+      case 19:
+        return WeedPreferenceTab(
+            key: _weedPreferenceTabKey,
+            currentUser: user,
+            updateIndex: updateIndex);
+      case 20:
+        return DrugPreferenceTab(
+            key: _drugPreferenceTabKey,
+            currentUser: user,
+            updateIndex: updateIndex);
+
       default:
-        return const Text('Register Page');
+        return const CircularProgressIndicator();
     }
   }
 }

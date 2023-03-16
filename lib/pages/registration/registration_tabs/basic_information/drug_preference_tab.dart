@@ -3,34 +3,32 @@ import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:group_button/group_button.dart';
 
-class EducationLevelTab extends StatefulWidget {
+class DrugPreferenceTab extends StatefulWidget {
   final User currentUser;
   final Function() updateIndex;
-  const EducationLevelTab(
+  const DrugPreferenceTab(
       {super.key, required this.currentUser, required this.updateIndex});
 
   @override
-  State<EducationLevelTab> createState() => EducationLevelTabState();
+  State<DrugPreferenceTab> createState() => DrugPreferenceTabState();
 }
 
-class EducationLevelTabState extends State<EducationLevelTab> {
+class DrugPreferenceTabState extends State<DrugPreferenceTab> {
   final controller = GroupButtonController();
 
-  String selectedEducationLevel = "";
-  String errorMessage = "Please select your higest level of education.";
+  String drugPreference = "";
+  String errorMessage = "Please tell us if you do drugs.";
 
   @override
   void initState() {
-    if (widget.currentUser.getEducationLevel.isNotEmpty) {
-      selectedEducationLevel = widget.currentUser.getEducationLevel;
-      if (selectedEducationLevel == "High School") {
+    if (widget.currentUser.getDrugPreference.isNotEmpty) {
+      drugPreference = widget.currentUser.getDrugPreference;
+      if (drugPreference == "Yes") {
         controller.selectIndex(0);
-      } else if (selectedEducationLevel == "Under Graduate") {
+      } else if (drugPreference == "Sometimes") {
         controller.selectIndex(1);
-      } else if (selectedEducationLevel == "Post Graduate") {
+      } else if (drugPreference == "No") {
         controller.selectIndex(2);
-      } else if (selectedEducationLevel == "Other") {
-        controller.selectIndex(4);
       }
     }
     super.initState();
@@ -40,16 +38,16 @@ class EducationLevelTabState extends State<EducationLevelTab> {
     return errorMessage;
   }
 
-  bool validateEducationLevel() {
-    if (selectedEducationLevel.isNotEmpty) {
+  bool validateDrugPreference() {
+    if (drugPreference.isNotEmpty) {
       return true;
     } else {
       return false;
     }
   }
 
-  void updateEducationLevelOfUser() {
-    widget.currentUser.setEducationLevel = selectedEducationLevel;
+  void updateDrugPreferenceOfUser() {
+    widget.currentUser.setDrugPreference = drugPreference;
   }
 
   @override
@@ -61,14 +59,14 @@ class EducationLevelTabState extends State<EducationLevelTab> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Wrap(
-          children: const [
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Padding(
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Wrap(
+            children: const [
+              Padding(
                 padding: EdgeInsets.symmetric(horizontal: 25.0),
                 child: Text(
-                  "What's your highest level of education?",
+                  "Do you use drugs?",
                   textAlign: TextAlign.left,
                   style: TextStyle(
                     color: Colors.black,
@@ -78,8 +76,8 @@ class EducationLevelTabState extends State<EducationLevelTab> {
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
         const SizedBox(height: 25),
         Align(
@@ -105,14 +103,13 @@ class EducationLevelTabState extends State<EducationLevelTab> {
                     isRadio: true,
                     onSelected: (value, index, isSelected) {
                       if (isSelected) {
-                        selectedEducationLevel = value;
+                        drugPreference = value;
                       }
                     },
                     buttons: const [
-                      "High School",
-                      "Under Graduate",
-                      "Post Graduate",
-                      "Other",
+                      "Yes",
+                      "Sometimes",
+                      "No",
                     ],
                   ),
                 ),

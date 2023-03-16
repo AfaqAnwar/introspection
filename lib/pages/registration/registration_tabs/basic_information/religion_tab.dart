@@ -77,16 +77,19 @@ class ReligionTabState extends State<ReligionTab> {
       children: [
         Wrap(
           children: const [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 25.0),
-              child: Text(
-                "What are your religious beliefs?",
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 36,
-                  fontFamily: 'Marlide-Display',
-                  fontWeight: FontWeight.w800,
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 25.0),
+                child: Text(
+                  "What are your religious beliefs?",
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 36,
+                    fontFamily: 'Marlide-Display',
+                    fontWeight: FontWeight.w800,
+                  ),
                 ),
               ),
             ),

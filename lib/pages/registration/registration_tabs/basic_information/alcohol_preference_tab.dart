@@ -3,34 +3,32 @@ import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:group_button/group_button.dart';
 
-class EducationLevelTab extends StatefulWidget {
+class AlcoholPreferenceTab extends StatefulWidget {
   final User currentUser;
   final Function() updateIndex;
-  const EducationLevelTab(
+  const AlcoholPreferenceTab(
       {super.key, required this.currentUser, required this.updateIndex});
 
   @override
-  State<EducationLevelTab> createState() => EducationLevelTabState();
+  State<AlcoholPreferenceTab> createState() => AlcoholPreferenceTabState();
 }
 
-class EducationLevelTabState extends State<EducationLevelTab> {
+class AlcoholPreferenceTabState extends State<AlcoholPreferenceTab> {
   final controller = GroupButtonController();
 
-  String selectedEducationLevel = "";
-  String errorMessage = "Please select your higest level of education.";
+  String selectedAlcoholPreference = "";
+  String errorMessage = "Please tell us if you drink.";
 
   @override
   void initState() {
-    if (widget.currentUser.getEducationLevel.isNotEmpty) {
-      selectedEducationLevel = widget.currentUser.getEducationLevel;
-      if (selectedEducationLevel == "High School") {
+    if (widget.currentUser.getAlcoholPreference.isNotEmpty) {
+      selectedAlcoholPreference = widget.currentUser.getAlcoholPreference;
+      if (selectedAlcoholPreference == "Yes") {
         controller.selectIndex(0);
-      } else if (selectedEducationLevel == "Under Graduate") {
+      } else if (selectedAlcoholPreference == "Sometimes") {
         controller.selectIndex(1);
-      } else if (selectedEducationLevel == "Post Graduate") {
+      } else if (selectedAlcoholPreference == "No") {
         controller.selectIndex(2);
-      } else if (selectedEducationLevel == "Other") {
-        controller.selectIndex(4);
       }
     }
     super.initState();
@@ -40,16 +38,16 @@ class EducationLevelTabState extends State<EducationLevelTab> {
     return errorMessage;
   }
 
-  bool validateEducationLevel() {
-    if (selectedEducationLevel.isNotEmpty) {
+  bool validateAlcoholPreference() {
+    if (selectedAlcoholPreference.isNotEmpty) {
       return true;
     } else {
       return false;
     }
   }
 
-  void updateEducationLevelOfUser() {
-    widget.currentUser.setEducationLevel = selectedEducationLevel;
+  void updateAlcoholPreferenceOfUser() {
+    widget.currentUser.setAlcoholPreference = selectedAlcoholPreference;
   }
 
   @override
@@ -68,7 +66,7 @@ class EducationLevelTabState extends State<EducationLevelTab> {
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 25.0),
                 child: Text(
-                  "What's your highest level of education?",
+                  "Do you drink?",
                   textAlign: TextAlign.left,
                   style: TextStyle(
                     color: Colors.black,
@@ -105,14 +103,13 @@ class EducationLevelTabState extends State<EducationLevelTab> {
                     isRadio: true,
                     onSelected: (value, index, isSelected) {
                       if (isSelected) {
-                        selectedEducationLevel = value;
+                        selectedAlcoholPreference = value;
                       }
                     },
                     buttons: const [
-                      "High School",
-                      "Under Graduate",
-                      "Post Graduate",
-                      "Other",
+                      "Yes",
+                      "Sometimes",
+                      "No",
                     ],
                   ),
                 ),

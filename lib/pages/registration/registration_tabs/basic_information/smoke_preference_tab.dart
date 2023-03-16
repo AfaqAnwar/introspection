@@ -3,34 +3,32 @@ import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:group_button/group_button.dart';
 
-class EducationLevelTab extends StatefulWidget {
+class SmokePreferenceTab extends StatefulWidget {
   final User currentUser;
   final Function() updateIndex;
-  const EducationLevelTab(
+  const SmokePreferenceTab(
       {super.key, required this.currentUser, required this.updateIndex});
 
   @override
-  State<EducationLevelTab> createState() => EducationLevelTabState();
+  State<SmokePreferenceTab> createState() => SmokePreferenceTabState();
 }
 
-class EducationLevelTabState extends State<EducationLevelTab> {
+class SmokePreferenceTabState extends State<SmokePreferenceTab> {
   final controller = GroupButtonController();
 
-  String selectedEducationLevel = "";
-  String errorMessage = "Please select your higest level of education.";
+  String smokePreference = "";
+  String errorMessage = "Please tell us if you drink.";
 
   @override
   void initState() {
-    if (widget.currentUser.getEducationLevel.isNotEmpty) {
-      selectedEducationLevel = widget.currentUser.getEducationLevel;
-      if (selectedEducationLevel == "High School") {
+    if (widget.currentUser.getSmokePreference.isNotEmpty) {
+      smokePreference = widget.currentUser.getSmokePreference;
+      if (smokePreference == "Yes") {
         controller.selectIndex(0);
-      } else if (selectedEducationLevel == "Under Graduate") {
+      } else if (smokePreference == "Sometimes") {
         controller.selectIndex(1);
-      } else if (selectedEducationLevel == "Post Graduate") {
+      } else if (smokePreference == "No") {
         controller.selectIndex(2);
-      } else if (selectedEducationLevel == "Other") {
-        controller.selectIndex(4);
       }
     }
     super.initState();
@@ -40,16 +38,16 @@ class EducationLevelTabState extends State<EducationLevelTab> {
     return errorMessage;
   }
 
-  bool validateEducationLevel() {
-    if (selectedEducationLevel.isNotEmpty) {
+  bool validateSmokePreference() {
+    if (smokePreference.isNotEmpty) {
       return true;
     } else {
       return false;
     }
   }
 
-  void updateEducationLevelOfUser() {
-    widget.currentUser.setEducationLevel = selectedEducationLevel;
+  void updateSmokePreferenceOfUser() {
+    widget.currentUser.setAlcoholPreference = smokePreference;
   }
 
   @override
@@ -68,7 +66,7 @@ class EducationLevelTabState extends State<EducationLevelTab> {
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 25.0),
                 child: Text(
-                  "What's your highest level of education?",
+                  "Do you smoke?",
                   textAlign: TextAlign.left,
                   style: TextStyle(
                     color: Colors.black,
@@ -105,14 +103,13 @@ class EducationLevelTabState extends State<EducationLevelTab> {
                     isRadio: true,
                     onSelected: (value, index, isSelected) {
                       if (isSelected) {
-                        selectedEducationLevel = value;
+                        smokePreference = value;
                       }
                     },
                     buttons: const [
-                      "High School",
-                      "Under Graduate",
-                      "Post Graduate",
-                      "Other",
+                      "Yes",
+                      "Sometimes",
+                      "No",
                     ],
                   ),
                 ),
