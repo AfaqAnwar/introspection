@@ -84,24 +84,28 @@ class GenderTabState extends State<GenderTab> {
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: GroupButton(
-                  controller: controller,
-                  options: GroupButtonOptions(
-                    unselectedColor: Colors.grey,
-                    selectedColor: AppStyle.red800,
-                    borderRadius: const BorderRadius.all(Radius.circular(25)),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: GroupButton(
+                    controller: controller,
+                    options: GroupButtonOptions(
+                      mainGroupAlignment: MainGroupAlignment.start,
+                      crossGroupAlignment: CrossGroupAlignment.start,
+                      groupRunAlignment: GroupRunAlignment.start,
+                      unselectedColor: Colors.grey,
+                      selectedColor: AppStyle.red800,
+                      borderRadius: const BorderRadius.all(Radius.circular(25)),
+                    ),
+                    maxSelected: 1,
+                    enableDeselect: false,
+                    isRadio: true,
+                    onSelected: (value, index, isSelected) {
+                      if (isSelected) {
+                        selectedGender = value;
+                      }
+                    },
+                    buttons: const ["Man", "Woman"],
                   ),
-                  maxSelected: 1,
-                  enableDeselect: true,
-                  isRadio: false,
-                  onSelected: (value, index, isSelected) {
-                    if (isSelected) {
-                      selectedGender = value;
-                    } else {
-                      selectedGender = "";
-                    }
-                  },
-                  buttons: const ["Man", "Woman"],
                 ),
               )
             ],

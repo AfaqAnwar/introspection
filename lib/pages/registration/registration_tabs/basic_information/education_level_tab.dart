@@ -85,29 +85,33 @@ class EducationLevelTabState extends State<EducationLevelTab> {
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: GroupButton(
-                  controller: controller,
-                  options: GroupButtonOptions(
-                    unselectedColor: Colors.grey,
-                    selectedColor: AppStyle.red800,
-                    borderRadius: const BorderRadius.all(Radius.circular(25)),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: GroupButton(
+                    controller: controller,
+                    options: GroupButtonOptions(
+                      mainGroupAlignment: MainGroupAlignment.start,
+                      crossGroupAlignment: CrossGroupAlignment.start,
+                      groupRunAlignment: GroupRunAlignment.start,
+                      unselectedColor: Colors.grey,
+                      selectedColor: AppStyle.red800,
+                      borderRadius: const BorderRadius.all(Radius.circular(25)),
+                    ),
+                    maxSelected: 1,
+                    enableDeselect: false,
+                    isRadio: true,
+                    onSelected: (value, index, isSelected) {
+                      if (isSelected) {
+                        selectedEducationLevel = value;
+                      }
+                    },
+                    buttons: const [
+                      "High School",
+                      "Under Graduate",
+                      "Post Graduate",
+                      "Other",
+                    ],
                   ),
-                  maxSelected: 1,
-                  enableDeselect: true,
-                  isRadio: false,
-                  onSelected: (value, index, isSelected) {
-                    if (isSelected) {
-                      selectedEducationLevel = value;
-                    } else {
-                      selectedEducationLevel = "";
-                    }
-                  },
-                  buttons: const [
-                    "High School",
-                    "Under Graduate",
-                    "Post Graduate",
-                    "Other",
-                  ],
                 ),
               )
             ],

@@ -109,31 +109,35 @@ class ChildrenTabState extends State<ChildrenTab> {
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: GroupButton(
-                  controller: hasChildrenController,
-                  options: GroupButtonOptions(
-                    unselectedColor: Colors.grey,
-                    selectedColor: AppStyle.red800,
-                    borderRadius: const BorderRadius.all(Radius.circular(25)),
-                  ),
-                  maxSelected: 1,
-                  enableDeselect: true,
-                  isRadio: false,
-                  onSelected: (value, index, isSelected) {
-                    if (isSelected) {
-                      if (index == 0) {
-                        hasChildren = false;
-                      } else {
-                        hasChildren = true;
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: GroupButton(
+                    controller: hasChildrenController,
+                    options: GroupButtonOptions(
+                      mainGroupAlignment: MainGroupAlignment.start,
+                      crossGroupAlignment: CrossGroupAlignment.start,
+                      groupRunAlignment: GroupRunAlignment.start,
+                      unselectedColor: Colors.grey,
+                      selectedColor: AppStyle.red800,
+                      borderRadius: const BorderRadius.all(Radius.circular(25)),
+                    ),
+                    maxSelected: 1,
+                    enableDeselect: false,
+                    isRadio: true,
+                    onSelected: (value, index, isSelected) {
+                      if (isSelected) {
+                        if (index == 0) {
+                          hasChildren = false;
+                        } else {
+                          hasChildren = true;
+                        }
                       }
-                    } else {
-                      hasChildren = null;
-                    }
-                  },
-                  buttons: const [
-                    "Don't have children",
-                    "Have children",
-                  ],
+                    },
+                    buttons: const [
+                      "Don't have children",
+                      "Have children",
+                    ],
+                  ),
                 ),
               )
             ],
@@ -158,34 +162,38 @@ class ChildrenTabState extends State<ChildrenTab> {
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: GroupButton(
-                  controller: childrenPreferencesController,
-                  options: GroupButtonOptions(
-                    unselectedColor: Colors.grey,
-                    selectedColor: AppStyle.red800,
-                    borderRadius: const BorderRadius.all(Radius.circular(25)),
-                  ),
-                  maxSelected: 1,
-                  enableDeselect: true,
-                  isRadio: false,
-                  onSelected: (value, index, isSelected) {
-                    if (isSelected) {
-                      if (index == 0) {
-                        childrenPreference = "Don't want children";
-                      } else if (index == 1) {
-                        childrenPreference = "Want children";
-                      } else {
-                        childrenPreference = "Open to children";
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: GroupButton(
+                    controller: childrenPreferencesController,
+                    options: GroupButtonOptions(
+                      mainGroupAlignment: MainGroupAlignment.start,
+                      crossGroupAlignment: CrossGroupAlignment.start,
+                      groupRunAlignment: GroupRunAlignment.start,
+                      unselectedColor: Colors.grey,
+                      selectedColor: AppStyle.red800,
+                      borderRadius: const BorderRadius.all(Radius.circular(25)),
+                    ),
+                    maxSelected: 1,
+                    enableDeselect: false,
+                    isRadio: true,
+                    onSelected: (value, index, isSelected) {
+                      if (isSelected) {
+                        if (index == 0) {
+                          childrenPreference = "Don't want children";
+                        } else if (index == 1) {
+                          childrenPreference = "Want children";
+                        } else {
+                          childrenPreference = "Open to children";
+                        }
                       }
-                    } else {
-                      childrenPreference = "";
-                    }
-                  },
-                  buttons: const [
-                    "Don't want children",
-                    "Want children",
-                    "Open to children",
-                  ],
+                    },
+                    buttons: const [
+                      "Don't want children",
+                      "Want children",
+                      "Open to children",
+                    ],
+                  ),
                 ),
               )
             ],
