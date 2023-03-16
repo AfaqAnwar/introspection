@@ -1,3 +1,4 @@
+import 'package:datingapp/pages/registration/basic_information_buffer.dart';
 import 'package:datingapp/pages/registration/registration_buffer.dart';
 import 'package:datingapp/pages/registration/registration_tabs/basic_information/alcohol_preference_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/basic_information/children_tab.dart';
@@ -39,7 +40,7 @@ class RegisterPageState extends State<RegisterPageHost> {
 
   int currentIndex = 0;
   int currentKeyIndex = 0;
-  int totalIndex = 21;
+  int totalIndex = 23;
 
   late GlobalKey _currentKey;
   List<GlobalKey> keys = [];
@@ -103,7 +104,7 @@ class RegisterPageState extends State<RegisterPageHost> {
     if (currentIndex < totalIndex - 1) {
       setState(() {
         // Check to see if we're crossing a UI seperator screen next (index of (3) comes after (2)).
-        if (currentIndex != 2) {
+        if (currentIndex != 2 && currentIndex != 20) {
           currentKeyIndex++;
         }
         currentIndex++;
@@ -116,7 +117,7 @@ class RegisterPageState extends State<RegisterPageHost> {
     if (currentIndex > 0) {
       setState(() {
         // Check to see if we're crossing a UI seperator screen (index of 3).
-        if (currentIndex != 3) {
+        if (currentIndex != 3 && currentIndex != 22) {
           currentKeyIndex--;
         }
         currentIndex--;
@@ -318,7 +319,7 @@ class RegisterPageState extends State<RegisterPageHost> {
             dotRadius: 6,
             activeStep: currentIndex - 4,
             shape: Shape.circle,
-            spacing: 10,
+            spacing: 8,
             indicator: Indicator.shift,
             fixedDotDecoration: FixedDotDecoration(
                 color: Colors.grey.shade400,
@@ -333,7 +334,7 @@ class RegisterPageState extends State<RegisterPageHost> {
         ],
       );
     }
-    if (currentIndex > 4) {
+    if (currentIndex > 4 && currentIndex < 21) {
       return Column(
         children: [
           const SizedBox(height: 10),
@@ -343,7 +344,7 @@ class RegisterPageState extends State<RegisterPageHost> {
             dotRadius: 6,
             activeStep: currentIndex - 4,
             shape: Shape.circle,
-            spacing: 10,
+            spacing: 8,
             indicator: Indicator.shift,
             fixedDotDecoration: FixedDotDecoration(
                 color: Colors.grey.shade400,
@@ -359,7 +360,7 @@ class RegisterPageState extends State<RegisterPageHost> {
       );
     } else {
       return const SizedBox(
-        height: 40,
+        height: 25,
       );
     }
   }
@@ -367,37 +368,46 @@ class RegisterPageState extends State<RegisterPageHost> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back_ios),
-            splashRadius: 0.1,
-            color: AppStyle.red800,
-            onPressed: () async {
-              destroyData();
-              checkAndReturnToLogin();
-              updateIndexBackwards();
-            },
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios),
+          splashRadius: 0.1,
+          color: AppStyle.red800,
+          onPressed: () async {
+            destroyData();
+            checkAndReturnToLogin();
+            updateIndexBackwards();
+          },
+        ),
+      ),
+      bottomNavigationBar: buildBottomNavigationBar(),
+      backgroundColor: Colors.white,
+      body: buildBody(),
+    );
+  }
+
+  Widget buildBody() {
+    if (currentIndex == 3 || currentIndex == 21) {
+      return updateBodyContent();
+    } else {
+      return SingleChildScrollView(
+        physics: const NeverScrollableScrollPhysics(),
+        child: SizedBox(
+          child: SafeArea(
+            child: Column(children: [
+              showDotStepper(),
+              updateBodyContent(),
+            ]),
           ),
         ),
-        bottomNavigationBar: buildBottomNavigationBar(),
-        backgroundColor: Colors.white,
-        body: SingleChildScrollView(
-          physics: const NeverScrollableScrollPhysics(),
-          child: SizedBox(
-            child: SafeArea(
-              child: Column(children: [
-                showDotStepper(),
-                updateBodyContent(),
-              ]),
-            ),
-          ),
-        ));
+      );
+    }
   }
 
   Widget buildBottomNavigationBar() {
-    if (currentIndex != 3) {
+    if (currentIndex != 3 && currentIndex != 21) {
       return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 30),
         child: SafeArea(
@@ -525,46 +535,6 @@ class RegisterPageState extends State<RegisterPageHost> {
     }
   }
 
-  Widget buildBufferPage() {
-    final availableHeight = MediaQuery.of(context).size.height -
-        AppBar().preferredSize.height -
-        MediaQuery.of(context).padding.top -
-        MediaQuery.of(context).padding.bottom;
-
-    return SizedBox(
-      height: availableHeight,
-      child: Column(
-        children: [
-          const RegisterBuffer(),
-          Expanded(
-            child: Container(),
-          ),
-          Center(
-            child: GestureDetector(
-              onTap: () {
-                updateIndex();
-              },
-              child: Container(
-                padding: const EdgeInsets.all(35),
-                decoration: BoxDecoration(
-                  color: AppStyle.red800,
-                ),
-                child: const Center(
-                    child: Text(
-                  "Enter Basic Information",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16),
-                )),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
   Widget updateBodyContent() {
     switch (currentIndex) {
       case 0:
@@ -580,7 +550,7 @@ class RegisterPageState extends State<RegisterPageHost> {
         return AgeTab(
             key: _ageTabKey, currentUser: user, updateIndex: updateIndex);
       case 3:
-        return buildBufferPage();
+        return RegisterBuffer(onContinue: updateIndex);
       case 4:
         return LocationTab(
             key: _locationTabKey, currentUser: user, updateIndex: updateIndex);
@@ -647,7 +617,9 @@ class RegisterPageState extends State<RegisterPageHost> {
             key: _drugPreferenceTabKey,
             currentUser: user,
             updateIndex: updateIndex);
-
+      case 21:
+        return BasicInformationBuffer(onContinue: updateIndex);
+      case 22:
       default:
         return const CircularProgressIndicator();
     }

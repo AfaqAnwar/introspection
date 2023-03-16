@@ -47,7 +47,7 @@ class SmokePreferenceTabState extends State<SmokePreferenceTab> {
   }
 
   void updateSmokePreferenceOfUser() {
-    widget.currentUser.setAlcoholPreference = smokePreference;
+    widget.currentUser.setSmokePreference = smokePreference;
   }
 
   @override
