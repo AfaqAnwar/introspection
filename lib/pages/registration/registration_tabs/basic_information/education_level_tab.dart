@@ -3,32 +3,34 @@ import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:group_button/group_button.dart';
 
-class GenderPreferenceTab extends StatefulWidget {
+class EducationLevelTab extends StatefulWidget {
   final User currentUser;
   final Function() updateIndex;
-  const GenderPreferenceTab(
+  const EducationLevelTab(
       {super.key, required this.currentUser, required this.updateIndex});
 
   @override
-  State<GenderPreferenceTab> createState() => GenderPreferenceTabState();
+  State<EducationLevelTab> createState() => EducationLevelTabState();
 }
 
-class GenderPreferenceTabState extends State<GenderPreferenceTab> {
+class EducationLevelTabState extends State<EducationLevelTab> {
   final controller = GroupButtonController();
 
-  String selectedGender = "";
-  String errorMessage = "Please select which genders you would like to date.";
+  String selectedEducationLevel = "";
+  String errorMessage = "Please select your higest level of education.";
 
   @override
   void initState() {
-    if (widget.currentUser.getGenderPreference.isNotEmpty) {
-      selectedGender = widget.currentUser.getGenderPreference;
-      if (selectedGender == "Men") {
+    if (widget.currentUser.getEducationLevel.isNotEmpty) {
+      selectedEducationLevel = widget.currentUser.getEducationLevel;
+      if (selectedEducationLevel == "High School") {
         controller.selectIndex(0);
-      } else if (selectedGender == "Women") {
+      } else if (selectedEducationLevel == "Under Graduate") {
         controller.selectIndex(1);
-      } else {
+      } else if (selectedEducationLevel == "Post Graduate") {
         controller.selectIndex(2);
+      } else if (selectedEducationLevel == "Other") {
+        controller.selectIndex(4);
       }
     }
     super.initState();
@@ -38,16 +40,16 @@ class GenderPreferenceTabState extends State<GenderPreferenceTab> {
     return errorMessage;
   }
 
-  bool validateGenderPreference() {
-    if (selectedGender.isNotEmpty) {
+  bool validateEducationLevel() {
+    if (selectedEducationLevel.isNotEmpty) {
       return true;
     } else {
       return false;
     }
   }
 
-  void updateUserGenderPreference() {
-    widget.currentUser.setGenderPreference = selectedGender;
+  void udpateEducationLevelOfUser() {
+    widget.currentUser.setEducationLevel = selectedEducationLevel;
   }
 
   @override
@@ -61,19 +63,16 @@ class GenderPreferenceTabState extends State<GenderPreferenceTab> {
       children: [
         Wrap(
           children: const [
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 25.0),
-                child: Text(
-                  "Who do you want to date?",
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 36,
-                    fontFamily: 'Marlide-Display',
-                    fontWeight: FontWeight.w800,
-                  ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 25.0),
+              child: Text(
+                "What's your highest level of education?",
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 36,
+                  fontFamily: 'Marlide-Display',
+                  fontWeight: FontWeight.w800,
                 ),
               ),
             ),
@@ -98,12 +97,17 @@ class GenderPreferenceTabState extends State<GenderPreferenceTab> {
                   isRadio: false,
                   onSelected: (value, index, isSelected) {
                     if (isSelected) {
-                      selectedGender = value;
+                      selectedEducationLevel = value;
                     } else {
-                      selectedGender = "";
+                      selectedEducationLevel = "";
                     }
                   },
-                  buttons: const ["Men", "Women", "Everyone"],
+                  buttons: const [
+                    "High School",
+                    "Under Graduate",
+                    "Post Graduate",
+                    "Other",
+                  ],
                 ),
               )
             ],

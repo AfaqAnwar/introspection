@@ -62,19 +62,21 @@ class HometownTabState extends State<HometownTab> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
+        Wrap(
           children: const [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 25.0),
-              child: Text(
-                "Where's your hometown?",
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 36,
-                  fontFamily: 'Marlide-Display',
-                  fontWeight: FontWeight.w800,
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 25.0),
+                child: Text(
+                  "Where's your hometown?",
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 36,
+                    fontFamily: 'Marlide-Display',
+                    fontWeight: FontWeight.w800,
+                  ),
                 ),
               ),
             ),

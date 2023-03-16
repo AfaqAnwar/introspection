@@ -25,6 +25,7 @@ class ChildrenTabState extends State<ChildrenTab> {
   @override
   void initState() {
     if (widget.currentUser.getHasChildren != null) {
+      hasChildren = widget.currentUser.getHasChildren;
       if (widget.currentUser.getHasChildren == true) {
         hasChildrenController.selectIndex(1);
       } else {
@@ -33,6 +34,7 @@ class ChildrenTabState extends State<ChildrenTab> {
     }
 
     if (widget.currentUser.getChildrenPreference.isNotEmpty) {
+      childrenPreference = widget.currentUser.getChildrenPreference;
       if (widget.currentUser.getChildrenPreference == "Don't want children") {
         childrenPreferencesController.selectIndex(0);
       } else if (widget.currentUser.getChildrenPreference == "Want children") {
@@ -79,19 +81,21 @@ class ChildrenTabState extends State<ChildrenTab> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
+        Wrap(
           children: const [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 25.0),
-              child: Text(
-                "What about children?",
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 36,
-                  fontFamily: 'Marlide-Display',
-                  fontWeight: FontWeight.w800,
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 25.0),
+                child: Text(
+                  "What about children?",
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 36,
+                    fontFamily: 'Marlide-Display',
+                    fontWeight: FontWeight.w800,
+                  ),
                 ),
               ),
             ),

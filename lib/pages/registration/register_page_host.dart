@@ -1,5 +1,6 @@
 import 'package:datingapp/pages/registration/registration_buffer.dart';
 import 'package:datingapp/pages/registration/registration_tabs/basic_information/children_tab.dart';
+import 'package:datingapp/pages/registration/registration_tabs/basic_information/education_level_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/basic_information/ethnicity_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/basic_information/gender_preference_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/basic_information/gender_tab.dart';
@@ -52,6 +53,7 @@ class RegisterPageState extends State<RegisterPageHost> {
   final GlobalKey<WorkTabState> _workTabKey = GlobalKey();
   final GlobalKey<JobTitleTabState> _jobTitleTabKey = GlobalKey();
   final GlobalKey<SchoolTabState> _schoolTabKey = GlobalKey();
+  final GlobalKey<EducationLevelTabState> _educationLevelTabKey = GlobalKey();
 
   String errorMessage = "";
 
@@ -73,6 +75,7 @@ class RegisterPageState extends State<RegisterPageHost> {
       _workTabKey,
       _jobTitleTabKey,
       _schoolTabKey,
+      _educationLevelTabKey,
     ];
     _currentKey = keys[currentKeyIndex];
   }
@@ -155,6 +158,9 @@ class RegisterPageState extends State<RegisterPageHost> {
       case 13:
         _schoolTabKey.currentState!.updateSchoolOfUser();
         return _schoolTabKey.currentState!.textFieldValidation();
+      case 14:
+        _educationLevelTabKey.currentState!.udpateEducationLevelOfUser();
+        return _educationLevelTabKey.currentState!.validateEducationLevel();
       default:
         return false;
     }
@@ -207,6 +213,9 @@ class RegisterPageState extends State<RegisterPageHost> {
         break;
       case 13:
         user.setSchool = "";
+        break;
+      case 14:
+        user.setEducationLevel = "";
         break;
       default:
         break;
@@ -549,6 +558,11 @@ class RegisterPageState extends State<RegisterPageHost> {
       case 13:
         return SchoolTab(
             key: _schoolTabKey, currentUser: user, updateIndex: updateIndex);
+      case 14:
+        return EducationLevelTab(
+            key: _educationLevelTabKey,
+            currentUser: user,
+            updateIndex: updateIndex);
       default:
         return const Text('Register Page');
     }

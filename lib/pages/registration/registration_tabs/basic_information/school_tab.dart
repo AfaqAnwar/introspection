@@ -35,7 +35,7 @@ class SchoolTabState extends State<SchoolTab> {
 
   void updateSchoolOfUser() {
     if (textFieldValidation() == true) {
-      widget.currentUser.setHometown = schoolController.text.toString().trim();
+      widget.currentUser.setSchool = schoolController.text.toString().trim();
     }
   }
 
@@ -52,28 +52,25 @@ class SchoolTabState extends State<SchoolTab> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: const [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 25.0),
-              child: Text(
-                "Where's your hometown?",
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 36,
-                  fontFamily: 'Marlide-Display',
-                  fontWeight: FontWeight.w800,
-                ),
+        Wrap(children: const [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 25.0),
+            child: Text(
+              "Where did you go to school?",
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 36,
+                fontFamily: 'Marlide-Display',
+                fontWeight: FontWeight.w800,
               ),
             ),
-          ],
-        ),
+          ),
+        ]),
         const SizedBox(height: 25),
         RegistrationTextField(
             controller: schoolController,
-            hintText: "Queens, NY",
+            hintText: "Add a school",
             obscureText: false),
       ],
     );
