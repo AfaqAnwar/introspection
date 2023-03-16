@@ -3,34 +3,48 @@ import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:group_button/group_button.dart';
 
-class EducationLevelTab extends StatefulWidget {
+class ReligionTab extends StatefulWidget {
   final User currentUser;
   final Function() updateIndex;
-  const EducationLevelTab(
+  const ReligionTab(
       {super.key, required this.currentUser, required this.updateIndex});
 
   @override
-  State<EducationLevelTab> createState() => EducationLevelTabState();
+  State<ReligionTab> createState() => ReligionTabState();
 }
 
-class EducationLevelTabState extends State<EducationLevelTab> {
+class ReligionTabState extends State<ReligionTab> {
   final controller = GroupButtonController();
 
-  String selectedEducationLevel = "";
-  String errorMessage = "Please select your higest level of education.";
+  String selectedReligion = "";
+  String errorMessage = "Please select your religion, if any at all.";
 
   @override
   void initState() {
-    if (widget.currentUser.getEducationLevel.isNotEmpty) {
-      selectedEducationLevel = widget.currentUser.getEducationLevel;
-      if (selectedEducationLevel == "High School") {
+    if (widget.currentUser.getReligion.isNotEmpty) {
+      selectedReligion = widget.currentUser.getReligion;
+      if (selectedReligion == "Bhuddist") {
         controller.selectIndex(0);
-      } else if (selectedEducationLevel == "Under Graduate") {
+      } else if (selectedReligion == "Catholic") {
         controller.selectIndex(1);
-      } else if (selectedEducationLevel == "Post Graduate") {
+      } else if (selectedReligion == "Christain") {
         controller.selectIndex(2);
-      } else if (selectedEducationLevel == "Other") {
+      } else if (selectedReligion == "Hindu") {
         controller.selectIndex(4);
+      } else if (selectedReligion == "Jewish") {
+        controller.selectIndex(5);
+      } else if (selectedReligion == "Muslim") {
+        controller.selectIndex(6);
+      } else if (selectedReligion == "Spiritual") {
+        controller.selectIndex(7);
+      } else if (selectedReligion == "Agnostic") {
+        controller.selectIndex(8);
+      } else if (selectedReligion == "Atheist") {
+        controller.selectIndex(9);
+      } else if (selectedReligion == "Other") {
+        controller.selectIndex(10);
+      } else if (selectedReligion == "None") {
+        controller.selectIndex(11);
       }
     }
     super.initState();
@@ -40,16 +54,16 @@ class EducationLevelTabState extends State<EducationLevelTab> {
     return errorMessage;
   }
 
-  bool validateEducationLevel() {
-    if (selectedEducationLevel.isNotEmpty) {
+  bool validateReligion() {
+    if (selectedReligion.isNotEmpty) {
       return true;
     } else {
       return false;
     }
   }
 
-  void updateEducationLevelOfUser() {
-    widget.currentUser.setEducationLevel = selectedEducationLevel;
+  void updateReligionOfUser() {
+    widget.currentUser.setReligion = selectedReligion;
   }
 
   @override
@@ -66,7 +80,7 @@ class EducationLevelTabState extends State<EducationLevelTab> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 25.0),
               child: Text(
-                "What's your highest level of education?",
+                "What are your religious beliefs?",
                 textAlign: TextAlign.left,
                 style: TextStyle(
                   color: Colors.black,
@@ -102,14 +116,21 @@ class EducationLevelTabState extends State<EducationLevelTab> {
                     isRadio: true,
                     onSelected: (value, index, isSelected) {
                       if (isSelected) {
-                        selectedEducationLevel = value;
+                        selectedReligion = value;
                       }
                     },
                     buttons: const [
-                      "High School",
-                      "Under Graduate",
-                      "Post Graduate",
+                      "Bhuddist",
+                      "Catholic",
+                      "Christain",
+                      "Hindu",
+                      "Jewish",
+                      "Muslim",
+                      "Spiritual",
+                      "Agnostic",
+                      "Atheist",
                       "Other",
+                      "None",
                     ],
                   ),
                 ),

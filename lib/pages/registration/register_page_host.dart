@@ -8,6 +8,7 @@ import 'package:datingapp/pages/registration/registration_tabs/basic_information
 import 'package:datingapp/pages/registration/registration_tabs/basic_information/hometown_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/basic_information/job_title_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/basic_information/location_tab.dart';
+import 'package:datingapp/pages/registration/registration_tabs/basic_information/religion_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/basic_information/school_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/basic_information/work_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/initial_information/age_tab.dart';
@@ -54,6 +55,7 @@ class RegisterPageState extends State<RegisterPageHost> {
   final GlobalKey<JobTitleTabState> _jobTitleTabKey = GlobalKey();
   final GlobalKey<SchoolTabState> _schoolTabKey = GlobalKey();
   final GlobalKey<EducationLevelTabState> _educationLevelTabKey = GlobalKey();
+  final GlobalKey<ReligionTabState> _religionTabKey = GlobalKey();
 
   String errorMessage = "";
 
@@ -76,6 +78,7 @@ class RegisterPageState extends State<RegisterPageHost> {
       _jobTitleTabKey,
       _schoolTabKey,
       _educationLevelTabKey,
+      _religionTabKey,
     ];
     _currentKey = keys[currentKeyIndex];
   }
@@ -159,8 +162,11 @@ class RegisterPageState extends State<RegisterPageHost> {
         _schoolTabKey.currentState!.updateSchoolOfUser();
         return _schoolTabKey.currentState!.textFieldValidation();
       case 14:
-        _educationLevelTabKey.currentState!.udpateEducationLevelOfUser();
+        _educationLevelTabKey.currentState!.updateEducationLevelOfUser();
         return _educationLevelTabKey.currentState!.validateEducationLevel();
+      case 15:
+        _religionTabKey.currentState!.updateReligionOfUser();
+        return _religionTabKey.currentState!.validateReligion();
       default:
         return false;
     }
@@ -216,6 +222,9 @@ class RegisterPageState extends State<RegisterPageHost> {
         break;
       case 14:
         user.setEducationLevel = "";
+        break;
+      case 15:
+        user.setReligion = "";
         break;
       default:
         break;
@@ -563,6 +572,9 @@ class RegisterPageState extends State<RegisterPageHost> {
             key: _educationLevelTabKey,
             currentUser: user,
             updateIndex: updateIndex);
+      case 15:
+        return ReligionTab(
+            key: _religionTabKey, currentUser: user, updateIndex: updateIndex);
       default:
         return const Text('Register Page');
     }
