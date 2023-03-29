@@ -179,6 +179,7 @@ class PhotoTabState extends State<PhotoTab> {
     setState(() {
       photoPickerBoxes[index] = GestureDetector(
         onTap: () {
+          // fix replacing correct image.
           showImagePickerBottomBar();
         },
         child: ClipRRect(
