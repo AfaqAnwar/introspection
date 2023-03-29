@@ -203,6 +203,10 @@ class RegisterPageState extends State<RegisterPageHost> {
       case 20:
         _drugPreferenceTabKey.currentState!.updateDrugPreferenceOfUser();
         return _drugPreferenceTabKey.currentState!.validateDrugPreference();
+      case 21:
+        return true;
+      case 22:
+        return _photoTabKey.currentState!.validatePhotos();
       default:
         return false;
     }
@@ -276,6 +280,11 @@ class RegisterPageState extends State<RegisterPageHost> {
         break;
       case 20:
         user.setDrugPreference = "";
+        break;
+      case 21:
+        break;
+      case 22:
+        user.clearImages();
         break;
       default:
         break;
