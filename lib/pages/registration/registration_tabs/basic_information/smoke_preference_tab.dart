@@ -17,7 +17,7 @@ class SmokePreferenceTabState extends State<SmokePreferenceTab> {
   final controller = GroupButtonController();
 
   String smokePreference = "";
-  String errorMessage = "Please tell us if you drink.";
+  String errorMessage = "Please tell us if you smoke.";
 
   @override
   void initState() {

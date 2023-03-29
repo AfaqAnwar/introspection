@@ -23,7 +23,7 @@ class BasicInformationBufferState extends State<BasicInformationBuffer>
     _composition = _loadComposition();
 
     _controller =
-        AnimationController(vsync: this, duration: const Duration(seconds: 5));
+        AnimationController(vsync: this, duration: const Duration(seconds: 6));
 
     _controller.repeat();
   }

@@ -20,6 +20,7 @@ import 'package:datingapp/pages/registration/registration_tabs/basic_information
 import 'package:datingapp/pages/registration/registration_tabs/initial_information/age_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/initial_information/email_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/initial_information/name_tab.dart';
+import 'package:datingapp/pages/registration/registration_tabs/user_photographic_information/photo_tab.dart';
 import 'package:datingapp/pages/signin_signup/login_page.dart';
 import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/cupertino.dart';
@@ -68,6 +69,7 @@ class RegisterPageState extends State<RegisterPageHost> {
   final GlobalKey<SmokePreferenceTabState> _smokePreferenceTabKey = GlobalKey();
   final GlobalKey<WeedPreferenceTabState> _weedPreferenceTabKey = GlobalKey();
   final GlobalKey<DrugPreferenceTabState> _drugPreferenceTabKey = GlobalKey();
+  final GlobalKey<PhotoTabState> _photoTabKey = GlobalKey();
 
   String errorMessage = "";
 
@@ -96,6 +98,7 @@ class RegisterPageState extends State<RegisterPageHost> {
       _smokePreferenceTabKey,
       _weedPreferenceTabKey,
       _drugPreferenceTabKey,
+      _photoTabKey,
     ];
     _currentKey = keys[currentKeyIndex];
   }
@@ -104,7 +107,7 @@ class RegisterPageState extends State<RegisterPageHost> {
     if (currentIndex < totalIndex - 1) {
       setState(() {
         // Check to see if we're crossing a UI seperator screen next (index of (3) comes after (2)).
-        if (currentIndex != 2 && currentIndex != 20) {
+        if (currentIndex != 2 && currentIndex != 21) {
           currentKeyIndex++;
         }
         currentIndex++;
@@ -620,6 +623,8 @@ class RegisterPageState extends State<RegisterPageHost> {
       case 21:
         return BasicInformationBuffer(onContinue: updateIndex);
       case 22:
+        return PhotoTab(
+            key: _photoTabKey, currentUser: user, updateIndex: updateIndex);
       default:
         return const CircularProgressIndicator();
     }
