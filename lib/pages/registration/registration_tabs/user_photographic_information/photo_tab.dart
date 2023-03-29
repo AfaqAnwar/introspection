@@ -1,5 +1,5 @@
+import 'package:datingapp/components/registration_components/photo_picker_box.dart';
 import 'package:datingapp/data/user.dart';
-import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:reorderables/reorderables.dart';
 
@@ -14,6 +14,13 @@ class PhotoTab extends StatefulWidget {
 }
 
 class PhotoTabState extends State<PhotoTab> {
+  List<PhotoPickerBox> photoPickerBoxes = [];
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -55,113 +62,23 @@ class PhotoTabState extends State<PhotoTab> {
               },
               onReorder: (int oldIndex, int newIndex) {},
               children: [
-                GestureDetector(
+                PhotoPickerBox(
                   onTap: () {},
-                  child: DottedBorder(
-                    color: Colors.grey.shade600,
-                    strokeWidth: 2,
-                    dashPattern: const [4, 4],
-                    borderType: BorderType.RRect,
-                    radius: const Radius.circular(12),
-                    child: const ClipRRect(
-                      borderRadius: BorderRadius.all(Radius.circular(12)),
-                      child: SizedBox(
-                        height: 100,
-                        width: 100,
-                        child: Icon(Icons.add),
-                      ),
-                    ),
-                  ),
                 ),
-                GestureDetector(
+                PhotoPickerBox(
                   onTap: () {},
-                  child: DottedBorder(
-                    color: Colors.grey.shade600,
-                    strokeWidth: 2,
-                    dashPattern: const [4, 4],
-                    borderType: BorderType.RRect,
-                    radius: const Radius.circular(12),
-                    child: const ClipRRect(
-                      borderRadius: BorderRadius.all(Radius.circular(12)),
-                      child: SizedBox(
-                        height: 100,
-                        width: 100,
-                        child: Icon(Icons.add),
-                      ),
-                    ),
-                  ),
                 ),
-                GestureDetector(
+                PhotoPickerBox(
                   onTap: () {},
-                  child: DottedBorder(
-                    color: Colors.grey.shade600,
-                    strokeWidth: 2,
-                    dashPattern: const [4, 4],
-                    borderType: BorderType.RRect,
-                    radius: const Radius.circular(12),
-                    child: const ClipRRect(
-                      borderRadius: BorderRadius.all(Radius.circular(12)),
-                      child: SizedBox(
-                        height: 100,
-                        width: 100,
-                        child: Icon(Icons.add),
-                      ),
-                    ),
-                  ),
                 ),
-                GestureDetector(
+                PhotoPickerBox(
                   onTap: () {},
-                  child: DottedBorder(
-                    color: Colors.grey.shade600,
-                    strokeWidth: 2,
-                    dashPattern: const [4, 4],
-                    borderType: BorderType.RRect,
-                    radius: const Radius.circular(12),
-                    child: const ClipRRect(
-                      borderRadius: BorderRadius.all(Radius.circular(12)),
-                      child: SizedBox(
-                        height: 100,
-                        width: 100,
-                        child: Icon(Icons.add),
-                      ),
-                    ),
-                  ),
                 ),
-                GestureDetector(
+                PhotoPickerBox(
                   onTap: () {},
-                  child: DottedBorder(
-                    color: Colors.grey.shade600,
-                    strokeWidth: 2,
-                    dashPattern: const [4, 4],
-                    borderType: BorderType.RRect,
-                    radius: const Radius.circular(12),
-                    child: const ClipRRect(
-                      borderRadius: BorderRadius.all(Radius.circular(12)),
-                      child: SizedBox(
-                        height: 100,
-                        width: 100,
-                        child: Icon(Icons.add),
-                      ),
-                    ),
-                  ),
                 ),
-                GestureDetector(
+                PhotoPickerBox(
                   onTap: () {},
-                  child: DottedBorder(
-                    color: Colors.grey.shade600,
-                    strokeWidth: 2,
-                    dashPattern: const [4, 4],
-                    borderType: BorderType.RRect,
-                    radius: const Radius.circular(12),
-                    child: const ClipRRect(
-                      borderRadius: BorderRadius.all(Radius.circular(12)),
-                      child: SizedBox(
-                        height: 100,
-                        width: 100,
-                        child: Icon(Icons.add),
-                      ),
-                    ),
-                  ),
                 ),
               ]),
         ),
