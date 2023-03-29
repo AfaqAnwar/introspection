@@ -146,6 +146,8 @@ class PhotoTabState extends State<PhotoTab> {
                     setState(() {
                       updateWidgetTreeWithPhoto(image!);
                     });
+                    // ignore: use_build_context_synchronously
+                    Navigator.pop(context);
                   },
                 ),
                 CupertinoActionSheetAction(
@@ -156,6 +158,8 @@ class PhotoTabState extends State<PhotoTab> {
                   onPressed: () async {
                     XFile? image =
                         await picker.pickImage(source: ImageSource.camera);
+                    // ignore: use_build_context_synchronously
+                    Navigator.pop(context);
                   },
                 ),
                 CupertinoActionSheetAction(
