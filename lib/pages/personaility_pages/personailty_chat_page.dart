@@ -162,7 +162,7 @@ class _PersonailtyChatPage extends State<PersonailtyChatPage> {
                         // retrieve the text that the user has entered by using the textediting controller
                         //content: Text(myController.text),
                         // add the user's response to the string that will be sent to the next screen
-                        allResponses = allResponses + myController.text;
+                        allResponses = allResponses + "  " + myController.text;
 
                         messagesSent.add(ChatBubble(
                             messageText: myController.text,
@@ -193,10 +193,10 @@ class _PersonailtyChatPage extends State<PersonailtyChatPage> {
                     },
                     child: Icon(
                       Icons.send,
-                      color: Colors.white,
+                      color: Colors.blue,
                       size: 18,
                     ),
-                    backgroundColor: Colors.blue,
+                    backgroundColor: Colors.white,
                     elevation: 0,
                   )
                 ],

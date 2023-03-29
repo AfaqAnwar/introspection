@@ -378,7 +378,7 @@ def main():
     personailtyColumns(myersBrigs_df)
     dataPreprocessing(myersBrigs_df)
     # print(myersBrigs_df)
-    df_list = setProcessList(myersBrigs_df)
+    #df_list = setProcessList(myersBrigs_df)
     #X_data, Y_data = vectorization(df_list, myersBrigs_df)
     # x_data, y_data = vectorization(df_list, myersBrigs_df)
     x_data, y_data = predictingUser("userText", myersBrigs_df)
