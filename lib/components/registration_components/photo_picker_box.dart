@@ -1,8 +1,5 @@
 import 'package:dotted_border/dotted_border.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
 class PhotoPickerBox extends StatelessWidget {
   final Function()? onTap;
@@ -10,20 +7,21 @@ class PhotoPickerBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Widget widget = const Icon(Icons.add);
     return GestureDetector(
-      onTap: onTap,
+      onTap: onTap!,
       child: DottedBorder(
         color: Colors.grey.shade600,
         strokeWidth: 2,
         dashPattern: const [4, 4],
         borderType: BorderType.RRect,
         radius: const Radius.circular(12),
-        child: const ClipRRect(
-          borderRadius: BorderRadius.all(Radius.circular(12)),
+        child: ClipRRect(
+          borderRadius: const BorderRadius.all(Radius.circular(12)),
           child: SizedBox(
             height: 100,
             width: 100,
-            child: Icon(Icons.add),
+            child: widget,
           ),
         ),
       ),

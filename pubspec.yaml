@@ -47,6 +47,7 @@ dependencies:
   dotted_border: ^2.0.0+3
   reorderables:
   image_picker: ^0.8.7+1
+  cross_file_image: ^1.0.0
 
 dev_dependencies:
   flutter_test:
