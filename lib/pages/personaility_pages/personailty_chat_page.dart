@@ -1,7 +1,6 @@
-import 'package:datingapp/components/chatbubble.dart';
+import 'package:datingapp/components/chat_page_components/chatbubble.dart';
 import 'package:datingapp/pages/personaility_pages/personailty_prediction_result_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/material/icons.dart';
 
 class PersonailtyChatPage extends StatefulWidget {
   const PersonailtyChatPage({super.key});
@@ -108,12 +107,12 @@ class _PersonailtyChatPage extends State<PersonailtyChatPage> {
             itemCount: messagesSent.length,
             shrinkWrap: true,
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-            padding: EdgeInsets.only(top: 100, bottom: 5),
+            padding: const EdgeInsets.only(top: 100, bottom: 5),
             physics: const AlwaysScrollableScrollPhysics(),
             itemBuilder: (context, index) {
               return Container(
-                  padding:
-                      EdgeInsets.only(left: 10, right: 16, top: 10, bottom: 10),
+                  padding: const EdgeInsets.only(
+                      left: 10, right: 16, top: 10, bottom: 10),
                   child: Align(
                       alignment: (messagesSent[index].isCurrentUser == false
                           ? Alignment.topLeft
@@ -125,7 +124,7 @@ class _PersonailtyChatPage extends State<PersonailtyChatPage> {
                               ? Colors.grey.shade200
                               : Colors.deepPurpleAccent[200]),
                         ),
-                        padding: EdgeInsets.all(16),
+                        padding: const EdgeInsets.all(16),
                         child: Text(messagesSent[index].messageText),
                       ))
                   // add a delay for the next questions
@@ -147,13 +146,13 @@ class _PersonailtyChatPage extends State<PersonailtyChatPage> {
                     // Textfeild for users to write a message
                     child: TextField(
                       controller: myController,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                           hintText: " Respond to the question....",
                           hintStyle: TextStyle(color: Colors.grey),
                           border: InputBorder.none),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 15,
                   ),
                   FloatingActionButton(
@@ -163,7 +162,7 @@ class _PersonailtyChatPage extends State<PersonailtyChatPage> {
                         // retrieve the text that the user has entered by using the textediting controller
                         //content: Text(myController.text),
                         // add the user's response to the string that will be sent to the next screen
-                        allResponses = allResponses + "  " + myController.text;
+                        allResponses = "$allResponses  ${myController.text}";
 
                         messagesSent.add(ChatBubble(
                             messageText: myController.text,
@@ -194,13 +193,13 @@ class _PersonailtyChatPage extends State<PersonailtyChatPage> {
                         }
                       });
                     },
-                    child: Icon(
+                    backgroundColor: Colors.white,
+                    elevation: 0,
+                    child: const Icon(
                       Icons.send,
                       color: Colors.blue,
                       size: 18,
                     ),
-                    backgroundColor: Colors.white,
-                    elevation: 0,
                   )
                 ],
               ),
