@@ -1,10 +1,11 @@
 import 'dart:ui';
 
-import 'package:datingapp/components/chat_page_components/chatbubble.dart';
-import 'package:datingapp/pages/personaility_pages/personailty_prediction_result_page.dart';
+import 'package:datingapp/components/chat_page_components/chat_bubble.dart';
+import 'package:datingapp/components/chat_page_components/typing_indicator/typing_indicator.dart';
 import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:openai_client/openai_client.dart';
+// ignore: implementation_imports
 import 'package:openai_client/src/model/openai_chat/chat_message.dart';
 
 class PersonailtyChatPage extends StatefulWidget {
@@ -20,8 +21,27 @@ class _PersonailtyChatPage extends State<PersonailtyChatPage> {
   String allResponses = "";
   int indexController = 0;
   final ScrollController _scrollController = ScrollController();
+  Widget bubble = const TypingIndicator(
+    showIndicator: false,
+  );
+
+  void turnBubbleOn() {
+    bubble = const TypingIndicator(
+      showIndicator: true,
+    );
+  }
+
+  void turnBubbleOff() {
+    bubble = const TypingIndicator(
+      showIndicator: false,
+    );
+  }
 
   Future<void> connectToGPT() async {
+    setState(() {
+      turnBubbleOn();
+    });
+
     // Load app credentials from environment variables or file.
     const configuration = OpenAIConfiguration(
         apiKey: "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");
@@ -48,11 +68,15 @@ class _PersonailtyChatPage extends State<PersonailtyChatPage> {
     var message = chatMap['choices'][0]['message']['content'];
 
     setState(() {
+      turnBubbleOff();
       messagesSent.add(ChatBubble(messageText: message, isCurrentUser: false));
     });
   }
 
   Future<void> continueChat() async {
+    setState(() {
+      turnBubbleOn();
+    });
     const configuration = OpenAIConfiguration(
         apiKey: "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");
 
@@ -73,6 +97,7 @@ class _PersonailtyChatPage extends State<PersonailtyChatPage> {
     var message = chatMap['choices'][0]['message']['content'];
 
     setState(() {
+      turnBubbleOff();
       messagesSent.add(ChatBubble(messageText: message, isCurrentUser: false));
     });
   }
