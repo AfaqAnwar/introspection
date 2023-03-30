@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: const PersonailtyChatPage(),
+        home: const AuthPage(),
         theme: ThemeData(fontFamily: 'Modern-Era'));
   }
 }
