@@ -1,5 +1,8 @@
+import 'dart:ui';
+
 import 'package:datingapp/components/chat_page_components/chatbubble.dart';
 import 'package:datingapp/pages/personaility_pages/personailty_prediction_result_page.dart';
+import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:openai_client/openai_client.dart';
 import 'package:openai_client/src/model/openai_chat/chat_message.dart';
@@ -15,6 +18,8 @@ class _PersonailtyChatPage extends State<PersonailtyChatPage> {
   final myController = TextEditingController();
   List<ChatBubble> messagesSent = [];
   String allResponses = "";
+  int indexController = 0;
+  final ScrollController _scrollController = ScrollController();
 
   Future<void> connectToGPT() async {
     // Load app credentials from environment variables or file.
@@ -42,7 +47,9 @@ class _PersonailtyChatPage extends State<PersonailtyChatPage> {
     var chatMap = chat.toMap();
     var message = chatMap['choices'][0]['message']['content'];
 
-    messagesSent.add(ChatBubble(messageText: message, isCurrentUser: false));
+    setState(() {
+      messagesSent.add(ChatBubble(messageText: message, isCurrentUser: false));
+    });
   }
 
   Future<void> continueChat() async {
@@ -99,119 +106,159 @@ class _PersonailtyChatPage extends State<PersonailtyChatPage> {
     connectToGPT();
   }
 
-  int indexController = 0;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: Stack(
-        children: <Widget>[
-          ListView.builder(
-            itemCount: messagesSent.length,
-            shrinkWrap: true,
-            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-            padding: const EdgeInsets.only(top: 100, bottom: 5),
-            physics: const AlwaysScrollableScrollPhysics(),
-            itemBuilder: (context, index) {
-              return Container(
-                  padding: const EdgeInsets.only(
-                      left: 10, right: 16, top: 10, bottom: 10),
-                  child: Align(
-                      alignment: (messagesSent[index].isCurrentUser == false
-                          ? Alignment.topLeft
-                          : Alignment.topRight),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: (messagesSent[index].isCurrentUser == false
-                              ? Colors.grey.shade200
-                              : Colors.deepPurpleAccent[200]),
-                        ),
-                        padding: const EdgeInsets.all(16),
-                        child: Text(messagesSent[index].messageText),
-                      ))
-                  // add a delay for the next questions
-
-                  );
-            },
-          ),
-          Align(
-            alignment: Alignment.bottomLeft,
+      bottomNavigationBar: Padding(
+        padding: MediaQuery.of(context).viewInsets,
+        child: ClipRect(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
             child: Container(
-              padding: const EdgeInsets.only(
-                  left: 30, bottom: 10, top: 10, right: 30),
-              height: 80,
               width: double.infinity,
-              color: Colors.white,
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    // Textfeild for users to write a message
-                    child: TextField(
-                      controller: myController,
-                      decoration: const InputDecoration(
-                          hintText: " Respond to the question....",
-                          hintStyle: TextStyle(color: Colors.grey),
-                          border: InputBorder.none),
-                    ),
+              height: 100.0,
+              decoration:
+                  BoxDecoration(color: Colors.grey.shade200.withOpacity(0.5)),
+              child: Center(
+                child: Container(
+                  padding: const EdgeInsets.only(
+                      left: 40, bottom: 10, top: 10, right: 10),
+                  height: 80,
+                  width: double.infinity,
+                  color: Colors.transparent,
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                        // Textfeild for users to write a message
+                        child: TextField(
+                          controller: myController,
+                          decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(30),
+                                  borderSide:
+                                      BorderSide(color: AppStyle.red600)),
+                              focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(30),
+                                  borderSide:
+                                      BorderSide(color: AppStyle.red900)),
+                              hintText: " Type your answer here...",
+                              hintStyle: const TextStyle(color: Colors.grey),
+                              border: InputBorder.none),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 15,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 10, top: 10),
+                        child: FloatingActionButton(
+                          onPressed: () {
+                            setState(() {
+                              // when user presses the send message show it in the ui
+                              // retrieve the text that the user has entered by using the textediting controller
+                              //content: Text(myController.text),
+                              // add the user's response to the string that will be sent to the next screen
+                              allResponses =
+                                  "$allResponses  ${myController.text}";
+
+                              messagesSent.add(ChatBubble(
+                                  messageText: myController.text,
+                                  isCurrentUser: true));
+
+                              // messagesSent.add(messages[indexController]);
+
+                              indexController += 1;
+
+                              continueChat();
+                              _scrollController.animateTo(
+                                  _scrollController.position.maxScrollExtent,
+                                  duration: const Duration(milliseconds: 300),
+                                  curve: Curves.easeInOut);
+                              myController.clear();
+
+                              //print(myController.text);
+                              //print(messages.last.messageText);
+
+                              // if we the indexed is at the last mesage in the questionaire then we go to the next page
+                              // if (indexController == messages.length) {
+                              //   print("Completed questionaire");
+                              //   print(allResponses);
+                              //   // go to the next page to predict the personailty results
+                              //   Navigator.push(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //         builder: (context) =>
+                              //             PersonailtyPredictionResultPage(
+                              //               userQuestionareResults: allResponses,
+                              //             )),
+                              //   );
+                              // }
+                            });
+                          },
+                          backgroundColor: Colors.transparent,
+                          elevation: 0,
+                          child: Icon(
+                            Icons.send,
+                            color: AppStyle.red500,
+                            size: 18,
+                          ),
+                        ),
+                      )
+                    ],
                   ),
-                  const SizedBox(
-                    width: 15,
-                  ),
-                  FloatingActionButton(
-                    onPressed: () {
-                      setState(() {
-                        // when user presses the send message show it in the ui
-                        // retrieve the text that the user has entered by using the textediting controller
-                        //content: Text(myController.text),
-                        // add the user's response to the string that will be sent to the next screen
-                        allResponses = "$allResponses  ${myController.text}";
-
-                        messagesSent.add(ChatBubble(
-                            messageText: myController.text,
-                            isCurrentUser: true));
-
-                        // messagesSent.add(messages[indexController]);
-
-                        indexController += 1;
-
-                        continueChat();
-
-                        myController.clear();
-
-                        //print(myController.text);
-                        //print(messages.last.messageText);
-
-                        // if we the indexed is at the last mesage in the questionaire then we go to the next page
-                        // if (indexController == messages.length) {
-                        //   print("Completed questionaire");
-                        //   print(allResponses);
-                        //   // go to the next page to predict the personailty results
-                        //   Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (context) =>
-                        //             PersonailtyPredictionResultPage(
-                        //               userQuestionareResults: allResponses,
-                        //             )),
-                        //   );
-                        // }
-                      });
-                    },
-                    backgroundColor: Colors.white,
-                    elevation: 0,
-                    child: const Icon(
-                      Icons.send,
-                      color: Colors.blue,
-                      size: 18,
-                    ),
-                  )
-                ],
+                ),
               ),
             ),
           ),
-        ],
+        ),
+      ),
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.only(left: 10, right: 10),
+          child: Stack(
+            children: <Widget>[
+              ListView.builder(
+                controller: _scrollController,
+                itemCount: messagesSent.length,
+                shrinkWrap: true,
+                keyboardDismissBehavior:
+                    ScrollViewKeyboardDismissBehavior.onDrag,
+                padding: const EdgeInsets.only(top: 40, bottom: 5),
+                physics: const AlwaysScrollableScrollPhysics(),
+                itemBuilder: (context, index) {
+                  return Container(
+                      padding: const EdgeInsets.only(
+                          left: 20, right: 20, top: 10, bottom: 10),
+                      child: Align(
+                          alignment: (messagesSent[index].isCurrentUser == false
+                              ? Alignment.topLeft
+                              : Alignment.topRight),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: (messagesSent[index].isCurrentUser == false
+                                  ? Colors.grey.shade200
+                                  : AppStyle.red700),
+                            ),
+                            padding: const EdgeInsets.all(16),
+                            child: Text(
+                              messagesSent[index].messageText,
+                              style: TextStyle(
+                                  color: (messagesSent[index].isCurrentUser ==
+                                          false
+                                      ? Colors.black
+                                      : Colors.white)),
+                            ),
+                          ))
+                      // add a delay for the next questions
+
+                      );
+                },
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
