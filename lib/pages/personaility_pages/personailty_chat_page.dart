@@ -107,6 +107,7 @@ class _PersonailtyChatPage extends State<PersonailtyChatPage> {
           ListView.builder(
             itemCount: messagesSent.length,
             shrinkWrap: true,
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             padding: EdgeInsets.only(top: 100, bottom: 5),
             physics: const AlwaysScrollableScrollPhysics(),
             itemBuilder: (context, index) {
@@ -122,7 +123,7 @@ class _PersonailtyChatPage extends State<PersonailtyChatPage> {
                           borderRadius: BorderRadius.circular(20),
                           color: (messagesSent[index].isCurrentUser == false
                               ? Colors.grey.shade200
-                              : Colors.blue[200]),
+                              : Colors.deepPurpleAccent[200]),
                         ),
                         padding: EdgeInsets.all(16),
                         child: Text(messagesSent[index].messageText),
@@ -139,7 +140,7 @@ class _PersonailtyChatPage extends State<PersonailtyChatPage> {
                   left: 30, bottom: 10, top: 10, right: 30),
               height: 80,
               width: double.infinity,
-              color: Colors.red,
+              color: Colors.white,
               child: Row(
                 children: <Widget>[
                   Expanded(
@@ -148,7 +149,7 @@ class _PersonailtyChatPage extends State<PersonailtyChatPage> {
                       controller: myController,
                       decoration: InputDecoration(
                           hintText: " Respond to the question....",
-                          hintStyle: TextStyle(color: Colors.white),
+                          hintStyle: TextStyle(color: Colors.grey),
                           border: InputBorder.none),
                     ),
                   ),
@@ -171,6 +172,8 @@ class _PersonailtyChatPage extends State<PersonailtyChatPage> {
                         messagesSent.add(messages[indexController]);
 
                         indexController += 1;
+
+                        myController.clear();
 
                         //print(myController.text);
                         //print(messages.last.messageText);
