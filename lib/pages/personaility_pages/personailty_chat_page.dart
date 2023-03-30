@@ -25,18 +25,6 @@ class _PersonailtyChatPage extends State<PersonailtyChatPage> {
     showIndicator: false,
   );
 
-  void turnBubbleOn() {
-    bubble = const TypingIndicator(
-      showIndicator: true,
-    );
-  }
-
-  void turnBubbleOff() {
-    bubble = const TypingIndicator(
-      showIndicator: false,
-    );
-  }
-
   void addMessageForGPT() {
     setState(() {
       messagesSent.add(ChatBubble(
