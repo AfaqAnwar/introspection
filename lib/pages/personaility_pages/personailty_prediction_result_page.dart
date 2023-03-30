@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/material/icons.dart';
-import 'package:page_transition/page_transition.dart';
-import 'package:flutter/cupertino.dart';
 
 class PersonailtyPredictionResultPage extends StatefulWidget {
   const PersonailtyPredictionResultPage(
@@ -17,7 +14,7 @@ class _PersonailtyPredictionResultPage
     extends State<PersonailtyPredictionResultPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       backgroundColor: Colors.lightGreen,
     );
   }
