@@ -1,6 +1,8 @@
 import 'package:datingapp/components/chat_page_components/chatbubble.dart';
 import 'package:datingapp/pages/personaility_pages/personailty_prediction_result_page.dart';
 import 'package:flutter/material.dart';
+import 'package:openai_client/openai_client.dart';
+import 'package:openai_client/src/model/openai_chat/chat_message.dart';
 
 class PersonailtyChatPage extends StatefulWidget {
   const PersonailtyChatPage({super.key});
@@ -11,89 +13,91 @@ class PersonailtyChatPage extends StatefulWidget {
 
 class _PersonailtyChatPage extends State<PersonailtyChatPage> {
   final myController = TextEditingController();
+  List<ChatBubble> messagesSent = [];
+  String allResponses = "";
 
-  List<ChatBubble> messages = [
-    ChatBubble(
-        messageText: "What was the best part of your day?",
-        isCurrentUser: false),
-    ChatBubble(
-        messageText: "What were you for Halloween last year?",
-        isCurrentUser: false),
-    ChatBubble(messageText: "Do you like to read ?", isCurrentUser: false),
-    ChatBubble(messageText: "How often do you go out ?", isCurrentUser: false),
-    ChatBubble(
-        messageText: "Go to sing-a-long song for the car",
-        isCurrentUser: false),
-    ChatBubble(messageText: "Are you into routines?", isCurrentUser: false),
-    ChatBubble(messageText: "Favorite weekend activity?", isCurrentUser: false),
-    ChatBubble(
-        messageText: "Who's the closest person to you?", isCurrentUser: false),
-    ChatBubble(
-        messageText:
-            "If your house was burning, what would one item you would take to save?",
-        isCurrentUser: false),
-    ChatBubble(messageText: "How do you handle stress?", isCurrentUser: false),
-    ChatBubble(
-        messageText: "Greatest failure you’ve come across from?",
-        isCurrentUser: false),
-    ChatBubble(
-        messageText:
-            "If you’re in a bad mood, would you like to be alone or have company with you?",
-        isCurrentUser: false),
-    ChatBubble(messageText: "Are you a photo taker?", isCurrentUser: false),
-    ChatBubble(
-        messageText: "Reminisce on memories or look forward to the future?",
-        isCurrentUser: false),
-    ChatBubble(
-        messageText: "What is your favorite part of the day?",
-        isCurrentUser: false),
-    ChatBubble(
-        messageText: "Morning person or night owl?", isCurrentUser: false),
-    ChatBubble(
-        messageText: "How do you show care for others?", isCurrentUser: false),
-    ChatBubble(messageText: "Who is your hero?", isCurrentUser: false),
-    ChatBubble(
-        messageText:
-            "What is one gift you have received that you value the most?",
-        isCurrentUser: false),
-    ChatBubble(
-        messageText: "What is one aspect you and your friends have in common?",
-        isCurrentUser: false),
-    ChatBubble(
-        messageText: "What is your guilty pleasure?", isCurrentUser: false),
-    ChatBubble(
-        messageText: "What is your unique factor/sets you a part from others?",
-        isCurrentUser: false),
-    ChatBubble(
-        messageText: "What subject did you do best in school or like?",
-        isCurrentUser: false),
-    ChatBubble(messageText: "Favorite hobby?", isCurrentUser: false),
-    ChatBubble(messageText: "Going out or staying in?", isCurrentUser: false),
-    ChatBubble(
-        messageText: "Best advice someone has given you?",
-        isCurrentUser: false),
-    ChatBubble(
-        messageText: "What are some pet peeves you have?",
-        isCurrentUser: false),
-    ChatBubble(messageText: "Do you like to cook?", isCurrentUser: false),
-    ChatBubble(
-        messageText: "Are you a talker or listenter?", isCurrentUser: false),
-    ChatBubble(
-        messageText: "What was your favoriter toy growing up?",
-        isCurrentUser: false),
-    ChatBubble(
-        messageText: "Congrations you have completed the questionaire",
-        isCurrentUser: false)
-  ];
+  Future<void> connectToGPT() async {
+    // Load app credentials from environment variables or file.
+    const configuration = OpenAIConfiguration(
+        apiKey: "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");
 
-  List<ChatBubble> messagesSent = [
-    ChatBubble(
-        messageText: "Hello Welcome to our Personailty Prediction Chat Bot",
-        isCurrentUser: false),
-  ];
+    // Create a new client.
+    final client = OpenAIClient(
+      configuration: configuration,
+      enableLogging: true,
+    );
 
-  // String to hold all the responses to send to the personailty prediction results
-  String allResponses = " ";
+    // Create a chat.
+    final chat = await client.chat.create(
+      model: 'gpt-3.5-turbo',
+      messages: const [
+        ChatMessage(
+          role: 'system',
+          content:
+              'You are a chatbot that is trying to find out about a user\'s personality. Ask the user questions to learn about their personality. You can ask the user about their hobbies, interests, and more.',
+        )
+      ],
+    ).data;
+
+    var chatMap = chat.toMap();
+    var message = chatMap['choices'][0]['message']['content'];
+
+    messagesSent.add(ChatBubble(messageText: message, isCurrentUser: false));
+  }
+
+  Future<void> continueChat() async {
+    const configuration = OpenAIConfiguration(
+        apiKey: "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");
+
+    // Create a new client.
+    final client = OpenAIClient(
+      configuration: configuration,
+      enableLogging: true,
+    );
+
+    final chat = await client.chat
+        .create(
+          model: 'gpt-3.5-turbo',
+          messages: createListOfChatMessages(),
+        )
+        .data;
+
+    var chatMap = chat.toMap();
+    var message = chatMap['choices'][0]['message']['content'];
+
+    setState(() {
+      messagesSent.add(ChatBubble(messageText: message, isCurrentUser: false));
+    });
+  }
+
+  List<ChatMessage> createListOfChatMessages() {
+    List<ChatMessage> chatMessages = [];
+    chatMessages.add(const ChatMessage(
+      role: 'system',
+      content:
+          'You are a chatbot that is trying to find out about a user\'s personality. Ask the user questions to learn about their personality. You can ask the user about their hobbies, interests, and more.',
+    ));
+    for (int i = 0; i < messagesSent.length; i++) {
+      if (messagesSent[i].isCurrentUser == true) {
+        chatMessages.add(ChatMessage(
+          role: 'user',
+          content: messagesSent[i].getMessageText,
+        ));
+      } else {
+        chatMessages.add(ChatMessage(
+          role: 'system',
+          content: messagesSent[i].getMessageText,
+        ));
+      }
+    }
+    return chatMessages;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    connectToGPT();
+  }
 
   int indexController = 0;
 
@@ -168,9 +172,11 @@ class _PersonailtyChatPage extends State<PersonailtyChatPage> {
                             messageText: myController.text,
                             isCurrentUser: true));
 
-                        messagesSent.add(messages[indexController]);
+                        // messagesSent.add(messages[indexController]);
 
                         indexController += 1;
+
+                        continueChat();
 
                         myController.clear();
 
@@ -178,19 +184,19 @@ class _PersonailtyChatPage extends State<PersonailtyChatPage> {
                         //print(messages.last.messageText);
 
                         // if we the indexed is at the last mesage in the questionaire then we go to the next page
-                        if (indexController == messages.length) {
-                          print("Completed questionaire");
-                          print(allResponses);
-                          // go to the next page to predict the personailty results
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    PersonailtyPredictionResultPage(
-                                      userQuestionareResults: allResponses,
-                                    )),
-                          );
-                        }
+                        // if (indexController == messages.length) {
+                        //   print("Completed questionaire");
+                        //   print(allResponses);
+                        //   // go to the next page to predict the personailty results
+                        //   Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (context) =>
+                        //             PersonailtyPredictionResultPage(
+                        //               userQuestionareResults: allResponses,
+                        //             )),
+                        //   );
+                        // }
                       });
                     },
                     backgroundColor: Colors.white,
