@@ -1,7 +1,6 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:sklite/naivebayes/naive_bayes.dart';
-import 'package:sklite/utils/io.dart';
+import 'dart:convert';
+import 'package:http/http.dart';
 
 class PersonailtyPredictionResultPage extends StatefulWidget {
   const PersonailtyPredictionResultPage(
@@ -15,13 +14,42 @@ class PersonailtyPredictionResultPage extends StatefulWidget {
 
 class _PersonailtyPredictionResultPage
     extends State<PersonailtyPredictionResultPage> {
-  late GaussianNB nb;
   @override
   void initState() {
     super.initState();
-    loadModel("assets/data/models/nm_ei.json").then((x) {
-      nb = GaussianNB.fromMap(jsonDecode(x));
-    });
+    makePostRequest();
+  }
+
+  makePostRequest() async {
+    final uri = Uri.parse(
+        'https://big-five-personality-insights.p.rapidapi.com/api/big5');
+    final headers = {
+      'content-type': 'application/json',
+      'X-RapidAPI-Host': 'big-five-personality-insights.p.rapidapi.com',
+      'X-RapidAPI-Key': '35ffad7e37mshc8f5fb94aeb7520p1ed63bjsn4f1b473b3784'
+    };
+    List<Map<String, String>> body = [
+      {
+        'id': "1",
+        'language': 'en',
+        'text': widget.userQuestionareResults.toString()
+      }
+    ];
+    String jsonBody = json.encode(body);
+    final encoding = Encoding.getByName('utf-8');
+
+    Response response = await post(
+      uri,
+      headers: headers,
+      body: jsonBody,
+      encoding: encoding,
+    );
+
+    int statusCode = response.statusCode;
+    String responseBody = response.body;
+
+    print(statusCode);
+    print(responseBody);
   }
 
   @override

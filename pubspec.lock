@@ -105,6 +105,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.0+3"
+  easypost:
+    dependency: "direct main"
+    description:
+      name: easypost
+      sha256: "4e1f40d0b0e16fc397580e3baa73c27930d9d1de41baaee4d34f24f1352a263b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.1"
   fake_async:
     dependency: transitive
     description:
@@ -376,6 +384,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.6.5"
+  json_annotation:
+    dependency: transitive
+    description:
+      name: json_annotation
+      sha256: c33da08e136c3df0190bd5bbe51ae1df4a7d96e7954d1d7249fea2968a72d317
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.8.0"
   lints:
     dependency: transitive
     description:
@@ -480,14 +496,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.6.0"
-  sklite:
-    dependency: "direct main"
-    description:
-      name: sklite
-      sha256: "6301d4b6cc17c5603d07021cb9c4c4510e4385c371e859bce3663468a1a8ac01"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.0"
   sky_engine:
     dependency: transitive
     description: flutter
