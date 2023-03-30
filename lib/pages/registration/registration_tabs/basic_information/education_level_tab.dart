@@ -3,30 +3,34 @@ import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:group_button/group_button.dart';
 
-class GenderTab extends StatefulWidget {
+class EducationLevelTab extends StatefulWidget {
   final User currentUser;
   final Function() updateIndex;
-  const GenderTab(
+  const EducationLevelTab(
       {super.key, required this.currentUser, required this.updateIndex});
 
   @override
-  State<GenderTab> createState() => GenderTabState();
+  State<EducationLevelTab> createState() => EducationLevelTabState();
 }
 
-class GenderTabState extends State<GenderTab> {
+class EducationLevelTabState extends State<EducationLevelTab> {
   final controller = GroupButtonController();
 
-  String selectedGender = "";
-  String errorMessage = "Please select your gender.";
+  String selectedEducationLevel = "";
+  String errorMessage = "Please select your higest level of education.";
 
   @override
   void initState() {
-    if (widget.currentUser.getGender.isNotEmpty) {
-      selectedGender = widget.currentUser.getGender;
-      if (selectedGender == "Man") {
+    if (widget.currentUser.getEducationLevel.isNotEmpty) {
+      selectedEducationLevel = widget.currentUser.getEducationLevel;
+      if (selectedEducationLevel == "High School") {
         controller.selectIndex(0);
-      } else {
+      } else if (selectedEducationLevel == "Under Graduate") {
         controller.selectIndex(1);
+      } else if (selectedEducationLevel == "Post Graduate") {
+        controller.selectIndex(2);
+      } else if (selectedEducationLevel == "Other") {
+        controller.selectIndex(4);
       }
     }
     super.initState();
@@ -36,16 +40,16 @@ class GenderTabState extends State<GenderTab> {
     return errorMessage;
   }
 
-  bool validateGender() {
-    if (selectedGender.isNotEmpty) {
+  bool validateEducationLevel() {
+    if (selectedEducationLevel.isNotEmpty) {
       return true;
     } else {
       return false;
     }
   }
 
-  void updateUserGender() {
-    widget.currentUser.setGender = selectedGender;
+  void updateEducationLevelOfUser() {
+    widget.currentUser.setEducationLevel = selectedEducationLevel;
   }
 
   @override
@@ -64,7 +68,7 @@ class GenderTabState extends State<GenderTab> {
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 25.0),
                 child: Text(
-                  "What's your gender?",
+                  "What's your highest level of education?",
                   textAlign: TextAlign.left,
                   style: TextStyle(
                     color: Colors.black,
@@ -101,10 +105,15 @@ class GenderTabState extends State<GenderTab> {
                     isRadio: true,
                     onSelected: (value, index, isSelected) {
                       if (isSelected) {
-                        selectedGender = value;
+                        selectedEducationLevel = value;
                       }
                     },
-                    buttons: const ["Man", "Woman"],
+                    buttons: const [
+                      "High School",
+                      "Under Graduate",
+                      "Post Graduate",
+                      "Other",
+                    ],
                   ),
                 ),
               )

@@ -51,22 +51,29 @@ class GenderPreferenceTabState extends State<GenderPreferenceTab> {
   }
 
   @override
+  String toStringShort() {
+    return errorMessage;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
+        Wrap(
           children: const [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 25.0),
-              child: Text(
-                "Who do you want to date?",
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 36,
-                  fontFamily: 'Marlide-Display',
-                  fontWeight: FontWeight.w800,
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 25.0),
+                child: Text(
+                  "Who do you want to date?",
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 36,
+                    fontFamily: 'Marlide-Display',
+                    fontWeight: FontWeight.w800,
+                  ),
                 ),
               ),
             ),
@@ -79,24 +86,28 @@ class GenderPreferenceTabState extends State<GenderPreferenceTab> {
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: GroupButton(
-                  controller: controller,
-                  options: GroupButtonOptions(
-                    unselectedColor: Colors.grey,
-                    selectedColor: AppStyle.red800,
-                    borderRadius: const BorderRadius.all(Radius.circular(25)),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: GroupButton(
+                    controller: controller,
+                    options: GroupButtonOptions(
+                      mainGroupAlignment: MainGroupAlignment.start,
+                      crossGroupAlignment: CrossGroupAlignment.start,
+                      groupRunAlignment: GroupRunAlignment.start,
+                      unselectedColor: Colors.grey,
+                      selectedColor: AppStyle.red800,
+                      borderRadius: const BorderRadius.all(Radius.circular(25)),
+                    ),
+                    maxSelected: 1,
+                    enableDeselect: false,
+                    isRadio: true,
+                    onSelected: (value, index, isSelected) {
+                      if (isSelected) {
+                        selectedGender = value;
+                      }
+                    },
+                    buttons: const ["Men", "Women", "Everyone"],
                   ),
-                  maxSelected: 1,
-                  enableDeselect: true,
-                  isRadio: false,
-                  onSelected: (value, index, isSelected) {
-                    if (isSelected) {
-                      selectedGender = value;
-                    } else {
-                      selectedGender = "";
-                    }
-                  },
-                  buttons: const ["Men", "Women", "Everyone"],
                 ),
               )
             ],

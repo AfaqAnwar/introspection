@@ -3,30 +3,48 @@ import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:group_button/group_button.dart';
 
-class GenderTab extends StatefulWidget {
+class ReligionTab extends StatefulWidget {
   final User currentUser;
   final Function() updateIndex;
-  const GenderTab(
+  const ReligionTab(
       {super.key, required this.currentUser, required this.updateIndex});
 
   @override
-  State<GenderTab> createState() => GenderTabState();
+  State<ReligionTab> createState() => ReligionTabState();
 }
 
-class GenderTabState extends State<GenderTab> {
+class ReligionTabState extends State<ReligionTab> {
   final controller = GroupButtonController();
 
-  String selectedGender = "";
-  String errorMessage = "Please select your gender.";
+  String selectedReligion = "";
+  String errorMessage = "Please select your religion, if any at all.";
 
   @override
   void initState() {
-    if (widget.currentUser.getGender.isNotEmpty) {
-      selectedGender = widget.currentUser.getGender;
-      if (selectedGender == "Man") {
+    if (widget.currentUser.getReligion.isNotEmpty) {
+      selectedReligion = widget.currentUser.getReligion;
+      if (selectedReligion == "Bhuddist") {
         controller.selectIndex(0);
-      } else {
+      } else if (selectedReligion == "Catholic") {
         controller.selectIndex(1);
+      } else if (selectedReligion == "Christain") {
+        controller.selectIndex(2);
+      } else if (selectedReligion == "Hindu") {
+        controller.selectIndex(4);
+      } else if (selectedReligion == "Jewish") {
+        controller.selectIndex(5);
+      } else if (selectedReligion == "Muslim") {
+        controller.selectIndex(6);
+      } else if (selectedReligion == "Spiritual") {
+        controller.selectIndex(7);
+      } else if (selectedReligion == "Agnostic") {
+        controller.selectIndex(8);
+      } else if (selectedReligion == "Atheist") {
+        controller.selectIndex(9);
+      } else if (selectedReligion == "Other") {
+        controller.selectIndex(10);
+      } else if (selectedReligion == "None") {
+        controller.selectIndex(11);
       }
     }
     super.initState();
@@ -36,16 +54,16 @@ class GenderTabState extends State<GenderTab> {
     return errorMessage;
   }
 
-  bool validateGender() {
-    if (selectedGender.isNotEmpty) {
+  bool validateReligion() {
+    if (selectedReligion.isNotEmpty) {
       return true;
     } else {
       return false;
     }
   }
 
-  void updateUserGender() {
-    widget.currentUser.setGender = selectedGender;
+  void updateReligionOfUser() {
+    widget.currentUser.setReligion = selectedReligion;
   }
 
   @override
@@ -64,7 +82,7 @@ class GenderTabState extends State<GenderTab> {
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 25.0),
                 child: Text(
-                  "What's your gender?",
+                  "What are your religious beliefs?",
                   textAlign: TextAlign.left,
                   style: TextStyle(
                     color: Colors.black,
@@ -101,10 +119,22 @@ class GenderTabState extends State<GenderTab> {
                     isRadio: true,
                     onSelected: (value, index, isSelected) {
                       if (isSelected) {
-                        selectedGender = value;
+                        selectedReligion = value;
                       }
                     },
-                    buttons: const ["Man", "Woman"],
+                    buttons: const [
+                      "Bhuddist",
+                      "Catholic",
+                      "Christain",
+                      "Hindu",
+                      "Jewish",
+                      "Muslim",
+                      "Spiritual",
+                      "Agnostic",
+                      "Atheist",
+                      "Other",
+                      "None",
+                    ],
                   ),
                 ),
               )

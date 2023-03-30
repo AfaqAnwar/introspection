@@ -47,13 +47,18 @@ class EmailTabState extends State<EmailTab> {
   }
 
   @override
+  String toStringShort() {
+    return errorMessage;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: const [
-            Padding(
+        Wrap(children: const [
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 25.0),
               child: Text(
                 "What's your email?",
@@ -66,8 +71,8 @@ class EmailTabState extends State<EmailTab> {
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+        ]),
         const SizedBox(height: 25),
         RegistrationTextField(
             controller: emailTextController,

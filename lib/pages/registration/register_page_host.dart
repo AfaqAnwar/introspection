@@ -1,13 +1,27 @@
+import 'package:datingapp/pages/registration/basic_information_buffer.dart';
+import 'package:datingapp/pages/registration/finalization_buffer.dart';
 import 'package:datingapp/pages/registration/registration_buffer.dart';
+import 'package:datingapp/pages/registration/registration_tabs/basic_information/alcohol_preference_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/basic_information/children_tab.dart';
+import 'package:datingapp/pages/registration/registration_tabs/basic_information/drug_preference_tab.dart';
+import 'package:datingapp/pages/registration/registration_tabs/basic_information/education_level_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/basic_information/ethnicity_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/basic_information/gender_preference_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/basic_information/gender_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/basic_information/height_tab.dart';
+import 'package:datingapp/pages/registration/registration_tabs/basic_information/hometown_tab.dart';
+import 'package:datingapp/pages/registration/registration_tabs/basic_information/job_title_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/basic_information/location_tab.dart';
+import 'package:datingapp/pages/registration/registration_tabs/basic_information/political_tab.dart';
+import 'package:datingapp/pages/registration/registration_tabs/basic_information/religion_tab.dart';
+import 'package:datingapp/pages/registration/registration_tabs/basic_information/school_tab.dart';
+import 'package:datingapp/pages/registration/registration_tabs/basic_information/smoke_preference_tab.dart';
+import 'package:datingapp/pages/registration/registration_tabs/basic_information/weed_preference_tab.dart';
+import 'package:datingapp/pages/registration/registration_tabs/basic_information/work_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/initial_information/age_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/initial_information/email_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/initial_information/name_tab.dart';
+import 'package:datingapp/pages/registration/registration_tabs/user_photographic_information/photo_tab.dart';
 import 'package:datingapp/pages/signin_signup/login_page.dart';
 import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/cupertino.dart';
@@ -25,8 +39,15 @@ class RegisterPageHost extends StatefulWidget {
 
 class RegisterPageState extends State<RegisterPageHost> {
   late User user;
+
   int currentIndex = 0;
-  int totalIndex = 20;
+  int currentKeyIndex = 0;
+  int totalIndex = 24;
+
+  late GlobalKey _currentKey;
+  List<GlobalKey> keys = [];
+
+  // Global Keys for each tab
   final GlobalKey<NameTabState> _nameTabKey = GlobalKey();
   final GlobalKey<EmailTabState> _emailTabKey = GlobalKey();
   final GlobalKey<AgeTabState> _ageTabKey = GlobalKey();
@@ -37,18 +58,62 @@ class RegisterPageState extends State<RegisterPageHost> {
   final GlobalKey<HeightTabState> _heightTabKey = GlobalKey();
   final GlobalKey<EthnicityTabState> _ethnicityTabKey = GlobalKey();
   final GlobalKey<ChildrenTabState> _childrenTabKey = GlobalKey();
+  final GlobalKey<HometownTabState> _hometownTabKey = GlobalKey();
+  final GlobalKey<WorkTabState> _workTabKey = GlobalKey();
+  final GlobalKey<JobTitleTabState> _jobTitleTabKey = GlobalKey();
+  final GlobalKey<SchoolTabState> _schoolTabKey = GlobalKey();
+  final GlobalKey<EducationLevelTabState> _educationLevelTabKey = GlobalKey();
+  final GlobalKey<ReligionTabState> _religionTabKey = GlobalKey();
+  final GlobalKey<PoliticalBeliefTabState> _politicalBeliefTabKey = GlobalKey();
+  final GlobalKey<AlcoholPreferenceTabState> _alcoholPreferenceTabKey =
+      GlobalKey();
+  final GlobalKey<SmokePreferenceTabState> _smokePreferenceTabKey = GlobalKey();
+  final GlobalKey<WeedPreferenceTabState> _weedPreferenceTabKey = GlobalKey();
+  final GlobalKey<DrugPreferenceTabState> _drugPreferenceTabKey = GlobalKey();
+  final GlobalKey<PhotoTabState> _photoTabKey = GlobalKey();
+
   String errorMessage = "";
 
   @override
   void initState() {
     super.initState();
     user = User();
+    keys = [
+      _nameTabKey,
+      _emailTabKey,
+      _ageTabKey,
+      _locationTabKey,
+      _genderTabKey,
+      _genderPreferenceTabKey,
+      _heightTabKey,
+      _ethnicityTabKey,
+      _childrenTabKey,
+      _hometownTabKey,
+      _workTabKey,
+      _jobTitleTabKey,
+      _schoolTabKey,
+      _educationLevelTabKey,
+      _religionTabKey,
+      _politicalBeliefTabKey,
+      _alcoholPreferenceTabKey,
+      _smokePreferenceTabKey,
+      _weedPreferenceTabKey,
+      _drugPreferenceTabKey,
+      _photoTabKey,
+    ];
+    _currentKey = keys[currentKeyIndex];
   }
 
   void updateIndex() {
     if (currentIndex < totalIndex - 1) {
       setState(() {
+        // Check to see if we're crossing a UI seperator screen next (index of (3) comes after (2)).
+        if (currentIndex != 2 && currentIndex != 21 && currentIndex != 22) {
+          currentKeyIndex++;
+        }
+
         currentIndex++;
+        updateKey(currentKeyIndex);
       });
     }
   }
@@ -56,9 +121,18 @@ class RegisterPageState extends State<RegisterPageHost> {
   void updateIndexBackwards() {
     if (currentIndex > 0) {
       setState(() {
+        // Check to see if we're crossing a UI seperator screen (index of 3).
+        if (currentIndex != 3 && currentIndex != 22) {
+          currentKeyIndex--;
+        }
         currentIndex--;
+        updateKey(currentKeyIndex);
       });
     }
+  }
+
+  void updateKey(int index) {
+    _currentKey = keys[index];
   }
 
   Future<bool> checkFieldsAndUpdateCurrentUser() async {
@@ -97,6 +171,46 @@ class RegisterPageState extends State<RegisterPageHost> {
       case 9:
         _childrenTabKey.currentState!.updateChildrenQuestions();
         return _childrenTabKey.currentState!.validateChildrenQuestions();
+      case 10:
+        _hometownTabKey.currentState!.updateHometownOfUser();
+        return _hometownTabKey.currentState!.textFieldValidation();
+      case 11:
+        _workTabKey.currentState!.updateWorkOfUser();
+        return true;
+      case 12:
+        _jobTitleTabKey.currentState!.updateJobTitleOfUser();
+        return _jobTitleTabKey.currentState!.textFieldValidation();
+      case 13:
+        _schoolTabKey.currentState!.updateSchoolOfUser();
+        return _schoolTabKey.currentState!.textFieldValidation();
+      case 14:
+        _educationLevelTabKey.currentState!.updateEducationLevelOfUser();
+        return _educationLevelTabKey.currentState!.validateEducationLevel();
+      case 15:
+        _religionTabKey.currentState!.updateReligionOfUser();
+        return _religionTabKey.currentState!.validateReligion();
+      case 16:
+        _politicalBeliefTabKey.currentState!.updatePoliticalBeliefOfUser();
+        return _politicalBeliefTabKey.currentState!.validatePoliticalBelief();
+      case 17:
+        _alcoholPreferenceTabKey.currentState!.updateAlcoholPreferenceOfUser();
+        return _alcoholPreferenceTabKey.currentState!
+            .validateAlcoholPreference();
+      case 18:
+        _smokePreferenceTabKey.currentState!.updateSmokePreferenceOfUser();
+        return _smokePreferenceTabKey.currentState!.validateSmokePreference();
+      case 19:
+        _weedPreferenceTabKey.currentState!.updateWeedPreferenceOfUser();
+        return _weedPreferenceTabKey.currentState!.validateWeedPreference();
+      case 20:
+        _drugPreferenceTabKey.currentState!.updateDrugPreferenceOfUser();
+        return _drugPreferenceTabKey.currentState!.validateDrugPreference();
+      case 21:
+        return true;
+      case 22:
+        return _photoTabKey.currentState!.validatePhotos();
+      case 23:
+        return true;
       default:
         return false;
     }
@@ -138,43 +252,53 @@ class RegisterPageState extends State<RegisterPageHost> {
         user.hasChildren = null;
         user.setChildrenPreference = "";
         break;
+      case 10:
+        user.setHometown = "";
+        break;
+      case 11:
+        user.setWork = "";
+        break;
+      case 12:
+        user.setJobTitle = "";
+        break;
+      case 13:
+        user.setSchool = "";
+        break;
+      case 14:
+        user.setEducationLevel = "";
+        break;
+      case 15:
+        user.setReligion = "";
+        break;
+      case 16:
+        user.setPoliticalBelief = "";
+        break;
+      case 17:
+        user.setAlcoholPreference = "";
+        break;
+      case 18:
+        user.setSmokePreference = "";
+        break;
+      case 19:
+        user.setWeedPreference = "";
+        break;
+      case 20:
+        user.setDrugPreference = "";
+        break;
+      case 21:
+        break;
+      case 22:
+        user.clearImages();
+        break;
+      case 23:
+        break;
       default:
         break;
     }
   }
 
   void updateErrorMessage() {
-    switch (currentIndex) {
-      case 0:
-        errorMessage = _nameTabKey.currentState!.getErrorMessage();
-        break;
-      case 1:
-        errorMessage = _emailTabKey.currentState!.getErrorMessage();
-        break;
-      case 2:
-        errorMessage = _ageTabKey.currentState!.getErrorMessage();
-        break;
-      case 4:
-        errorMessage = _locationTabKey.currentState!.getErrorMessage();
-        break;
-      case 5:
-        errorMessage = _genderTabKey.currentState!.getErrorMessage();
-        break;
-      case 6:
-        errorMessage = _genderPreferenceTabKey.currentState!.getErrorMessage();
-        break;
-      case 7:
-        errorMessage = "Unknown Error Occured";
-        break;
-      case 8:
-        errorMessage = _ethnicityTabKey.currentState!.getErrorMessage();
-        break;
-      case 9:
-        errorMessage = _childrenTabKey.currentState!.getErrorMessage();
-        break;
-      default:
-        break;
-    }
+    errorMessage = _currentKey.currentState!.toStringShort();
   }
 
   Widget showDotStepper() {
@@ -213,7 +337,7 @@ class RegisterPageState extends State<RegisterPageHost> {
             dotRadius: 6,
             activeStep: currentIndex - 4,
             shape: Shape.circle,
-            spacing: 10,
+            spacing: 8,
             indicator: Indicator.shift,
             fixedDotDecoration: FixedDotDecoration(
                 color: Colors.grey.shade400,
@@ -228,17 +352,17 @@ class RegisterPageState extends State<RegisterPageHost> {
         ],
       );
     }
-    if (currentIndex > 4) {
+    if (currentIndex > 4 && currentIndex < 21) {
       return Column(
         children: [
           const SizedBox(height: 10),
           DotStepper(
             tappingEnabled: false,
-            dotCount: totalIndex - 4,
+            dotCount: totalIndex - 7,
             dotRadius: 6,
             activeStep: currentIndex - 4,
             shape: Shape.circle,
-            spacing: 10,
+            spacing: 8,
             indicator: Indicator.shift,
             fixedDotDecoration: FixedDotDecoration(
                 color: Colors.grey.shade400,
@@ -254,7 +378,7 @@ class RegisterPageState extends State<RegisterPageHost> {
       );
     } else {
       return const SizedBox(
-        height: 40,
+        height: 25,
       );
     }
   }
@@ -262,37 +386,46 @@ class RegisterPageState extends State<RegisterPageHost> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back_ios),
-            splashRadius: 0.1,
-            color: AppStyle.red800,
-            onPressed: () async {
-              destroyData();
-              checkAndReturnToLogin();
-              updateIndexBackwards();
-            },
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios),
+          splashRadius: 0.1,
+          color: AppStyle.red800,
+          onPressed: () async {
+            destroyData();
+            checkAndReturnToLogin();
+            updateIndexBackwards();
+          },
+        ),
+      ),
+      bottomNavigationBar: buildBottomNavigationBar(),
+      backgroundColor: Colors.white,
+      body: buildBody(),
+    );
+  }
+
+  Widget buildBody() {
+    if (currentIndex == 3 || currentIndex == 21 || currentIndex == 23) {
+      return updateBodyContent();
+    } else {
+      return SingleChildScrollView(
+        physics: const NeverScrollableScrollPhysics(),
+        child: SizedBox(
+          child: SafeArea(
+            child: Column(children: [
+              showDotStepper(),
+              updateBodyContent(),
+            ]),
           ),
         ),
-        bottomNavigationBar: buildBottomNavigationBar(),
-        backgroundColor: Colors.white,
-        body: SingleChildScrollView(
-          physics: const NeverScrollableScrollPhysics(),
-          child: SizedBox(
-            child: SafeArea(
-              child: Column(children: [
-                showDotStepper(),
-                updateBodyContent(),
-              ]),
-            ),
-          ),
-        ));
+      );
+    }
   }
 
   Widget buildBottomNavigationBar() {
-    if (currentIndex != 3) {
+    if (currentIndex != 3 && currentIndex != 21 && currentIndex != 23) {
       return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 30),
         child: SafeArea(
@@ -420,46 +553,6 @@ class RegisterPageState extends State<RegisterPageHost> {
     }
   }
 
-  Widget buildBufferPage() {
-    final availableHeight = MediaQuery.of(context).size.height -
-        AppBar().preferredSize.height -
-        MediaQuery.of(context).padding.top -
-        MediaQuery.of(context).padding.bottom;
-
-    return SizedBox(
-      height: availableHeight,
-      child: Column(
-        children: [
-          const RegisterBuffer(),
-          Expanded(
-            child: Container(),
-          ),
-          Center(
-            child: GestureDetector(
-              onTap: () {
-                updateIndex();
-              },
-              child: Container(
-                padding: const EdgeInsets.all(35),
-                decoration: BoxDecoration(
-                  color: AppStyle.red800,
-                ),
-                child: const Center(
-                    child: Text(
-                  "Enter Basic Information",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16),
-                )),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
   Widget updateBodyContent() {
     switch (currentIndex) {
       case 0:
@@ -475,7 +568,7 @@ class RegisterPageState extends State<RegisterPageHost> {
         return AgeTab(
             key: _ageTabKey, currentUser: user, updateIndex: updateIndex);
       case 3:
-        return buildBufferPage();
+        return RegisterBuffer(onContinue: updateIndex);
       case 4:
         return LocationTab(
             key: _locationTabKey, currentUser: user, updateIndex: updateIndex);
@@ -497,8 +590,60 @@ class RegisterPageState extends State<RegisterPageHost> {
       case 9:
         return ChildrenTab(
             key: _childrenTabKey, currentUser: user, updateIndex: updateIndex);
+      case 10:
+        return HometownTab(
+            key: _hometownTabKey, currentUser: user, updateIndex: updateIndex);
+      case 11:
+        return WorkTab(
+            key: _workTabKey, currentUser: user, updateIndex: updateIndex);
+      case 12:
+        return JobTitleTab(
+            key: _jobTitleTabKey, currentUser: user, updateIndex: updateIndex);
+      case 13:
+        return SchoolTab(
+            key: _schoolTabKey, currentUser: user, updateIndex: updateIndex);
+      case 14:
+        return EducationLevelTab(
+            key: _educationLevelTabKey,
+            currentUser: user,
+            updateIndex: updateIndex);
+      case 15:
+        return ReligionTab(
+            key: _religionTabKey, currentUser: user, updateIndex: updateIndex);
+      case 16:
+        return PoliticalBeliefTab(
+            key: _politicalBeliefTabKey,
+            currentUser: user,
+            updateIndex: updateIndex);
+      case 17:
+        return AlcoholPreferenceTab(
+            key: _alcoholPreferenceTabKey,
+            currentUser: user,
+            updateIndex: updateIndex);
+      case 18:
+        return SmokePreferenceTab(
+            key: _smokePreferenceTabKey,
+            currentUser: user,
+            updateIndex: updateIndex);
+      case 19:
+        return WeedPreferenceTab(
+            key: _weedPreferenceTabKey,
+            currentUser: user,
+            updateIndex: updateIndex);
+      case 20:
+        return DrugPreferenceTab(
+            key: _drugPreferenceTabKey,
+            currentUser: user,
+            updateIndex: updateIndex);
+      case 21:
+        return BasicInformationBuffer(onContinue: updateIndex);
+      case 22:
+        return PhotoTab(
+            key: _photoTabKey, currentUser: user, updateIndex: updateIndex);
+      case 23:
+        return FinalizationBuffer(onContinue: updateIndex);
       default:
-        return const Text('Register Page');
+        return const CircularProgressIndicator();
     }
   }
 }

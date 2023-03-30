@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart';
 
-class RegisterBuffer extends StatefulWidget {
+class FinalizationBuffer extends StatefulWidget {
   final Function() onContinue;
-  const RegisterBuffer({super.key, required this.onContinue});
+  const FinalizationBuffer({super.key, required this.onContinue});
 
   @override
-  State<RegisterBuffer> createState() => RegisterBufferState();
+  State<FinalizationBuffer> createState() => FinalizationBufferState();
 }
 
-class RegisterBufferState extends State<RegisterBuffer>
+class FinalizationBufferState extends State<FinalizationBuffer>
     with TickerProviderStateMixin {
   late final AnimationController _controller;
   bool animationEnded = false;
@@ -23,7 +23,7 @@ class RegisterBufferState extends State<RegisterBuffer>
     _composition = _loadComposition();
 
     _controller =
-        AnimationController(vsync: this, duration: const Duration(seconds: 3));
+        AnimationController(vsync: this, duration: const Duration(seconds: 1));
 
     _controller.repeat();
   }
@@ -35,8 +35,7 @@ class RegisterBufferState extends State<RegisterBuffer>
   }
 
   Future<LottieComposition> _loadComposition() async {
-    var assetData =
-        await rootBundle.load('assets/animations/registration_buffer.json');
+    var assetData = await rootBundle.load('assets/animations/final-load.json');
     return await LottieComposition.fromByteData(assetData);
   }
 
@@ -57,7 +56,7 @@ class RegisterBufferState extends State<RegisterBuffer>
                     Padding(
                       padding: EdgeInsets.all(25),
                       child: Text(
-                        "Let's get to know more about you!",
+                        "Let's get started!",
                         textAlign: TextAlign.start,
                         style: TextStyle(
                           color: Colors.black,
@@ -76,7 +75,7 @@ class RegisterBufferState extends State<RegisterBuffer>
                     Padding(
                       padding: EdgeInsets.all(25),
                       child: Text(
-                        "Adding basic info leads to better matches!",
+                        "Thoughtful answers get more matches!",
                         textAlign: TextAlign.start,
                         style: TextStyle(
                           color: Colors.black,
@@ -109,7 +108,7 @@ class RegisterBufferState extends State<RegisterBuffer>
                       ),
                       child: const Center(
                           child: Text(
-                        "Enter Basic Information",
+                        "Create Your Profile",
                         style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,

@@ -44,7 +44,14 @@ dependencies:
   geolocator: ^9.0.2
   geocoding: ^2.0.5
   group_button: ^5.2.2
+<<<<<<< HEAD
   #http: ^0.13.5
+=======
+  dotted_border: ^2.0.0+3
+  reorderables:
+  image_picker: ^0.8.7+1
+  cross_file_image: ^1.0.0
+>>>>>>> 94b5cf8480d20a27193db2569f777154b9f56bf8
 
 dev_dependencies:
   flutter_test:
@@ -71,7 +78,9 @@ flutter:
   assets:
     - assets/images/
     - assets/animations/loveglass.json
-    - assets/animations/buffer.json
+    - assets/animations/final-load.json
+    - assets/animations/basic_info_buffer.json
+    - assets/animations/registration_buffer.json
     - assets/mapstyle/map_style.txt
 
   # An image asset can refer to one or more resolution-specific "variants", see

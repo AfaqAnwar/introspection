@@ -3,30 +3,32 @@ import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:group_button/group_button.dart';
 
-class GenderTab extends StatefulWidget {
+class SmokePreferenceTab extends StatefulWidget {
   final User currentUser;
   final Function() updateIndex;
-  const GenderTab(
+  const SmokePreferenceTab(
       {super.key, required this.currentUser, required this.updateIndex});
 
   @override
-  State<GenderTab> createState() => GenderTabState();
+  State<SmokePreferenceTab> createState() => SmokePreferenceTabState();
 }
 
-class GenderTabState extends State<GenderTab> {
+class SmokePreferenceTabState extends State<SmokePreferenceTab> {
   final controller = GroupButtonController();
 
-  String selectedGender = "";
-  String errorMessage = "Please select your gender.";
+  String smokePreference = "";
+  String errorMessage = "Please tell us if you smoke.";
 
   @override
   void initState() {
-    if (widget.currentUser.getGender.isNotEmpty) {
-      selectedGender = widget.currentUser.getGender;
-      if (selectedGender == "Man") {
+    if (widget.currentUser.getSmokePreference.isNotEmpty) {
+      smokePreference = widget.currentUser.getSmokePreference;
+      if (smokePreference == "Yes") {
         controller.selectIndex(0);
-      } else {
+      } else if (smokePreference == "Sometimes") {
         controller.selectIndex(1);
+      } else if (smokePreference == "No") {
+        controller.selectIndex(2);
       }
     }
     super.initState();
@@ -36,16 +38,16 @@ class GenderTabState extends State<GenderTab> {
     return errorMessage;
   }
 
-  bool validateGender() {
-    if (selectedGender.isNotEmpty) {
+  bool validateSmokePreference() {
+    if (smokePreference.isNotEmpty) {
       return true;
     } else {
       return false;
     }
   }
 
-  void updateUserGender() {
-    widget.currentUser.setGender = selectedGender;
+  void updateSmokePreferenceOfUser() {
+    widget.currentUser.setSmokePreference = smokePreference;
   }
 
   @override
@@ -64,7 +66,7 @@ class GenderTabState extends State<GenderTab> {
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 25.0),
                 child: Text(
-                  "What's your gender?",
+                  "Do you smoke?",
                   textAlign: TextAlign.left,
                   style: TextStyle(
                     color: Colors.black,
@@ -101,10 +103,14 @@ class GenderTabState extends State<GenderTab> {
                     isRadio: true,
                     onSelected: (value, index, isSelected) {
                       if (isSelected) {
-                        selectedGender = value;
+                        smokePreference = value;
                       }
                     },
-                    buttons: const ["Man", "Woman"],
+                    buttons: const [
+                      "Yes",
+                      "Sometimes",
+                      "No",
+                    ],
                   ),
                 ),
               )

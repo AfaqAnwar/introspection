@@ -1,3 +1,7 @@
+import 'dart:collection';
+
+import 'package:image_picker/image_picker.dart';
+
 class User {
   late String firstName;
   late String lastName;
@@ -24,6 +28,7 @@ class User {
   late String smokePreference;
   late String weedPreference;
   late String drugPreference;
+  late Map<int, XFile> imageMap;
 
   User() {
     firstName = "";
@@ -51,6 +56,7 @@ class User {
     smokePreference = "";
     weedPreference = "";
     drugPreference = "";
+    imageMap = HashMap();
   }
 
   String get getFirstName {
@@ -251,5 +257,39 @@ class User {
 
   set setDrugPreference(String drugPreference) {
     this.drugPreference = drugPreference;
+  }
+
+  Map<int, XFile> get getImages {
+    return imageMap;
+  }
+
+  set setImages(Map<int, XFile> imageMap) {
+    this.imageMap = imageMap;
+  }
+
+  void addImageAtIndex(int index, XFile image) {
+    if (imageMap.containsKey(index)) {
+      imageMap.update(index, (value) => image);
+    } else {
+      imageMap.putIfAbsent(index, () => image);
+    }
+  }
+
+  void removeImageAtIndex(int index) {
+    if (imageMap.containsKey(index)) {
+      imageMap.remove(index);
+    }
+  }
+
+  void swapImages(int oldIndex, newIndex) {
+    if (imageMap.containsKey(oldIndex) && imageMap.containsKey(newIndex)) {
+      XFile temp = imageMap[oldIndex]!;
+      imageMap.update(oldIndex, (value) => imageMap[newIndex]!);
+      imageMap.update(newIndex, (value) => temp);
+    }
+  }
+
+  void clearImages() {
+    imageMap.clear();
   }
 }

@@ -3,30 +3,36 @@ import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:group_button/group_button.dart';
 
-class GenderTab extends StatefulWidget {
+class PoliticalBeliefTab extends StatefulWidget {
   final User currentUser;
   final Function() updateIndex;
-  const GenderTab(
+  const PoliticalBeliefTab(
       {super.key, required this.currentUser, required this.updateIndex});
 
   @override
-  State<GenderTab> createState() => GenderTabState();
+  State<PoliticalBeliefTab> createState() => PoliticalBeliefTabState();
 }
 
-class GenderTabState extends State<GenderTab> {
+class PoliticalBeliefTabState extends State<PoliticalBeliefTab> {
   final controller = GroupButtonController();
 
-  String selectedGender = "";
-  String errorMessage = "Please select your gender.";
+  String selectedPoliticalBelief = "";
+  String errorMessage = "Please select your political belief, if any.";
 
   @override
   void initState() {
-    if (widget.currentUser.getGender.isNotEmpty) {
-      selectedGender = widget.currentUser.getGender;
-      if (selectedGender == "Man") {
+    if (widget.currentUser.getPoliticalBelief.isNotEmpty) {
+      selectedPoliticalBelief = widget.currentUser.getPoliticalBelief;
+      if (selectedPoliticalBelief == "Liberal") {
         controller.selectIndex(0);
-      } else {
+      } else if (selectedPoliticalBelief == "Moderate") {
         controller.selectIndex(1);
+      } else if (selectedPoliticalBelief == "Conservative") {
+        controller.selectIndex(2);
+      } else if (selectedPoliticalBelief == "Other") {
+        controller.selectIndex(4);
+      } else if (selectedPoliticalBelief == "None") {
+        controller.selectIndex(5);
       }
     }
     super.initState();
@@ -36,16 +42,16 @@ class GenderTabState extends State<GenderTab> {
     return errorMessage;
   }
 
-  bool validateGender() {
-    if (selectedGender.isNotEmpty) {
+  bool validatePoliticalBelief() {
+    if (selectedPoliticalBelief.isNotEmpty) {
       return true;
     } else {
       return false;
     }
   }
 
-  void updateUserGender() {
-    widget.currentUser.setGender = selectedGender;
+  void updatePoliticalBeliefOfUser() {
+    widget.currentUser.setPoliticalBelief = selectedPoliticalBelief;
   }
 
   @override
@@ -64,7 +70,7 @@ class GenderTabState extends State<GenderTab> {
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 25.0),
                 child: Text(
-                  "What's your gender?",
+                  "What are your political beliefs?",
                   textAlign: TextAlign.left,
                   style: TextStyle(
                     color: Colors.black,
@@ -101,10 +107,16 @@ class GenderTabState extends State<GenderTab> {
                     isRadio: true,
                     onSelected: (value, index, isSelected) {
                       if (isSelected) {
-                        selectedGender = value;
+                        selectedPoliticalBelief = value;
                       }
                     },
-                    buttons: const ["Man", "Woman"],
+                    buttons: const [
+                      "Liberal",
+                      "Moderate",
+                      "Conservative",
+                      "Other",
+                      "None",
+                    ],
                   ),
                 ),
               )

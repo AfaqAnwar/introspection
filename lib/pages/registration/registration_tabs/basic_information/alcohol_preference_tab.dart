@@ -3,30 +3,32 @@ import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:group_button/group_button.dart';
 
-class GenderTab extends StatefulWidget {
+class AlcoholPreferenceTab extends StatefulWidget {
   final User currentUser;
   final Function() updateIndex;
-  const GenderTab(
+  const AlcoholPreferenceTab(
       {super.key, required this.currentUser, required this.updateIndex});
 
   @override
-  State<GenderTab> createState() => GenderTabState();
+  State<AlcoholPreferenceTab> createState() => AlcoholPreferenceTabState();
 }
 
-class GenderTabState extends State<GenderTab> {
+class AlcoholPreferenceTabState extends State<AlcoholPreferenceTab> {
   final controller = GroupButtonController();
 
-  String selectedGender = "";
-  String errorMessage = "Please select your gender.";
+  String selectedAlcoholPreference = "";
+  String errorMessage = "Please tell us if you drink.";
 
   @override
   void initState() {
-    if (widget.currentUser.getGender.isNotEmpty) {
-      selectedGender = widget.currentUser.getGender;
-      if (selectedGender == "Man") {
+    if (widget.currentUser.getAlcoholPreference.isNotEmpty) {
+      selectedAlcoholPreference = widget.currentUser.getAlcoholPreference;
+      if (selectedAlcoholPreference == "Yes") {
         controller.selectIndex(0);
-      } else {
+      } else if (selectedAlcoholPreference == "Sometimes") {
         controller.selectIndex(1);
+      } else if (selectedAlcoholPreference == "No") {
+        controller.selectIndex(2);
       }
     }
     super.initState();
@@ -36,16 +38,16 @@ class GenderTabState extends State<GenderTab> {
     return errorMessage;
   }
 
-  bool validateGender() {
-    if (selectedGender.isNotEmpty) {
+  bool validateAlcoholPreference() {
+    if (selectedAlcoholPreference.isNotEmpty) {
       return true;
     } else {
       return false;
     }
   }
 
-  void updateUserGender() {
-    widget.currentUser.setGender = selectedGender;
+  void updateAlcoholPreferenceOfUser() {
+    widget.currentUser.setAlcoholPreference = selectedAlcoholPreference;
   }
 
   @override
@@ -64,7 +66,7 @@ class GenderTabState extends State<GenderTab> {
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 25.0),
                 child: Text(
-                  "What's your gender?",
+                  "Do you drink?",
                   textAlign: TextAlign.left,
                   style: TextStyle(
                     color: Colors.black,
@@ -101,10 +103,14 @@ class GenderTabState extends State<GenderTab> {
                     isRadio: true,
                     onSelected: (value, index, isSelected) {
                       if (isSelected) {
-                        selectedGender = value;
+                        selectedAlcoholPreference = value;
                       }
                     },
-                    buttons: const ["Man", "Woman"],
+                    buttons: const [
+                      "Yes",
+                      "Sometimes",
+                      "No",
+                    ],
                   ),
                 ),
               )
