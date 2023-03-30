@@ -8,9 +8,9 @@ class TypingIndicator extends StatefulWidget {
   const TypingIndicator({
     super.key,
     this.showIndicator = false,
-    this.bubbleColor = const Color(0xFF646b7f),
-    this.flashingCircleDarkColor = const Color(0xFF333333),
-    this.flashingCircleBrightColor = const Color(0xFFaec1dd),
+    this.bubbleColor = const Color(0xFFE0E0E0),
+    this.flashingCircleDarkColor = const Color(0xFF85182A),
+    this.flashingCircleBrightColor = const Color(0xFFC71F37),
   });
   final bool showIndicator;
   final Color bubbleColor;

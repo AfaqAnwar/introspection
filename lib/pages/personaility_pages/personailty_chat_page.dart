@@ -37,11 +37,19 @@ class _PersonailtyChatPage extends State<PersonailtyChatPage> {
     );
   }
 
-  Future<void> connectToGPT() async {
+  void addMessageForGPT() {
     setState(() {
-      turnBubbleOn();
+      messagesSent.add(ChatBubble(
+          messageText: "",
+          isCurrentUser: false,
+          bubble: const TypingIndicator(
+            showIndicator: true,
+          )));
     });
+  }
 
+  Future<void> connectToGPT() async {
+    addMessageForGPT();
     // Load app credentials from environment variables or file.
     const configuration = OpenAIConfiguration(
         apiKey: "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");
@@ -66,17 +74,15 @@ class _PersonailtyChatPage extends State<PersonailtyChatPage> {
 
     var chatMap = chat.toMap();
     var message = chatMap['choices'][0]['message']['content'];
-
+    messagesSent[messagesSent.length - 1].setMessageText = message;
     setState(() {
-      turnBubbleOff();
-      messagesSent.add(ChatBubble(messageText: message, isCurrentUser: false));
+      messagesSent[messagesSent.length - 1].turnOffBubble();
     });
   }
 
   Future<void> continueChat() async {
-    setState(() {
-      turnBubbleOn();
-    });
+    addMessageForGPT();
+
     const configuration = OpenAIConfiguration(
         apiKey: "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");
 
@@ -96,9 +102,9 @@ class _PersonailtyChatPage extends State<PersonailtyChatPage> {
     var chatMap = chat.toMap();
     var message = chatMap['choices'][0]['message']['content'];
 
+    messagesSent[messagesSent.length - 1].setMessageText = message;
     setState(() {
-      turnBubbleOff();
-      messagesSent.add(ChatBubble(messageText: message, isCurrentUser: false));
+      messagesSent[messagesSent.length - 1].turnOffBubble();
     });
   }
 
@@ -188,7 +194,9 @@ class _PersonailtyChatPage extends State<PersonailtyChatPage> {
 
                               messagesSent.add(ChatBubble(
                                   messageText: myController.text,
-                                  isCurrentUser: true));
+                                  isCurrentUser: true,
+                                  bubble: const TypingIndicator(
+                                      showIndicator: false)));
 
                               // messagesSent.add(messages[indexController]);
 
@@ -256,26 +264,34 @@ class _PersonailtyChatPage extends State<PersonailtyChatPage> {
                       padding: const EdgeInsets.only(
                           left: 20, right: 20, top: 10, bottom: 10),
                       child: Align(
-                          alignment: (messagesSent[index].isCurrentUser == false
-                              ? Alignment.topLeft
-                              : Alignment.topRight),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: (messagesSent[index].isCurrentUser == false
-                                  ? Colors.grey.shade200
-                                  : AppStyle.red700),
-                            ),
-                            padding: const EdgeInsets.all(16),
-                            child: Text(
-                              messagesSent[index].messageText,
-                              style: TextStyle(
+                        alignment: (messagesSent[index].isCurrentUser == false
+                            ? Alignment.topLeft
+                            : Alignment.topRight),
+                        child: (messagesSent[index].getBubble.showIndicator ==
+                                false
+                            ? Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
                                   color: (messagesSent[index].isCurrentUser ==
                                           false
-                                      ? Colors.black
-                                      : Colors.white)),
-                            ),
-                          ))
+                                      ? Colors.grey.shade200
+                                      : AppStyle.red700),
+                                ),
+                                padding: const EdgeInsets.all(16),
+                                child: Text(
+                                  messagesSent[index].messageText,
+                                  style: TextStyle(
+                                      color:
+                                          (messagesSent[index].isCurrentUser ==
+                                                  false
+                                              ? Colors.black
+                                              : Colors.white)),
+                                ),
+                              )
+                            : const TypingIndicator(
+                                showIndicator: true,
+                              )),
+                      )
                       // add a delay for the next questions
 
                       );
