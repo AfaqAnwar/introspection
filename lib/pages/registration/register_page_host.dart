@@ -1,4 +1,5 @@
 import 'package:datingapp/pages/registration/basic_information_buffer.dart';
+import 'package:datingapp/pages/registration/finalization_buffer.dart';
 import 'package:datingapp/pages/registration/registration_buffer.dart';
 import 'package:datingapp/pages/registration/registration_tabs/basic_information/alcohol_preference_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/basic_information/children_tab.dart';
@@ -41,7 +42,7 @@ class RegisterPageState extends State<RegisterPageHost> {
 
   int currentIndex = 0;
   int currentKeyIndex = 0;
-  int totalIndex = 23;
+  int totalIndex = 24;
 
   late GlobalKey _currentKey;
   List<GlobalKey> keys = [];
@@ -107,9 +108,10 @@ class RegisterPageState extends State<RegisterPageHost> {
     if (currentIndex < totalIndex - 1) {
       setState(() {
         // Check to see if we're crossing a UI seperator screen next (index of (3) comes after (2)).
-        if (currentIndex != 2 && currentIndex != 21) {
+        if (currentIndex != 2 && currentIndex != 21 && currentIndex != 22) {
           currentKeyIndex++;
         }
+
         currentIndex++;
         updateKey(currentKeyIndex);
       });
@@ -207,6 +209,8 @@ class RegisterPageState extends State<RegisterPageHost> {
         return true;
       case 22:
         return _photoTabKey.currentState!.validatePhotos();
+      case 23:
+        return true;
       default:
         return false;
     }
@@ -286,6 +290,8 @@ class RegisterPageState extends State<RegisterPageHost> {
       case 22:
         user.clearImages();
         break;
+      case 23:
+        break;
       default:
         break;
     }
@@ -352,7 +358,7 @@ class RegisterPageState extends State<RegisterPageHost> {
           const SizedBox(height: 10),
           DotStepper(
             tappingEnabled: false,
-            dotCount: totalIndex - 4,
+            dotCount: totalIndex - 7,
             dotRadius: 6,
             activeStep: currentIndex - 4,
             shape: Shape.circle,
@@ -401,7 +407,7 @@ class RegisterPageState extends State<RegisterPageHost> {
   }
 
   Widget buildBody() {
-    if (currentIndex == 3 || currentIndex == 21) {
+    if (currentIndex == 3 || currentIndex == 21 || currentIndex == 23) {
       return updateBodyContent();
     } else {
       return SingleChildScrollView(
@@ -419,7 +425,7 @@ class RegisterPageState extends State<RegisterPageHost> {
   }
 
   Widget buildBottomNavigationBar() {
-    if (currentIndex != 3 && currentIndex != 21) {
+    if (currentIndex != 3 && currentIndex != 21 && currentIndex != 23) {
       return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 30),
         child: SafeArea(
@@ -634,6 +640,8 @@ class RegisterPageState extends State<RegisterPageHost> {
       case 22:
         return PhotoTab(
             key: _photoTabKey, currentUser: user, updateIndex: updateIndex);
+      case 23:
+        return FinalizationBuffer(onContinue: updateIndex);
       default:
         return const CircularProgressIndicator();
     }

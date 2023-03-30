@@ -29,6 +29,12 @@ class PhotoTabState extends State<PhotoTab> {
     }
   }
 
+  void swapPhotoBoxes(int oldIndex, int newIndex) {
+    Widget temp = photoBoxes[oldIndex];
+    photoBoxes[oldIndex] = photoBoxes[newIndex];
+    photoBoxes[newIndex] = temp;
+  }
+
   bool validatePhotos() {
     if (widget.currentUser.getImages.length >= 3) {
       return true;
@@ -78,9 +84,8 @@ class PhotoTabState extends State<PhotoTab> {
             runSpacing: 15,
             onReorder: (int oldIndex, int newIndex) {
               setState(() {
-                Widget temp = photoBoxes[oldIndex];
-                photoBoxes[oldIndex] = photoBoxes[newIndex];
-                photoBoxes[newIndex] = temp;
+                swapPhotoBoxes(oldIndex, newIndex);
+                widget.currentUser.swapImages(oldIndex, newIndex);
               });
             },
             children: photoBoxes,

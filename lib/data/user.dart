@@ -281,6 +281,14 @@ class User {
     }
   }
 
+  void swapImages(int oldIndex, newIndex) {
+    if (imageMap.containsKey(oldIndex) && imageMap.containsKey(newIndex)) {
+      XFile temp = imageMap[oldIndex]!;
+      imageMap.update(oldIndex, (value) => imageMap[newIndex]!);
+      imageMap.update(newIndex, (value) => temp);
+    }
+  }
+
   void clearImages() {
     imageMap.clear();
   }

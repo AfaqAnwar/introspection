@@ -74,6 +74,7 @@ flutter:
   assets:
     - assets/images/
     - assets/animations/loveglass.json
+    - assets/animations/final-load.json
     - assets/animations/basic_info_buffer.json
     - assets/animations/registration_buffer.json
     - assets/mapstyle/map_style.txt
