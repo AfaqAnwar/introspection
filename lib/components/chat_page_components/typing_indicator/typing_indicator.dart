@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:datingapp/components/chat_page_components/typing_indicator/animated_bubble.dart';
 import 'package:datingapp/components/chat_page_components/typing_indicator/circle_bubble.dart';
 import 'package:flutter/material.dart';

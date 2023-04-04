@@ -48,9 +48,6 @@ class _PersonailtyPredictionResultPage
 
     int statusCode = response.statusCode;
     String responseBody = response.body;
-
-    print(statusCode);
-    print(responseBody);
   }
 
   @override
