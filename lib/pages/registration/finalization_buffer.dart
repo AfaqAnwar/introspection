@@ -1,11 +1,21 @@
+import 'dart:ui';
+
+import 'package:another_flushbar/flushbar.dart';
+import 'package:datingapp/components/login_page_components/login_textfield.dart';
+import 'package:datingapp/components/login_page_components/styled_button.dart';
+import 'package:datingapp/components/registration_components/password_button.dart';
+import 'package:datingapp/components/registration_components/password_textfield.dart';
+import 'package:datingapp/components/registration_components/registration_textfield.dart';
+import 'package:datingapp/data/user.dart';
 import 'package:datingapp/style/app_style.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart';
 
 class FinalizationBuffer extends StatefulWidget {
-  final Function() onContinue;
-  const FinalizationBuffer({super.key, required this.onContinue});
+  final User currentUser;
+  const FinalizationBuffer({super.key, required this.currentUser});
 
   @override
   State<FinalizationBuffer> createState() => FinalizationBufferState();
@@ -16,6 +26,9 @@ class FinalizationBufferState extends State<FinalizationBuffer>
   late final AnimationController _controller;
   bool animationEnded = false;
   late final Future<LottieComposition> _composition;
+
+  final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
 
   @override
   void initState() {
@@ -37,6 +50,80 @@ class FinalizationBufferState extends State<FinalizationBuffer>
   Future<LottieComposition> _loadComposition() async {
     var assetData = await rootBundle.load('assets/animations/final-load.json');
     return await LottieComposition.fromByteData(assetData);
+  }
+
+  void confirmPassword() {
+    if (passwordController.text.isEmpty ||
+        confirmPasswordController.text.isEmpty) {
+      Flushbar(
+        flushbarStyle: FlushbarStyle.GROUNDED,
+        messageText: const Text("Please fill in all fields",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 18,
+            )),
+        backgroundColor: Colors.white,
+        duration: const Duration(seconds: 2),
+      ).show(context);
+    }
+    if (passwordController.text != confirmPasswordController.text) {
+      Flushbar(
+        flushbarStyle: FlushbarStyle.GROUNDED,
+        messageText: const Text("Passwords do not match",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 18,
+            )),
+        backgroundColor: Colors.white,
+        duration: const Duration(seconds: 2),
+      ).show(context);
+    }
+
+    if (passwordController.text == confirmPasswordController.text) {}
+  }
+
+  void showPasswordDialog() {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            child: AlertDialog(
+              shape: ShapeBorder.lerp(
+                  RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)),
+                  RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)),
+                  1)!,
+              backgroundColor: Colors.grey.shade200.withOpacity(0.5),
+              content: SingleChildScrollView(
+                child: ListBody(
+                  children: <Widget>[
+                    const SizedBox(height: 10),
+                    PasswordTextField(
+                      controller: passwordController,
+                      hintText: "Password",
+                      obscureText: true,
+                    ),
+                    const SizedBox(height: 10),
+                    PasswordTextField(
+                      controller: confirmPasswordController,
+                      hintText: "Confirm Password",
+                      obscureText: true,
+                    ),
+                  ],
+                ),
+              ),
+              actions: <Widget>[
+                PasswordButton(
+                    onTap: confirmPassword, buttonText: "Confirm Password"),
+                const SizedBox(height: 20),
+              ],
+            ),
+          );
+        });
   }
 
   @override
@@ -100,7 +187,9 @@ class FinalizationBufferState extends State<FinalizationBuffer>
                 ),
                 Center(
                   child: GestureDetector(
-                    onTap: widget.onContinue,
+                    onTap: () {
+                      showPasswordDialog();
+                    },
                     child: Container(
                       padding: const EdgeInsets.all(35),
                       decoration: BoxDecoration(

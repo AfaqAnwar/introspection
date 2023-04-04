@@ -641,7 +641,7 @@ class RegisterPageState extends State<RegisterPageHost> {
         return PhotoTab(
             key: _photoTabKey, currentUser: user, updateIndex: updateIndex);
       case 23:
-        return FinalizationBuffer(onContinue: updateIndex);
+        return FinalizationBuffer(currentUser: user);
       default:
         return const CircularProgressIndicator();
     }

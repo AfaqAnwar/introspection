@@ -50,6 +50,7 @@ dependencies:
   cross_file_image: ^1.0.0
   easypost: ^0.1.1
   openai_client: ^0.0.7
+  another_flushbar: ^1.12.29
 
 dev_dependencies:
   flutter_test:
