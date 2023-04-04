@@ -1,16 +1,12 @@
 import 'dart:ui';
 
 import 'package:another_flushbar/flushbar.dart';
-import 'package:datingapp/components/login_page_components/login_textfield.dart';
-import 'package:datingapp/components/login_page_components/styled_button.dart';
 import 'package:datingapp/components/registration_components/password_button.dart';
 import 'package:datingapp/components/registration_components/password_textfield.dart';
-import 'package:datingapp/components/registration_components/registration_textfield.dart';
 import 'package:datingapp/data/current_user.dart';
 import 'package:datingapp/helpers/firebase_registration.dart';
 import 'package:datingapp/pages/home_page_host.dart';
 import 'package:datingapp/style/app_style.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart';
@@ -150,14 +146,6 @@ class FinalizationBufferState extends State<FinalizationBuffer>
         .then((value) async {
       if (value == "Success") {
         await helper.addUserDetails();
-        dismissProgressIndicator();
-        Future.delayed(const Duration(milliseconds: 100), () {
-          Navigator.pushReplacement(
-              context,
-              PageTransition(
-                  child: const HomePageHost(),
-                  type: PageTransitionType.rightToLeft));
-        });
       } else {
         dismissProgressIndicator();
         showErrorIndicator(value);
@@ -202,7 +190,14 @@ class FinalizationBufferState extends State<FinalizationBuffer>
                     onTap: () async {
                       if (confirmPassword() == true) {
                         await registerUser();
-                        print("Registered");
+                        dismissProgressIndicator();
+                        Future.delayed(const Duration(milliseconds: 100), () {
+                          Navigator.pushReplacement(
+                              context,
+                              PageTransition(
+                                  child: const HomePageHost(),
+                                  type: PageTransitionType.rightToLeft));
+                        });
                       }
                     },
                     buttonText: "Confirm Password"),
