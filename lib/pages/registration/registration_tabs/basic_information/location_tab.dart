@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:datingapp/data/user.dart';
+import 'package:datingapp/data/current_user.dart';
 import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +11,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:map_picker/map_picker.dart';
 
 class LocationTab extends StatefulWidget {
-  final User currentUser;
+  final CurrentUser currentUser;
   final Function() updateIndex;
 
   const LocationTab(

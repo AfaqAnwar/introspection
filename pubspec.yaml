@@ -51,6 +51,7 @@ dependencies:
   easypost: ^0.1.1
   openai_client: ^0.0.7
   another_flushbar: ^1.12.29
+  cloud_firestore: ^4.5.0
 
 dev_dependencies:
   flutter_test:

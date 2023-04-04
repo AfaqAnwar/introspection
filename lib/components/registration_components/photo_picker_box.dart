@@ -1,5 +1,5 @@
 import 'package:cross_file_image/cross_file_image.dart';
-import 'package:datingapp/data/user.dart';
+import 'package:datingapp/data/current_user.dart';
 import 'package:datingapp/style/app_style.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,7 +8,7 @@ import 'package:image_picker/image_picker.dart';
 
 class PhotoPickerBox extends StatefulWidget {
   final int index;
-  final User currentUser;
+  final CurrentUser currentUser;
   const PhotoPickerBox(
       {super.key, required this.index, required this.currentUser});
 

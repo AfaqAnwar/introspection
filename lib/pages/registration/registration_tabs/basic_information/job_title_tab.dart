@@ -1,9 +1,9 @@
 import 'package:datingapp/components/registration_components/registration_textfield.dart';
-import 'package:datingapp/data/user.dart';
+import 'package:datingapp/data/current_user.dart';
 import 'package:flutter/material.dart';
 
 class JobTitleTab extends StatefulWidget {
-  final User currentUser;
+  final CurrentUser currentUser;
   final Function() updateIndex;
   const JobTitleTab(
       {super.key, required this.currentUser, required this.updateIndex});

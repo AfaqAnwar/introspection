@@ -1,10 +1,10 @@
-import 'package:datingapp/data/user.dart';
+import 'package:datingapp/data/current_user.dart';
 import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:group_button/group_button.dart';
 
 class PoliticalBeliefTab extends StatefulWidget {
-  final User currentUser;
+  final CurrentUser currentUser;
   final Function() updateIndex;
   const PoliticalBeliefTab(
       {super.key, required this.currentUser, required this.updateIndex});

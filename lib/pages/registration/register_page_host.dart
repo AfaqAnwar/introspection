@@ -28,7 +28,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:im_stepper/stepper.dart';
 import 'package:page_transition/page_transition.dart';
-import '../../data/user.dart';
+import '../../data/current_user.dart';
 
 class RegisterPageHost extends StatefulWidget {
   const RegisterPageHost({super.key});
@@ -38,7 +38,7 @@ class RegisterPageHost extends StatefulWidget {
 }
 
 class RegisterPageState extends State<RegisterPageHost> {
-  late User user;
+  late CurrentUser user;
 
   int currentIndex = 0;
   int currentKeyIndex = 0;
@@ -77,7 +77,7 @@ class RegisterPageState extends State<RegisterPageHost> {
   @override
   void initState() {
     super.initState();
-    user = User();
+    user = CurrentUser();
     keys = [
       _nameTabKey,
       _emailTabKey,
