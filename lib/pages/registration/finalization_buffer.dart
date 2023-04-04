@@ -146,6 +146,7 @@ class FinalizationBufferState extends State<FinalizationBuffer>
         .then((value) async {
       if (value == "Success") {
         await helper.addUserDetails();
+        await helper.uploadUserImages();
       } else {
         dismissProgressIndicator();
         showErrorIndicator(value);
