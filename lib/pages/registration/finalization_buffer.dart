@@ -32,17 +32,7 @@ class FinalizationBufferState extends State<FinalizationBuffer>
 
   late Flushbar progressBar;
 
-  @override
-  void initState() {
-    super.initState();
-    _composition = _loadComposition();
-
-    _controller =
-        AnimationController(vsync: this, duration: const Duration(seconds: 1));
-
-    progressController =
-        AnimationController(vsync: this, duration: const Duration(seconds: 1));
-
+  void buildFlushBar() {
     progressBar = Flushbar(
       isDismissible: true,
       messageText: const Text("Loading...",
@@ -59,6 +49,20 @@ class FinalizationBufferState extends State<FinalizationBuffer>
       backgroundColor: Colors.white,
       progressIndicatorController: progressController,
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _composition = _loadComposition();
+
+    _controller =
+        AnimationController(vsync: this, duration: const Duration(seconds: 1));
+
+    progressController =
+        AnimationController(vsync: this, duration: const Duration(seconds: 1));
+
+    buildFlushBar();
 
     _controller.repeat();
   }
