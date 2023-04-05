@@ -42,7 +42,7 @@ dependencies:
   google_maps_flutter: ^2.2.5
   map_picker: ^0.0.3
   geolocator: ^9.0.2
-  geocoding: ^2.0.5
+  geocoding: ^2.1.0
   group_button: ^5.2.2
   dotted_border: ^2.0.0+3
   reorderables:
