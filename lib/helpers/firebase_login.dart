@@ -40,7 +40,6 @@ class FirebaseLoginHelper {
     currentUser.setSmokePreference = data.get('Smoking Preference');
     currentUser.setDrugPreference = data.get('Drugs Preference');
     currentUser.setPersonalityType = data.get('Personality Type');
-    print(currentUser.getPersonalityType);
   }
 
   CurrentUser getCurrentUser() {

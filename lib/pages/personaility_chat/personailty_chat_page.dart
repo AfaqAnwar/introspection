@@ -372,6 +372,8 @@ class _PersonailtyChatPage extends State<PersonailtyChatPage> {
 
                                   indexController += 1;
 
+                                  // Message Threshold Needs To Be Modified!
+                                  // Check User Message Words?
                                   if (messagesSent.length >= 7) {
                                     endChat();
                                   } else {
