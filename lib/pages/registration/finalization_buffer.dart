@@ -5,12 +5,11 @@ import 'package:datingapp/components/registration_components/password_button.dar
 import 'package:datingapp/components/registration_components/password_textfield.dart';
 import 'package:datingapp/data/current_user.dart';
 import 'package:datingapp/helpers/firebase_registration.dart';
-import 'package:datingapp/pages/home_page_host.dart';
+import 'package:datingapp/pages/personaility_chat/personailty_chat_page.dart';
 import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart';
-import 'package:page_transition/page_transition.dart';
 
 class FinalizationBuffer extends StatefulWidget {
   final CurrentUser currentUser;
@@ -160,6 +159,7 @@ class FinalizationBufferState extends State<FinalizationBuffer>
 
   void showPasswordDialog() {
     showDialog(
+        barrierDismissible: false,
         context: context,
         builder: (context) {
           return BackdropFilter(
@@ -197,11 +197,15 @@ class FinalizationBufferState extends State<FinalizationBuffer>
                         await registerUser();
                         dismissProgressIndicator();
                         Future.delayed(const Duration(milliseconds: 100), () {
-                          Navigator.pushReplacement(
-                              context,
-                              PageTransition(
-                                  child: const HomePageHost(),
-                                  type: PageTransitionType.rightToLeft));
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    PersonailtyChatPage(
+                                      currentUser: widget.currentUser,
+                                    )),
+                            ModalRoute.withName('/'),
+                          );
                         });
                       }
                     },
@@ -284,7 +288,7 @@ class FinalizationBufferState extends State<FinalizationBuffer>
                       ),
                       child: const Center(
                           child: Text(
-                        "Create Your Profile",
+                        "Complete Registration",
                         style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,

@@ -1,8 +1,10 @@
+import 'package:datingapp/data/current_user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class HomePageHost extends StatefulWidget {
-  const HomePageHost({super.key});
+  final CurrentUser currentUser;
+  const HomePageHost({super.key, required this.currentUser});
 
   @override
   State<HomePageHost> createState() => _HomePageHostState();

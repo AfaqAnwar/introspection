@@ -29,6 +29,7 @@ class CurrentUser {
   late String weedPreference;
   late String drugPreference;
   late Map<int, XFile> imageMap;
+  late String personalityType;
 
   CurrentUser() {
     firstName = "";
@@ -57,6 +58,7 @@ class CurrentUser {
     weedPreference = "";
     drugPreference = "";
     imageMap = HashMap();
+    personalityType = "";
   }
 
   String get getFirstName {
@@ -259,6 +261,14 @@ class CurrentUser {
     this.drugPreference = drugPreference;
   }
 
+  String get getPersonalityType {
+    return personalityType;
+  }
+
+  set setPersonalityType(String personalityType) {
+    this.personalityType = personalityType;
+  }
+
   Map<int, XFile> get getImages {
     return imageMap;
   }
@@ -291,5 +301,10 @@ class CurrentUser {
 
   void clearImages() {
     imageMap.clear();
+  }
+
+  bool isBuilt() {
+    // check if email is present, this will tell us if the User is built.
+    return email.isNotEmpty;
   }
 }

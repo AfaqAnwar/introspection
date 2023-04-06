@@ -1,15 +1,19 @@
 import 'dart:ui';
 
+import 'package:another_flushbar/flushbar.dart';
 import 'package:datingapp/components/chat_page_components/chat_bubble.dart';
 import 'package:datingapp/components/chat_page_components/typing_indicator/typing_indicator.dart';
+import 'package:datingapp/data/current_user.dart';
+import 'package:datingapp/pages/personaility_chat/personailty_prediction_result_page.dart';
 import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/material.dart';
-import 'package:openai_client/openai_client.dart';
+import 'package:openai_client/openai_client.dart' hide Color;
 // ignore: implementation_imports
 import 'package:openai_client/src/model/openai_chat/chat_message.dart';
 
 class PersonailtyChatPage extends StatefulWidget {
-  const PersonailtyChatPage({super.key});
+  final CurrentUser currentUser;
+  const PersonailtyChatPage({super.key, required this.currentUser});
 
   @override
   State<PersonailtyChatPage> createState() => _PersonailtyChatPage();
@@ -24,9 +28,12 @@ class _PersonailtyChatPage extends State<PersonailtyChatPage> {
   Widget bubble = const TypingIndicator(
     showIndicator: false,
   );
+  late bool buttonDisabled;
+  Color buttonColor = AppStyle.red900;
 
   void addMessageForGPT() {
     setState(() {
+      disableButton();
       messagesSent.add(ChatBubble(
           messageText: "",
           isCurrentUser: false,
@@ -66,6 +73,7 @@ class _PersonailtyChatPage extends State<PersonailtyChatPage> {
     setState(() {
       messagesSent[messagesSent.length - 1].turnOffBubble();
     });
+    enableButton();
   }
 
   Future<void> continueChat() async {
@@ -94,6 +102,7 @@ class _PersonailtyChatPage extends State<PersonailtyChatPage> {
     setState(() {
       messagesSent[messagesSent.length - 1].turnOffBubble();
     });
+    enableButton();
   }
 
   List<ChatMessage> createListOfChatMessages() {
@@ -122,7 +131,183 @@ class _PersonailtyChatPage extends State<PersonailtyChatPage> {
   @override
   void initState() {
     super.initState();
-    connectToGPT();
+    disableButton();
+    Future.delayed(Duration.zero, () {
+      showPopUp();
+    });
+  }
+
+  void disableButton() {
+    setState(() {
+      buttonDisabled = true;
+      buttonColor = Colors.grey.shade500;
+    });
+  }
+
+  void enableButton() {
+    setState(() {
+      buttonDisabled = false;
+      buttonColor = AppStyle.red600;
+    });
+  }
+
+  void showPopUp() {
+    showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (context) {
+          return BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            child: AlertDialog(
+              shape: ShapeBorder.lerp(
+                  RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)),
+                  RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)),
+                  1)!,
+              backgroundColor: Colors.grey.shade200.withOpacity(0.5),
+              content: SingleChildScrollView(
+                child: ListBody(
+                  children: <Widget>[
+                    Text(
+                      "Before We Begin",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: AppStyle.red800),
+                    ),
+                    const SizedBox(height: 20),
+                    const Text(
+                        "You'll need to chat with out chatbot for a few minutes to get to know you. This will help us find you the best matches. We'll ask you a few questions about your personality and interests. Please answer as honestly as possible.",
+                        style: TextStyle(fontSize: 16, color: Colors.white)),
+                  ],
+                ),
+              ),
+              actions: <Widget>[
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+                    connectToGPT();
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.all(15),
+                    margin: const EdgeInsets.symmetric(horizontal: 40),
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.white, width: 2),
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(8)),
+                    child: const Center(
+                        child: Text(
+                      "Let's Go",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16),
+                    )),
+                  ),
+                ),
+                const SizedBox(height: 20),
+              ],
+            ),
+          );
+        });
+  }
+
+  void showEndPopUp() {
+    showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (context) {
+          return BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            child: AlertDialog(
+              shape: ShapeBorder.lerp(
+                  RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)),
+                  RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)),
+                  1)!,
+              backgroundColor: Colors.grey.shade200.withOpacity(0.5),
+              content: SingleChildScrollView(
+                child: ListBody(
+                  children: <Widget>[
+                    Text(
+                      "Thank You",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: AppStyle.red800),
+                    ),
+                    const SizedBox(height: 20),
+                    const Text(
+                        "We'll take a moment to figure out your personality and interests. We'll be back with your matches shortly.",
+                        style: TextStyle(fontSize: 16, color: Colors.white)),
+                  ],
+                ),
+              ),
+              actions: <Widget>[
+                GestureDetector(
+                  onTap: () {
+                    Future.delayed(const Duration(milliseconds: 100), () {
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                PersonailtyPredictionResultPage(
+                                    userQuestionareResults: allResponses,
+                                    currentUser: widget.currentUser)),
+                        ModalRoute.withName('/'),
+                      );
+                    });
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.all(15),
+                    margin: const EdgeInsets.symmetric(horizontal: 40),
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.white, width: 2),
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(8)),
+                    child: const Center(
+                        child: Text(
+                      "Let's Finish!",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16),
+                    )),
+                  ),
+                ),
+                const SizedBox(height: 20),
+              ],
+            ),
+          );
+        });
+  }
+
+  void endChat() {
+    addMessageForGPT();
+    messagesSent[messagesSent.length - 1].setMessageText =
+        "Thanks for chatting!, I hope you find your perfect match!";
+    setState(() {
+      messagesSent[messagesSent.length - 1].turnOffBubble();
+    });
+    showEndPopUp();
+  }
+
+  void showEmptyTextPopUp() {
+    Flushbar(
+      flushbarStyle: FlushbarStyle.GROUNDED,
+      messageText: const Text("Please enter a message",
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 18,
+          )),
+      backgroundColor: Colors.white,
+      duration: const Duration(seconds: 1),
+    ).show(context);
   }
 
   @override
@@ -172,55 +357,43 @@ class _PersonailtyChatPage extends State<PersonailtyChatPage> {
                         padding: const EdgeInsets.only(bottom: 10, top: 10),
                         child: FloatingActionButton(
                           onPressed: () {
-                            setState(() {
-                              // when user presses the send message show it in the ui
-                              // retrieve the text that the user has entered by using the textediting controller
-                              //content: Text(myController.text),
-                              // add the user's response to the string that will be sent to the next screen
-                              allResponses =
-                                  "$allResponses  ${myController.text}";
+                            if (buttonDisabled == false) {
+                              if (myController.text.trim().isEmpty) {
+                                showEmptyTextPopUp();
+                              } else {
+                                setState(() {
+                                  allResponses =
+                                      "$allResponses  ${myController.text}";
 
-                              messagesSent.add(ChatBubble(
-                                  messageText: myController.text,
-                                  isCurrentUser: true,
-                                  bubble: const TypingIndicator(
-                                      showIndicator: false)));
+                                  messagesSent.add(ChatBubble(
+                                      messageText: myController.text,
+                                      isCurrentUser: true,
+                                      bubble: const TypingIndicator(
+                                          showIndicator: false)));
 
-                              // messagesSent.add(messages[indexController]);
+                                  indexController += 1;
 
-                              indexController += 1;
-
-                              continueChat();
-                              _scrollController.animateTo(
-                                  _scrollController.position.maxScrollExtent,
-                                  duration: const Duration(milliseconds: 300),
-                                  curve: Curves.easeInOut);
-                              myController.clear();
-
-                              //print(myController.text);
-                              //print(messages.last.messageText);
-
-                              // if we the indexed is at the last mesage in the questionaire then we go to the next page
-                              // if (indexController == messages.length) {
-                              //   print("Completed questionaire");
-                              //   print(allResponses);
-                              //   // go to the next page to predict the personailty results
-                              //   Navigator.push(
-                              //     context,
-                              //     MaterialPageRoute(
-                              //         builder: (context) =>
-                              //             PersonailtyPredictionResultPage(
-                              //               userQuestionareResults: allResponses,
-                              //             )),
-                              //   );
-                              // }
-                            });
+                                  if (messagesSent.length >= 7) {
+                                    endChat();
+                                  } else {
+                                    continueChat();
+                                    _scrollController.animateTo(
+                                        _scrollController
+                                            .position.maxScrollExtent,
+                                        duration:
+                                            const Duration(milliseconds: 300),
+                                        curve: Curves.easeInOut);
+                                    myController.clear();
+                                  }
+                                });
+                              }
+                            } else {}
                           },
                           backgroundColor: Colors.transparent,
                           elevation: 0,
                           child: Icon(
                             Icons.send,
-                            color: AppStyle.red500,
+                            color: buttonColor,
                             size: 18,
                           ),
                         ),

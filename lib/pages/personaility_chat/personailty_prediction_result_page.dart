@@ -1,11 +1,15 @@
+import 'package:datingapp/data/current_user.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 // ignore: depend_on_referenced_packages
 import 'package:http/http.dart';
 
 class PersonailtyPredictionResultPage extends StatefulWidget {
+  final CurrentUser currentUser;
   const PersonailtyPredictionResultPage(
-      {super.key, required this.userQuestionareResults});
+      {super.key,
+      required this.userQuestionareResults,
+      required this.currentUser});
 
   @override
   State<PersonailtyPredictionResultPage> createState() =>
@@ -48,6 +52,9 @@ class _PersonailtyPredictionResultPage
 
     int statusCode = response.statusCode;
     String responseBody = response.body;
+
+    print(statusCode);
+    print(responseBody);
   }
 
   @override
