@@ -251,15 +251,14 @@ class _PersonailtyChatPage extends State<PersonailtyChatPage> {
                 GestureDetector(
                   onTap: () {
                     Future.delayed(const Duration(milliseconds: 100), () {
-                      Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                PersonailtyPredictionResultPage(
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  PersonailtyPredictionResultPage(
+                                    currentUser: widget.currentUser,
                                     userQuestionareResults: allResponses,
-                                    currentUser: widget.currentUser)),
-                        ModalRoute.withName('/'),
-                      );
+                                  )));
                     });
                   },
                   child: Container(
