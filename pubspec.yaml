@@ -85,6 +85,9 @@ flutter:
     - assets/mapstyle/map_style.txt
     - assets/data/models/
     - assets/animations/personality.json
+    - assets/icons/heart.png
+    - assets/icons/account.png
+    - assets/icons/chat.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

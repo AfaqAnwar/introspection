@@ -11,24 +11,35 @@ class HomePageHost extends StatefulWidget {
 }
 
 class _HomePageHostState extends State<HomePageHost> {
+  late PageController _pageController;
   var currentIndex = 0;
 
   @override
   void initState() {
     super.initState();
+    _pageController = PageController();
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
   }
 
   Widget buildContentOfTab(int index) {
-    switch (index) {
-      case 0:
-        return const Text("Home");
-      case 1:
-        return const Text("Home");
-      case 2:
-        return const Text("Home");
-      default:
-        return const Text("Home");
-    }
+    return PageView(
+      controller: _pageController,
+      children: const <Widget>[
+        Center(child: Text("Messages")),
+        Center(child: Text("Discover")),
+        Center(child: Text("Profile")),
+      ],
+      onPageChanged: (index) => {
+        setState(() {
+          currentIndex = index;
+        })
+      },
+    );
   }
 
   Future checkIfUserIsLoggedIn() async {
@@ -44,26 +55,40 @@ class _HomePageHostState extends State<HomePageHost> {
             return Scaffold(
               body: buildContentOfTab(currentIndex),
               bottomNavigationBar: BottomNavigationBar(
+                elevation: 0,
+                iconSize: 24,
                 type: BottomNavigationBarType.shifting,
-                backgroundColor: Colors.white,
+                backgroundColor: Colors.transparent,
                 showUnselectedLabels: false,
+                showSelectedLabels: false,
                 currentIndex: currentIndex,
-                onTap: (index) {
-                  setState(() {
-                    currentIndex = index;
-                  });
-                },
-                selectedItemColor: AppStyle.red600,
-                unselectedItemColor: AppStyle.red300,
-                items: const [
+                onTap: _onItemTapped,
+                items: [
                   BottomNavigationBarItem(
-                    icon: Icon(Icons.star),
+                      icon: Image.asset(
+                        'assets/icons/chat.png',
+                        width: 24,
+                        height: 24,
+                        color: AppStyle.red800,
+                      ),
+                      label: "Messages"),
+                  BottomNavigationBarItem(
+                    icon: Image.asset(
+                      'assets/icons/heart.png',
+                      width: 24,
+                      height: 24,
+                      color: AppStyle.red800,
+                    ),
                     label: "Discover",
                   ),
                   BottomNavigationBarItem(
-                      icon: Icon(Icons.message), label: "Messages"),
-                  BottomNavigationBarItem(
-                      icon: Icon(Icons.person), label: "Profile"),
+                      icon: Image.asset(
+                        'assets/icons/account.png',
+                        width: 24,
+                        height: 24,
+                        color: AppStyle.red800,
+                      ),
+                      label: "Profile"),
                 ],
               ),
             );
@@ -71,5 +96,16 @@ class _HomePageHostState extends State<HomePageHost> {
             return const Center(child: CircularProgressIndicator());
           }
         });
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      currentIndex = index;
+      //
+      //
+      //using this page controller you can make beautiful animation effects
+      _pageController.animateToPage(index,
+          duration: const Duration(milliseconds: 250), curve: Curves.easeOut);
+    });
   }
 }
