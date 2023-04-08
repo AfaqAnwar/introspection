@@ -23,6 +23,10 @@ class PersonailtyPredictionResultPage extends StatefulWidget {
 class _PersonailtyPredictionResultPage
     extends State<PersonailtyPredictionResultPage>
     with TickerProviderStateMixin {
+  late int statusCode;
+  late String finalResponse;
+  Map<String, double> personalityMap = {};
+
   @override
   void initState() {
     super.initState();
@@ -61,11 +65,28 @@ class _PersonailtyPredictionResultPage
       encoding: encoding,
     );
 
-    int statusCode = response.statusCode;
-    String responseBody = response.body;
+    statusCode = response.statusCode;
+    finalResponse = response.body;
+    personalityMap = parseResponseIntoMap(finalResponse);
+    print(personalityMap);
+  }
 
-    print(statusCode);
-    print(responseBody);
+  Map<String, double> parseResponseIntoMap(String response) {
+    List<String> splitResponse = response.split(",");
+    Map<String, double> map = {};
+    for (int i = 1; i < splitResponse.length; i++) {
+      String key = splitResponse[i].split(":")[0];
+      key = key.replaceAll('"', "");
+      String value = splitResponse[i].split(":")[1];
+      if (value.contains("}")) {
+        value = value.replaceAll("}", "");
+      }
+      if (value.contains("]")) {
+        value = value.replaceAll("]", "");
+      }
+      map[key] = double.parse(value);
+    }
+    return map;
   }
 
   late final AnimationController _controller;

@@ -43,11 +43,7 @@ class AuthPage extends StatelessWidget {
                 }),
           );
         } else {
-          return const Scaffold(
-            body: Center(
-              child: CircularProgressIndicator(),
-            ),
-          );
+          return const LoginPage();
         }
       },
     );
