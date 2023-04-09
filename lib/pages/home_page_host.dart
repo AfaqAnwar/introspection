@@ -1,4 +1,5 @@
 import 'package:datingapp/data/current_user.dart';
+import 'package:datingapp/pages/home_page_tabs/account_page.dart';
 import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/material.dart';
 
@@ -32,7 +33,7 @@ class _HomePageHostState extends State<HomePageHost> {
       children: const <Widget>[
         Center(child: Text("Messages")),
         Center(child: Text("Discover")),
-        Center(child: Text("Profile")),
+        AccountPage(),
       ],
       onPageChanged: (index) => {
         setState(() {

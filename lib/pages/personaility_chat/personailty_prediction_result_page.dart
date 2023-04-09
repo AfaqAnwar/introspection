@@ -68,7 +68,6 @@ class _PersonailtyPredictionResultPage
     statusCode = response.statusCode;
     finalResponse = response.body;
     personalityMap = parseResponseIntoMap(finalResponse);
-    print(personalityMap);
   }
 
   Map<String, double> parseResponseIntoMap(String response) {
