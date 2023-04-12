@@ -1,4 +1,5 @@
 import 'package:datingapp/auth/auth_page.dart';
+import 'package:datingapp/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: const AuthPage(),
+        home: HomeScreen(),
         theme: ThemeData(fontFamily: 'Modern-Era'));
   }
 }
