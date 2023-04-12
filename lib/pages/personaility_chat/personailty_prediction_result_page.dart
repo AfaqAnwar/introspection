@@ -17,6 +17,10 @@ class PersonailtyPredictionResultPage extends StatefulWidget {
   @override
   State<PersonailtyPredictionResultPage> createState() =>
       _PersonailtyPredictionResultPage();
+
+  //State<PersonailtyPredictionResultPage> createState1() =>
+  //  PersonalityPredictor();
+
   final String userQuestionareResults;
 }
 
@@ -88,6 +92,59 @@ class _PersonailtyPredictionResultPage
     }
     return map;
   }
+
+
+  void PersonalityConverter (Map<String, double> map) 
+  {
+    String bigfiveattribute = "";
+    double key = 1;
+    int letter_counter = 0;
+
+    for(double i = key; i < personalityMap.length; i++){
+      if(i == 1 || i == 4 || i == 5 || i == 21 || i == 22 || i == 26 || i == 27 || i == 28 || i == 35) 
+      {
+          if(0 <= i || i < 0.5) {
+            add bigfiveattribute = "I" to map;
+          } 
+          else if(0.5 < i || i <= 1) {
+            add bigfiveattribute = "E" to map;
+          }  
+      }
+      else if(i == 2 || i == 7 || i == 8 || i == 9 || i == 11 || i == 17 || i == 19 || i == 23 || i == 32){
+
+         if(0 <= i || i < 0.5) {
+           add bigfiveattribute = "S" to map;
+         } 
+         else if(0.5 < i || i <= 1) {
+           add bigfiveattribute = "N" to map;
+         }  
+        
+      }
+      else if(i == 3 || i == 10 || i == 14 || i == 15 || i == 24 || i == 25 || i == 29 || i == 33 || i == 34){
+        
+         if(0 <= i || i < 0.5) {
+           add bigfiveattribute = "T" to map;
+         } 
+         else if(0.5 < i || i <= 1) {
+           add bigfiveattribute = "F" to map;
+         }  
+      }
+      else if(i == 6|| i == 12 || i == 13 || i == 16 || i == 18 || i == 20 || i == 30 || i == 31){
+         
+         if(0 <= i || i < 0.5) {
+           add bigfiveattribute = "J" to map;
+         } 
+         else if(0.5 < i || i <= 1) {
+           add bigfiveattribute = "P" to map;
+         }  
+      }
+    }
+
+    
+  }
+
+  
+  
 
   late final AnimationController _controller;
   bool animationEnded = false;
