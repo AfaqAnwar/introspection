@@ -1,4 +1,4 @@
-import 'package:datingapp/data/CustomUser.dart';
+import 'package:datingapp/data/custom_user.dart';
 import 'package:datingapp/helpers/firebase_manager.dart';
 import 'package:datingapp/helpers/firebase_updater.dart';
 import 'package:datingapp/helpers/personality_classifier.dart';

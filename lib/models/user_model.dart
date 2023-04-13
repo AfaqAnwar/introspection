@@ -20,7 +20,7 @@ class User extends Equatable {
   List<Object?> get props => [id, name, age, imgUrls, bio, jobTitle];
 
   static List<User> users = [
-    User(
+    const User(
         id: 1,
         name: 'Sanzi',
         age: 21,
@@ -32,7 +32,7 @@ class User extends Equatable {
         ],
         bio: 'I like turtles',
         jobTitle: 'subway sufer'),
-    User(
+    const User(
         id: 2,
         name: 'Val',
         age: 22,
@@ -44,7 +44,7 @@ class User extends Equatable {
         ],
         bio: 'I like hippos',
         jobTitle: 'doodle jumper'),
-    User(
+    const User(
         id: 3,
         name: 'Preston',
         age: 19,
@@ -56,7 +56,7 @@ class User extends Equatable {
         ],
         bio: 'I like cats',
         jobTitle: '2049 enjoyer'),
-    User(
+    const User(
         id: 2,
         name: 'Val',
         age: 22,
@@ -68,7 +68,7 @@ class User extends Equatable {
         ],
         bio: 'I like hippos',
         jobTitle: 'doodle jumper'),
-    User(
+    const User(
         id: 1,
         name: 'Sanzi',
         age: 21,

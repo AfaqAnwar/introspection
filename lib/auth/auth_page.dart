@@ -1,4 +1,4 @@
-import 'package:datingapp/data/CustomUser.dart';
+import 'package:datingapp/data/custom_user.dart';
 import 'package:datingapp/helpers/firebase_login.dart';
 import 'package:datingapp/pages/home_page_host.dart';
 import 'package:datingapp/pages/personaility_chat/personailty_chat_page.dart';

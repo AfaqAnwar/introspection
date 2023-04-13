@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:datingapp/data/CustomUser.dart';
+import 'package:datingapp/data/custom_user.dart';
 import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

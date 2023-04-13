@@ -1,11 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:datingapp/data/current_user.dart';
+import 'package:datingapp/data/custom_user.dart';
 
 class DiscoveryManager {
-  late CurrentUser currentUser;
+  late CustomUser currentUser;
+  late List<CustomUser> potentialMatches;
 
-  DiscoveryManager(CurrentUser givenUser) {
+  DiscoveryManager(CustomUser givenUser) {
     currentUser = givenUser;
+    potentialMatches = [];
+  }
+
+  void calculatePotentialMatches() {
+    // Get reference(s) to Firestore collection.
+    // Check if doc(s) exist for matching personality types.
+    // If doc(s) exist, add the users with that ID to the potentialMatches list. *User FirebaseUserBuilder to build the CustomUser objects.*
+    // If doc(s) do not exist, do nothing.
   }
 
   List<CollectionReference> getCollectionReferences() {

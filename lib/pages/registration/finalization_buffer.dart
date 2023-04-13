@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:another_flushbar/flushbar.dart';
 import 'package:datingapp/components/registration_components/password_button.dart';
 import 'package:datingapp/components/registration_components/password_textfield.dart';
-import 'package:datingapp/data/CustomUser.dart';
+import 'package:datingapp/data/custom_user.dart';
 import 'package:datingapp/helpers/firebase_registration.dart';
 import 'package:datingapp/pages/personaility_chat/personailty_chat_page.dart';
 import 'package:datingapp/style/app_style.dart';

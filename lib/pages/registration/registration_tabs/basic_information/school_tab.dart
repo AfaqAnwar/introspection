@@ -1,5 +1,5 @@
 import 'package:datingapp/components/registration_components/registration_textfield.dart';
-import 'package:datingapp/data/CustomUser.dart';
+import 'package:datingapp/data/custom_user.dart';
 import 'package:flutter/material.dart';
 
 class SchoolTab extends StatefulWidget {

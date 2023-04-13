@@ -28,7 +28,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:im_stepper/stepper.dart';
 import 'package:page_transition/page_transition.dart';
-import '../../data/CustomUser.dart';
+import '../../data/custom_user.dart';
 
 class RegisterPageHost extends StatefulWidget {
   const RegisterPageHost({super.key});
