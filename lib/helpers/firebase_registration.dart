@@ -1,14 +1,14 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:datingapp/data/current_user.dart';
+import 'package:datingapp/data/CustomUser.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 class FirebaseRegistrationHelper {
-  late CurrentUser currentUser;
+  late CustomUser currentUser;
 
-  FirebaseRegistrationHelper(CurrentUser givenUser) {
+  FirebaseRegistrationHelper(CustomUser givenUser) {
     currentUser = givenUser;
   }
 

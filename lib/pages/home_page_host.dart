@@ -1,11 +1,11 @@
-import 'package:datingapp/data/current_user.dart';
+import 'package:datingapp/data/CustomUser.dart';
 import 'package:datingapp/pages/home_page_tabs/account_page.dart';
 import 'package:datingapp/pages/home_page_tabs/discover_page.dart';
 import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/material.dart';
 
 class HomePageHost extends StatefulWidget {
-  final CurrentUser currentUser;
+  final CustomUser currentUser;
   const HomePageHost({super.key, required this.currentUser});
 
   @override

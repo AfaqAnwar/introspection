@@ -1,10 +1,10 @@
-import 'package:datingapp/data/current_user.dart';
+import 'package:datingapp/data/CustomUser.dart';
 import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AgeTab extends StatefulWidget {
-  final CurrentUser currentUser;
+  final CustomUser currentUser;
   final Function() updateIndex;
   const AgeTab(
       {super.key, required this.currentUser, required this.updateIndex});

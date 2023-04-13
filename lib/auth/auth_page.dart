@@ -1,4 +1,4 @@
-import 'package:datingapp/data/current_user.dart';
+import 'package:datingapp/data/CustomUser.dart';
 import 'package:datingapp/helpers/firebase_login.dart';
 import 'package:datingapp/pages/home_page_host.dart';
 import 'package:datingapp/pages/personaility_chat/personailty_chat_page.dart';
@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 class AuthPage extends StatelessWidget {
   const AuthPage({super.key});
 
-  Future<CurrentUser> buildUser() async {
+  Future<CustomUser> buildUser() async {
     FirebaseLoginHelper helper = FirebaseLoginHelper();
     await helper.populateUserData();
     return helper.getCurrentUser();
@@ -21,7 +21,7 @@ class AuthPage extends StatelessWidget {
       future: buildUser(),
       builder: (BuildContext context, AsyncSnapshot<dynamic> futureSnapshot) {
         if (futureSnapshot.hasData) {
-          CurrentUser user = futureSnapshot.data;
+          CustomUser user = futureSnapshot.data;
           return Scaffold(
             body: StreamBuilder<User?>(
                 stream: FirebaseAuth.instance.authStateChanges(),

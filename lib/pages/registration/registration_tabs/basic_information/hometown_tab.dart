@@ -1,9 +1,9 @@
 import 'package:datingapp/components/registration_components/registration_textfield.dart';
-import 'package:datingapp/data/current_user.dart';
+import 'package:datingapp/data/CustomUser.dart';
 import 'package:flutter/material.dart';
 
 class HometownTab extends StatefulWidget {
-  final CurrentUser currentUser;
+  final CustomUser currentUser;
   final Function() updateIndex;
   const HometownTab(
       {super.key, required this.currentUser, required this.updateIndex});

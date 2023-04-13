@@ -2,7 +2,7 @@ import 'dart:collection';
 
 import 'package:image_picker/image_picker.dart';
 
-class CurrentUser {
+class CustomUser {
   late String firstName;
   late String lastName;
   late String email;
@@ -31,7 +31,7 @@ class CurrentUser {
   late Map<int, XFile> imageMap;
   late String personalityType;
 
-  CurrentUser() {
+  CustomUser() {
     firstName = "";
     lastName = "";
     email = "";

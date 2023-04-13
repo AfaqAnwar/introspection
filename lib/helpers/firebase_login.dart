@@ -1,12 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:datingapp/data/current_user.dart';
+import 'package:datingapp/data/CustomUser.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class FirebaseLoginHelper {
-  late CurrentUser currentUser;
+  late CustomUser currentUser;
 
   FirebaseLoginHelper() {
-    currentUser = CurrentUser();
+    currentUser = CustomUser();
   }
 
   Future<void> populateUserData() async {
@@ -42,7 +42,7 @@ class FirebaseLoginHelper {
     currentUser.setPersonalityType = data.get('Personality Type');
   }
 
-  CurrentUser getCurrentUser() {
+  CustomUser getCurrentUser() {
     return currentUser;
   }
 

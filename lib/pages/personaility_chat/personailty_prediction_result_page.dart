@@ -1,4 +1,4 @@
-import 'package:datingapp/data/current_user.dart';
+import 'package:datingapp/data/CustomUser.dart';
 import 'package:datingapp/helpers/firebase_manager.dart';
 import 'package:datingapp/helpers/firebase_updater.dart';
 import 'package:datingapp/helpers/personality_classifier.dart';
@@ -12,7 +12,7 @@ import 'package:http/http.dart';
 import 'package:lottie/lottie.dart';
 
 class PersonailtyPredictionResultPage extends StatefulWidget {
-  final CurrentUser currentUser;
+  final CustomUser currentUser;
   const PersonailtyPredictionResultPage(
       {super.key,
       required this.userQuestionareResults,

@@ -1,10 +1,10 @@
 import 'package:datingapp/components/registration_components/cupertino_picker_object.dart';
-import 'package:datingapp/data/current_user.dart';
+import 'package:datingapp/data/CustomUser.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HeightTab extends StatefulWidget {
-  final CurrentUser currentUser;
+  final CustomUser currentUser;
   final Function() updateIndex;
   const HeightTab(
       {super.key, required this.currentUser, required this.updateIndex});

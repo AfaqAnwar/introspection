@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:datingapp/data/current_user.dart';
+import 'package:datingapp/data/CustomUser.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class FirebaseUpdater {
-  late CurrentUser currentUser;
+  late CustomUser currentUser;
 
-  FirebaseUpdater(CurrentUser givenUser) {
+  FirebaseUpdater(CustomUser givenUser) {
     currentUser = givenUser;
   }
 
