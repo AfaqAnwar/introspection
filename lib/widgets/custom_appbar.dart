@@ -22,14 +22,14 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
           Expanded(
             flex: 6,
             child: Text(
-              'DISCOVER',
+              '', //this is where "DISCOVER" went
               style: TextStyle(
                   fontSize: 50, color: Color.fromRGBO(189, 31, 54, 60)),
             ),
           )
         ]),
         actions: [
-          IconButton(
+          /* IconButton(
             onPressed: () {},
             icon: Icon(Icons.message),
             color: Color.fromRGBO(189, 31, 54, 60),
@@ -38,7 +38,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
             onPressed: () {},
             icon: Icon(Icons.person),
             color: Color.fromRGBO(189, 31, 54, 60),
-          )
+          )*/
         ],
       ),
     );
