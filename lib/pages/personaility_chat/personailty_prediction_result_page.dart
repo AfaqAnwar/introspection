@@ -1,4 +1,7 @@
 import 'package:datingapp/data/current_user.dart';
+import 'package:datingapp/helpers/firebase_updater.dart';
+import 'package:datingapp/helpers/personality_classifier.dart';
+import 'package:datingapp/pages/home_page_host.dart';
 import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -18,9 +21,6 @@ class PersonailtyPredictionResultPage extends StatefulWidget {
   State<PersonailtyPredictionResultPage> createState() =>
       _PersonailtyPredictionResultPage();
 
-  //State<PersonailtyPredictionResultPage> createState1() =>
-  //  PersonalityPredictor();
-
   final String userQuestionareResults;
 }
 
@@ -30,6 +30,8 @@ class _PersonailtyPredictionResultPage
   late int statusCode;
   late String finalResponse;
   Map<String, double> personalityMap = {};
+  late String personalityType;
+  bool buttonDisabled = true;
 
   @override
   void initState() {
@@ -40,7 +42,7 @@ class _PersonailtyPredictionResultPage
         AnimationController(vsync: this, duration: const Duration(seconds: 3));
 
     _controller.repeat();
-
+    personalityType = "";
     makePostRequest();
   }
 
@@ -72,6 +74,19 @@ class _PersonailtyPredictionResultPage
     statusCode = response.statusCode;
     finalResponse = response.body;
     personalityMap = parseResponseIntoMap(finalResponse);
+
+    PersonalityClassifer classifier = PersonalityClassifer(personalityMap);
+
+    setState(() {
+      buttonDisabled = false;
+      personalityType = classifier.classifyPersonality();
+    });
+
+    widget.currentUser.setPersonalityType = personalityType;
+    FirebaseUpdater updater = FirebaseUpdater(widget.currentUser);
+    await updater
+        .updateUserDetails("Personality Type")
+        .then((value) => {print("work")});
   }
 
   Map<String, double> parseResponseIntoMap(String response) {
@@ -91,59 +106,6 @@ class _PersonailtyPredictionResultPage
     }
     return map;
   }
-
-
-  void PersonalityConverter (Map<String, double> map) 
-  {
-    String bigfiveattribute = "";
-    double key = 1;
-    int letter_counter = 0;
-
-    for(double i = key; i < personalityMap.length; i++){
-      if(i == 1 || i == 4 || i == 5 || i == 21 || i == 22 || i == 26 || i == 27 || i == 28 || i == 35) 
-      {
-          if(0 <= i || i < 0.5) {
-            add bigfiveattribute = "I" to map;
-          } 
-          else if(0.5 < i || i <= 1) {
-            add bigfiveattribute = "E" to map;
-          }  
-      }
-      else if(i == 2 || i == 7 || i == 8 || i == 9 || i == 11 || i == 17 || i == 19 || i == 23 || i == 32){
-
-         if(0 <= i || i < 0.5) {
-           add bigfiveattribute = "S" to map;
-         } 
-         else if(0.5 < i || i <= 1) {
-           add bigfiveattribute = "N" to map;
-         }  
-        
-      }
-      else if(i == 3 || i == 10 || i == 14 || i == 15 || i == 24 || i == 25 || i == 29 || i == 33 || i == 34){
-        
-         if(0 <= i || i < 0.5) {
-           add bigfiveattribute = "T" to map;
-         } 
-         else if(0.5 < i || i <= 1) {
-           add bigfiveattribute = "F" to map;
-         }  
-      }
-      else if(i == 6|| i == 12 || i == 13 || i == 16 || i == 18 || i == 20 || i == 30 || i == 31){
-         
-         if(0 <= i || i < 0.5) {
-           add bigfiveattribute = "J" to map;
-         } 
-         else if(0.5 < i || i <= 1) {
-           add bigfiveattribute = "P" to map;
-         }  
-      }
-    }
-
-    
-  }
-
-  
-  
 
   late final AnimationController _controller;
   bool animationEnded = false;
@@ -173,7 +135,7 @@ class _PersonailtyPredictionResultPage
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const SizedBox(height: 50),
+                  const SizedBox(height: 25),
                   SafeArea(
                     child: Align(
                       alignment: Alignment.centerLeft,
@@ -194,26 +156,45 @@ class _PersonailtyPredictionResultPage
                       ]),
                     ),
                   ),
-                  SafeArea(
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Wrap(children: const [
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 25),
-                          child: Text(
-                            "We think you are a person with a personality type of.",
-                            textAlign: TextAlign.start,
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 38,
-                              fontFamily: 'Modern-Era',
-                              fontWeight: FontWeight.w900,
-                            ),
+                  const SizedBox(height: 25),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Wrap(children: const [
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 25),
+                        child: Text(
+                          "We think you are a person with a personality type of...",
+                          textAlign: TextAlign.start,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 38,
+                            fontFamily: 'Modern-Era',
+                            fontWeight: FontWeight.w900,
                           ),
                         ),
-                      ]),
-                    ),
+                      ),
+                    ]),
                   ),
+                  const SizedBox(height: 50),
+                  Align(
+                    alignment: Alignment.center,
+                    child: Wrap(children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 25),
+                        child: Text(
+                          personalityType,
+                          textAlign: TextAlign.start,
+                          style: TextStyle(
+                            color: AppStyle.red600,
+                            fontSize: 42,
+                            fontFamily: 'Modern-Era',
+                            fontWeight: FontWeight.w900,
+                          ),
+                        ),
+                      ),
+                    ]),
+                  ),
+                  const SizedBox(height: 50),
                   Lottie(
                       width: 350,
                       height: 300,
@@ -226,7 +207,18 @@ class _PersonailtyPredictionResultPage
                   ),
                   Center(
                     child: GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        if (!buttonDisabled) {
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) => HomePageHost(
+                                      currentUser: widget.currentUser,
+                                    )),
+                            ModalRoute.withName('/'),
+                          );
+                        }
+                      },
                       child: Container(
                         padding: const EdgeInsets.all(35),
                         decoration: BoxDecoration(color: AppStyle.red800),
