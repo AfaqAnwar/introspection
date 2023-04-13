@@ -1,4 +1,5 @@
 import 'package:datingapp/data/current_user.dart';
+import 'package:datingapp/helpers/firebase_manager.dart';
 import 'package:datingapp/helpers/firebase_updater.dart';
 import 'package:datingapp/helpers/personality_classifier.dart';
 import 'package:datingapp/pages/home_page_host.dart';
@@ -31,6 +32,7 @@ class _PersonailtyPredictionResultPage
   late String finalResponse;
   Map<String, double> personalityMap = {};
   late String personalityType;
+  Color buttonColor = Colors.grey;
   bool buttonDisabled = true;
 
   @override
@@ -78,15 +80,19 @@ class _PersonailtyPredictionResultPage
     PersonalityClassifer classifier = PersonalityClassifer(personalityMap);
 
     setState(() {
-      buttonDisabled = false;
       personalityType = classifier.classifyPersonality();
     });
 
     widget.currentUser.setPersonalityType = personalityType;
     FirebaseUpdater updater = FirebaseUpdater(widget.currentUser);
-    await updater
-        .updateUserDetails("Personality Type")
-        .then((value) => {print("work")});
+    await updater.updateUserDetails("Personality Type");
+    FirebaseManager manager = FirebaseManager(widget.currentUser);
+    await manager.categorizeUser().then((value) => {
+          setState(() {
+            buttonDisabled = false;
+            buttonColor = AppStyle.red900;
+          })
+        });
   }
 
   Map<String, double> parseResponseIntoMap(String response) {
@@ -221,7 +227,7 @@ class _PersonailtyPredictionResultPage
                       },
                       child: Container(
                         padding: const EdgeInsets.all(35),
-                        decoration: BoxDecoration(color: AppStyle.red800),
+                        decoration: BoxDecoration(color: buttonColor),
                         child: const Center(
                             child: Text(
                           "Let's Get Matching!",
