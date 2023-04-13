@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:datingapp/data/CustomUser.dart';
+import 'package:datingapp/data/current_user.dart';
 
 class DiscoveryManager {
-  late CustomUser currentUser;
+  late CurrentUser currentUser;
 
-  DiscoveryManager(CustomUser givenUser) {
+  DiscoveryManager(CurrentUser givenUser) {
     currentUser = givenUser;
   }
 
