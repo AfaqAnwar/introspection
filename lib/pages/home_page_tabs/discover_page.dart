@@ -1,30 +1,29 @@
-import 'dart:ffi';
-
 import 'package:datingapp/widgets/user_card.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-import '../models/user_model.dart';
-import '../widgets/choice_button.dart';
-import '../widgets/custom_appbar.dart';
+import '../../models/user_model.dart';
+import '../../widgets/choice_button.dart';
+import '../../widgets/custom_appbar.dart';
 
-class HomeScreen extends StatelessWidget {
+class DiscoverPage extends StatelessWidget {
   static const String routeName = '/';
+
+  const DiscoverPage({super.key});
 
   static Route route() {
     return MaterialPageRoute(
-      settings: RouteSettings(name: routeName),
-      builder: (context) => HomeScreen(),
+      settings: const RouteSettings(name: routeName),
+      builder: (context) => const DiscoverPage(),
     );
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(),
+      appBar: const CustomAppBar(),
       body: Column(
         children: [
           Draggable(
-            child: UserCard(user: User.users[0]),
             feedback: UserCard(user: User.users[0]),
             childWhenDragging: UserCard(user: User.users[1]),
             onDragEnd: (drag) {
@@ -34,12 +33,13 @@ class HomeScreen extends StatelessWidget {
                 print("Swipe Right");
               }
             },
+            child: UserCard(user: User.users[0]),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 60),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 ChoiceButton(
                     width: 60,
                     height: 60,

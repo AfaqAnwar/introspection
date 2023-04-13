@@ -1,6 +1,4 @@
 import 'package:datingapp/auth/auth_page.dart';
-
-import 'package:datingapp/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
@@ -21,62 +19,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-            create: (_) => SwipeBloc()..add(LoadUsersEvent(users: User.users)))
-      ],
-      child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          home: HomeScreen(),
-          theme: ThemeData(fontFamily: 'Modern-Era')),
-    );
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: const AuthPage(),
+        theme: ThemeData(fontFamily: 'Modern-Era'));
   }
 }
-
-/*
-
-          Draggable(
-            child: UserCard(user: User.users[0]),
-            feedback: UserCard(user: User.users[0]),
-            childWhenDragging: UserCard(user: User.users[1]),
-            onDragEnd: (drag) {
-              if (drag.velocity.pixelsPerSecond.dx < 0) {
-                print("Swipe Left");
-              } else {
-                print("Swipe Right");
-              }
-            },
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 60),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                ChoiceButton(
-                    width: 60,
-                    height: 60,
-                    size: 25,
-                    hasGradient: false,
-                    color: Color.fromRGBO(189, 31, 54, 60),
-                    icon: Icons.clear_rounded),
-                ChoiceButton(
-                    width: 80,
-                    height: 80,
-                    size: 30,
-                    hasGradient: true,
-                    color: Colors.white,
-                    icon: Icons.favorite),
-                ChoiceButton(
-                    width: 60,
-                    height: 60,
-                    size: 25,
-                    hasGradient: false,
-                    color: Color.fromRGBO(189, 31, 54, 60),
-                    icon: Icons.watch_later),
-              ],
-            ),
-          ),
-
-
-*/

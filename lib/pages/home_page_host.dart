@@ -1,5 +1,6 @@
 import 'package:datingapp/data/current_user.dart';
 import 'package:datingapp/pages/home_page_tabs/account_page.dart';
+import 'package:datingapp/pages/home_page_tabs/discover_page.dart';
 import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/material.dart';
 
@@ -32,7 +33,7 @@ class _HomePageHostState extends State<HomePageHost> {
       controller: _pageController,
       children: const <Widget>[
         Center(child: Text("Messages")),
-        Center(child: Text("Discover")),
+        DiscoverPage(),
         AccountPage(),
       ],
       onPageChanged: (index) => {
@@ -58,7 +59,7 @@ class _HomePageHostState extends State<HomePageHost> {
               bottomNavigationBar: BottomNavigationBar(
                 elevation: 0,
                 iconSize: 24,
-                type: BottomNavigationBarType.shifting,
+                type: BottomNavigationBarType.fixed,
                 backgroundColor: Colors.transparent,
                 showUnselectedLabels: false,
                 showSelectedLabels: false,
