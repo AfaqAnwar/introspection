@@ -1,9 +1,6 @@
-import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:datingapp/data/current_user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 
 class FirebaseUpdater {
   late CurrentUser currentUser;
@@ -97,22 +94,5 @@ class FirebaseUpdater {
     }
 
     return "Success";
-  }
-
-  Future<String> uploadUserImages() async {
-    try {
-      FirebaseStorage firebaseStorage = FirebaseStorage.instance;
-      for (int i = 0; i < currentUser.getImages.length; i++) {
-        if (currentUser.getImages[i] != null) {
-          File file = File(currentUser.getImages[i]!.path);
-          await firebaseStorage
-              .ref('users/${FirebaseAuth.instance.currentUser!.uid}/ $i')
-              .putFile(file);
-        }
-      }
-      return "Success";
-    } catch (error) {
-      return error.toString();
-    }
   }
 }
