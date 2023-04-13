@@ -20,11 +20,11 @@ class DiscoveryManager {
   List<CollectionReference> getCollectionReferences() {
     List<CollectionReference> refs = [];
 
-    if (currentUser.getGenderPreference == "female") {
+    if (currentUser.getGenderPreference == "Women") {
       CollectionReference ref =
           FirebaseFirestore.instance.collection('female users');
       refs.add(ref);
-    } else if (currentUser.genderPreference == "male") {
+    } else if (currentUser.genderPreference == "Men") {
       CollectionReference ref =
           FirebaseFirestore.instance.collection('male users');
       refs.add(ref);

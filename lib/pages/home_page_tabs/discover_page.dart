@@ -1,3 +1,4 @@
+import 'package:datingapp/data/custom_user.dart';
 import 'package:datingapp/widgets/user_card.dart';
 import 'package:flutter/material.dart';
 
@@ -5,18 +6,15 @@ import '../../models/user_model.dart';
 import '../../widgets/choice_button.dart';
 import '../../widgets/custom_appbar.dart';
 
-class DiscoverPage extends StatelessWidget {
-  static const String routeName = '/';
+class DiscoverPage extends StatefulWidget {
+  final CustomUser currentUser;
+  const DiscoverPage({super.key, required this.currentUser});
 
-  const DiscoverPage({super.key});
+  @override
+  State<DiscoverPage> createState() => _DiscoverPageState();
+}
 
-  static Route route() {
-    return MaterialPageRoute(
-      settings: const RouteSettings(name: routeName),
-      builder: (context) => const DiscoverPage(),
-    );
-  }
-
+class _DiscoverPageState extends State<DiscoverPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -23,7 +23,7 @@ class UserCard extends StatelessWidget {
                 image: DecorationImage(
                     fit: BoxFit.cover, image: NetworkImage(user.imgUrls[0])),
                 borderRadius: BorderRadius.circular(10.0),
-                boxShadow: [
+                boxShadow: const [
                   BoxShadow(
                     color: Color.fromRGBO(100, 18, 32, 60),
                     spreadRadius: 4,
@@ -35,7 +35,7 @@ class UserCard extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5.0),
-                gradient: LinearGradient(
+                gradient: const LinearGradient(
                   colors: [
                     Color.fromARGB(200, 0, 0, 0),
                     Color.fromARGB(0, 0, 0, 0)
@@ -54,12 +54,12 @@ class UserCard extends StatelessWidget {
                   '${user.name}, ${user.age}',
                   style: Theme.of(context)
                       .textTheme
-                      .headline2!
+                      .displayMedium!
                       .copyWith(color: Colors.white),
                 ),
                 Text(
-                  '${user.jobTitle}',
-                  style: Theme.of(context).textTheme.headline3!.copyWith(
+                  user.jobTitle,
+                  style: Theme.of(context).textTheme.displaySmall!.copyWith(
                       color: Colors.white, fontWeight: FontWeight.normal),
                 ),
                 Row(
@@ -67,13 +67,13 @@ class UserCard extends StatelessWidget {
                     UserImagesSmall(imageUrl: user.imgUrls[1]),
                     UserImagesSmall(imageUrl: user.imgUrls[2]),
                     UserImagesSmall(imageUrl: user.imgUrls[3]),
-                    SizedBox(width: 10),
+                    const SizedBox(width: 10),
                     Container(
                       width: 40,
                       height: 40,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           shape: BoxShape.circle, color: Colors.white),
-                      child: Icon(
+                      child: const Icon(
                         Icons.info_outline,
                         size: 25,
                         color: Colors.grey,

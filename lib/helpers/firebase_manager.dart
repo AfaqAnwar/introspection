@@ -12,7 +12,7 @@ class FirebaseManager {
   CollectionReference getCollectionReference() {
     CollectionReference ref;
 
-    if (currentUser.getGender == "Male") {
+    if (currentUser.getGender == "Man") {
       ref = FirebaseFirestore.instance.collection('male users');
     } else {
       ref = FirebaseFirestore.instance.collection('female users');

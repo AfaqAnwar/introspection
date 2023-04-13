@@ -31,10 +31,12 @@ class _HomePageHostState extends State<HomePageHost> {
   Widget buildContentOfTab(int index) {
     return PageView(
       controller: _pageController,
-      children: const <Widget>[
-        Center(child: Text("Messages")),
-        DiscoverPage(),
-        AccountPage(),
+      children: <Widget>[
+        const Center(child: Text("Messages")),
+        DiscoverPage(
+          currentUser: widget.currentUser,
+        ),
+        const AccountPage(),
       ],
       onPageChanged: (index) => {
         setState(() {

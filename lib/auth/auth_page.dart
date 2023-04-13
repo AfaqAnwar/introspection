@@ -1,10 +1,12 @@
 import 'package:datingapp/data/custom_user.dart';
 import 'package:datingapp/helpers/firebase_login.dart';
+import 'package:datingapp/helpers/firebase_storage_manager.dart';
 import 'package:datingapp/pages/home_page_host.dart';
 import 'package:datingapp/pages/personaility_chat/personailty_chat_page.dart';
 import 'package:datingapp/pages/signin_signup/login_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class AuthPage extends StatelessWidget {
   const AuthPage({super.key});
@@ -12,7 +14,17 @@ class AuthPage extends StatelessWidget {
   Future<CustomUser> buildUser() async {
     FirebaseLoginHelper helper = FirebaseLoginHelper();
     await helper.populateUserData();
-    return helper.getCurrentUser();
+    CustomUser currentUser = helper.getCurrentUser();
+    var firebaseUser = FirebaseAuth.instance.currentUser;
+
+    FirebaseStorageManager storageManager =
+        FirebaseStorageManager(firebaseUser!.uid);
+
+    Map<int, XFile> images = await storageManager.getImages();
+
+    currentUser.setImages = images;
+
+    return currentUser;
   }
 
   @override

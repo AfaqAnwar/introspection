@@ -19,7 +19,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
               height: 100,
             ),
           ),
-          Expanded(
+          const Expanded(
             flex: 6,
             child: Text(
               '', //this is where "DISCOVER" went
@@ -28,7 +28,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
             ),
           )
         ]),
-        actions: [
+        actions: const [
           /* IconButton(
             onPressed: () {},
             icon: Icon(Icons.message),
@@ -45,5 +45,5 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(56.0);
+  Size get preferredSize => const Size.fromHeight(56.0);
 }

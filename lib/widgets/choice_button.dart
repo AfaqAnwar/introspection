@@ -26,19 +26,19 @@ class ChoiceButton extends StatelessWidget {
           shape: BoxShape.circle,
           color: Colors.white,
           gradient: hasGradient
-              ? LinearGradient(
+              ? const LinearGradient(
                   colors: [
                     Colors.white,
                     Color.fromRGBO(189, 31, 54, 60),
                   ],
                 )
-              : LinearGradient(
+              : const LinearGradient(
                   colors: [
                     Colors.white,
                     Colors.white,
                   ],
                 ),
-          boxShadow: [
+          boxShadow: const [
             BoxShadow(
               color: Color.fromRGBO(189, 31, 54, 60),
               spreadRadius: 4,
