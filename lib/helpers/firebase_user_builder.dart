@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:datingapp/data/custom_user.dart';
+import 'package:datingapp/helpers/firebase_storage_manager.dart';
+import 'package:image_picker/image_picker.dart';
 
 class FirebaseUserBuilder {
   late String userID;
@@ -39,6 +41,14 @@ class FirebaseUserBuilder {
           user.setSmokePreference = data.get('Smoking Preference');
           user.setDrugPreference = data.get('Drugs Preference');
           user.setPersonalityType = data.get('Personality Type');
+
+          FirebaseStorageManager storageManager =
+              FirebaseStorageManager(userID);
+
+          Map<int, XFile> images = await storageManager.getImages();
+
+          user.setImages = images;
+
           return user;
         });
     return user;
