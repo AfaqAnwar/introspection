@@ -22,6 +22,7 @@ class _UserCardState extends State<UserCard> {
   late String parsedDOB;
   late String xFilePath = xFilePath = widget.user.getImages[0]!.path;
   bool _visible = false;
+  bool _textVisible = true;
 
   @override
   Widget build(BuildContext context) {
@@ -38,9 +39,11 @@ class _UserCardState extends State<UserCard> {
             setState(() {
               if (_visible == false) {
                 _visible = !_visible;
+                _textVisible = _visible;
                 Future.delayed(const Duration(milliseconds: 8000), () {
                   setState(() {
                     _visible = !_visible;
+                    _textVisible = _visible;
                   });
                 });
               }
@@ -80,7 +83,7 @@ class _UserCardState extends State<UserCard> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   AnimatedOpacity(
-                    opacity: _visible ? 1.0 : 0.0,
+                    opacity: _textVisible ? 1.0 : 0.0,
                     duration: const Duration(milliseconds: 250),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
