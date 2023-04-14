@@ -12,7 +12,8 @@ class HomePageHost extends StatefulWidget {
   State<HomePageHost> createState() => _HomePageHostState();
 }
 
-class _HomePageHostState extends State<HomePageHost> {
+class _HomePageHostState extends State<HomePageHost>
+    with AutomaticKeepAliveClientMixin {
   late PageController _pageController;
   var currentIndex = 0;
 
@@ -28,8 +29,12 @@ class _HomePageHostState extends State<HomePageHost> {
     super.dispose();
   }
 
+  @override
+  bool get wantKeepAlive => true;
+
   Widget buildContentOfTab(int index) {
     return PageView(
+      physics: const NeverScrollableScrollPhysics(),
       controller: _pageController,
       children: <Widget>[
         const Center(child: Text("Messages")),
@@ -52,6 +57,7 @@ class _HomePageHostState extends State<HomePageHost> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return FutureBuilder(
         future: checkIfUserIsLoggedIn(),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {

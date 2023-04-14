@@ -11,9 +11,22 @@ class DiscoverPage extends StatefulWidget {
   State<DiscoverPage> createState() => _DiscoverPageState();
 }
 
-class _DiscoverPageState extends State<DiscoverPage> {
+class _DiscoverPageState extends State<DiscoverPage>
+    with AutomaticKeepAliveClientMixin {
+  late List<Widget> userCards;
+
+  @override
+  void initState() {
+    super.initState();
+    userCards = buildUserCards();
+  }
+
+  @override
+  bool get wantKeepAlive => true;
+
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -30,13 +43,38 @@ class _DiscoverPageState extends State<DiscoverPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            UserCard(user: widget.matches[0]),
-            const Expanded(
-              child: SizedBox(),
+            Expanded(
+              child: Stack(
+                children: userCards,
+              ),
             ),
           ],
         ),
       ),
     );
+  }
+
+  List<Widget> buildUserCards() {
+    List<Widget> userCards = [];
+    for (var i = 0; i < widget.matches.length; i++) {
+      userCards.add(Dismissible(
+          onDismissed: (direction) {
+            if (direction == DismissDirection.endToStart) {
+              // TODO: Add to dislikes
+              setState(() {
+                userCards.removeAt(i);
+              });
+            } else if (direction == DismissDirection.startToEnd) {
+              // TODO: Add to likes
+              setState(() {
+                userCards.removeAt(i);
+              });
+            }
+          },
+          direction: DismissDirection.horizontal,
+          key: UniqueKey(),
+          child: UserCard(user: widget.matches[i])));
+    }
+    return userCards;
   }
 }
