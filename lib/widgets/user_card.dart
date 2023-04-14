@@ -1,8 +1,12 @@
+import 'dart:io';
+
 import 'package:age_calculator/age_calculator.dart';
 import 'package:datingapp/data/custom_user.dart';
+import 'package:datingapp/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
-class UserCard extends StatelessWidget {
+class UserCard extends StatefulWidget {
   final CustomUser user;
   const UserCard({
     Key? key,
@@ -10,9 +14,18 @@ class UserCard extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<UserCard> createState() => _UserCardState();
+}
+
+class _UserCardState extends State<UserCard> {
+  late String parsedDOB;
+  late String xFilePath = widget.user.getImages[0]!.path;
+
+  @override
   Widget build(BuildContext context) {
-    String parsedDOB =
-        '${user.getDob.split('-')[2]}-${user.getDob.split('-')[0]}-${user.getDob.split('-')[1]}';
+    parsedDOB =
+        '${widget.user.getDob.split('-')[2]}-${widget.user.getDob.split('-')[0]}-${widget.user.getDob.split('-')[1]}';
+
     return Padding(
       padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
       child: SizedBox(
@@ -21,7 +34,8 @@ class UserCard extends StatelessWidget {
         child: Stack(children: [
           Container(
             decoration: BoxDecoration(
-                //image:DecorationImage(fit: BoxFit.cover, image: NetworkImage()),
+                image: DecorationImage(
+                    fit: BoxFit.cover, image: FileImage(File(xFilePath))),
                 borderRadius: BorderRadius.circular(10.0),
                 boxShadow: const [
                   BoxShadow(
@@ -51,37 +65,61 @@ class UserCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '${user.getFirstName},',
+                  widget.user.getFirstName,
                   style: Theme.of(context)
                       .textTheme
                       .displayMedium!
                       .copyWith(color: Colors.white),
                 ),
+                const SizedBox(
+                  height: 10,
+                ),
                 Row(
                   children: [
                     Text(
-                        AgeCalculator.age(DateTime.parse(parsedDOB))
-                            .years
-                            .toString(),
+                        '${AgeCalculator.age(DateTime.parse(parsedDOB)).years},',
                         style: Theme.of(context)
                             .textTheme
                             .displaySmall!
                             .copyWith(color: Colors.white)),
                     const SizedBox(
-                      width: 10,
+                      width: 5,
                     ),
                     Text(
-                      user.jobTitle,
+                      widget.user.jobTitle,
                       style: Theme.of(context).textTheme.displaySmall!.copyWith(
                           color: Colors.white, fontWeight: FontWeight.normal),
                     ),
                   ],
                 ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  children: buildUserImages(),
+                )
               ],
             ),
           )
         ]),
       ),
     );
+  }
+
+  List<Widget> buildUserImages() {
+    Map<int, XFile> images = widget.user.getImages;
+    List<Widget> imageWidgets = [];
+
+    for (int i = 0; i < images.length; i++) {
+      imageWidgets.add(GestureDetector(
+          onTap: () {
+            setState(() {
+              xFilePath = images[i]!.path;
+            });
+          },
+          child: UserImagesSmall(xfilePath: images[i]!.path)));
+    }
+
+    return imageWidgets;
   }
 }

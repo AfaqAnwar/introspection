@@ -34,7 +34,7 @@ class _HomePageHostState extends State<HomePageHost> {
       children: <Widget>[
         const Center(child: Text("Messages")),
         DiscoverPage(
-          currentUser: widget.currentUser,
+          matches: [widget.currentUser],
         ),
         const AccountPage(),
       ],

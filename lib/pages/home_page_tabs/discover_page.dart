@@ -3,8 +3,8 @@ import 'package:datingapp/widgets/user_card.dart';
 import 'package:flutter/material.dart';
 
 class DiscoverPage extends StatefulWidget {
-  final CustomUser currentUser;
-  const DiscoverPage({super.key, required this.currentUser});
+  final List<CustomUser> matches;
+  const DiscoverPage({super.key, required this.matches});
 
   @override
   State<DiscoverPage> createState() => _DiscoverPageState();
@@ -20,7 +20,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              UserCard(user: widget.currentUser),
+              UserCard(user: widget.matches[0]),
             ],
           ),
         ),
