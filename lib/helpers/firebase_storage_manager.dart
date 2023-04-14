@@ -15,10 +15,10 @@ class FirebaseStorageManager {
 
     Map<int, XFile> images = {};
 
-    await pathReference.listAll().then((result) {
+    await pathReference.listAll().then((result) async {
       int count = 0;
       for (var imageRef in result.items) {
-        imageRef.getData().then((value) {
+        await imageRef.getData().then((value) {
           images[count] = XFile.fromData(value!);
           count++;
         });
