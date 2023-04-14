@@ -19,7 +19,7 @@ class UserCard extends StatefulWidget {
 
 class _UserCardState extends State<UserCard> {
   late String parsedDOB;
-  late String xFilePath;
+  late String xFilePath = xFilePath = widget.user.getImages[0]!.path;
   bool _visible = false;
 
   Future checkIfImagesLoaded() {
@@ -39,20 +39,24 @@ class _UserCardState extends State<UserCard> {
       future: checkIfImagesLoaded(),
       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
         if (snapshot.data == true) {
-          xFilePath = widget.user.getImages[0]!.path;
           return Padding(
             padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
             child: SizedBox(
               height: MediaQuery.of(context).size.height / 1.4,
               width: MediaQuery.of(context).size.width,
-              child: Stack(children: [
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      _visible = !_visible;
+              child: GestureDetector(
+                onTap: () {
+                  setState(() {
+                    _visible = !_visible;
+                    Future.delayed(const Duration(milliseconds: 5000), () {
+                      setState(() {
+                        _visible = !_visible;
+                      });
                     });
-                  },
-                  child: Container(
+                  });
+                },
+                child: Stack(children: [
+                  Container(
                     decoration: BoxDecoration(
                         image: DecorationImage(
                             fit: BoxFit.cover,
@@ -67,71 +71,71 @@ class _UserCardState extends State<UserCard> {
                           )
                         ]),
                   ),
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5.0),
-                      gradient: const LinearGradient(
-                        colors: [
-                          Color.fromARGB(200, 0, 0, 0),
-                          Color.fromARGB(0, 0, 0, 0)
-                        ],
-                        begin: Alignment.bottomCenter,
-                        end: Alignment.topCenter,
-                      )),
-                ),
-                Positioned(
-                  bottom: 30,
-                  left: 20,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        widget.user.getFirstName,
-                        style: Theme.of(context)
-                            .textTheme
-                            .displayMedium!
-                            .copyWith(color: Colors.white),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                              '${AgeCalculator.age(DateTime.parse(parsedDOB)).years},',
+                  Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5.0),
+                        gradient: const LinearGradient(
+                          colors: [
+                            Color.fromARGB(200, 0, 0, 0),
+                            Color.fromARGB(0, 0, 0, 0)
+                          ],
+                          begin: Alignment.bottomCenter,
+                          end: Alignment.topCenter,
+                        )),
+                  ),
+                  Positioned(
+                    bottom: 30,
+                    left: 20,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          widget.user.getFirstName,
+                          style: Theme.of(context)
+                              .textTheme
+                              .displayMedium!
+                              .copyWith(color: Colors.white),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                                '${AgeCalculator.age(DateTime.parse(parsedDOB)).years},',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .displaySmall!
+                                    .copyWith(color: Colors.white)),
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            Text(
+                              widget.user.jobTitle,
                               style: Theme.of(context)
                                   .textTheme
                                   .displaySmall!
-                                  .copyWith(color: Colors.white)),
-                          const SizedBox(
-                            width: 5,
-                          ),
-                          Text(
-                            widget.user.jobTitle,
-                            style: Theme.of(context)
-                                .textTheme
-                                .displaySmall!
-                                .copyWith(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.normal),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      AnimatedOpacity(
-                        opacity: _visible ? 1.0 : 0.0,
-                        duration: const Duration(milliseconds: 500),
-                        child: Row(
-                          children: buildUserImages(),
+                                  .copyWith(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.normal),
+                            ),
+                          ],
                         ),
-                      )
-                    ],
-                  ),
-                )
-              ]),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        AnimatedOpacity(
+                          opacity: _visible ? 1.0 : 0.0,
+                          duration: const Duration(milliseconds: 500),
+                          child: Row(
+                            children: buildUserImages(),
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                ]),
+              ),
             ),
           );
         } else {
@@ -150,9 +154,11 @@ class _UserCardState extends State<UserCard> {
     for (int i = 0; i < images.length; i++) {
       imageWidgets.add(GestureDetector(
           onTap: () {
-            setState(() {
-              xFilePath = images[i]!.path;
-            });
+            if (_visible) {
+              setState(() {
+                xFilePath = images[i]!.path;
+              });
+            }
           },
           child: UserImagesSmall(xfilePath: images[i]!.path)));
     }
