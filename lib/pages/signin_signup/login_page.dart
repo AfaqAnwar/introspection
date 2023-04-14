@@ -37,8 +37,8 @@ class _LoginPageState extends State<LoginPage> {
                   'Login Error',
                   style: TextStyle(fontSize: 18),
                 ),
-                content: Column(
-                  children: const [
+                content: const Column(
+                  children: [
                     SizedBox(
                       height: 15,
                     ),

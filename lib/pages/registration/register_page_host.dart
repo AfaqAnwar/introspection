@@ -504,8 +504,8 @@ class RegisterPageState extends State<RegisterPageHost> {
                   'Woah There!',
                   style: TextStyle(fontSize: 18),
                 ),
-                content: Column(
-                  children: const [
+                content: const Column(
+                  children: [
                     SizedBox(
                       height: 10,
                     ),

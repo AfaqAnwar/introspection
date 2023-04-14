@@ -21,7 +21,6 @@ class FirebaseStorageManager {
       for (var imageRef in result.items) {
         var url = await imageRef.getDownloadURL();
         images[count] = await getImageXFileByUrl(url);
-        print(images[count]!.path);
         count++;
       }
     });

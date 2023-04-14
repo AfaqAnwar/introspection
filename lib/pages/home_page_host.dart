@@ -62,7 +62,7 @@ class _HomePageHostState extends State<HomePageHost> {
                 elevation: 0,
                 iconSize: 24,
                 type: BottomNavigationBarType.fixed,
-                backgroundColor: Colors.transparent,
+                backgroundColor: Colors.white,
                 showUnselectedLabels: false,
                 showSelectedLabels: false,
                 currentIndex: currentIndex,

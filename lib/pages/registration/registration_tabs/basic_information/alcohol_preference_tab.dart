@@ -59,8 +59,8 @@ class AlcoholPreferenceTabState extends State<AlcoholPreferenceTab> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Wrap(
-          children: const [
+        const Wrap(
+          children: [
             Align(
               alignment: Alignment.centerLeft,
               child: Padding(

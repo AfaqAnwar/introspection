@@ -166,8 +166,8 @@ class LocationTabState extends State<LocationTab> {
         if (snapshot.data == true) {
           return Column(
             children: [
-              Wrap(
-                children: const [
+              const Wrap(
+                children: [
                   Align(
                     alignment: Alignment.centerLeft,
                     child: Padding(
