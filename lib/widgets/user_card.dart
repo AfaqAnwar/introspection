@@ -47,12 +47,14 @@ class _UserCardState extends State<UserCard> {
               child: GestureDetector(
                 onTap: () {
                   setState(() {
-                    _visible = !_visible;
-                    Future.delayed(const Duration(milliseconds: 5000), () {
-                      setState(() {
-                        _visible = !_visible;
+                    if (_visible == false) {
+                      _visible = !_visible;
+                      Future.delayed(const Duration(milliseconds: 8000), () {
+                        setState(() {
+                          _visible = !_visible;
+                        });
                       });
-                    });
+                    }
                   });
                 },
                 child: Stack(children: [
@@ -89,44 +91,54 @@ class _UserCardState extends State<UserCard> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          widget.user.getFirstName,
-                          style: Theme.of(context)
-                              .textTheme
-                              .displayMedium!
-                              .copyWith(color: Colors.white),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                                '${AgeCalculator.age(DateTime.parse(parsedDOB)).years},',
+                        AnimatedOpacity(
+                          opacity: _visible ? 1.0 : 0.0,
+                          duration: const Duration(milliseconds: 250),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
+                                widget.user.getFirstName,
                                 style: Theme.of(context)
                                     .textTheme
-                                    .displaySmall!
-                                    .copyWith(color: Colors.white)),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            Text(
-                              widget.user.jobTitle,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .displaySmall!
-                                  .copyWith(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.normal),
-                            ),
-                          ],
+                                    .displayMedium!
+                                    .copyWith(color: Colors.white),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                      '${AgeCalculator.age(DateTime.parse(parsedDOB)).years},',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .displaySmall!
+                                          .copyWith(color: Colors.white)),
+                                  const SizedBox(
+                                    width: 5,
+                                  ),
+                                  Text(
+                                    widget.user.jobTitle,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .displaySmall!
+                                        .copyWith(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.normal),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                         const SizedBox(
                           height: 10,
                         ),
                         AnimatedOpacity(
                           opacity: _visible ? 1.0 : 0.0,
-                          duration: const Duration(milliseconds: 500),
+                          duration: const Duration(milliseconds: 250),
                           child: Row(
                             children: buildUserImages(),
                           ),
