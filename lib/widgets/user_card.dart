@@ -1,10 +1,9 @@
-import 'package:datingapp/widgets/widgets.dart';
+import 'package:age_calculator/age_calculator.dart';
+import 'package:datingapp/data/custom_user.dart';
 import 'package:flutter/material.dart';
 
-import '../models/user_model.dart';
-
 class UserCard extends StatelessWidget {
-  final User user;
+  final CustomUser user;
   const UserCard({
     Key? key,
     required this.user,
@@ -12,6 +11,8 @@ class UserCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String parsedDOB =
+        '${user.getDob.split('-')[2]}-${user.getDob.split('-')[0]}-${user.getDob.split('-')[1]}';
     return Padding(
       padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
       child: SizedBox(
@@ -20,8 +21,7 @@ class UserCard extends StatelessWidget {
         child: Stack(children: [
           Container(
             decoration: BoxDecoration(
-                image: DecorationImage(
-                    fit: BoxFit.cover, image: NetworkImage(user.imgUrls[0])),
+                //image:DecorationImage(fit: BoxFit.cover, image: NetworkImage()),
                 borderRadius: BorderRadius.circular(10.0),
                 boxShadow: const [
                   BoxShadow(
@@ -51,36 +51,32 @@ class UserCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '${user.name}, ${user.age}',
+                  '${user.getFirstName},',
                   style: Theme.of(context)
                       .textTheme
                       .displayMedium!
                       .copyWith(color: Colors.white),
                 ),
-                Text(
-                  user.jobTitle,
-                  style: Theme.of(context).textTheme.displaySmall!.copyWith(
-                      color: Colors.white, fontWeight: FontWeight.normal),
-                ),
                 Row(
                   children: [
-                    UserImagesSmall(imageUrl: user.imgUrls[1]),
-                    UserImagesSmall(imageUrl: user.imgUrls[2]),
-                    UserImagesSmall(imageUrl: user.imgUrls[3]),
-                    const SizedBox(width: 10),
-                    Container(
-                      width: 40,
-                      height: 40,
-                      decoration: const BoxDecoration(
-                          shape: BoxShape.circle, color: Colors.white),
-                      child: const Icon(
-                        Icons.info_outline,
-                        size: 25,
-                        color: Colors.grey,
-                      ),
-                    )
+                    Text(
+                        AgeCalculator.age(DateTime.parse(parsedDOB))
+                            .years
+                            .toString(),
+                        style: Theme.of(context)
+                            .textTheme
+                            .displaySmall!
+                            .copyWith(color: Colors.white)),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      user.jobTitle,
+                      style: Theme.of(context).textTheme.displaySmall!.copyWith(
+                          color: Colors.white, fontWeight: FontWeight.normal),
+                    ),
                   ],
-                )
+                ),
               ],
             ),
           )

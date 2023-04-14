@@ -1,3 +1,4 @@
+import 'package:age_calculator/age_calculator.dart';
 import 'package:datingapp/data/custom_user.dart';
 import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/cupertino.dart';
@@ -46,9 +47,24 @@ class AgeTabState extends State<AgeTab> {
     return finalDob;
   }
 
+  String getDobUniversal(DateTime selectedDate) {
+    String finalDob = selectedDate.toString();
+    finalDob = finalDob.split(" ")[0];
+    List splitDob = finalDob.split("-");
+    String year = splitDob[0];
+    String month = splitDob[1];
+    String day = splitDob[2];
+    finalDob = "$year-$month-$day";
+    return finalDob;
+  }
+
   void updateAgeOnUI(DateTime selectedDate) {
     setState(() {
-      age = DateTime.now().year - selectedDate.year;
+      String calculatedAge =
+          AgeCalculator.age(DateTime.parse(getDobUniversal(selectedDate)))
+              .years
+              .toString();
+      age = int.parse(calculatedAge);
     });
   }
 
