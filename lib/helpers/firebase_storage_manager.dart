@@ -1,4 +1,5 @@
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:image_picker/image_picker.dart';
 
 class FirebaseStorageManager {
@@ -18,13 +19,19 @@ class FirebaseStorageManager {
     await pathReference.listAll().then((result) async {
       int count = 0;
       for (var imageRef in result.items) {
-        await imageRef.getData().then((value) {
-          images[count] = XFile.fromData(value!);
-          count++;
-        });
+        var url = await imageRef.getDownloadURL();
+        images[count] = await getImageXFileByUrl(url);
+        print(images[count]!.path);
+        count++;
       }
     });
 
     return images;
+  }
+
+  static Future<XFile> getImageXFileByUrl(String url) async {
+    var file = await DefaultCacheManager().getSingleFile(url);
+    XFile result = XFile(file.path);
+    return result;
   }
 }

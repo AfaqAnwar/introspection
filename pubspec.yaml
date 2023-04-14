@@ -57,6 +57,7 @@ dependencies:
   flutter_bloc: ^8.1.2
   equatable: ^2.0.5
   age_calculator: ^1.0.0
+  flutter_cache_manager: ^3.3.0
 
 dev_dependencies:
   flutter_test:
