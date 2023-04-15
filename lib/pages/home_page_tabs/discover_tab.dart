@@ -3,15 +3,18 @@ import 'package:datingapp/style/app_style.dart';
 import 'package:datingapp/widgets/user_card.dart';
 import 'package:flutter/material.dart';
 
-class DiscoverPage extends StatefulWidget {
+class DiscoverTab extends StatefulWidget {
+  final CustomUser currentUser;
   final List<CustomUser> matches;
-  const DiscoverPage({super.key, required this.matches});
+
+  const DiscoverTab(
+      {super.key, required this.matches, required this.currentUser});
 
   @override
-  State<DiscoverPage> createState() => _DiscoverPageState();
+  State<DiscoverTab> createState() => _DiscoverTabState();
 }
 
-class _DiscoverPageState extends State<DiscoverPage>
+class _DiscoverTabState extends State<DiscoverTab>
     with AutomaticKeepAliveClientMixin {
   late List<Widget> userCards;
 

@@ -1,6 +1,6 @@
 import 'package:datingapp/data/custom_user.dart';
-import 'package:datingapp/pages/home_page_tabs/account_page.dart';
-import 'package:datingapp/pages/home_page_tabs/discover_page.dart';
+import 'package:datingapp/pages/home_page_tabs/account_tab.dart';
+import 'package:datingapp/pages/home_page_tabs/discover_tab.dart';
 import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/material.dart';
 
@@ -38,10 +38,11 @@ class _HomePageHostState extends State<HomePageHost>
       controller: _pageController,
       children: <Widget>[
         const Center(child: Text("Messages")),
-        DiscoverPage(
-          matches: [widget.currentUser],
+        DiscoverTab(
+            matches: [widget.currentUser], currentUser: widget.currentUser),
+        AccountTab(
+          currentUser: widget.currentUser,
         ),
-        const AccountPage(),
       ],
       onPageChanged: (index) => {
         setState(() {
