@@ -6,15 +6,15 @@ import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class AccountTab extends StatefulWidget {
+class ProfileTab extends StatefulWidget {
   final CustomUser currentUser;
-  const AccountTab({super.key, required this.currentUser});
+  const ProfileTab({super.key, required this.currentUser});
 
   @override
-  State<AccountTab> createState() => _AccountTabState();
+  State<ProfileTab> createState() => _ProfileTabState();
 }
 
-class _AccountTabState extends State<AccountTab> {
+class _ProfileTabState extends State<ProfileTab> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
