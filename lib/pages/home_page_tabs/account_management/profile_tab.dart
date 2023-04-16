@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:datingapp/components/profile_tab_components/profile_row_tile.dart';
 import 'package:datingapp/data/custom_user.dart';
+import 'package:datingapp/pages/home_page_tabs/account_management/account_page.dart';
 import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -71,8 +72,17 @@ class _ProfileTabState extends State<ProfileTab> {
                   text: "Preferences",
                   icon: CupertinoIcons.slider_horizontal_3,
                   onTap: () {}),
-              const ProfileRowTile(
-                  text: "Account", icon: CupertinoIcons.settings, onTap: null),
+              ProfileRowTile(
+                  text: "Account",
+                  icon: CupertinoIcons.settings,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              AccountPage(currentUser: widget.currentUser)),
+                    );
+                  }),
               const ProfileRowTile(
                   text: "Help Center",
                   icon: CupertinoIcons.question,

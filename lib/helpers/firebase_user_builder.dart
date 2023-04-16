@@ -78,4 +78,20 @@ class FirebaseUserBuilder {
     }
     return ethnicities;
   }
+
+  Future<List<String>> getAllUserFields() async {
+    CollectionReference ref = getCollectionReference();
+
+    List<String> fields = [];
+
+    DocumentSnapshot data = await ref.doc(userID).get();
+
+    Map<String, dynamic> map = data.data() as Map<String, dynamic>;
+
+    map.forEach((key, value) {
+      fields.add(key);
+    });
+
+    return fields;
+  }
 }

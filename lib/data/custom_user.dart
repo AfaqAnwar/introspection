@@ -31,6 +31,9 @@ class CustomUser {
   late Map<int, XFile> imageMap;
   late String personalityType;
 
+  late List<String> preferenceFields;
+  late List<String> accountFields;
+
   CustomUser() {
     firstName = "";
     lastName = "";
@@ -59,6 +62,10 @@ class CustomUser {
     drugPreference = "";
     imageMap = HashMap();
     personalityType = "";
+    preferenceFields = [];
+    accountFields = [];
+    buildPreferenceFieldsList();
+    buildAccountFieldsList();
   }
 
   String get getFirstName {
@@ -269,6 +276,14 @@ class CustomUser {
     this.personalityType = personalityType;
   }
 
+  List<String> get getPreferenceFields {
+    return preferenceFields;
+  }
+
+  List<String> get getAccountFields {
+    return accountFields;
+  }
+
   Map<int, XFile> get getImages {
     return imageMap;
   }
@@ -306,5 +321,31 @@ class CustomUser {
   bool isBuilt() {
     // check if email is present, this will tell us if the User is built.
     return email.isNotEmpty;
+  }
+
+  void buildPreferenceFieldsList() {
+    preferenceFields.add("Gender Preference");
+    preferenceFields.add("Wants Children");
+  }
+
+  void buildAccountFieldsList() {
+    accountFields.add("Name");
+    accountFields.add("Email");
+    accountFields.add("DOB");
+    accountFields.add("Location");
+    accountFields.add("Gender");
+    accountFields.add("Height");
+    accountFields.add("Ethnicity");
+    accountFields.add("Hometown");
+    accountFields.add("Work");
+    accountFields.add("Job Title");
+    accountFields.add("School");
+    accountFields.add("Education Level");
+    accountFields.add("Religion");
+    accountFields.add("Political Belief");
+    accountFields.add("Alcohol Preference");
+    accountFields.add("Smoke Preference");
+    accountFields.add("Weed Preference");
+    accountFields.add("Drug Preference");
   }
 }
