@@ -67,10 +67,10 @@ class _ProfileTabState extends State<ProfileTab> {
                 thickness: 0.5,
                 color: Colors.grey[300],
               ),
-              const ProfileRowTile(
+              ProfileRowTile(
                   text: "Preferences",
                   icon: CupertinoIcons.slider_horizontal_3,
-                  onTap: null),
+                  onTap: () {}),
               const ProfileRowTile(
                   text: "Account", icon: CupertinoIcons.settings, onTap: null),
               const ProfileRowTile(

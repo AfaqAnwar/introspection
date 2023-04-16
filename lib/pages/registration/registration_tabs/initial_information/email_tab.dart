@@ -1,4 +1,4 @@
-import 'package:datingapp/components/registration_components/registration_textfield.dart';
+import 'package:datingapp/components/registration_authentication_components/registration_textfield.dart';
 import 'package:datingapp/data/custom_user.dart';
 import 'package:flutter/material.dart';
 

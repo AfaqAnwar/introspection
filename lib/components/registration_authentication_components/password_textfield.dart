@@ -20,6 +20,8 @@ class PasswordTextField extends StatelessWidget {
         controller: controller,
         obscureText: obscureText,
         decoration: InputDecoration(
+            border: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(20.0))),
             fillColor: Colors.transparent,
             filled: true,
             hintText: hintText,
