@@ -1,3 +1,4 @@
+import 'package:datingapp/auth/reauth.dart';
 import 'package:datingapp/components/profile_tab_components/profile_user_field_tile.dart';
 import 'package:datingapp/data/custom_user.dart';
 import 'package:datingapp/helpers/firebase_updater.dart';
@@ -5,6 +6,7 @@ import 'package:datingapp/pages/registration/registration_tabs/information_tab.d
 import 'package:datingapp/pages/registration/registration_tabs/initial_information/email_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/initial_information/name_tab.dart';
 import 'package:datingapp/style/app_style.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -111,6 +113,10 @@ class _AccountPageState extends State<AccountPage> {
     return tiles;
   }
 
+  bool checkIfUserIsLoggedIn() {
+    return FirebaseAuth.instance.currentUser != null;
+  }
+
   void showErrorMessage(BuildContext context) {
     showDialog(
         context: context,
@@ -184,14 +190,32 @@ class _AccountPageState extends State<AccountPage> {
                                           key.currentState as InformationTab);
                                       if (InformationTab.staticValidate()) {
                                         if (InformationTab.staticHasChanged()) {
-                                          InformationTab
-                                              .staticUpdateUserInformation();
                                           FirebaseUpdater updater =
                                               FirebaseUpdater(
                                                   widget.currentUser);
                                           for (var field in fields) {
-                                            await updater
-                                                .updateUserDetails(field);
+                                            if (field == "Email") {
+                                              if (!checkIfUserIsLoggedIn()) {
+                                                Reauth reauth = Reauth();
+                                                await reauth
+                                                    .buildPopUp(context);
+                                              }
+                                            }
+
+                                            if (field != "Email" ||
+                                                checkIfUserIsLoggedIn()) {
+                                              if (field == "Email") {
+                                                InformationTab
+                                                    .staticUpdateUserInformation();
+                                                FirebaseAuth
+                                                    .instance.currentUser!
+                                                    .updateEmail(widget
+                                                        .currentUser.getEmail);
+                                              }
+
+                                              await updater
+                                                  .updateUserDetails(field);
+                                            }
                                           }
                                         }
                                         Future.delayed(
