@@ -32,7 +32,6 @@ class NameTabState extends State<NameTab> with InformationTab {
 
   @override
   bool validate() {
-    print(firstNameController.text);
     if (firstNameController.text.trim().isEmpty) {
       errorMessage = "Please enter your first name.";
       return false;

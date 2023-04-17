@@ -79,13 +79,12 @@ class _AccountPageState extends State<AccountPage> {
             switch (field) {
               case "Name":
                 GlobalKey<NameTabState> key = GlobalKey<NameTabState>();
-                NameTab tab = NameTab(
-                  key: key,
-                  currentUser: widget.currentUser,
-                  updateIndex: () {},
-                );
-                pushToPage(tab, key);
-
+                pushToPage(
+                    NameTab(
+                        key: key,
+                        currentUser: widget.currentUser,
+                        updateIndex: () {}),
+                    key);
                 break;
             }
           }));
