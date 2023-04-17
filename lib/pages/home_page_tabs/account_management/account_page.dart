@@ -1,6 +1,8 @@
 import 'package:datingapp/components/profile_tab_components/profile_user_field_tile.dart';
 import 'package:datingapp/data/custom_user.dart';
+import 'package:datingapp/helpers/firebase_updater.dart';
 import 'package:datingapp/pages/registration/registration_tabs/information_tab.dart';
+import 'package:datingapp/pages/registration/registration_tabs/initial_information/email_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/initial_information/name_tab.dart';
 import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/cupertino.dart';
@@ -78,13 +80,29 @@ class _AccountPageState extends State<AccountPage> {
           onTap: () {
             switch (field) {
               case "Name":
+                List<String> fields = [];
+                fields.add("First Name");
+                fields.add("Last Name");
                 GlobalKey<NameTabState> key = GlobalKey<NameTabState>();
                 pushToPage(
                     NameTab(
                         key: key,
                         currentUser: widget.currentUser,
                         updateIndex: () {}),
-                    key);
+                    key,
+                    fields);
+                break;
+              case "Email":
+                List<String> fields = [];
+                fields.add("Email");
+                GlobalKey<EmailTabState> key = GlobalKey<EmailTabState>();
+                pushToPage(
+                    EmailTab(
+                        key: key,
+                        currentUser: widget.currentUser,
+                        updateIndex: () {}),
+                    key,
+                    fields);
                 break;
             }
           }));
@@ -124,7 +142,7 @@ class _AccountPageState extends State<AccountPage> {
             ));
   }
 
-  void pushToPage(Widget page, GlobalKey key) {
+  void pushToPage(Widget page, GlobalKey key, List<String> fields) {
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -165,10 +183,22 @@ class _AccountPageState extends State<AccountPage> {
                                       InformationTab.initializeWith(
                                           key.currentState as InformationTab);
                                       if (InformationTab.staticValidate()) {
-                                        InformationTab
-                                            .staticUpdateUserInformation();
-
-                                        Navigator.pop(context);
+                                        if (InformationTab.staticHasChanged()) {
+                                          InformationTab
+                                              .staticUpdateUserInformation();
+                                          FirebaseUpdater updater =
+                                              FirebaseUpdater(
+                                                  widget.currentUser);
+                                          for (var field in fields) {
+                                            await updater
+                                                .updateUserDetails(field);
+                                          }
+                                        }
+                                        Future.delayed(
+                                            const Duration(milliseconds: 500),
+                                            () {
+                                          Navigator.pop(context);
+                                        });
                                       } else {
                                         error = InformationTab
                                             .staticGetErrorMessage();

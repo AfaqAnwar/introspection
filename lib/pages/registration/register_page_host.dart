@@ -141,8 +141,8 @@ class RegisterPageState extends State<RegisterPageHost> {
         _nameTabKey.currentState!.updateUserInformation();
         return _nameTabKey.currentState!.validate();
       case 1:
-        _emailTabKey.currentState!.updateUserEmail();
-        return _emailTabKey.currentState!.emailTextValidation();
+        _emailTabKey.currentState!.updateUserInformation();
+        return _emailTabKey.currentState!.validate();
       case 2:
         _ageTabKey.currentState!.reset();
         bool changeScreen = false;

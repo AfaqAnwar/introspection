@@ -1,5 +1,6 @@
 import 'package:datingapp/components/registration_authentication_components/registration_textfield.dart';
 import 'package:datingapp/data/custom_user.dart';
+import 'package:datingapp/pages/registration/registration_tabs/information_tab.dart';
 import 'package:flutter/material.dart';
 
 class EmailTab extends StatefulWidget {
@@ -12,7 +13,7 @@ class EmailTab extends StatefulWidget {
   State<EmailTab> createState() => EmailTabState();
 }
 
-class EmailTabState extends State<EmailTab> {
+class EmailTabState extends State<EmailTab> with InformationTab {
   final emailTextController = TextEditingController();
 
   String errorMessage = "";
@@ -25,7 +26,8 @@ class EmailTabState extends State<EmailTab> {
     }
   }
 
-  bool emailTextValidation() {
+  @override
+  bool validate() {
     if (!emailTextController.text.toString().trim().contains("@")) {
       errorMessage = "Please enter a valid email address.";
       return false;
@@ -36,12 +38,14 @@ class EmailTabState extends State<EmailTab> {
     return true;
   }
 
-  void updateUserEmail() {
-    if (emailTextValidation() == true) {
+  @override
+  void updateUserInformation() {
+    if (validate() == true) {
       widget.currentUser.setEmail = emailTextController.text.toString().trim();
     }
   }
 
+  @override
   String getErrorMessage() {
     return errorMessage;
   }
@@ -49,6 +53,12 @@ class EmailTabState extends State<EmailTab> {
   @override
   String toStringShort() {
     return errorMessage;
+  }
+
+  @override
+  bool hasChanged() {
+    return widget.currentUser.getEmail !=
+        emailTextController.text.toString().trim();
   }
 
   @override

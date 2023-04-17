@@ -74,6 +74,15 @@ class NameTabState extends State<NameTab> with InformationTab {
   }
 
   @override
+  bool hasChanged() {
+    if (firstNameController.text.trim() != widget.currentUser.getFirstName ||
+        lastNameController.text.trim() != widget.currentUser.getLastName) {
+      return true;
+    }
+    return false;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
