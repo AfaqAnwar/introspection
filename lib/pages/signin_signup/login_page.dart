@@ -38,7 +38,11 @@ class _LoginPageState extends State<LoginPage> {
                   style: TextStyle(fontSize: 18),
                 ),
                 content: Column(
+<<<<<<< Updated upstream
                   children: const [
+=======
+                  children: [
+>>>>>>> Stashed changes
                     SizedBox(
                       height: 15,
                     ),

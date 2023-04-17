@@ -32,7 +32,11 @@ class WorkTabState extends State<WorkTab> {
     return Column(
       children: [
         Wrap(
+<<<<<<< Updated upstream
           children: const [
+=======
+          children: [
+>>>>>>> Stashed changes
             Align(
               alignment: Alignment.centerLeft,
               child: Padding(

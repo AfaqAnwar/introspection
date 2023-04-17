@@ -174,7 +174,11 @@ class _PersonailtyPredictionResultPage
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+<<<<<<< Updated upstream
                   const SizedBox(height: 50),
+=======
+                  const SizedBox(height: 25),
+>>>>>>> Stashed changes
                   SafeArea(
                     child: Align(
                       alignment: Alignment.centerLeft,
@@ -195,6 +199,7 @@ class _PersonailtyPredictionResultPage
                       ]),
                     ),
                   ),
+<<<<<<< Updated upstream
                   SafeArea(
                     child: Align(
                       alignment: Alignment.centerLeft,
@@ -210,6 +215,22 @@ class _PersonailtyPredictionResultPage
                               fontFamily: 'Modern-Era',
                               fontWeight: FontWeight.w900,
                             ),
+=======
+                  const SizedBox(height: 25),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Wrap(children: [
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 25),
+                        child: Text(
+                          "We think you are a person with a personality type of...",
+                          textAlign: TextAlign.start,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 38,
+                            fontFamily: 'Modern-Era',
+                            fontWeight: FontWeight.w900,
+>>>>>>> Stashed changes
                           ),
                         ),
                       ]),
