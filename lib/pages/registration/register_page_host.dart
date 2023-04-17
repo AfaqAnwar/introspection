@@ -138,8 +138,8 @@ class RegisterPageState extends State<RegisterPageHost> {
   Future<bool> checkFieldsAndUpdateCurrentUser() async {
     switch (currentIndex) {
       case 0:
-        _nameTabKey.currentState!.updateNameOfUser();
-        return _nameTabKey.currentState!.textFieldValidation();
+        _nameTabKey.currentState!.updateUserInformation();
+        return _nameTabKey.currentState!.validate();
       case 1:
         _emailTabKey.currentState!.updateUserEmail();
         return _emailTabKey.currentState!.emailTextValidation();

@@ -1,5 +1,6 @@
 import 'package:datingapp/components/profile_tab_components/profile_user_field_tile.dart';
 import 'package:datingapp/data/custom_user.dart';
+import 'package:datingapp/pages/registration/registration_tabs/information_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/initial_information/name_tab.dart';
 import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/cupertino.dart';
@@ -15,11 +16,13 @@ class AccountPage extends StatefulWidget {
 
 class _AccountPageState extends State<AccountPage> {
   late List<Widget> tiles;
+  late String error;
 
   @override
   void initState() {
     super.initState();
     tiles = [];
+    error = "";
   }
 
   Future setTiles() async {
@@ -75,8 +78,14 @@ class _AccountPageState extends State<AccountPage> {
           onTap: () {
             switch (field) {
               case "Name":
-                pushToPage(NameTab(
-                    currentUser: widget.currentUser, updateIndex: () {}));
+                GlobalKey<NameTabState> key = GlobalKey<NameTabState>();
+                NameTab tab = NameTab(
+                  key: key,
+                  currentUser: widget.currentUser,
+                  updateIndex: () {},
+                );
+                pushToPage(tab, key);
+
                 break;
             }
           }));
@@ -85,7 +94,38 @@ class _AccountPageState extends State<AccountPage> {
     return tiles;
   }
 
-  void pushToPage(Widget page) {
+  void showErrorMessage(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (context) => CupertinoAlertDialog(
+              title: const Text(
+                'Whoops!',
+                style: TextStyle(fontSize: 18),
+              ),
+              content: Column(
+                children: [
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    error,
+                    style: const TextStyle(fontSize: 14),
+                  ),
+                ],
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: Text(
+                    "Okay",
+                    style: TextStyle(color: AppStyle.red800),
+                  ),
+                )
+              ],
+            ));
+  }
+
+  void pushToPage(Widget page, GlobalKey key) {
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -123,7 +163,18 @@ class _AccountPageState extends State<AccountPage> {
                                     fillColor: AppStyle.red900,
                                     shape: const CircleBorder(),
                                     onPressed: () async {
-                                      Navigator.pop(context);
+                                      InformationTab.initializeWith(
+                                          key.currentState as InformationTab);
+                                      if (InformationTab.staticValidate()) {
+                                        InformationTab
+                                            .staticUpdateUserInformation();
+
+                                        Navigator.pop(context);
+                                      } else {
+                                        error = InformationTab
+                                            .staticGetErrorMessage();
+                                        showErrorMessage(context);
+                                      }
                                     },
                                     child: const Icon(
                                       CupertinoIcons.check_mark,

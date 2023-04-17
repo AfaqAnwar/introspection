@@ -1,5 +1,6 @@
 import 'package:datingapp/components/registration_authentication_components/registration_textfield.dart';
 import 'package:datingapp/data/custom_user.dart';
+import 'package:datingapp/pages/registration/registration_tabs/information_tab.dart';
 import 'package:flutter/material.dart';
 
 class NameTab extends StatefulWidget {
@@ -12,7 +13,7 @@ class NameTab extends StatefulWidget {
   State<NameTab> createState() => NameTabState();
 }
 
-class NameTabState extends State<NameTab> {
+class NameTabState extends State<NameTab> with InformationTab {
   final firstNameController = TextEditingController();
   final lastNameController = TextEditingController();
 
@@ -29,7 +30,9 @@ class NameTabState extends State<NameTab> {
     }
   }
 
-  bool textFieldValidation() {
+  @override
+  bool validate() {
+    print(firstNameController.text);
     if (firstNameController.text.trim().isEmpty) {
       errorMessage = "Please enter your first name.";
       return false;
@@ -51,8 +54,9 @@ class NameTabState extends State<NameTab> {
     return _numeric.hasMatch(str);
   }
 
-  void updateNameOfUser() {
-    if (textFieldValidation() == true) {
+  @override
+  void updateUserInformation() {
+    if (validate() == true) {
       widget.currentUser.setFirstName =
           firstNameController.text.toString().trim();
       widget.currentUser.setLastName =
@@ -60,6 +64,7 @@ class NameTabState extends State<NameTab> {
     }
   }
 
+  @override
   String getErrorMessage() {
     return errorMessage;
   }
