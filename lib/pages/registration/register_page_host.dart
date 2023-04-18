@@ -157,54 +157,53 @@ class RegisterPageState extends State<RegisterPageHost> {
         _locationTabKey.currentState!.updateUserAddress();
         return _locationTabKey.currentState!.validateLocation();
       case 5:
-        _genderTabKey.currentState!.updateUserGender();
-        return _genderTabKey.currentState!.validateGender();
+        _genderTabKey.currentState!.updateUserInformation();
+        return _genderTabKey.currentState!.validate();
       case 6:
         _genderPreferenceTabKey.currentState!.updateUserGenderPreference();
         return _genderPreferenceTabKey.currentState!.validateGenderPreference();
       case 7:
-        _heightTabKey.currentState!.updateUserHeight();
+        _heightTabKey.currentState!.updateUserInformation();
         return true;
       case 8:
-        _ethnicityTabKey.currentState!.updateUserEthnicities();
-        return _ethnicityTabKey.currentState!.validateEthnicities();
+        _ethnicityTabKey.currentState!.updateUserInformation();
+        return _ethnicityTabKey.currentState!.validate();
       case 9:
         _childrenTabKey.currentState!.updateChildrenQuestions();
         return _childrenTabKey.currentState!.validateChildrenQuestions();
       case 10:
-        _hometownTabKey.currentState!.updateHometownOfUser();
-        return _hometownTabKey.currentState!.textFieldValidation();
+        _hometownTabKey.currentState!.updateUserInformation();
+        return _hometownTabKey.currentState!.validate();
       case 11:
-        _workTabKey.currentState!.updateWorkOfUser();
+        _workTabKey.currentState!.updateUserInformation();
         return true;
       case 12:
-        _jobTitleTabKey.currentState!.updateJobTitleOfUser();
-        return _jobTitleTabKey.currentState!.textFieldValidation();
+        _jobTitleTabKey.currentState!.updateUserInformation();
+        return _jobTitleTabKey.currentState!.validate();
       case 13:
-        _schoolTabKey.currentState!.updateSchoolOfUser();
-        return _schoolTabKey.currentState!.textFieldValidation();
+        _schoolTabKey.currentState!.updateUserInformation();
+        return _schoolTabKey.currentState!.validate();
       case 14:
-        _educationLevelTabKey.currentState!.updateEducationLevelOfUser();
-        return _educationLevelTabKey.currentState!.validateEducationLevel();
+        _educationLevelTabKey.currentState!.updateUserInformation();
+        return _educationLevelTabKey.currentState!.validate();
       case 15:
-        _religionTabKey.currentState!.updateReligionOfUser();
-        return _religionTabKey.currentState!.validateReligion();
+        _religionTabKey.currentState!.updateUserInformation();
+        return _religionTabKey.currentState!.validate();
       case 16:
-        _politicalBeliefTabKey.currentState!.updatePoliticalBeliefOfUser();
-        return _politicalBeliefTabKey.currentState!.validatePoliticalBelief();
+        _politicalBeliefTabKey.currentState!.updateUserInformation();
+        return _politicalBeliefTabKey.currentState!.validate();
       case 17:
-        _alcoholPreferenceTabKey.currentState!.updateAlcoholPreferenceOfUser();
-        return _alcoholPreferenceTabKey.currentState!
-            .validateAlcoholPreference();
+        _alcoholPreferenceTabKey.currentState!.updateUserInformation();
+        return _alcoholPreferenceTabKey.currentState!.validate();
       case 18:
-        _smokePreferenceTabKey.currentState!.updateSmokePreferenceOfUser();
-        return _smokePreferenceTabKey.currentState!.validateSmokePreference();
+        _smokePreferenceTabKey.currentState!.updateUserInformation();
+        return _smokePreferenceTabKey.currentState!.validate();
       case 19:
-        _weedPreferenceTabKey.currentState!.updateWeedPreferenceOfUser();
-        return _weedPreferenceTabKey.currentState!.validateWeedPreference();
+        _weedPreferenceTabKey.currentState!.updateUserInformation();
+        return _weedPreferenceTabKey.currentState!.validate();
       case 20:
-        _drugPreferenceTabKey.currentState!.updateDrugPreferenceOfUser();
-        return _drugPreferenceTabKey.currentState!.validateDrugPreference();
+        _drugPreferenceTabKey.currentState!.updateUserInformation();
+        return _drugPreferenceTabKey.currentState!.validate();
       case 21:
         return true;
       case 22:

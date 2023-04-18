@@ -52,6 +52,7 @@ class FirebaseRegistrationHelper {
       'Alcohol Preference': currentUser.getAlcoholPreference,
       'Smoking Preference': currentUser.getSmokePreference,
       'Drugs Preference': currentUser.getDrugPreference,
+      'Weed Preference': currentUser.getWeedPreference,
       'Personality Type': currentUser.getPersonalityType,
     });
   }

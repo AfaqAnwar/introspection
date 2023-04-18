@@ -1,5 +1,6 @@
 import 'package:datingapp/components/registration_authentication_components/registration_textfield.dart';
 import 'package:datingapp/data/custom_user.dart';
+import 'package:datingapp/pages/registration/registration_tabs/information_tab.dart';
 import 'package:flutter/material.dart';
 
 class WorkTab extends StatefulWidget {
@@ -12,7 +13,7 @@ class WorkTab extends StatefulWidget {
   State<WorkTab> createState() => WorkTabState();
 }
 
-class WorkTabState extends State<WorkTab> {
+class WorkTabState extends State<WorkTab> with InformationTab {
   final workController = TextEditingController();
 
   @override
@@ -23,8 +24,24 @@ class WorkTabState extends State<WorkTab> {
     }
   }
 
-  void updateWorkOfUser() {
+  @override
+  void updateUserInformation() {
     widget.currentUser.setWork = workController.text.toString().trim();
+  }
+
+  @override
+  String getErrorMessage() {
+    return "";
+  }
+
+  @override
+  bool validate() {
+    return true;
+  }
+
+  @override
+  bool hasChanged() {
+    return workController.text != widget.currentUser.getWork;
   }
 
   @override

@@ -1,4 +1,5 @@
 import 'package:datingapp/data/custom_user.dart';
+import 'package:datingapp/pages/registration/registration_tabs/information_tab.dart';
 import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:group_button/group_button.dart';
@@ -13,7 +14,8 @@ class WeedPreferenceTab extends StatefulWidget {
   State<WeedPreferenceTab> createState() => WeedPreferenceTabState();
 }
 
-class WeedPreferenceTabState extends State<WeedPreferenceTab> {
+class WeedPreferenceTabState extends State<WeedPreferenceTab>
+    with InformationTab {
   final controller = GroupButtonController();
 
   String weedPreference = "";
@@ -34,11 +36,13 @@ class WeedPreferenceTabState extends State<WeedPreferenceTab> {
     super.initState();
   }
 
+  @override
   String getErrorMessage() {
     return errorMessage;
   }
 
-  bool validateWeedPreference() {
+  @override
+  bool validate() {
     if (weedPreference.isNotEmpty) {
       return true;
     } else {
@@ -46,13 +50,19 @@ class WeedPreferenceTabState extends State<WeedPreferenceTab> {
     }
   }
 
-  void updateWeedPreferenceOfUser() {
+  @override
+  void updateUserInformation() {
     widget.currentUser.setWeedPreference = weedPreference;
   }
 
   @override
   String toStringShort() {
     return errorMessage;
+  }
+
+  @override
+  bool hasChanged() {
+    return weedPreference != widget.currentUser.getWeedPreference;
   }
 
   @override

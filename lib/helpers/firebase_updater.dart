@@ -48,8 +48,9 @@ class FirebaseUpdater {
       case "Height":
         ref.update({'Height': currentUser.getHeight});
         break;
-      case "Ethnicies":
+      case "Ethnicities":
         List<dynamic> ethnicities = currentUser.getEthnicities;
+        print(ethnicities);
         ref.update({'Ethnicities': ethnicities});
         break;
       case "Has Children":
@@ -87,6 +88,9 @@ class FirebaseUpdater {
         break;
       case "Drugs Preference":
         ref.update({'Drugs Preference': currentUser.getDrugPreference});
+        break;
+      case "Weed Preference":
+        ref.update({'Weed Preference': currentUser.getWeedPreference});
         break;
       case "Personality Type":
         ref.update({'Personality Type': currentUser.getPersonalityType});

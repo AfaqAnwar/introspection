@@ -1,4 +1,5 @@
 import 'package:datingapp/data/custom_user.dart';
+import 'package:datingapp/pages/registration/registration_tabs/information_tab.dart';
 import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:group_button/group_button.dart';
@@ -13,7 +14,8 @@ class AlcoholPreferenceTab extends StatefulWidget {
   State<AlcoholPreferenceTab> createState() => AlcoholPreferenceTabState();
 }
 
-class AlcoholPreferenceTabState extends State<AlcoholPreferenceTab> {
+class AlcoholPreferenceTabState extends State<AlcoholPreferenceTab>
+    with InformationTab {
   final controller = GroupButtonController();
 
   String selectedAlcoholPreference = "";
@@ -34,11 +36,13 @@ class AlcoholPreferenceTabState extends State<AlcoholPreferenceTab> {
     super.initState();
   }
 
+  @override
   String getErrorMessage() {
     return errorMessage;
   }
 
-  bool validateAlcoholPreference() {
+  @override
+  bool validate() {
     if (selectedAlcoholPreference.isNotEmpty) {
       return true;
     } else {
@@ -46,13 +50,19 @@ class AlcoholPreferenceTabState extends State<AlcoholPreferenceTab> {
     }
   }
 
-  void updateAlcoholPreferenceOfUser() {
+  @override
+  void updateUserInformation() {
     widget.currentUser.setAlcoholPreference = selectedAlcoholPreference;
   }
 
   @override
   String toStringShort() {
     return errorMessage;
+  }
+
+  @override
+  bool hasChanged() {
+    return selectedAlcoholPreference != widget.currentUser.getAlcoholPreference;
   }
 
   @override

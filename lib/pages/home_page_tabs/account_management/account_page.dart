@@ -1,7 +1,20 @@
-import 'package:datingapp/auth/reauth.dart';
 import 'package:datingapp/components/profile_tab_components/profile_user_field_tile.dart';
 import 'package:datingapp/data/custom_user.dart';
 import 'package:datingapp/helpers/firebase_updater.dart';
+import 'package:datingapp/pages/registration/registration_tabs/basic_information/alcohol_preference_tab.dart';
+import 'package:datingapp/pages/registration/registration_tabs/basic_information/drug_preference_tab.dart';
+import 'package:datingapp/pages/registration/registration_tabs/basic_information/education_level_tab.dart';
+import 'package:datingapp/pages/registration/registration_tabs/basic_information/ethnicity_tab.dart';
+import 'package:datingapp/pages/registration/registration_tabs/basic_information/gender_tab.dart';
+import 'package:datingapp/pages/registration/registration_tabs/basic_information/height_tab.dart';
+import 'package:datingapp/pages/registration/registration_tabs/basic_information/hometown_tab.dart';
+import 'package:datingapp/pages/registration/registration_tabs/basic_information/job_title_tab.dart';
+import 'package:datingapp/pages/registration/registration_tabs/basic_information/political_tab.dart';
+import 'package:datingapp/pages/registration/registration_tabs/basic_information/religion_tab.dart';
+import 'package:datingapp/pages/registration/registration_tabs/basic_information/school_tab.dart';
+import 'package:datingapp/pages/registration/registration_tabs/basic_information/smoke_preference_tab.dart';
+import 'package:datingapp/pages/registration/registration_tabs/basic_information/weed_preference_tab.dart';
+import 'package:datingapp/pages/registration/registration_tabs/basic_information/work_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/information_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/initial_information/name_tab.dart';
 import 'package:datingapp/style/app_style.dart';
@@ -87,6 +100,181 @@ class _AccountPageState extends State<AccountPage> {
                 GlobalKey<NameTabState> key = GlobalKey<NameTabState>();
                 pushToPage(
                     NameTab(
+                        key: key,
+                        currentUser: widget.currentUser,
+                        updateIndex: () {}),
+                    key,
+                    fields);
+                break;
+              case "Gender":
+                List<String> fields = [];
+                fields.add("Gender");
+                GlobalKey<GenderTabState> key = GlobalKey<GenderTabState>();
+                pushToPage(
+                    GenderTab(
+                        key: key,
+                        currentUser: widget.currentUser,
+                        updateIndex: () {}),
+                    key,
+                    fields);
+                break;
+              case "Height":
+                List<String> fields = [];
+                fields.add("Height");
+                GlobalKey<HeightTabState> key = GlobalKey<HeightTabState>();
+                pushToPage(
+                    HeightTab(
+                        key: key,
+                        currentUser: widget.currentUser,
+                        updateIndex: () {}),
+                    key,
+                    fields);
+                break;
+              case "Ethnicities":
+                List<String> fields = [];
+                fields.add("Ethnicities");
+                GlobalKey<EthnicityTabState> key =
+                    GlobalKey<EthnicityTabState>();
+                pushToPage(
+                    EthnicityTab(
+                        key: key,
+                        currentUser: widget.currentUser,
+                        updateIndex: () {}),
+                    key,
+                    fields);
+                break;
+              case "Hometown":
+                List<String> fields = [];
+                fields.add("Hometown");
+                GlobalKey<HometownTabState> key = GlobalKey<HometownTabState>();
+                pushToPage(
+                    HometownTab(
+                        key: key,
+                        currentUser: widget.currentUser,
+                        updateIndex: () {}),
+                    key,
+                    fields);
+                break;
+              case "Work":
+                List<String> fields = [];
+                fields.add("Work");
+                GlobalKey<WorkTabState> key = GlobalKey<WorkTabState>();
+                pushToPage(
+                    WorkTab(
+                        key: key,
+                        currentUser: widget.currentUser,
+                        updateIndex: () {}),
+                    key,
+                    fields);
+                break;
+              case "Job Title":
+                List<String> fields = [];
+                fields.add("Job Title");
+                GlobalKey<JobTitleTabState> key = GlobalKey<JobTitleTabState>();
+                pushToPage(
+                    JobTitleTab(
+                        key: key,
+                        currentUser: widget.currentUser,
+                        updateIndex: () {}),
+                    key,
+                    fields);
+                break;
+              case "School":
+                List<String> fields = [];
+                fields.add("School");
+                GlobalKey<SchoolTabState> key = GlobalKey<SchoolTabState>();
+                pushToPage(
+                    SchoolTab(
+                        key: key,
+                        currentUser: widget.currentUser,
+                        updateIndex: () {}),
+                    key,
+                    fields);
+                break;
+              case "Education Level":
+                List<String> fields = [];
+                fields.add("Education Level");
+                GlobalKey<EducationLevelTabState> key =
+                    GlobalKey<EducationLevelTabState>();
+                pushToPage(
+                    EducationLevelTab(
+                        key: key,
+                        currentUser: widget.currentUser,
+                        updateIndex: () {}),
+                    key,
+                    fields);
+                break;
+              case "Religion":
+                List<String> fields = [];
+                fields.add("Religion");
+                GlobalKey<ReligionTabState> key = GlobalKey<ReligionTabState>();
+                pushToPage(
+                    ReligionTab(
+                        key: key,
+                        currentUser: widget.currentUser,
+                        updateIndex: () {}),
+                    key,
+                    fields);
+                break;
+              case "Political Belief":
+                List<String> fields = [];
+                fields.add("Political Belief");
+                GlobalKey<PoliticalBeliefTabState> key =
+                    GlobalKey<PoliticalBeliefTabState>();
+                pushToPage(
+                    PoliticalBeliefTab(
+                        key: key,
+                        currentUser: widget.currentUser,
+                        updateIndex: () {}),
+                    key,
+                    fields);
+                break;
+              case "Alcohol Preference":
+                List<String> fields = [];
+                fields.add("Alcohol Preference");
+                GlobalKey<AlcoholPreferenceTabState> key =
+                    GlobalKey<AlcoholPreferenceTabState>();
+                pushToPage(
+                    AlcoholPreferenceTab(
+                        key: key,
+                        currentUser: widget.currentUser,
+                        updateIndex: () {}),
+                    key,
+                    fields);
+                break;
+              case "Smoking Preference":
+                List<String> fields = [];
+                fields.add("Smoking Preference");
+                GlobalKey<SmokePreferenceTabState> key =
+                    GlobalKey<SmokePreferenceTabState>();
+                pushToPage(
+                    SmokePreferenceTab(
+                        key: key,
+                        currentUser: widget.currentUser,
+                        updateIndex: () {}),
+                    key,
+                    fields);
+                break;
+              case "Weed Preference":
+                List<String> fields = [];
+                fields.add("Weed Preference");
+                GlobalKey<WeedPreferenceTabState> key =
+                    GlobalKey<WeedPreferenceTabState>();
+                pushToPage(
+                    WeedPreferenceTab(
+                        key: key,
+                        currentUser: widget.currentUser,
+                        updateIndex: () {}),
+                    key,
+                    fields);
+                break;
+              case "Drugs Preference":
+                List<String> fields = [];
+                fields.add("Drug Preference");
+                GlobalKey<DrugPreferenceTabState> key =
+                    GlobalKey<DrugPreferenceTabState>();
+                pushToPage(
+                    DrugPreferenceTab(
                         key: key,
                         currentUser: widget.currentUser,
                         updateIndex: () {}),
@@ -181,28 +369,10 @@ class _AccountPageState extends State<AccountPage> {
                                               FirebaseUpdater(
                                                   widget.currentUser);
                                           for (var field in fields) {
-                                            if (field == "Email") {
-                                              if (!checkIfUserIsLoggedIn()) {
-                                                Reauth reauth = Reauth();
-                                                await reauth
-                                                    .buildPopUp(context);
-                                              }
-                                            }
-
-                                            if (field != "Email" ||
-                                                checkIfUserIsLoggedIn()) {
-                                              if (field == "Email") {
-                                                InformationTab
-                                                    .staticUpdateUserInformation();
-                                                FirebaseAuth
-                                                    .instance.currentUser!
-                                                    .updateEmail(widget
-                                                        .currentUser.getEmail);
-                                              }
-
-                                              await updater
-                                                  .updateUserDetails(field);
-                                            }
+                                            InformationTab
+                                                .staticUpdateUserInformation();
+                                            await updater
+                                                .updateUserDetails(field);
                                           }
                                         }
                                         Future.delayed(

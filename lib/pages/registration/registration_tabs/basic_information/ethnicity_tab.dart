@@ -1,4 +1,5 @@
 import 'package:datingapp/data/custom_user.dart';
+import 'package:datingapp/pages/registration/registration_tabs/information_tab.dart';
 import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:group_button/group_button.dart';
@@ -13,7 +14,7 @@ class EthnicityTab extends StatefulWidget {
   State<EthnicityTab> createState() => EthnicityTabState();
 }
 
-class EthnicityTabState extends State<EthnicityTab> {
+class EthnicityTabState extends State<EthnicityTab> with InformationTab {
   final controller = GroupButtonController();
   List<String> selectedEthnicities = [];
 
@@ -33,6 +34,7 @@ class EthnicityTabState extends State<EthnicityTab> {
     super.initState();
   }
 
+  @override
   String getErrorMessage() {
     return errorMessage;
   }
@@ -42,7 +44,8 @@ class EthnicityTabState extends State<EthnicityTab> {
     return errorMessage;
   }
 
-  bool validateEthnicities() {
+  @override
+  bool validate() {
     if (selectedEthnicities.isNotEmpty) {
       return true;
     } else {
@@ -50,7 +53,13 @@ class EthnicityTabState extends State<EthnicityTab> {
     }
   }
 
-  void updateUserEthnicities() {
+  @override
+  bool hasChanged() {
+    return selectedEthnicities != widget.currentUser.getEthnicities;
+  }
+
+  @override
+  void updateUserInformation() {
     widget.currentUser.setEthnicities = selectedEthnicities;
   }
 
@@ -141,6 +150,8 @@ class EthnicityTabState extends State<EthnicityTab> {
                     enableDeselect: true,
                     isRadio: false,
                     onSelected: (value, index, isSelected) {
+                      print(selectedEthnicities);
+                      print(widget.currentUser.getEthnicities);
                       if (!isSelected &&
                           selectedEthnicities.contains(value.toString())) {
                         selectedEthnicities.remove(value.toString());

@@ -1,4 +1,5 @@
 import 'package:datingapp/data/custom_user.dart';
+import 'package:datingapp/pages/registration/registration_tabs/information_tab.dart';
 import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:group_button/group_button.dart';
@@ -13,7 +14,8 @@ class SmokePreferenceTab extends StatefulWidget {
   State<SmokePreferenceTab> createState() => SmokePreferenceTabState();
 }
 
-class SmokePreferenceTabState extends State<SmokePreferenceTab> {
+class SmokePreferenceTabState extends State<SmokePreferenceTab>
+    with InformationTab {
   final controller = GroupButtonController();
 
   String smokePreference = "";
@@ -34,11 +36,13 @@ class SmokePreferenceTabState extends State<SmokePreferenceTab> {
     super.initState();
   }
 
+  @override
   String getErrorMessage() {
     return errorMessage;
   }
 
-  bool validateSmokePreference() {
+  @override
+  bool validate() {
     if (smokePreference.isNotEmpty) {
       return true;
     } else {
@@ -46,7 +50,8 @@ class SmokePreferenceTabState extends State<SmokePreferenceTab> {
     }
   }
 
-  void updateSmokePreferenceOfUser() {
+  @override
+  void updateUserInformation() {
     widget.currentUser.setSmokePreference = smokePreference;
   }
 
@@ -55,6 +60,12 @@ class SmokePreferenceTabState extends State<SmokePreferenceTab> {
     return errorMessage;
   }
 
+  @override
+  bool hasChanged() {
+    return smokePreference != widget.currentUser.getSmokePreference;
+  }
+
+  @override
   @override
   Widget build(BuildContext context) {
     return Column(

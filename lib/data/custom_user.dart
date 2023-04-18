@@ -332,7 +332,7 @@ class CustomUser {
     accountFields.add("Name");
     accountFields.add("Gender");
     accountFields.add("Height");
-    accountFields.add("Ethnicity");
+    accountFields.add("Ethnicities");
     accountFields.add("Hometown");
     accountFields.add("Work");
     accountFields.add("Job Title");
@@ -341,8 +341,8 @@ class CustomUser {
     accountFields.add("Religion");
     accountFields.add("Political Belief");
     accountFields.add("Alcohol Preference");
-    accountFields.add("Smoke Preference");
+    accountFields.add("Smoking Preference");
     accountFields.add("Weed Preference");
-    accountFields.add("Drug Preference");
+    accountFields.add("Drugs Preference");
   }
 }
