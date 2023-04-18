@@ -166,8 +166,8 @@ class RegisterPageState extends State<RegisterPageHost> {
         _heightTabKey.currentState!.updateUserInformation();
         return true;
       case 8:
-        _ethnicityTabKey.currentState!.updateUserInformation();
-        return _ethnicityTabKey.currentState!.validate();
+        _ethnicityTabKey.currentState!.updateUserEthnicities();
+        return _ethnicityTabKey.currentState!.validateEthnicities();
       case 9:
         _childrenTabKey.currentState!.updateChildrenQuestions();
         return _childrenTabKey.currentState!.validateChildrenQuestions();

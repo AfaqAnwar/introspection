@@ -1,5 +1,4 @@
 import 'package:datingapp/data/custom_user.dart';
-import 'package:datingapp/pages/registration/registration_tabs/information_tab.dart';
 import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:group_button/group_button.dart';
@@ -14,7 +13,7 @@ class EthnicityTab extends StatefulWidget {
   State<EthnicityTab> createState() => EthnicityTabState();
 }
 
-class EthnicityTabState extends State<EthnicityTab> with InformationTab {
+class EthnicityTabState extends State<EthnicityTab> {
   final controller = GroupButtonController();
   List<String> selectedEthnicities = [];
 
@@ -34,7 +33,6 @@ class EthnicityTabState extends State<EthnicityTab> with InformationTab {
     super.initState();
   }
 
-  @override
   String getErrorMessage() {
     return errorMessage;
   }
@@ -44,8 +42,7 @@ class EthnicityTabState extends State<EthnicityTab> with InformationTab {
     return errorMessage;
   }
 
-  @override
-  bool validate() {
+  bool validateEthnicities() {
     if (selectedEthnicities.isNotEmpty) {
       return true;
     } else {
@@ -53,13 +50,7 @@ class EthnicityTabState extends State<EthnicityTab> with InformationTab {
     }
   }
 
-  @override
-  bool hasChanged() {
-    return selectedEthnicities != widget.currentUser.getEthnicities;
-  }
-
-  @override
-  void updateUserInformation() {
+  void updateUserEthnicities() {
     widget.currentUser.setEthnicities = selectedEthnicities;
   }
 

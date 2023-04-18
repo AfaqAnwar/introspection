@@ -332,7 +332,6 @@ class CustomUser {
     accountFields.add("Name");
     accountFields.add("Gender");
     accountFields.add("Height");
-    accountFields.add("Ethnicities");
     accountFields.add("Hometown");
     accountFields.add("Work");
     accountFields.add("Job Title");

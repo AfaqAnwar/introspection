@@ -4,7 +4,6 @@ import 'package:datingapp/helpers/firebase_updater.dart';
 import 'package:datingapp/pages/registration/registration_tabs/basic_information/alcohol_preference_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/basic_information/drug_preference_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/basic_information/education_level_tab.dart';
-import 'package:datingapp/pages/registration/registration_tabs/basic_information/ethnicity_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/basic_information/gender_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/basic_information/height_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/basic_information/hometown_tab.dart';
@@ -124,20 +123,6 @@ class _AccountPageState extends State<AccountPage> {
                 GlobalKey<HeightTabState> key = GlobalKey<HeightTabState>();
                 pushToPage(
                     HeightTab(
-                        key: key,
-                        currentUser: widget.currentUser,
-                        updateIndex: () {}),
-                    key,
-                    fields);
-                break;
-              case "Ethnicities":
-                //TODO: FIX WEIRD BUG WHERE CURRENT USER IS UPDATED!!???
-                List<String> fields = [];
-                fields.add("Ethnicities");
-                GlobalKey<EthnicityTabState> key =
-                    GlobalKey<EthnicityTabState>();
-                pushToPage(
-                    EthnicityTab(
                         key: key,
                         currentUser: widget.currentUser,
                         updateIndex: () {}),
