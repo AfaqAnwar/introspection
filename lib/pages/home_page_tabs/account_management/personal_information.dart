@@ -21,15 +21,16 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class AccountPage extends StatefulWidget {
+class PersonalInformationPage extends StatefulWidget {
   final CustomUser currentUser;
-  const AccountPage({super.key, required this.currentUser});
+  const PersonalInformationPage({super.key, required this.currentUser});
 
   @override
-  State<AccountPage> createState() => _AccountPageState();
+  State<PersonalInformationPage> createState() =>
+      _PersonalInformationPageState();
 }
 
-class _AccountPageState extends State<AccountPage> {
+class _PersonalInformationPageState extends State<PersonalInformationPage> {
   late List<Widget> tiles;
   late String error;
 
