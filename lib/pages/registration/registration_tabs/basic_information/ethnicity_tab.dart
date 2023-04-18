@@ -150,8 +150,6 @@ class EthnicityTabState extends State<EthnicityTab> with InformationTab {
                     enableDeselect: true,
                     isRadio: false,
                     onSelected: (value, index, isSelected) {
-                      print(selectedEthnicities);
-                      print(widget.currentUser.getEthnicities);
                       if (!isSelected &&
                           selectedEthnicities.contains(value.toString())) {
                         selectedEthnicities.remove(value.toString());

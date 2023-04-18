@@ -131,6 +131,7 @@ class _AccountPageState extends State<AccountPage> {
                     fields);
                 break;
               case "Ethnicities":
+                //TODO: FIX WEIRD BUG WHERE CURRENT USER IS UPDATED!!???
                 List<String> fields = [];
                 fields.add("Ethnicities");
                 GlobalKey<EthnicityTabState> key =

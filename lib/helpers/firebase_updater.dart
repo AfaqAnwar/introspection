@@ -50,7 +50,6 @@ class FirebaseUpdater {
         break;
       case "Ethnicities":
         List<dynamic> ethnicities = currentUser.getEthnicities;
-        print(ethnicities);
         ref.update({'Ethnicities': ethnicities});
         break;
       case "Has Children":
