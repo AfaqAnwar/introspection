@@ -15,12 +15,12 @@ class HomePageHost extends StatefulWidget {
 class _HomePageHostState extends State<HomePageHost>
     with AutomaticKeepAliveClientMixin {
   late PageController _pageController;
-  var currentIndex = 0;
+  var currentIndex = 1;
 
   @override
   void initState() {
     super.initState();
-    _pageController = PageController();
+    _pageController = PageController(initialPage: 1);
   }
 
   @override

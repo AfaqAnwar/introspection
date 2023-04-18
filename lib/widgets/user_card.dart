@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:age_calculator/age_calculator.dart';
@@ -23,6 +24,13 @@ class _UserCardState extends State<UserCard> {
   late String xFilePath = xFilePath = widget.user.getImages[0]!.path;
   bool _visible = false;
   bool _textVisible = true;
+  Timer _timer = Timer(const Duration(milliseconds: 8000), () {});
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,18 +44,20 @@ class _UserCardState extends State<UserCard> {
         width: MediaQuery.of(context).size.width,
         child: GestureDetector(
           onTap: () {
-            setState(() {
-              if (_visible == false) {
-                _visible = !_visible;
-                _textVisible = _visible;
-                Future.delayed(const Duration(milliseconds: 8000), () {
-                  setState(() {
-                    _visible = !_visible;
-                    _textVisible = _visible;
+            if (mounted) {
+              setState(() {
+                if (_visible == false) {
+                  _visible = !_visible;
+                  _textVisible = _visible;
+                  _timer = Timer(const Duration(milliseconds: 8000), () {
+                    setState(() {
+                      _visible = !_visible;
+                      _textVisible = _visible;
+                    });
                   });
-                });
-              }
-            });
+                }
+              });
+            }
           },
           child: Stack(children: [
             Container(
