@@ -73,11 +73,7 @@ class NameTabState extends State<NameTab> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-<<<<<<< Updated upstream
-        Wrap(children: const [
-=======
         Wrap(children: [
->>>>>>> Stashed changes
           Align(
             alignment: Alignment.centerLeft,
             child: Padding(

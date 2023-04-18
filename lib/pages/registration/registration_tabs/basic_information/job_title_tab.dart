@@ -59,11 +59,7 @@ class JobTitleTabState extends State<JobTitleTab> {
     return Column(
       children: [
         Wrap(
-<<<<<<< Updated upstream
-          children: const [
-=======
           children: [
->>>>>>> Stashed changes
             Align(
               alignment: Alignment.centerLeft,
               child: Padding(

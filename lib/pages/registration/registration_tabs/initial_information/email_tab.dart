@@ -55,11 +55,7 @@ class EmailTabState extends State<EmailTab> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-<<<<<<< Updated upstream
-        Wrap(children: const [
-=======
         Wrap(children: [
->>>>>>> Stashed changes
           Align(
             alignment: Alignment.centerLeft,
             child: Padding(

@@ -505,11 +505,7 @@ class RegisterPageState extends State<RegisterPageHost> {
                   style: TextStyle(fontSize: 18),
                 ),
                 content: Column(
-<<<<<<< Updated upstream
-                  children: const [
-=======
                   children: [
->>>>>>> Stashed changes
                     SizedBox(
                       height: 10,
                     ),
