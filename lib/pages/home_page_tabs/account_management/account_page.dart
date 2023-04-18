@@ -3,7 +3,6 @@ import 'package:datingapp/components/profile_tab_components/profile_user_field_t
 import 'package:datingapp/data/custom_user.dart';
 import 'package:datingapp/helpers/firebase_updater.dart';
 import 'package:datingapp/pages/registration/registration_tabs/information_tab.dart';
-import 'package:datingapp/pages/registration/registration_tabs/initial_information/email_tab.dart';
 import 'package:datingapp/pages/registration/registration_tabs/initial_information/name_tab.dart';
 import 'package:datingapp/style/app_style.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -88,18 +87,6 @@ class _AccountPageState extends State<AccountPage> {
                 GlobalKey<NameTabState> key = GlobalKey<NameTabState>();
                 pushToPage(
                     NameTab(
-                        key: key,
-                        currentUser: widget.currentUser,
-                        updateIndex: () {}),
-                    key,
-                    fields);
-                break;
-              case "Email":
-                List<String> fields = [];
-                fields.add("Email");
-                GlobalKey<EmailTabState> key = GlobalKey<EmailTabState>();
-                pushToPage(
-                    EmailTab(
                         key: key,
                         currentUser: widget.currentUser,
                         updateIndex: () {}),
