@@ -1,6 +1,7 @@
 import 'package:datingapp/data/custom_user.dart';
 import 'package:datingapp/pages/home_page_tabs/account_management/profile_tab.dart';
 import 'package:datingapp/pages/home_page_tabs/discover_tab.dart';
+import 'package:datingapp/pages/home_page_tabs/message_tab.dart';
 import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/material.dart';
 
@@ -37,7 +38,7 @@ class _HomePageHostState extends State<HomePageHost>
       physics: const NeverScrollableScrollPhysics(),
       controller: _pageController,
       children: <Widget>[
-        const Center(child: Text("Messages")),
+        const MessageTab(),
         DiscoverTab(
             matches: [widget.currentUser], currentUser: widget.currentUser),
         ProfileTab(
