@@ -3,6 +3,7 @@ import 'dart:collection';
 import 'package:image_picker/image_picker.dart';
 
 class CustomUser {
+  late String uid;
   late String firstName;
   late String lastName;
   late String email;
@@ -35,6 +36,7 @@ class CustomUser {
   late List<String> accountFields;
 
   CustomUser() {
+    uid = "";
     firstName = "";
     lastName = "";
     email = "";
@@ -66,6 +68,14 @@ class CustomUser {
     accountFields = [];
     buildPreferenceFieldsList();
     buildAccountFieldsList();
+  }
+
+  String get getUid {
+    return uid;
+  }
+
+  set setUid(String uid) {
+    this.uid = uid;
   }
 
   String get getFirstName {

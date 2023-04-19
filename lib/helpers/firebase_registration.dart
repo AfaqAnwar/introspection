@@ -28,6 +28,7 @@ class FirebaseRegistrationHelper {
         .doc(FirebaseAuth.instance.currentUser!.uid);
     List<dynamic> ethnicities = currentUser.getEthnicities;
     ref.set({
+      'uid': FirebaseAuth.instance.currentUser!.uid,
       'First Name': currentUser.getFirstName,
       'Last Name': currentUser.getLastName,
       'Email': currentUser.getEmail,

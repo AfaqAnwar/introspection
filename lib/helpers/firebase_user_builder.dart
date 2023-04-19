@@ -17,7 +17,7 @@ class FirebaseUserBuilder {
     bool exists = await checkIfDocExists(userID);
     if (exists) {
       DocumentSnapshot data = await ref.doc(userID).get();
-
+      user.setUid = userID;
       user.setFirstName = data.get('First Name');
       user.setLastName = data.get('Last Name');
       user.setEmail = data.get('Email');

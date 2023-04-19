@@ -15,6 +15,7 @@ class FirebaseLoginHelper {
         .collection('users')
         .doc(firebaseUser!.uid)
         .get();
+    currentUser.setUid = firebaseUser.uid;
     currentUser.setFirstName = data.get('First Name');
     currentUser.setLastName = data.get('Last Name');
     currentUser.setEmail = data.get('Email');
