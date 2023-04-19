@@ -1,9 +1,10 @@
-import 'package:datingapp/components/registration_components/registration_textfield.dart';
-import 'package:datingapp/data/user.dart';
+import 'package:datingapp/components/registration_authentication_components/registration_textfield.dart';
+import 'package:datingapp/data/custom_user.dart';
+import 'package:datingapp/pages/registration/registration_tabs/information_tab.dart';
 import 'package:flutter/material.dart';
 
 class NameTab extends StatefulWidget {
-  final User currentUser;
+  final CustomUser currentUser;
   final Function() updateIndex;
   const NameTab(
       {super.key, required this.currentUser, required this.updateIndex});
@@ -12,7 +13,7 @@ class NameTab extends StatefulWidget {
   State<NameTab> createState() => NameTabState();
 }
 
-class NameTabState extends State<NameTab> {
+class NameTabState extends State<NameTab> with InformationTab {
   final firstNameController = TextEditingController();
   final lastNameController = TextEditingController();
 
@@ -29,7 +30,8 @@ class NameTabState extends State<NameTab> {
     }
   }
 
-  bool textFieldValidation() {
+  @override
+  bool validate() {
     if (firstNameController.text.trim().isEmpty) {
       errorMessage = "Please enter your first name.";
       return false;
@@ -51,8 +53,9 @@ class NameTabState extends State<NameTab> {
     return _numeric.hasMatch(str);
   }
 
-  void updateNameOfUser() {
-    if (textFieldValidation() == true) {
+  @override
+  void updateUserInformation() {
+    if (validate() == true) {
       widget.currentUser.setFirstName =
           firstNameController.text.toString().trim();
       widget.currentUser.setLastName =
@@ -60,6 +63,7 @@ class NameTabState extends State<NameTab> {
     }
   }
 
+  @override
   String getErrorMessage() {
     return errorMessage;
   }
@@ -70,10 +74,19 @@ class NameTabState extends State<NameTab> {
   }
 
   @override
+  bool hasChanged() {
+    if (firstNameController.text.trim() != widget.currentUser.getFirstName ||
+        lastNameController.text.trim() != widget.currentUser.getLastName) {
+      return true;
+    }
+    return false;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Wrap(children: const [
+        const Wrap(children: [
           Align(
             alignment: Alignment.centerLeft,
             child: Padding(

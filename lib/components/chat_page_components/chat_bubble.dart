@@ -1,5 +1,4 @@
 import 'package:datingapp/components/chat_page_components/typing_indicator/typing_indicator.dart';
-import 'package:flutter/material.dart';
 
 class ChatBubble {
   // Chat bubbles would have the following the text prompt and if they are the current user

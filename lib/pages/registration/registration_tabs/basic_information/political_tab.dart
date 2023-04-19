@@ -1,10 +1,11 @@
-import 'package:datingapp/data/user.dart';
+import 'package:datingapp/data/custom_user.dart';
+import 'package:datingapp/pages/registration/registration_tabs/information_tab.dart';
 import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:group_button/group_button.dart';
 
 class PoliticalBeliefTab extends StatefulWidget {
-  final User currentUser;
+  final CustomUser currentUser;
   final Function() updateIndex;
   const PoliticalBeliefTab(
       {super.key, required this.currentUser, required this.updateIndex});
@@ -13,7 +14,8 @@ class PoliticalBeliefTab extends StatefulWidget {
   State<PoliticalBeliefTab> createState() => PoliticalBeliefTabState();
 }
 
-class PoliticalBeliefTabState extends State<PoliticalBeliefTab> {
+class PoliticalBeliefTabState extends State<PoliticalBeliefTab>
+    with InformationTab {
   final controller = GroupButtonController();
 
   String selectedPoliticalBelief = "";
@@ -30,19 +32,21 @@ class PoliticalBeliefTabState extends State<PoliticalBeliefTab> {
       } else if (selectedPoliticalBelief == "Conservative") {
         controller.selectIndex(2);
       } else if (selectedPoliticalBelief == "Other") {
-        controller.selectIndex(4);
+        controller.selectIndex(3);
       } else if (selectedPoliticalBelief == "None") {
-        controller.selectIndex(5);
+        controller.selectIndex(4);
       }
     }
     super.initState();
   }
 
+  @override
   String getErrorMessage() {
     return errorMessage;
   }
 
-  bool validatePoliticalBelief() {
+  @override
+  bool validate() {
     if (selectedPoliticalBelief.isNotEmpty) {
       return true;
     } else {
@@ -50,7 +54,8 @@ class PoliticalBeliefTabState extends State<PoliticalBeliefTab> {
     }
   }
 
-  void updatePoliticalBeliefOfUser() {
+  @override
+  void updateUserInformation() {
     widget.currentUser.setPoliticalBelief = selectedPoliticalBelief;
   }
 
@@ -60,11 +65,16 @@ class PoliticalBeliefTabState extends State<PoliticalBeliefTab> {
   }
 
   @override
+  bool hasChanged() {
+    return selectedPoliticalBelief != widget.currentUser.getPoliticalBelief;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Wrap(
-          children: const [
+        const Wrap(
+          children: [
             Align(
               alignment: Alignment.centerLeft,
               child: Padding(

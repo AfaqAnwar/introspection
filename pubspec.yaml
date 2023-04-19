@@ -42,7 +42,7 @@ dependencies:
   google_maps_flutter: ^2.2.5
   map_picker: ^0.0.3
   geolocator: ^9.0.2
-  geocoding: ^2.0.5
+  geocoding: ^2.1.0
   group_button: ^5.2.2
   dotted_border: ^2.0.0+3
   reorderables:
@@ -50,6 +50,14 @@ dependencies:
   cross_file_image: ^1.0.0
   easypost: ^0.1.1
   openai_client: ^0.0.7
+  another_flushbar: ^1.12.29
+  cloud_firestore: ^4.5.0
+  firebase_storage: ^11.1.0
+  flutter_svg: ^2.0.5
+  flutter_bloc: ^8.1.2
+  equatable: ^2.0.5
+  age_calculator: ^1.0.0
+  flutter_cache_manager: ^3.3.0
 
 dev_dependencies:
   flutter_test:
@@ -81,6 +89,10 @@ flutter:
     - assets/animations/registration_buffer.json
     - assets/mapstyle/map_style.txt
     - assets/data/models/
+    - assets/animations/personality.json
+    - assets/icons/heart.png
+    - assets/icons/account.png
+    - assets/icons/chat.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

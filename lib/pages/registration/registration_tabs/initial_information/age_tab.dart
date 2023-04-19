@@ -1,10 +1,11 @@
-import 'package:datingapp/data/user.dart';
+import 'package:age_calculator/age_calculator.dart';
+import 'package:datingapp/data/custom_user.dart';
 import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AgeTab extends StatefulWidget {
-  final User currentUser;
+  final CustomUser currentUser;
   final Function() updateIndex;
   const AgeTab(
       {super.key, required this.currentUser, required this.updateIndex});
@@ -46,9 +47,24 @@ class AgeTabState extends State<AgeTab> {
     return finalDob;
   }
 
+  String getDobUniversal(DateTime selectedDate) {
+    String finalDob = selectedDate.toString();
+    finalDob = finalDob.split(" ")[0];
+    List splitDob = finalDob.split("-");
+    String year = splitDob[0];
+    String month = splitDob[1];
+    String day = splitDob[2];
+    finalDob = "$year-$month-$day";
+    return finalDob;
+  }
+
   void updateAgeOnUI(DateTime selectedDate) {
     setState(() {
-      age = DateTime.now().year - selectedDate.year;
+      String calculatedAge =
+          AgeCalculator.age(DateTime.parse(getDobUniversal(selectedDate)))
+              .years
+              .toString();
+      age = int.parse(calculatedAge);
     });
   }
 
@@ -160,8 +176,8 @@ class AgeTabState extends State<AgeTab> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Wrap(
-          children: const [
+        const Wrap(
+          children: [
             Align(
               alignment: Alignment.centerLeft,
               child: Padding(

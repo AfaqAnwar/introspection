@@ -1,10 +1,11 @@
-import 'package:datingapp/data/user.dart';
+import 'package:datingapp/data/custom_user.dart';
+import 'package:datingapp/pages/registration/registration_tabs/information_tab.dart';
 import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:group_button/group_button.dart';
 
 class DrugPreferenceTab extends StatefulWidget {
-  final User currentUser;
+  final CustomUser currentUser;
   final Function() updateIndex;
   const DrugPreferenceTab(
       {super.key, required this.currentUser, required this.updateIndex});
@@ -13,7 +14,8 @@ class DrugPreferenceTab extends StatefulWidget {
   State<DrugPreferenceTab> createState() => DrugPreferenceTabState();
 }
 
-class DrugPreferenceTabState extends State<DrugPreferenceTab> {
+class DrugPreferenceTabState extends State<DrugPreferenceTab>
+    with InformationTab {
   final controller = GroupButtonController();
 
   String drugPreference = "";
@@ -34,11 +36,13 @@ class DrugPreferenceTabState extends State<DrugPreferenceTab> {
     super.initState();
   }
 
+  @override
   String getErrorMessage() {
     return errorMessage;
   }
 
-  bool validateDrugPreference() {
+  @override
+  bool validate() {
     if (drugPreference.isNotEmpty) {
       return true;
     } else {
@@ -46,7 +50,8 @@ class DrugPreferenceTabState extends State<DrugPreferenceTab> {
     }
   }
 
-  void updateDrugPreferenceOfUser() {
+  @override
+  void updateUserInformation() {
     widget.currentUser.setDrugPreference = drugPreference;
   }
 
@@ -56,13 +61,18 @@ class DrugPreferenceTabState extends State<DrugPreferenceTab> {
   }
 
   @override
+  bool hasChanged() {
+    return drugPreference != widget.currentUser.getDrugPreference;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Align(
+        const Align(
           alignment: Alignment.centerLeft,
           child: Wrap(
-            children: const [
+            children: [
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 25.0),
                 child: Text(

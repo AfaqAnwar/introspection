@@ -28,7 +28,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:im_stepper/stepper.dart';
 import 'package:page_transition/page_transition.dart';
-import '../../data/user.dart';
+import '../../data/custom_user.dart';
 
 class RegisterPageHost extends StatefulWidget {
   const RegisterPageHost({super.key});
@@ -38,7 +38,7 @@ class RegisterPageHost extends StatefulWidget {
 }
 
 class RegisterPageState extends State<RegisterPageHost> {
-  late User user;
+  late CustomUser user;
 
   int currentIndex = 0;
   int currentKeyIndex = 0;
@@ -77,7 +77,7 @@ class RegisterPageState extends State<RegisterPageHost> {
   @override
   void initState() {
     super.initState();
-    user = User();
+    user = CustomUser();
     keys = [
       _nameTabKey,
       _emailTabKey,
@@ -138,11 +138,11 @@ class RegisterPageState extends State<RegisterPageHost> {
   Future<bool> checkFieldsAndUpdateCurrentUser() async {
     switch (currentIndex) {
       case 0:
-        _nameTabKey.currentState!.updateNameOfUser();
-        return _nameTabKey.currentState!.textFieldValidation();
+        _nameTabKey.currentState!.updateUserInformation();
+        return _nameTabKey.currentState!.validate();
       case 1:
-        _emailTabKey.currentState!.updateUserEmail();
-        return _emailTabKey.currentState!.emailTextValidation();
+        _emailTabKey.currentState!.updateUserInformation();
+        return _emailTabKey.currentState!.validate();
       case 2:
         _ageTabKey.currentState!.reset();
         bool changeScreen = false;
@@ -157,13 +157,13 @@ class RegisterPageState extends State<RegisterPageHost> {
         _locationTabKey.currentState!.updateUserAddress();
         return _locationTabKey.currentState!.validateLocation();
       case 5:
-        _genderTabKey.currentState!.updateUserGender();
-        return _genderTabKey.currentState!.validateGender();
+        _genderTabKey.currentState!.updateUserInformation();
+        return _genderTabKey.currentState!.validate();
       case 6:
         _genderPreferenceTabKey.currentState!.updateUserGenderPreference();
         return _genderPreferenceTabKey.currentState!.validateGenderPreference();
       case 7:
-        _heightTabKey.currentState!.updateUserHeight();
+        _heightTabKey.currentState!.updateUserInformation();
         return true;
       case 8:
         _ethnicityTabKey.currentState!.updateUserEthnicities();
@@ -172,39 +172,38 @@ class RegisterPageState extends State<RegisterPageHost> {
         _childrenTabKey.currentState!.updateChildrenQuestions();
         return _childrenTabKey.currentState!.validateChildrenQuestions();
       case 10:
-        _hometownTabKey.currentState!.updateHometownOfUser();
-        return _hometownTabKey.currentState!.textFieldValidation();
+        _hometownTabKey.currentState!.updateUserInformation();
+        return _hometownTabKey.currentState!.validate();
       case 11:
-        _workTabKey.currentState!.updateWorkOfUser();
+        _workTabKey.currentState!.updateUserInformation();
         return true;
       case 12:
-        _jobTitleTabKey.currentState!.updateJobTitleOfUser();
-        return _jobTitleTabKey.currentState!.textFieldValidation();
+        _jobTitleTabKey.currentState!.updateUserInformation();
+        return _jobTitleTabKey.currentState!.validate();
       case 13:
-        _schoolTabKey.currentState!.updateSchoolOfUser();
-        return _schoolTabKey.currentState!.textFieldValidation();
+        _schoolTabKey.currentState!.updateUserInformation();
+        return _schoolTabKey.currentState!.validate();
       case 14:
-        _educationLevelTabKey.currentState!.updateEducationLevelOfUser();
-        return _educationLevelTabKey.currentState!.validateEducationLevel();
+        _educationLevelTabKey.currentState!.updateUserInformation();
+        return _educationLevelTabKey.currentState!.validate();
       case 15:
-        _religionTabKey.currentState!.updateReligionOfUser();
-        return _religionTabKey.currentState!.validateReligion();
+        _religionTabKey.currentState!.updateUserInformation();
+        return _religionTabKey.currentState!.validate();
       case 16:
-        _politicalBeliefTabKey.currentState!.updatePoliticalBeliefOfUser();
-        return _politicalBeliefTabKey.currentState!.validatePoliticalBelief();
+        _politicalBeliefTabKey.currentState!.updateUserInformation();
+        return _politicalBeliefTabKey.currentState!.validate();
       case 17:
-        _alcoholPreferenceTabKey.currentState!.updateAlcoholPreferenceOfUser();
-        return _alcoholPreferenceTabKey.currentState!
-            .validateAlcoholPreference();
+        _alcoholPreferenceTabKey.currentState!.updateUserInformation();
+        return _alcoholPreferenceTabKey.currentState!.validate();
       case 18:
-        _smokePreferenceTabKey.currentState!.updateSmokePreferenceOfUser();
-        return _smokePreferenceTabKey.currentState!.validateSmokePreference();
+        _smokePreferenceTabKey.currentState!.updateUserInformation();
+        return _smokePreferenceTabKey.currentState!.validate();
       case 19:
-        _weedPreferenceTabKey.currentState!.updateWeedPreferenceOfUser();
-        return _weedPreferenceTabKey.currentState!.validateWeedPreference();
+        _weedPreferenceTabKey.currentState!.updateUserInformation();
+        return _weedPreferenceTabKey.currentState!.validate();
       case 20:
-        _drugPreferenceTabKey.currentState!.updateDrugPreferenceOfUser();
-        return _drugPreferenceTabKey.currentState!.validateDrugPreference();
+        _drugPreferenceTabKey.currentState!.updateUserInformation();
+        return _drugPreferenceTabKey.currentState!.validate();
       case 21:
         return true;
       case 22:
@@ -504,8 +503,8 @@ class RegisterPageState extends State<RegisterPageHost> {
                   'Woah There!',
                   style: TextStyle(fontSize: 18),
                 ),
-                content: Column(
-                  children: const [
+                content: const Column(
+                  children: [
                     SizedBox(
                       height: 10,
                     ),
@@ -641,7 +640,7 @@ class RegisterPageState extends State<RegisterPageHost> {
         return PhotoTab(
             key: _photoTabKey, currentUser: user, updateIndex: updateIndex);
       case 23:
-        return FinalizationBuffer(onContinue: updateIndex);
+        return FinalizationBuffer(currentUser: user);
       default:
         return const CircularProgressIndicator();
     }

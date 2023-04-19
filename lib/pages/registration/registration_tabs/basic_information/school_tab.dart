@@ -1,9 +1,10 @@
-import 'package:datingapp/components/registration_components/registration_textfield.dart';
-import 'package:datingapp/data/user.dart';
+import 'package:datingapp/components/registration_authentication_components/registration_textfield.dart';
+import 'package:datingapp/data/custom_user.dart';
+import 'package:datingapp/pages/registration/registration_tabs/information_tab.dart';
 import 'package:flutter/material.dart';
 
 class SchoolTab extends StatefulWidget {
-  final User currentUser;
+  final CustomUser currentUser;
   final Function() updateIndex;
   const SchoolTab(
       {super.key, required this.currentUser, required this.updateIndex});
@@ -12,7 +13,7 @@ class SchoolTab extends StatefulWidget {
   State<SchoolTab> createState() => SchoolTabState();
 }
 
-class SchoolTabState extends State<SchoolTab> {
+class SchoolTabState extends State<SchoolTab> with InformationTab {
   final schoolController = TextEditingController();
 
   String errorMessage = "";
@@ -25,7 +26,8 @@ class SchoolTabState extends State<SchoolTab> {
     }
   }
 
-  bool textFieldValidation() {
+  @override
+  bool validate() {
     if (schoolController.text.trim().isEmpty) {
       errorMessage = "Please enter where you went to school.";
       return false;
@@ -33,12 +35,14 @@ class SchoolTabState extends State<SchoolTab> {
     return true;
   }
 
-  void updateSchoolOfUser() {
-    if (textFieldValidation() == true) {
+  @override
+  void updateUserInformation() {
+    if (validate() == true) {
       widget.currentUser.setSchool = schoolController.text.toString().trim();
     }
   }
 
+  @override
   String getErrorMessage() {
     return errorMessage;
   }
@@ -49,10 +53,15 @@ class SchoolTabState extends State<SchoolTab> {
   }
 
   @override
+  bool hasChanged() {
+    return widget.currentUser.getSchool != schoolController.text.trim();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Wrap(children: const [
+        const Wrap(children: [
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 25.0),
             child: Text(

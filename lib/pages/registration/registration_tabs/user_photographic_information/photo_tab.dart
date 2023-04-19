@@ -1,10 +1,10 @@
-import 'package:datingapp/components/registration_components/photo_picker_box.dart';
-import 'package:datingapp/data/user.dart';
+import 'package:datingapp/components/registration_authentication_components/photo_picker_box.dart';
+import 'package:datingapp/data/custom_user.dart';
 import 'package:flutter/material.dart';
 import 'package:reorderables/reorderables.dart';
 
 class PhotoTab extends StatefulWidget {
-  final User currentUser;
+  final CustomUser currentUser;
   final Function() updateIndex;
   const PhotoTab(
       {super.key, required this.currentUser, required this.updateIndex});
@@ -57,7 +57,7 @@ class PhotoTabState extends State<PhotoTab> {
     return Column(
       children: [
         const SizedBox(height: 25),
-        Wrap(children: const [
+        const Wrap(children: [
           Align(
             alignment: Alignment.centerLeft,
             child: Padding(

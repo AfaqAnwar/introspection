@@ -1,11 +1,19 @@
+import 'dart:ui';
+
+import 'package:another_flushbar/flushbar.dart';
+import 'package:datingapp/components/registration_authentication_components/password_button.dart';
+import 'package:datingapp/components/registration_authentication_components/password_textfield.dart';
+import 'package:datingapp/data/custom_user.dart';
+import 'package:datingapp/helpers/firebase_registration.dart';
+import 'package:datingapp/pages/personaility_chat/personailty_chat_page.dart';
 import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart';
 
 class FinalizationBuffer extends StatefulWidget {
-  final Function() onContinue;
-  const FinalizationBuffer({super.key, required this.onContinue});
+  final CustomUser currentUser;
+  const FinalizationBuffer({super.key, required this.currentUser});
 
   @override
   State<FinalizationBuffer> createState() => FinalizationBufferState();
@@ -16,6 +24,31 @@ class FinalizationBufferState extends State<FinalizationBuffer>
   late final AnimationController _controller;
   bool animationEnded = false;
   late final Future<LottieComposition> _composition;
+  late final AnimationController progressController;
+
+  final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
+
+  late Flushbar progressBar;
+
+  void buildFlushBar() {
+    progressBar = Flushbar(
+      isDismissible: true,
+      messageText: const Text("Loading...",
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 18,
+          )),
+      flushbarStyle: FlushbarStyle.GROUNDED,
+      showProgressIndicator: true,
+      progressIndicatorBackgroundColor: Colors.white,
+      progressIndicatorValueColor:
+          AlwaysStoppedAnimation<Color>(AppStyle.red500),
+      backgroundColor: Colors.white,
+      progressIndicatorController: progressController,
+    );
+  }
 
   @override
   void initState() {
@@ -24,6 +57,11 @@ class FinalizationBufferState extends State<FinalizationBuffer>
 
     _controller =
         AnimationController(vsync: this, duration: const Duration(seconds: 1));
+
+    progressController =
+        AnimationController(vsync: this, duration: const Duration(seconds: 1));
+
+    buildFlushBar();
 
     _controller.repeat();
   }
@@ -39,6 +77,146 @@ class FinalizationBufferState extends State<FinalizationBuffer>
     return await LottieComposition.fromByteData(assetData);
   }
 
+  bool confirmPassword() {
+    if (passwordController.text.isEmpty ||
+        confirmPasswordController.text.isEmpty) {
+      Flushbar(
+        flushbarStyle: FlushbarStyle.GROUNDED,
+        messageText: const Text("Please fill in all fields",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 18,
+            )),
+        backgroundColor: Colors.white,
+        duration: const Duration(seconds: 2),
+      ).show(context);
+      return false;
+    }
+    if (passwordController.text != confirmPasswordController.text) {
+      Flushbar(
+        flushbarStyle: FlushbarStyle.GROUNDED,
+        messageText: const Text("Passwords do not match",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 18,
+            )),
+        backgroundColor: Colors.white,
+        duration: const Duration(seconds: 2),
+      ).show(context);
+      return false;
+    }
+
+    if (passwordController.text == confirmPasswordController.text) {
+      return true;
+    }
+
+    return false;
+  }
+
+  void showProgressIndicator() {
+    progressBar.show(context);
+    progressController.repeat();
+  }
+
+  void dismissProgressIndicator() {
+    progressController.stop();
+    progressBar.dismiss();
+  }
+
+  void showErrorIndicator(String error) {
+    Flushbar(
+      flushbarStyle: FlushbarStyle.GROUNDED,
+      messageText: Text("Error: $error",
+          textAlign: TextAlign.center,
+          style: const TextStyle(
+            color: Colors.black,
+            fontSize: 18,
+          )),
+      backgroundColor: Colors.white,
+      duration: const Duration(seconds: 3),
+    ).show(context);
+  }
+
+  Future registerUser() async {
+    showProgressIndicator();
+    FirebaseRegistrationHelper helper =
+        FirebaseRegistrationHelper(widget.currentUser);
+
+    await helper
+        .registerUser(passwordController.text.trim())
+        .then((value) async {
+      if (value == "Success") {
+        await helper.addUserDetails();
+        await helper.uploadUserImages();
+      } else {
+        dismissProgressIndicator();
+        showErrorIndicator(value);
+      }
+    });
+  }
+
+  void showPasswordDialog() {
+    showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (context) {
+          return BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            child: AlertDialog(
+              shape: ShapeBorder.lerp(
+                  RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)),
+                  RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)),
+                  1)!,
+              backgroundColor: Colors.grey.shade200.withOpacity(0.5),
+              content: SingleChildScrollView(
+                child: ListBody(
+                  children: <Widget>[
+                    const SizedBox(height: 10),
+                    PasswordTextField(
+                      controller: passwordController,
+                      hintText: "Password",
+                      obscureText: true,
+                    ),
+                    const SizedBox(height: 10),
+                    PasswordTextField(
+                      controller: confirmPasswordController,
+                      hintText: "Confirm Password",
+                      obscureText: true,
+                    ),
+                  ],
+                ),
+              ),
+              actions: <Widget>[
+                PasswordButton(
+                    onTap: () async {
+                      if (confirmPassword() == true) {
+                        await registerUser();
+                        dismissProgressIndicator();
+                        Future.delayed(const Duration(milliseconds: 100), () {
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    PersonailtyChatPage(
+                                      currentUser: widget.currentUser,
+                                    )),
+                            ModalRoute.withName('/'),
+                          );
+                        });
+                      }
+                    },
+                    buttonText: "Confirm Password"),
+                const SizedBox(height: 20),
+              ],
+            ),
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<LottieComposition>(
@@ -50,9 +228,9 @@ class FinalizationBufferState extends State<FinalizationBuffer>
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Align(
+                const Align(
                   alignment: Alignment.centerLeft,
-                  child: Wrap(children: const [
+                  child: Wrap(children: [
                     Padding(
                       padding: EdgeInsets.all(25),
                       child: Text(
@@ -69,9 +247,9 @@ class FinalizationBufferState extends State<FinalizationBuffer>
                   ]),
                 ),
                 const SizedBox(height: 20),
-                Align(
+                const Align(
                   alignment: Alignment.centerLeft,
-                  child: Wrap(children: const [
+                  child: Wrap(children: [
                     Padding(
                       padding: EdgeInsets.all(25),
                       child: Text(
@@ -100,7 +278,9 @@ class FinalizationBufferState extends State<FinalizationBuffer>
                 ),
                 Center(
                   child: GestureDetector(
-                    onTap: widget.onContinue,
+                    onTap: () {
+                      showPasswordDialog();
+                    },
                     child: Container(
                       padding: const EdgeInsets.all(35),
                       decoration: BoxDecoration(
@@ -108,7 +288,7 @@ class FinalizationBufferState extends State<FinalizationBuffer>
                       ),
                       child: const Center(
                           child: Text(
-                        "Create Your Profile",
+                        "Complete Registration",
                         style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,

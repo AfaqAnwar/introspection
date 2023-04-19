@@ -51,9 +51,9 @@ class BasicInformationBufferState extends State<BasicInformationBuffer>
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Align(
+                const Align(
                   alignment: Alignment.centerLeft,
-                  child: Wrap(children: const [
+                  child: Wrap(children: [
                     Padding(
                       padding: EdgeInsets.all(25),
                       child: Text(
@@ -70,9 +70,9 @@ class BasicInformationBufferState extends State<BasicInformationBuffer>
                   ]),
                 ),
                 const SizedBox(height: 20),
-                Align(
+                const Align(
                   alignment: Alignment.centerLeft,
-                  child: Wrap(children: const [
+                  child: Wrap(children: [
                     Padding(
                       padding: EdgeInsets.all(25),
                       child: Text(

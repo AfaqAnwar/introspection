@@ -2,7 +2,7 @@ import 'dart:collection';
 
 import 'package:image_picker/image_picker.dart';
 
-class User {
+class CustomUser {
   late String firstName;
   late String lastName;
   late String email;
@@ -29,8 +29,12 @@ class User {
   late String weedPreference;
   late String drugPreference;
   late Map<int, XFile> imageMap;
+  late String personalityType;
 
-  User() {
+  late List<String> preferenceFields;
+  late List<String> accountFields;
+
+  CustomUser() {
     firstName = "";
     lastName = "";
     email = "";
@@ -57,6 +61,11 @@ class User {
     weedPreference = "";
     drugPreference = "";
     imageMap = HashMap();
+    personalityType = "";
+    preferenceFields = [];
+    accountFields = [];
+    buildPreferenceFieldsList();
+    buildAccountFieldsList();
   }
 
   String get getFirstName {
@@ -259,6 +268,22 @@ class User {
     this.drugPreference = drugPreference;
   }
 
+  String get getPersonalityType {
+    return personalityType;
+  }
+
+  set setPersonalityType(String personalityType) {
+    this.personalityType = personalityType;
+  }
+
+  List<String> get getPreferenceFields {
+    return preferenceFields;
+  }
+
+  List<String> get getAccountFields {
+    return accountFields;
+  }
+
   Map<int, XFile> get getImages {
     return imageMap;
   }
@@ -291,5 +316,32 @@ class User {
 
   void clearImages() {
     imageMap.clear();
+  }
+
+  bool isBuilt() {
+    // check if email is present, this will tell us if the User is built.
+    return email.isNotEmpty;
+  }
+
+  void buildPreferenceFieldsList() {
+    preferenceFields.add("Gender Preference");
+    preferenceFields.add("Wants Children");
+  }
+
+  void buildAccountFieldsList() {
+    accountFields.add("Name");
+    accountFields.add("Gender");
+    accountFields.add("Height");
+    accountFields.add("Hometown");
+    accountFields.add("Work");
+    accountFields.add("Job Title");
+    accountFields.add("School");
+    accountFields.add("Education Level");
+    accountFields.add("Religion");
+    accountFields.add("Political Belief");
+    accountFields.add("Alcohol Preference");
+    accountFields.add("Smoking Preference");
+    accountFields.add("Weed Preference");
+    accountFields.add("Drugs Preference");
   }
 }

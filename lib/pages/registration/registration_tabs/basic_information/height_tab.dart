@@ -1,10 +1,11 @@
-import 'package:datingapp/components/registration_components/cupertino_picker_object.dart';
-import 'package:datingapp/data/user.dart';
+import 'package:datingapp/components/registration_authentication_components/cupertino_picker_object.dart';
+import 'package:datingapp/data/custom_user.dart';
+import 'package:datingapp/pages/registration/registration_tabs/information_tab.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HeightTab extends StatefulWidget {
-  final User currentUser;
+  final CustomUser currentUser;
   final Function() updateIndex;
   const HeightTab(
       {super.key, required this.currentUser, required this.updateIndex});
@@ -13,7 +14,7 @@ class HeightTab extends StatefulWidget {
   State<HeightTab> createState() => HeightTabState();
 }
 
-class HeightTabState extends State<HeightTab> {
+class HeightTabState extends State<HeightTab> with InformationTab {
   List<CupertinoPickerObject> heights = [];
   String selectedHeight = "";
 
@@ -40,16 +41,37 @@ class HeightTabState extends State<HeightTab> {
     }
   }
 
-  void updateUserHeight() {
+  @override
+  String getErrorMessage() {
+    return "";
+  }
+
+  @override
+  bool validate() {
+    return true;
+  }
+
+  @override
+  void updateUserInformation() {
     widget.currentUser.setHeight = selectedHeight;
+  }
+
+  @override
+  String toStringShort() {
+    return "";
+  }
+
+  @override
+  bool hasChanged() {
+    return widget.currentUser.getHeight != selectedHeight;
   }
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Wrap(
-          children: const [
+        const Wrap(
+          children: [
             Align(
               alignment: Alignment.centerLeft,
               child: Padding(

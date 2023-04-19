@@ -1,9 +1,10 @@
-import 'package:datingapp/components/registration_components/registration_textfield.dart';
-import 'package:datingapp/data/user.dart';
+import 'package:datingapp/components/registration_authentication_components/registration_textfield.dart';
+import 'package:datingapp/data/custom_user.dart';
+import 'package:datingapp/pages/registration/registration_tabs/information_tab.dart';
 import 'package:flutter/material.dart';
 
 class JobTitleTab extends StatefulWidget {
-  final User currentUser;
+  final CustomUser currentUser;
   final Function() updateIndex;
   const JobTitleTab(
       {super.key, required this.currentUser, required this.updateIndex});
@@ -12,7 +13,7 @@ class JobTitleTab extends StatefulWidget {
   State<JobTitleTab> createState() => JobTitleTabState();
 }
 
-class JobTitleTabState extends State<JobTitleTab> {
+class JobTitleTabState extends State<JobTitleTab> with InformationTab {
   final jobTitleController = TextEditingController();
   String errorMessage = "";
 
@@ -24,14 +25,16 @@ class JobTitleTabState extends State<JobTitleTab> {
     }
   }
 
-  void updateJobTitleOfUser() {
-    if (textFieldValidation() == true) {
+  @override
+  void updateUserInformation() {
+    if (validate() == true) {
       widget.currentUser.setJobTitle =
           jobTitleController.text.toString().trim();
     }
   }
 
-  bool textFieldValidation() {
+  @override
+  bool validate() {
     if (isNumeric(jobTitleController.text.trim())) {
       errorMessage = "Please enter a valid job title.";
       return false;
@@ -45,6 +48,7 @@ class JobTitleTabState extends State<JobTitleTab> {
     return _numeric.hasMatch(str);
   }
 
+  @override
   String getErrorMessage() {
     return errorMessage;
   }
@@ -55,11 +59,16 @@ class JobTitleTabState extends State<JobTitleTab> {
   }
 
   @override
+  bool hasChanged() {
+    return jobTitleController.text != widget.currentUser.getJobTitle;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Wrap(
-          children: const [
+        const Wrap(
+          children: [
             Align(
               alignment: Alignment.centerLeft,
               child: Padding(

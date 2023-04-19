@@ -1,9 +1,10 @@
-import 'package:datingapp/components/registration_components/registration_textfield.dart';
-import 'package:datingapp/data/user.dart';
+import 'package:datingapp/components/registration_authentication_components/registration_textfield.dart';
+import 'package:datingapp/data/custom_user.dart';
+import 'package:datingapp/pages/registration/registration_tabs/information_tab.dart';
 import 'package:flutter/material.dart';
 
 class HometownTab extends StatefulWidget {
-  final User currentUser;
+  final CustomUser currentUser;
   final Function() updateIndex;
   const HometownTab(
       {super.key, required this.currentUser, required this.updateIndex});
@@ -12,7 +13,7 @@ class HometownTab extends StatefulWidget {
   State<HometownTab> createState() => HometownTabState();
 }
 
-class HometownTabState extends State<HometownTab> {
+class HometownTabState extends State<HometownTab> with InformationTab {
   final hometownController = TextEditingController();
 
   String errorMessage = "";
@@ -25,7 +26,8 @@ class HometownTabState extends State<HometownTab> {
     }
   }
 
-  bool textFieldValidation() {
+  @override
+  bool validate() {
     if (hometownController.text.trim().isEmpty) {
       errorMessage = "Please enter your hometown.";
       return false;
@@ -42,13 +44,15 @@ class HometownTabState extends State<HometownTab> {
     return _numeric.hasMatch(str);
   }
 
-  void updateHometownOfUser() {
-    if (textFieldValidation() == true) {
+  @override
+  void updateUserInformation() {
+    if (validate() == true) {
       widget.currentUser.setHometown =
           hometownController.text.toString().trim();
     }
   }
 
+  @override
   String getErrorMessage() {
     return errorMessage;
   }
@@ -59,11 +63,17 @@ class HometownTabState extends State<HometownTab> {
   }
 
   @override
+  bool hasChanged() {
+    return hometownController.text != widget.currentUser.getHometown;
+  }
+
+  @override
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Wrap(
-          children: const [
+        const Wrap(
+          children: [
             Align(
               alignment: Alignment.centerLeft,
               child: Padding(

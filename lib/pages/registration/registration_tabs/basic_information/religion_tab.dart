@@ -1,10 +1,11 @@
-import 'package:datingapp/data/user.dart';
+import 'package:datingapp/data/custom_user.dart';
+import 'package:datingapp/pages/registration/registration_tabs/information_tab.dart';
 import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:group_button/group_button.dart';
 
 class ReligionTab extends StatefulWidget {
-  final User currentUser;
+  final CustomUser currentUser;
   final Function() updateIndex;
   const ReligionTab(
       {super.key, required this.currentUser, required this.updateIndex});
@@ -13,7 +14,7 @@ class ReligionTab extends StatefulWidget {
   State<ReligionTab> createState() => ReligionTabState();
 }
 
-class ReligionTabState extends State<ReligionTab> {
+class ReligionTabState extends State<ReligionTab> with InformationTab {
   final controller = GroupButtonController();
 
   String selectedReligion = "";
@@ -50,11 +51,13 @@ class ReligionTabState extends State<ReligionTab> {
     super.initState();
   }
 
+  @override
   String getErrorMessage() {
     return errorMessage;
   }
 
-  bool validateReligion() {
+  @override
+  bool validate() {
     if (selectedReligion.isNotEmpty) {
       return true;
     } else {
@@ -62,7 +65,8 @@ class ReligionTabState extends State<ReligionTab> {
     }
   }
 
-  void updateReligionOfUser() {
+  @override
+  void updateUserInformation() {
     widget.currentUser.setReligion = selectedReligion;
   }
 
@@ -72,11 +76,16 @@ class ReligionTabState extends State<ReligionTab> {
   }
 
   @override
+  bool hasChanged() {
+    return selectedReligion != widget.currentUser.getReligion;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Wrap(
-          children: const [
+        const Wrap(
+          children: [
             Align(
               alignment: Alignment.centerLeft,
               child: Padding(

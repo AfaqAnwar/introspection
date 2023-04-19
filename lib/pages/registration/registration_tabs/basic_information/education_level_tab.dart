@@ -1,10 +1,11 @@
-import 'package:datingapp/data/user.dart';
+import 'package:datingapp/data/custom_user.dart';
+import 'package:datingapp/pages/registration/registration_tabs/information_tab.dart';
 import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:group_button/group_button.dart';
 
 class EducationLevelTab extends StatefulWidget {
-  final User currentUser;
+  final CustomUser currentUser;
   final Function() updateIndex;
   const EducationLevelTab(
       {super.key, required this.currentUser, required this.updateIndex});
@@ -13,7 +14,8 @@ class EducationLevelTab extends StatefulWidget {
   State<EducationLevelTab> createState() => EducationLevelTabState();
 }
 
-class EducationLevelTabState extends State<EducationLevelTab> {
+class EducationLevelTabState extends State<EducationLevelTab>
+    with InformationTab {
   final controller = GroupButtonController();
 
   String selectedEducationLevel = "";
@@ -36,11 +38,13 @@ class EducationLevelTabState extends State<EducationLevelTab> {
     super.initState();
   }
 
+  @override
   String getErrorMessage() {
     return errorMessage;
   }
 
-  bool validateEducationLevel() {
+  @override
+  bool validate() {
     if (selectedEducationLevel.isNotEmpty) {
       return true;
     } else {
@@ -48,7 +52,8 @@ class EducationLevelTabState extends State<EducationLevelTab> {
     }
   }
 
-  void updateEducationLevelOfUser() {
+  @override
+  void updateUserInformation() {
     widget.currentUser.setEducationLevel = selectedEducationLevel;
   }
 
@@ -58,11 +63,16 @@ class EducationLevelTabState extends State<EducationLevelTab> {
   }
 
   @override
+  bool hasChanged() {
+    return selectedEducationLevel != widget.currentUser.getEducationLevel;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Wrap(
-          children: const [
+        const Wrap(
+          children: [
             Align(
               alignment: Alignment.centerLeft,
               child: Padding(
