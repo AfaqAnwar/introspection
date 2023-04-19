@@ -58,6 +58,9 @@ class _DiscoverTabState extends State<DiscoverTab>
   }
 
   List<Widget> buildUserCards() {
+    if (widget.matches.isEmpty) {
+      return [];
+    }
     List<Widget> userCards = [];
     for (var i = 0; i < widget.matches.length; i++) {
       userCards.add(Dismissible(

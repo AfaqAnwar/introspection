@@ -1,0 +1,135 @@
+{
+    "INFP":{
+        "5": ["ENFJ", "ENTJ"],
+        "4": ["ENFP", "ENTP", "INFJ", "INFP", "INTJ", "INTP"],
+        "3":[],
+        "2":[],
+        "1":["ESFJ","ESFP","ESTJ", "ESTP", "ISFJ", "ISFP", "ISTJ", "ISTP"]
+    },
+
+    "ISTP":{
+        "5": ["ESFJ","ESTJ", "ISFJ"],
+        "4": [],
+        "3":["ESFP","ESTP", "ISFP", "ISTP"],
+        "2":["ENTJ", "ENTP", "INTJ","INTP","ISTJ"],
+        "1":["ENFJ","ENFP", "INFJ", "INFP"]
+    },
+
+    "ENFP":{
+        "5": ["INFJ", "INTJ"],
+        "4": ["ENFJ", "ENFP", "ENTJ","ENTP", "INFP", "INTP"],
+        "3":[],
+        "2":[],
+        "1":["ESFJ", "ESFP", "ESTJ", "ESTP", "ISFJ", "ISFP", "ISTJ", "ISTP"]
+    },
+
+    "INFJ":{
+        "5": ["ENFP", "ENTP"],
+        "4": ["ENFJ", "ENTJ", "INFJ", "INFP", "INTJ","INTP"],
+        "3":[],
+        "2":[],
+        "1":["ESFJ", "ESFP", "ESTJ", "ESTP", "ISFJ", "ISFP", "ISTJ", "ISTP" ]
+    },
+
+    "ENFJ":{
+        "5": ["INFP"],
+        "4": ["ENFJ", "ENFP", "ENTJ", "ENTP", "INFJ", "INTJ", "INTP", "ISFP"],
+        "3":[],
+        "2":[],
+        "1":["ESFJ", "ESFP", "ESTJ", "ESTP", "ISFJ", "ISTJ","ISTP"]
+    },
+
+    "INTJ":{
+        "5": ["ENFP", "ENTP"],
+        "4": ["ENFJ","ENTJ", "INFJ", "INFP", "INTJ", "INTP"],
+        "3":["ESFJ", "ESTJ", "ISFJ", "ISTJ"],
+        "2":["ESFP", "ESTP", "ISFP", "ISTP"],
+        "1":[]
+    },
+
+    "ENTJ":{
+        "5": ["INFP", "INTP"],
+        "4": ["ENFJ", "ENFJ", "ENTJ", "ENTP", "INFJ", "INTJ"],
+        "3":[],
+        "2":["ESFJ", "ESFP","ESTJ", "ESTP", "ISFJ", "ISFP", "ISTJ", "ISTP"],
+        "1":[]
+    },
+
+    "INTP":{
+        "5": ["ENTJ", "ESTJ"],
+        "4": ["ENFJ", "ENFP", "ENTP", "INFJ", "INFP", "INTJ", "INTP"],
+        "3":["ESFJ", "ISFJ", "ISTJ"],
+        "2":["ESFP","ESTJ", "ISFP", "ISTP"],
+        "1":[]
+    },
+
+    "ENTP": {
+        "5": ["INFJ", "INTJ"], 
+        "4": ["ENFJ", "ENFP", "ENTJ", "ENTP", "INFP", "INTP"],
+        "3": ["ESFJ", "ESTJ", "ISFJ", "ISTJ"],
+        "2": ["ESFP", "ESTP", "ISFP", "ISTP"],
+        "1": []
+    },
+
+    "ISFP": {
+        "5": ["ENFJ", "ESFJ", "ESTJ"],
+        "4": [""], 
+        "3": ["ESFP", "ESTP", "ISFP", "ISTP"],
+        "2": ["ENTP", "INTJ", "INTP", "ISFJ", "ISTJ", "ENTJ"],
+        "1": ["ENFP", "INFJ", "INFP"]
+    },
+
+    "ESFP": {
+        "5":["ISFJ", "ISTJ"],
+        "4": [],
+        "3": ["ESFP", "ESTP", "ISFP", "ISTP"],
+        "2": ["ENTJ", "ENTP", "ESFJ","ESTJ", "INTJ", "INTP"],
+        "1": ["ENFJ", "ENFP", "INFJ", "INFP"]
+    }, 
+    
+    "ESTP": {
+        "5":["ISFJ", "ISTJ"],
+        "4":[],
+        "3":["ESFP", "ESTP", "ISFP", "ISTP"],
+        "2":["ENTJ", "ENTP", "ESFJ", "ESTJ", "INTJ", "INTP"],
+        "1":["ENFJ", "ENFP","INFJ", "INFP"]
+
+    },
+
+    "ISFJ": {
+        "5":["ESFP", "ESTP"],
+        "4":["ESFJ", "ESTJ", "ISFJ", "ISTJ"],
+        "3":["ENTP", "INTJ", "INTP"],
+        "2":["ENTJ", "ISFP", "ISTP"],
+        "1":["ENFJ", "ENFP", "INFJ", "INFP" ]
+
+    },
+
+    "ESFJ": {
+        "5":["ISFP", "ISTP"],
+        "4":["ESFJ", "ESTJ", "ISFJ", "ISTJ"],
+        "3":["ENTP", "INTJ", "INTP"],
+        "2":["ENTJ", "ESFP", "ESTP"],
+        "1":["ENFJ", "ENFP", "INFJ", "INFP"]
+
+    },
+
+    "ISTJ": {
+        "5":["ESFP", "ESTP"],
+        "4":["ESFJ", "ESTJ", "ISFJ", "ISTJ"],
+        "3":["ENTP", "INTJ", "INTP"],
+        "2":["ENTJ", "ISFP", "ISTP"],
+        "1":["ENFJ", "ENFP", "INFJ", "INFP"]
+
+    },
+
+    "ESTJ": {
+        "5":["INTP", "ISFP", "ISTP"],
+        "4":["ESFJ", "ESTJ", "ISFJ","ISTJ"],
+        "3":["ENTP", "INTJ"],
+        "2":["ENTJ", "ESFP", "ESTP"],
+        "1":["ENFJ", "ENFP", "INFJ", "INFP"]
+
+    }
+    
+}

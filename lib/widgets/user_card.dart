@@ -70,7 +70,7 @@ class _UserCardState extends State<UserCard> {
                       color: AppStyle.red900,
                       spreadRadius: 1,
                       blurRadius: 6,
-                      offset: const Offset(1, 2),
+                      offset: const Offset(10, 20),
                     )
                   ]),
             ),

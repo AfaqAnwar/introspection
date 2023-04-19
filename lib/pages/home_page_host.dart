@@ -1,4 +1,5 @@
 import 'package:datingapp/data/custom_user.dart';
+import 'package:datingapp/helpers/discovery_manager.dart';
 import 'package:datingapp/pages/home_page_tabs/account_management/profile_tab.dart';
 import 'package:datingapp/pages/home_page_tabs/discover_tab.dart';
 import 'package:datingapp/pages/home_page_tabs/message_tab.dart';
@@ -17,11 +18,13 @@ class _HomePageHostState extends State<HomePageHost>
     with AutomaticKeepAliveClientMixin {
   late PageController _pageController;
   var currentIndex = 1;
+  late List<CustomUser> matches;
 
   @override
   void initState() {
     super.initState();
     _pageController = PageController(initialPage: 1);
+    matches = [];
   }
 
   @override
@@ -33,14 +36,19 @@ class _HomePageHostState extends State<HomePageHost>
   @override
   bool get wantKeepAlive => true;
 
+  Future getMatches() async {
+    DiscoveryManager discoveryManager = DiscoveryManager(widget.currentUser);
+    await discoveryManager.discover();
+    matches = discoveryManager.getPotentialMatches();
+  }
+
   Widget buildContentOfTab(int index) {
     return PageView(
       physics: const NeverScrollableScrollPhysics(),
       controller: _pageController,
       children: <Widget>[
         const MessageTab(),
-        DiscoverTab(
-            matches: [widget.currentUser], currentUser: widget.currentUser),
+        DiscoverTab(currentUser: widget.currentUser, matches: matches),
         ProfileTab(
           currentUser: widget.currentUser,
         ),
@@ -53,15 +61,16 @@ class _HomePageHostState extends State<HomePageHost>
     );
   }
 
-  Future checkIfUserIsLoggedIn() async {
-    return widget.currentUser.isBuilt();
+  Future checkForData() async {
+    await getMatches();
+    return widget.currentUser.isBuilt() && matches.isNotEmpty;
   }
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
     return FutureBuilder(
-        future: checkIfUserIsLoggedIn(),
+        future: checkForData(),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           if (snapshot.data == true) {
             return Scaffold(

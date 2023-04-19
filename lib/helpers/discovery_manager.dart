@@ -1,20 +1,73 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:datingapp/data/custom_user.dart';
+import 'package:datingapp/helpers/firebase_user_builder.dart';
+import 'package:flutter/services.dart';
 
 class DiscoveryManager {
   late CustomUser currentUser;
+  late List<String> idsOfPotentialMatches;
   late List<CustomUser> potentialMatches;
 
   DiscoveryManager(CustomUser givenUser) {
     currentUser = givenUser;
+    idsOfPotentialMatches = [];
     potentialMatches = [];
   }
 
-  void calculatePotentialMatches() {
+  Future discover() async {
     // Get reference(s) to Firestore collection.
     // Check if doc(s) exist for matching personality types.
     // If doc(s) exist, add the users with that ID to the potentialMatches list. *User FirebaseUserBuilder to build the CustomUser objects.*
     // If doc(s) do not exist, do nothing.
+    List<String> compatiblePersonalities = await findCompatibleMatchesFromMap();
+    List<CollectionReference> poolOfInterests = getCollectionReferences();
+
+    for (int i = 0; i < poolOfInterests.length; i++) {
+      await poolOfInterests[i].get().then((QuerySnapshot querySnapshot) {
+        for (var doc in querySnapshot.docs) {
+          String personalityType = doc.id;
+          if (compatiblePersonalities.contains(personalityType)) {
+            for (var id in doc.get("users")) {
+              idsOfPotentialMatches.add(id);
+            }
+          }
+        }
+      });
+    }
+
+    await buildUsers(idsOfPotentialMatches);
+  }
+
+  Future<List<String>> findCompatibleMatchesFromMap() async {
+    Map<String, dynamic> possibleMatches = {};
+
+    final String response =
+        await rootBundle.loadString('assets/data/compatibility_map.json');
+
+    final data = await json.decode(response);
+
+    possibleMatches = data[currentUser.getPersonalityType];
+    possibleMatches.remove("2");
+    possibleMatches.remove("1");
+
+    List<String> finalCompatibleMatches = [];
+    for (var key in possibleMatches.keys) {
+      for (var type in possibleMatches[key]) {
+        finalCompatibleMatches.add(type);
+      }
+    }
+
+    return finalCompatibleMatches;
+  }
+
+  Future buildUsers(List<String> ids) async {
+    for (int i = 0; i < ids.length; i++) {
+      FirebaseUserBuilder builder = FirebaseUserBuilder(ids[i]);
+      CustomUser user = await builder.buildUser();
+      potentialMatches.add(user);
+    }
   }
 
   List<CollectionReference> getCollectionReferences() {
@@ -53,5 +106,13 @@ class DiscoveryManager {
     } catch (e) {
       return results;
     }
+  }
+
+  List<CustomUser> getPotentialMatches() {
+    return potentialMatches;
+  }
+
+  List<String> getPotentialMatchesIds() {
+    return idsOfPotentialMatches;
   }
 }
