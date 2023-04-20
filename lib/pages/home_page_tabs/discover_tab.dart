@@ -1,14 +1,15 @@
 import 'package:datingapp/data/custom_user.dart';
+import 'package:datingapp/helpers/firebase_updater.dart';
 import 'package:datingapp/style/app_style.dart';
 import 'package:datingapp/widgets/user_card.dart';
 import 'package:flutter/material.dart';
 
 class DiscoverTab extends StatefulWidget {
   final CustomUser currentUser;
-  final List<CustomUser> matches;
+  final List<CustomUser> potentialMatches;
 
   const DiscoverTab(
-      {super.key, required this.matches, required this.currentUser});
+      {super.key, required this.potentialMatches, required this.currentUser});
 
   @override
   State<DiscoverTab> createState() => _DiscoverTabState();
@@ -58,29 +59,54 @@ class _DiscoverTabState extends State<DiscoverTab>
   }
 
   List<Widget> buildUserCards() {
-    if (widget.matches.isEmpty) {
-      return [];
+    if (widget.potentialMatches.isEmpty) {
+      return [
+        Center(
+          child: Text(
+            "No people found",
+            style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'Marlide-Display',
+                color: AppStyle.red900),
+          ),
+        )
+      ];
     }
     List<Widget> userCards = [];
-    for (var i = 0; i < widget.matches.length; i++) {
+    for (var i = 0; i < widget.potentialMatches.length; i++) {
       userCards.add(Dismissible(
-          onDismissed: (direction) {
+          onDismissed: (direction) async {
+            FirebaseUpdater updater = FirebaseUpdater(widget.currentUser);
             if (direction == DismissDirection.endToStart) {
-              // TODO: Add to dislikes
-              setState(() {
-                userCards.removeAt(i);
-              });
+              // Dislikes user
+              widget.currentUser
+                  .addDislikedUserID(widget.potentialMatches[i].getUid);
+              updater.updateUserDetails("Disliked User IDS");
             } else if (direction == DismissDirection.startToEnd) {
-              // TODO: Add to likes
-              setState(() {
-                userCards.removeAt(i);
-              });
+              // Likes user
+              if (checkIfLikeIsMutual(widget.potentialMatches[i])) {
+                widget.currentUser
+                    .addMatchedUserID(widget.potentialMatches[i].getUid);
+                await updater.updateUserDetails("Matched User IDS");
+              }
+              widget.currentUser
+                  .addLikedUserID(widget.potentialMatches[i].getUid);
+              await updater.updateUserDetails("Liked User IDS");
             }
+            setState(() {
+              userCards.removeAt(i);
+              widget.potentialMatches.removeAt(i);
+            });
           },
           direction: DismissDirection.horizontal,
           key: UniqueKey(),
-          child: UserCard(user: widget.matches[i])));
+          child: UserCard(user: widget.potentialMatches[i])));
     }
     return userCards;
+  }
+
+  bool checkIfLikeIsMutual(CustomUser likedUser) {
+    return likedUser.getLikedUserIDS.contains(widget.currentUser.getUid);
   }
 }

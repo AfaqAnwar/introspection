@@ -57,6 +57,7 @@ class FirebaseRegistrationHelper {
       'Personality Type': currentUser.getPersonalityType,
       'Liked User IDS': [],
       'Disliked User IDS': [],
+      'Matched User IDS': [],
     });
   }
 

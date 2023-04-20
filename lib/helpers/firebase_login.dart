@@ -44,6 +44,8 @@ class FirebaseLoginHelper {
     currentUser.setLikedUserIDS = decodeDynamicList(data.get('Liked User IDS'));
     currentUser.setDislikedUserIDS =
         decodeDynamicList(data.get('Disliked User IDS'));
+    currentUser.setMatchedUserIDS =
+        decodeDynamicList(data.get('Matched User IDS'));
   }
 
   CustomUser getCurrentUser() {

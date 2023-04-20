@@ -46,6 +46,7 @@ class FirebaseUserBuilder {
       user.setLikedUserIDS = decodeDynamicList(data.get('Liked User IDS'));
       user.setDislikedUserIDS =
           decodeDynamicList(data.get('Disliked User IDS'));
+      user.setMatchedUserIDS = decodeDynamicList(data.get('Matched User IDS'));
 
       FirebaseStorageManager storageManager = FirebaseStorageManager(userID);
 

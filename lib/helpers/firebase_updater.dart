@@ -13,7 +13,6 @@ class FirebaseUpdater {
     DocumentReference ref = FirebaseFirestore.instance
         .collection('users')
         .doc(FirebaseAuth.instance.currentUser!.uid);
-
     switch (field) {
       case "First Name":
         ref.update({'First Name': currentUser.getFirstName});
@@ -99,6 +98,9 @@ class FirebaseUpdater {
         break;
       case "Disliked User IDS":
         ref.update({'Disliked User IDS': currentUser.getDislikedUserIDS});
+        break;
+      case "Matched User IDS":
+        ref.update({'Matched User IDS': currentUser.getMatchedUserIDS});
         break;
     }
 

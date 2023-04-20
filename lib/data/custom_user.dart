@@ -37,6 +37,7 @@ class CustomUser {
 
   late List<String> likedUserIDS;
   late List<String> dislikedUserIDS;
+  late List<String> matchIDS;
 
   CustomUser() {
     uid = "";
@@ -390,5 +391,21 @@ class CustomUser {
 
   set setDislikedUserIDS(List<String> ids) {
     dislikedUserIDS = ids;
+  }
+
+  List<String> get getMatchedUserIDS {
+    return matchIDS;
+  }
+
+  void addMatchedUserID(String id) {
+    matchIDS.add(id);
+  }
+
+  void removeMatchedUserID(String id) {
+    matchIDS.remove(id);
+  }
+
+  set setMatchedUserIDS(List<String> ids) {
+    matchIDS = ids;
   }
 }

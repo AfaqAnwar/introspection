@@ -30,7 +30,9 @@ class DiscoveryManager {
           String personalityType = doc.id;
           if (compatiblePersonalities.contains(personalityType)) {
             for (var id in doc.get("users")) {
-              idsOfPotentialMatches.add(id);
+              if (!hasAlreadyBeenSeen(id) && id != currentUser.getUid) {
+                idsOfPotentialMatches.add(id);
+              }
             }
           }
         }
@@ -38,6 +40,12 @@ class DiscoveryManager {
     }
 
     await buildUsers(idsOfPotentialMatches);
+  }
+
+  bool hasAlreadyBeenSeen(String id) {
+    return (currentUser.getLikedUserIDS.contains(id) ||
+        currentUser.getDislikedUserIDS.contains(id) ||
+        currentUser.getMatchedUserIDS.contains(id));
   }
 
   Future<List<String>> findCompatibleMatchesFromMap() async {

@@ -18,13 +18,13 @@ class _HomePageHostState extends State<HomePageHost>
     with AutomaticKeepAliveClientMixin {
   late PageController _pageController;
   var currentIndex = 1;
-  late List<CustomUser> matches;
+  late List<CustomUser> potentialMatches;
 
   @override
   void initState() {
     super.initState();
     _pageController = PageController(initialPage: 1);
-    matches = [];
+    potentialMatches = [];
   }
 
   @override
@@ -39,7 +39,7 @@ class _HomePageHostState extends State<HomePageHost>
   Future getMatches() async {
     DiscoveryManager discoveryManager = DiscoveryManager(widget.currentUser);
     await discoveryManager.discover();
-    matches = discoveryManager.getPotentialMatches();
+    potentialMatches = discoveryManager.getPotentialMatches();
   }
 
   Widget buildContentOfTab(int index) {
@@ -48,7 +48,9 @@ class _HomePageHostState extends State<HomePageHost>
       controller: _pageController,
       children: <Widget>[
         const MessageTab(),
-        DiscoverTab(currentUser: widget.currentUser, matches: matches),
+        DiscoverTab(
+            currentUser: widget.currentUser,
+            potentialMatches: potentialMatches),
         ProfileTab(
           currentUser: widget.currentUser,
         ),
