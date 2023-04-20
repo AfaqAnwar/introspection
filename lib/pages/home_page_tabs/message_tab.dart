@@ -3,8 +3,10 @@ import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/material.dart';
 
 class MessageTab extends StatefulWidget {
+  final CustomUser currentUser;
   final List<CustomUser> matches;
-  const MessageTab({super.key, required this.matches});
+  const MessageTab(
+      {super.key, required this.currentUser, required this.matches});
 
   @override
   State<MessageTab> createState() => _MessageTabState();

@@ -62,7 +62,7 @@ class _HomePageHostState extends State<HomePageHost>
       physics: const NeverScrollableScrollPhysics(),
       controller: _pageController,
       children: <Widget>[
-        MessageTab(matches: matches),
+        MessageTab(currentUser: widget.currentUser, matches: matches),
         DiscoverTab(
             currentUser: widget.currentUser,
             potentialMatches: potentialMatches),
