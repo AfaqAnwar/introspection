@@ -52,7 +52,7 @@ class _AccountPageState extends State<AccountPage> {
                     onPressed: () {
                       Navigator.pop(context);
                     }),
-                title: Text("Account Management",
+                title: Text("Account",
                     style: TextStyle(
                         fontSize: 30,
                         fontWeight: FontWeight.bold,
