@@ -139,7 +139,7 @@ class FirebaseUpdater {
         ref.update({'Gender': user.getGender});
         break;
       case "Gender Preference":
-        ref.update({'Gender  Preference': user.getGenderPreference});
+        ref.update({'Gender Preference': user.getGenderPreference});
         break;
       case "Height":
         ref.update({'Height': user.getHeight});

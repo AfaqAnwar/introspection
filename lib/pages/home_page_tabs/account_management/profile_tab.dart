@@ -4,6 +4,7 @@ import 'package:datingapp/components/profile_tab_components/profile_row_tile.dar
 import 'package:datingapp/components/profile_tab_components/styled_button_custom_size.dart';
 import 'package:datingapp/data/custom_user.dart';
 import 'package:datingapp/pages/home_page_tabs/account_management/personal_information.dart';
+import 'package:datingapp/pages/home_page_tabs/account_management/preferences_page.dart';
 import 'package:datingapp/style/app_style.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -65,7 +66,7 @@ class _ProfileTabState extends State<ProfileTab> {
                       fontWeight: FontWeight.bold,
                       fontFamily: 'Modern-Era',
                       color: Colors.black)),
-              const SizedBox(height: 50),
+              const Spacer(),
               Divider(
                 thickness: 0.5,
                 color: Colors.grey[300],
@@ -86,7 +87,14 @@ class _ProfileTabState extends State<ProfileTab> {
               ProfileRowTile(
                   text: "Preferences",
                   icon: CupertinoIcons.slider_horizontal_3,
-                  onTap: () {}),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              PreferencesPage(currentUser: widget.currentUser)),
+                    );
+                  }),
               const ProfileRowTile(
                   text: "Help Center",
                   icon: CupertinoIcons.question,
@@ -98,8 +106,8 @@ class _ProfileTabState extends State<ProfileTab> {
                   },
                   buttonColor: AppStyle.red900,
                   buttonText: "Sign Out",
-                  height: 25,
-                  horizontalMargin: 125),
+                  height: 20,
+                  horizontalMargin: 130),
               const Spacer()
             ],
           ),

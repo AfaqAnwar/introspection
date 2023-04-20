@@ -346,7 +346,6 @@ class CustomUser {
 
   void buildAccountFieldsList() {
     accountFields.add("Name");
-    accountFields.add("Gender");
     accountFields.add("Height");
     accountFields.add("Hometown");
     accountFields.add("Work");

@@ -1,5 +1,4 @@
 import 'package:datingapp/data/custom_user.dart';
-import 'package:datingapp/pages/registration/registration_tabs/information_tab.dart';
 import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:group_button/group_button.dart';
@@ -14,7 +13,7 @@ class GenderTab extends StatefulWidget {
   State<GenderTab> createState() => GenderTabState();
 }
 
-class GenderTabState extends State<GenderTab> with InformationTab {
+class GenderTabState extends State<GenderTab> {
   final controller = GroupButtonController();
 
   String selectedGender = "";
@@ -33,12 +32,10 @@ class GenderTabState extends State<GenderTab> with InformationTab {
     super.initState();
   }
 
-  @override
   String getErrorMessage() {
     return errorMessage;
   }
 
-  @override
   bool validate() {
     if (selectedGender.isNotEmpty) {
       return true;
@@ -47,7 +44,6 @@ class GenderTabState extends State<GenderTab> with InformationTab {
     }
   }
 
-  @override
   void updateUserInformation() {
     widget.currentUser.setGender = selectedGender;
   }
@@ -57,7 +53,6 @@ class GenderTabState extends State<GenderTab> with InformationTab {
     return errorMessage;
   }
 
-  @override
   bool hasChanged() {
     return widget.currentUser.getGender != selectedGender;
   }

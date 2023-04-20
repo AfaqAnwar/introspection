@@ -1,4 +1,5 @@
 import 'package:datingapp/data/custom_user.dart';
+import 'package:datingapp/pages/registration/registration_tabs/information_tab.dart';
 import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:group_button/group_button.dart';
@@ -13,7 +14,7 @@ class ChildrenTab extends StatefulWidget {
   State<ChildrenTab> createState() => ChildrenTabState();
 }
 
-class ChildrenTabState extends State<ChildrenTab> {
+class ChildrenTabState extends State<ChildrenTab> with InformationTab {
   final hasChildrenController = GroupButtonController();
   final childrenPreferencesController = GroupButtonController();
 
@@ -47,6 +48,7 @@ class ChildrenTabState extends State<ChildrenTab> {
     super.initState();
   }
 
+  @override
   String getErrorMessage() {
     if (childrenPreference.isEmpty && hasChildren == null) {
       errorMessage =
@@ -59,7 +61,8 @@ class ChildrenTabState extends State<ChildrenTab> {
     return errorMessage;
   }
 
-  bool validateChildrenQuestions() {
+  @override
+  bool validate() {
     if (hasChildren != null && childrenPreference.isNotEmpty) {
       return true;
     } else {
@@ -67,7 +70,8 @@ class ChildrenTabState extends State<ChildrenTab> {
     }
   }
 
-  void updateChildrenQuestions() {
+  @override
+  void updateUserInformation() {
     widget.currentUser.setHasChildren = hasChildren;
     widget.currentUser.setChildrenPreference = childrenPreference;
   }
@@ -75,6 +79,12 @@ class ChildrenTabState extends State<ChildrenTab> {
   @override
   String toStringShort() {
     return getErrorMessage();
+  }
+
+  @override
+  bool hasChanged() {
+    return hasChildren != widget.currentUser.getHasChildren ||
+        childrenPreference != widget.currentUser.getChildrenPreference;
   }
 
   @override

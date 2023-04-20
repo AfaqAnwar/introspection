@@ -160,8 +160,8 @@ class RegisterPageState extends State<RegisterPageHost> {
         _genderTabKey.currentState!.updateUserInformation();
         return _genderTabKey.currentState!.validate();
       case 6:
-        _genderPreferenceTabKey.currentState!.updateUserGenderPreference();
-        return _genderPreferenceTabKey.currentState!.validateGenderPreference();
+        _genderPreferenceTabKey.currentState!.updateUserInformation();
+        return _genderPreferenceTabKey.currentState!.validate();
       case 7:
         _heightTabKey.currentState!.updateUserInformation();
         return true;
@@ -169,8 +169,8 @@ class RegisterPageState extends State<RegisterPageHost> {
         _ethnicityTabKey.currentState!.updateUserEthnicities();
         return _ethnicityTabKey.currentState!.validateEthnicities();
       case 9:
-        _childrenTabKey.currentState!.updateChildrenQuestions();
-        return _childrenTabKey.currentState!.validateChildrenQuestions();
+        _childrenTabKey.currentState!.updateUserInformation();
+        return _childrenTabKey.currentState!.validate();
       case 10:
         _hometownTabKey.currentState!.updateUserInformation();
         return _hometownTabKey.currentState!.validate();
