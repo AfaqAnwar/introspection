@@ -21,16 +21,15 @@ class _HomePageHostState extends State<HomePageHost>
   var currentIndex = 1;
   late List<CustomUser> potentialMatches;
   late List<CustomUser> matches;
-  late Future<bool> isBuilt;
+  late Future<bool>? built;
 
   @override
   void initState() {
-    super.initState();
-    isBuilt = Future.value(false);
     _pageController = PageController(initialPage: 1);
     potentialMatches = [];
     matches = [];
     getMatches();
+    super.initState();
   }
 
   @override
@@ -49,7 +48,7 @@ class _HomePageHostState extends State<HomePageHost>
     await buildMatches().then((value) => () {
           matches = value;
         });
-    isBuilt = Future.value(true);
+    built = Future.value(true);
   }
 
   Future<List<CustomUser>> buildMatches() async {
@@ -89,9 +88,9 @@ class _HomePageHostState extends State<HomePageHost>
   Widget build(BuildContext context) {
     super.build(context);
     return FutureBuilder(
-        future: isBuilt,
+        future: built,
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-          if (snapshot.data == true) {
+          if (snapshot.hasData) {
             return Scaffold(
               body: buildContentOfTab(currentIndex),
               bottomNavigationBar: BottomNavigationBar(
