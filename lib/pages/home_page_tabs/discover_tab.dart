@@ -88,7 +88,12 @@ class _DiscoverTabState extends State<DiscoverTab>
               if (checkIfLikeIsMutual(widget.potentialMatches[i])) {
                 widget.currentUser
                     .addMatchedUserID(widget.potentialMatches[i].getUid);
+                widget.potentialMatches[i]
+                    .addMatchedUserID(widget.currentUser.getUid);
+
                 await updater.updateUserDetails("Matched User IDS");
+                await updater.updateSpecifiedUsersDetails(
+                    widget.potentialMatches[i], "Matched User IDS");
               }
               widget.currentUser
                   .addLikedUserID(widget.potentialMatches[i].getUid);

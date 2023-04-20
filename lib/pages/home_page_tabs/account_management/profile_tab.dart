@@ -1,9 +1,11 @@
 import 'dart:io';
 
 import 'package:datingapp/components/profile_tab_components/profile_row_tile.dart';
+import 'package:datingapp/components/profile_tab_components/styled_button_custom_size.dart';
 import 'package:datingapp/data/custom_user.dart';
 import 'package:datingapp/pages/home_page_tabs/account_management/personal_information.dart';
 import 'package:datingapp/style/app_style.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -89,6 +91,16 @@ class _ProfileTabState extends State<ProfileTab> {
                   text: "Help Center",
                   icon: CupertinoIcons.question,
                   onTap: null),
+              const Spacer(),
+              StyledSizedButton(
+                  onTap: () {
+                    FirebaseAuth.instance.signOut();
+                  },
+                  buttonColor: AppStyle.red900,
+                  buttonText: "Sign Out",
+                  height: 25,
+                  horizontalMargin: 125),
+              const Spacer()
             ],
           ),
         ));

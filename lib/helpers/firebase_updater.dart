@@ -106,4 +106,101 @@ class FirebaseUpdater {
 
     return "Success";
   }
+
+  Future updateSpecifiedUsersDetails(CustomUser user, String field) async {
+    DocumentReference ref =
+        FirebaseFirestore.instance.collection('users').doc(user.getUid);
+    switch (field) {
+      case "First Name":
+        ref.update({'First Name': user.getFirstName});
+        break;
+      case "Last Name":
+        ref.update({'Last Name': user.getLastName});
+        break;
+      case "Email":
+        ref.update({'Email': user.getEmail});
+        break;
+      case "DOB":
+        ref.update({'DOB': user.getDob});
+        break;
+      case "Zip Code":
+        ref.update({'Zip Code': user.getZipcode});
+        break;
+      case "City":
+        ref.update({'City': user.getCity});
+        break;
+      case "State":
+        ref.update({'State': user.getState});
+        break;
+      case "Country":
+        ref.update({'Country': user.getCountry});
+        break;
+      case "Gender":
+        ref.update({'Gender': user.getGender});
+        break;
+      case "Gender Preference":
+        ref.update({'Gender  Preference': user.getGenderPreference});
+        break;
+      case "Height":
+        ref.update({'Height': user.getHeight});
+        break;
+      case "Ethnicities":
+        List<dynamic> ethnicities = user.getEthnicities;
+        ref.update({'Ethnicities': ethnicities});
+        break;
+      case "Has Children":
+        ref.update({'Has Children': user.getHasChildren});
+        break;
+      case "Wants Children":
+        ref.update({'Wants Children': user.getChildrenPreference});
+        break;
+      case "Hometown":
+        ref.update({'Hometown': user.getHometown});
+        break;
+      case "Work":
+        ref.update({'Work': user.getWork});
+        break;
+      case "Job Title":
+        ref.update({'Job Title': user.getJobTitle});
+        break;
+      case "School":
+        ref.update({'School': user.getSchool});
+        break;
+      case "Education Level":
+        ref.update({'Education Level': user.getEducationLevel});
+        break;
+      case "Religion":
+        ref.update({'Religion': user.getReligion});
+        break;
+      case "Political Belief":
+        ref.update({'Political Belief': user.getPoliticalBelief});
+        break;
+      case "Alcohol Preference":
+        ref.update({'Alcohol Preference': user.getAlcoholPreference});
+        break;
+      case "Smoking Preference":
+        ref.update({'Smoking Preference': user.getSmokePreference});
+        break;
+      case "Drugs Preference":
+        ref.update({'Drugs Preference': user.getDrugPreference});
+        break;
+      case "Weed Preference":
+        ref.update({'Weed Preference': user.getWeedPreference});
+        break;
+      case "Personality Type":
+        ref.update({'Personality Type': user.getPersonalityType});
+        break;
+      case "Liked User IDS":
+        ref.update({'Liked User IDS': user.getLikedUserIDS});
+        break;
+      case "Disliked User IDS":
+        ref.update({'Disliked User IDS': user.getDislikedUserIDS});
+        break;
+      case "Matched User IDS":
+        ref.update({'Matched User IDS': user.getMatchedUserIDS});
+        break;
+    }
+
+    return "Success";
+  }
 }
