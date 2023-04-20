@@ -21,7 +21,7 @@ class _HomePageHostState extends State<HomePageHost>
   var currentIndex = 1;
   late List<CustomUser> potentialMatches;
   late List<CustomUser> matches;
-  late Future<bool>? built;
+  Future<bool>? built = Future.value(false);
 
   @override
   void initState() {
