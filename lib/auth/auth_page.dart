@@ -40,7 +40,6 @@ class AuthPage extends StatelessWidget {
                 stream: FirebaseAuth.instance.authStateChanges(),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
-                    print("${futureSnapshot.hasData}built");
                     if (user.getPersonalityType.isEmpty) {
                       return PersonailtyChatPage(
                         currentUser: user,
@@ -51,14 +50,15 @@ class AuthPage extends StatelessWidget {
                       );
                     }
                   }
-                  print("${futureSnapshot.hasData}Loading");
-                  return Center(
-                    child: CircularProgressIndicator(color: AppStyle.red900),
+                  return Scaffold(
+                    backgroundColor: Colors.white,
+                    body: Center(
+                      child: CircularProgressIndicator(color: AppStyle.red900),
+                    ),
                   );
                 }),
           );
         } else {
-          print(futureSnapshot.hasData);
           return const LoginPage();
         }
       },
