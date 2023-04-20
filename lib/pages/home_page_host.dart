@@ -21,13 +21,16 @@ class _HomePageHostState extends State<HomePageHost>
   var currentIndex = 1;
   late List<CustomUser> potentialMatches;
   late List<CustomUser> matches;
+  late Future<bool> isBuilt;
 
   @override
   void initState() {
     super.initState();
+    isBuilt = Future.value(false);
     _pageController = PageController(initialPage: 1);
     potentialMatches = [];
     matches = [];
+    getMatches();
   }
 
   @override
@@ -39,15 +42,19 @@ class _HomePageHostState extends State<HomePageHost>
   @override
   bool get wantKeepAlive => true;
 
-  Future getMatches() async {
+  void getMatches() async {
     DiscoveryManager discoveryManager = DiscoveryManager(widget.currentUser);
     await discoveryManager.discover();
     potentialMatches = discoveryManager.getPotentialMatches();
-    await buildMatches().then((value) => matches = value);
+    await buildMatches().then((value) => () {
+          matches = value;
+        });
+    isBuilt = Future.value(true);
   }
 
   Future<List<CustomUser>> buildMatches() async {
     List<CustomUser> matches = [];
+    if (widget.currentUser.getMatchedUserIDS.isEmpty) return matches;
     for (var match in widget.currentUser.getMatchedUserIDS) {
       FirebaseUserBuilder builder = FirebaseUserBuilder(match);
       CustomUser user = CustomUser();
@@ -78,16 +85,11 @@ class _HomePageHostState extends State<HomePageHost>
     );
   }
 
-  Future checkForData() async {
-    await getMatches();
-    return widget.currentUser.isBuilt();
-  }
-
   @override
   Widget build(BuildContext context) {
     super.build(context);
     return FutureBuilder(
-        future: checkForData(),
+        future: isBuilt,
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           if (snapshot.data == true) {
             return Scaffold(
@@ -130,9 +132,12 @@ class _HomePageHostState extends State<HomePageHost>
                 ],
               ),
             );
-          } else {
-            return const Center(child: CircularProgressIndicator());
           }
+          return Scaffold(
+            body: Center(
+              child: CircularProgressIndicator(color: AppStyle.red900),
+            ),
+          );
         });
   }
 
