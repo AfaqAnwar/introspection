@@ -21,14 +21,13 @@ class _HomePageHostState extends State<HomePageHost>
   var currentIndex = 1;
   late List<CustomUser> potentialMatches;
   late List<CustomUser> matches;
-  Future<bool>? built = Future.value(false);
 
   @override
   void initState() {
     _pageController = PageController(initialPage: 1);
     potentialMatches = [];
     matches = [];
-    getMatches();
+
     super.initState();
   }
 
@@ -41,14 +40,12 @@ class _HomePageHostState extends State<HomePageHost>
   @override
   bool get wantKeepAlive => true;
 
-  void getMatches() async {
+  Future getMatches() async {
     DiscoveryManager discoveryManager = DiscoveryManager(widget.currentUser);
     await discoveryManager.discover();
     potentialMatches = discoveryManager.getPotentialMatches();
-    await buildMatches().then((value) => () {
-          matches = value;
-        });
-    built = Future.value(true);
+    await buildMatches().then((value) => matches = value);
+    return true;
   }
 
   Future<List<CustomUser>> buildMatches() async {
@@ -88,7 +85,7 @@ class _HomePageHostState extends State<HomePageHost>
   Widget build(BuildContext context) {
     super.build(context);
     return FutureBuilder(
-        future: built,
+        future: getMatches(),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           if (snapshot.hasData) {
             return Scaffold(
