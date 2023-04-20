@@ -1,6 +1,10 @@
 class PersonalityClassifer {
   late Map<String, double> personalityMap;
   late int statusCode;
+  late String extraversionIntroversion;
+  late String sensingIntuition;
+  late String thinkingFeeling;
+  late String judgingPerceiving;
 
   PersonalityClassifer(Map<String, double> map) {
     personalityMap = map;
@@ -13,35 +17,39 @@ class PersonalityClassifer {
       switch (key) {
         case "extraversion":
           if (personalityMap[key]! > 0.5) {
-            personality += "E";
+            extraversionIntroversion = "E";
           } else {
-            personality += "I";
+            extraversionIntroversion = "I";
           }
           break;
         case "imaginative":
           if (personalityMap[key]! > 0.5) {
-            personality += "N";
+            sensingIntuition = "N";
           } else {
-            personality += "S";
+            sensingIntuition = "S";
           }
           break;
         case "emotionally_aware":
           if (personalityMap[key]! > 0.5) {
-            personality += "F";
+            thinkingFeeling = "F";
           } else {
-            personality += "T";
+            thinkingFeeling = "T";
           }
           break;
         case "disciplined":
           if (personalityMap[key]! > 0.5) {
-            personality += "J";
+            judgingPerceiving = "P";
           } else {
-            personality += "P";
+            judgingPerceiving = "J";
           }
           break;
       }
     }
 
+    personality = extraversionIntroversion +
+        sensingIntuition +
+        thinkingFeeling +
+        judgingPerceiving;
     return personality;
   }
 }

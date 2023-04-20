@@ -63,7 +63,7 @@ class _HomePageHostState extends State<HomePageHost>
 
   Future checkForData() async {
     await getMatches();
-    return widget.currentUser.isBuilt() && matches.isNotEmpty;
+    return widget.currentUser.isBuilt();
   }
 
   @override

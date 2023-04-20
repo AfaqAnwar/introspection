@@ -63,10 +63,12 @@ class DiscoveryManager {
   }
 
   Future buildUsers(List<String> ids) async {
-    for (int i = 0; i < ids.length; i++) {
-      FirebaseUserBuilder builder = FirebaseUserBuilder(ids[i]);
-      CustomUser user = await builder.buildUser();
-      potentialMatches.add(user);
+    if (ids.isNotEmpty) {
+      for (int i = 0; i < ids.length; i++) {
+        FirebaseUserBuilder builder = FirebaseUserBuilder(ids[i]);
+        CustomUser user = await builder.buildUser();
+        potentialMatches.add(user);
+      }
     }
   }
 
