@@ -51,7 +51,7 @@ class RegisterBufferState extends State<RegisterBuffer>
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Align(
+                Align(
                   alignment: Alignment.centerLeft,
                   child: Wrap(children: [
                     Padding(
@@ -70,7 +70,7 @@ class RegisterBufferState extends State<RegisterBuffer>
                   ]),
                 ),
                 const SizedBox(height: 20),
-                const Align(
+                Align(
                   alignment: Alignment.centerLeft,
                   child: Wrap(children: [
                     Padding(

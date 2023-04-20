@@ -69,7 +69,7 @@ class DrugPreferenceTabState extends State<DrugPreferenceTab>
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Align(
+        Align(
           alignment: Alignment.centerLeft,
           child: Wrap(
             children: [

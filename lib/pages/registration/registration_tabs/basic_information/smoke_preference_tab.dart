@@ -70,7 +70,7 @@ class SmokePreferenceTabState extends State<SmokePreferenceTab>
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Wrap(
+        Wrap(
           children: [
             Align(
               alignment: Alignment.centerLeft,

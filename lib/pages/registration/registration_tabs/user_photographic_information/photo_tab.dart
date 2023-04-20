@@ -57,7 +57,7 @@ class PhotoTabState extends State<PhotoTab> {
     return Column(
       children: [
         const SizedBox(height: 25),
-        const Wrap(children: [
+        Wrap(children: [
           Align(
             alignment: Alignment.centerLeft,
             child: Padding(

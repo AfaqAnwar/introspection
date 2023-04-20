@@ -228,7 +228,7 @@ class FinalizationBufferState extends State<FinalizationBuffer>
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Align(
+                Align(
                   alignment: Alignment.centerLeft,
                   child: Wrap(children: [
                     Padding(
@@ -247,7 +247,7 @@ class FinalizationBufferState extends State<FinalizationBuffer>
                   ]),
                 ),
                 const SizedBox(height: 20),
-                const Align(
+                Align(
                   alignment: Alignment.centerLeft,
                   child: Wrap(children: [
                     Padding(
