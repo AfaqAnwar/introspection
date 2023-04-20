@@ -74,6 +74,7 @@ class CustomUser {
     buildAccountFieldsList();
     likedUserIDS = [];
     dislikedUserIDS = [];
+    matchIDS = [];
   }
 
   String get getUid {
