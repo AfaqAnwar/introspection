@@ -37,7 +37,6 @@ class _HomePageHostState extends State<HomePageHost>
   void dispose() {
     _pageController.dispose();
     super.dispose();
-    getMatches();
   }
 
   @override
