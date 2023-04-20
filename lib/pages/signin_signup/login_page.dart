@@ -74,8 +74,7 @@ class _LoginPageState extends State<LoginPage> {
             email: emailController.text, password: passwordController.text);
         // ignore: use_build_context_synchronously
         Navigator.pop(context);
-        Future.delayed(const Duration(milliseconds: 0), () {
-          // ignore: use_build_context_synchronously
+        Future.delayed(const Duration(milliseconds: 500), () {
           Navigator.pushReplacement(
               context,
               PageTransition(

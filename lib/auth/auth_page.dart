@@ -3,6 +3,7 @@ import 'package:datingapp/helpers/firebase_login_helper.dart';
 import 'package:datingapp/helpers/firebase_storage_manager.dart';
 import 'package:datingapp/pages/future_home_buffer_builder.dart';
 import 'package:datingapp/pages/personaility_chat/personailty_chat_page.dart';
+import 'package:datingapp/pages/signin_signup/login_page.dart';
 import 'package:datingapp/style/app_style.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -39,6 +40,7 @@ class AuthPage extends StatelessWidget {
                 stream: FirebaseAuth.instance.authStateChanges(),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
+                    print("${futureSnapshot.hasData}built");
                     if (user.getPersonalityType.isEmpty) {
                       return PersonailtyChatPage(
                         currentUser: user,
@@ -49,18 +51,15 @@ class AuthPage extends StatelessWidget {
                       );
                     }
                   }
+                  print("${futureSnapshot.hasData}Loading");
                   return Center(
                     child: CircularProgressIndicator(color: AppStyle.red900),
                   );
                 }),
           );
         } else {
-          return Scaffold(
-            backgroundColor: Colors.white,
-            body: Center(
-              child: CircularProgressIndicator(color: AppStyle.red900),
-            ),
-          );
+          print(futureSnapshot.hasData);
+          return const LoginPage();
         }
       },
     );
