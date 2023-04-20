@@ -2,7 +2,7 @@ import 'package:datingapp/data/custom_user.dart';
 import 'package:datingapp/helpers/firebase_manager.dart';
 import 'package:datingapp/helpers/firebase_updater.dart';
 import 'package:datingapp/helpers/personality_classifier.dart';
-import 'package:datingapp/pages/home_page_host.dart';
+import 'package:datingapp/pages/future_home_buffer_builder.dart';
 import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -218,7 +218,8 @@ class _PersonailtyPredictionResultPage
                           Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
-                                builder: (BuildContext context) => HomePageHost(
+                                builder: (BuildContext context) =>
+                                    FutureHomeBufferBuilder(
                                       currentUser: widget.currentUser,
                                     )),
                             ModalRoute.withName('/'),

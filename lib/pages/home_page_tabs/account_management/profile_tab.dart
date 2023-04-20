@@ -6,6 +6,7 @@ import 'package:datingapp/data/custom_user.dart';
 import 'package:datingapp/pages/home_page_tabs/account_management/account_page.dart';
 import 'package:datingapp/pages/home_page_tabs/account_management/personal_information_page.dart';
 import 'package:datingapp/pages/home_page_tabs/account_management/preferences_page.dart';
+import 'package:datingapp/pages/signin_signup/login_page.dart';
 import 'package:datingapp/style/app_style.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -112,7 +113,16 @@ class _ProfileTabState extends State<ProfileTab> {
               const Spacer(),
               StyledSizedButton(
                   onTap: () {
-                    FirebaseAuth.instance.signOut();
+                    setState(() {
+                      FirebaseAuth.instance.signOut();
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                const LoginPage()),
+                        ModalRoute.withName('/'),
+                      );
+                    });
                   },
                   buttonColor: AppStyle.red900,
                   buttonText: "Sign Out",

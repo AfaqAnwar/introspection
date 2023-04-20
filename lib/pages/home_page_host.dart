@@ -1,6 +1,4 @@
 import 'package:datingapp/data/custom_user.dart';
-import 'package:datingapp/helpers/discovery_manager.dart';
-import 'package:datingapp/helpers/firebase_user_builder.dart';
 import 'package:datingapp/pages/home_page_tabs/account_management/profile_tab.dart';
 import 'package:datingapp/pages/home_page_tabs/discover_tab.dart';
 import 'package:datingapp/pages/home_page_tabs/message_tab.dart';
@@ -9,7 +7,13 @@ import 'package:flutter/material.dart';
 
 class HomePageHost extends StatefulWidget {
   final CustomUser currentUser;
-  const HomePageHost({super.key, required this.currentUser});
+  final List<CustomUser> potentialMatches;
+  final List<CustomUser> matches;
+  const HomePageHost(
+      {super.key,
+      required this.currentUser,
+      required this.potentialMatches,
+      required this.matches});
 
   @override
   State<HomePageHost> createState() => _HomePageHostState();
@@ -25,8 +29,8 @@ class _HomePageHostState extends State<HomePageHost>
   @override
   void initState() {
     _pageController = PageController(initialPage: 1);
-    potentialMatches = [];
-    matches = [];
+    potentialMatches = widget.potentialMatches;
+    matches = widget.matches;
     super.initState();
   }
 
@@ -38,26 +42,6 @@ class _HomePageHostState extends State<HomePageHost>
 
   @override
   bool get wantKeepAlive => true;
-
-  Future getMatches() async {
-    DiscoveryManager discoveryManager = DiscoveryManager(widget.currentUser);
-    await discoveryManager.discover();
-    potentialMatches = discoveryManager.getPotentialMatches();
-    await buildMatches().then((value) => matches = value);
-    return true;
-  }
-
-  Future<List<CustomUser>> buildMatches() async {
-    List<CustomUser> matches = [];
-    if (widget.currentUser.getMatchedUserIDS.isEmpty) return matches;
-    for (var match in widget.currentUser.getMatchedUserIDS) {
-      FirebaseUserBuilder builder = FirebaseUserBuilder(match);
-      CustomUser user = CustomUser();
-      await builder.buildUser().then((value) => user = value);
-      matches.add(user);
-    }
-    return matches;
-  }
 
   Widget buildContentOfTab(int index) {
     return PageView(
@@ -83,57 +67,46 @@ class _HomePageHostState extends State<HomePageHost>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return FutureBuilder(
-        future: getMatches(),
-        builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-          if (snapshot.hasData) {
-            return Scaffold(
-              body: buildContentOfTab(currentIndex),
-              bottomNavigationBar: BottomNavigationBar(
-                elevation: 0,
-                iconSize: 24,
-                type: BottomNavigationBarType.fixed,
-                backgroundColor: Colors.white,
-                showUnselectedLabels: false,
-                showSelectedLabels: false,
-                currentIndex: currentIndex,
-                onTap: _onItemTapped,
-                items: [
-                  BottomNavigationBarItem(
-                      icon: Image.asset(
-                        'assets/icons/chat.png',
-                        width: 24,
-                        height: 24,
-                        color: AppStyle.red800,
-                      ),
-                      label: "Messages"),
-                  BottomNavigationBarItem(
-                    icon: Image.asset(
-                      'assets/icons/heart.png',
-                      width: 24,
-                      height: 24,
-                      color: AppStyle.red800,
-                    ),
-                    label: "Discover",
-                  ),
-                  BottomNavigationBarItem(
-                      icon: Image.asset(
-                        'assets/icons/account.png',
-                        width: 24,
-                        height: 24,
-                        color: AppStyle.red800,
-                      ),
-                      label: "Profile"),
-                ],
+    return Scaffold(
+      body: buildContentOfTab(currentIndex),
+      bottomNavigationBar: BottomNavigationBar(
+        elevation: 0,
+        iconSize: 24,
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: Colors.white,
+        showUnselectedLabels: false,
+        showSelectedLabels: false,
+        currentIndex: currentIndex,
+        onTap: _onItemTapped,
+        items: [
+          BottomNavigationBarItem(
+              icon: Image.asset(
+                'assets/icons/chat.png',
+                width: 24,
+                height: 24,
+                color: AppStyle.red800,
               ),
-            );
-          }
-          return Scaffold(
-            body: Center(
-              child: CircularProgressIndicator(color: AppStyle.red900),
+              label: "Messages"),
+          BottomNavigationBarItem(
+            icon: Image.asset(
+              'assets/icons/heart.png',
+              width: 24,
+              height: 24,
+              color: AppStyle.red800,
             ),
-          );
-        });
+            label: "Discover",
+          ),
+          BottomNavigationBarItem(
+              icon: Image.asset(
+                'assets/icons/account.png',
+                width: 24,
+                height: 24,
+                color: AppStyle.red800,
+              ),
+              label: "Profile"),
+        ],
+      ),
+    );
   }
 
   void _onItemTapped(int index) {

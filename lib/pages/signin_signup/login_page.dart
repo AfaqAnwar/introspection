@@ -1,3 +1,4 @@
+import 'package:datingapp/auth/auth_page.dart';
 import 'package:datingapp/components/login_page_components/login_textfield.dart';
 import 'package:datingapp/components/login_page_components/login_tile.dart';
 import 'package:datingapp/components/login_page_components/styled_button.dart';
@@ -62,8 +63,10 @@ class _LoginPageState extends State<LoginPage> {
       showDialog(
           context: context,
           builder: (context) {
-            return const Center(
-              child: CircularProgressIndicator(),
+            return Center(
+              child: CircularProgressIndicator(
+                color: AppStyle.red900,
+              ),
             );
           });
       try {
@@ -71,6 +74,14 @@ class _LoginPageState extends State<LoginPage> {
             email: emailController.text, password: passwordController.text);
         // ignore: use_build_context_synchronously
         Navigator.pop(context);
+        Future.delayed(const Duration(milliseconds: 0), () {
+          // ignore: use_build_context_synchronously
+          Navigator.pushReplacement(
+              context,
+              PageTransition(
+                  child: const AuthPage(),
+                  type: PageTransitionType.rightToLeftWithFade));
+        });
       } on FirebaseAuthException catch (e) {
         Navigator.pop(context);
         String errorMessage = "";

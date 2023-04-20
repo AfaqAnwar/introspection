@@ -1,9 +1,9 @@
 import 'package:datingapp/data/custom_user.dart';
 import 'package:datingapp/helpers/firebase_login_helper.dart';
 import 'package:datingapp/helpers/firebase_storage_manager.dart';
-import 'package:datingapp/pages/home_page_host.dart';
+import 'package:datingapp/pages/future_home_buffer_builder.dart';
 import 'package:datingapp/pages/personaility_chat/personailty_chat_page.dart';
-import 'package:datingapp/pages/signin_signup/login_page.dart';
+import 'package:datingapp/style/app_style.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -44,18 +44,23 @@ class AuthPage extends StatelessWidget {
                         currentUser: user,
                       );
                     } else if (user.isBuilt()) {
-                      return HomePageHost(
+                      return FutureHomeBufferBuilder(
                         currentUser: user,
                       );
                     }
-                    return const LoginPage();
-                  } else {
-                    return const LoginPage();
                   }
+                  return Center(
+                    child: CircularProgressIndicator(color: AppStyle.red900),
+                  );
                 }),
           );
         } else {
-          return const LoginPage();
+          return Scaffold(
+            backgroundColor: Colors.white,
+            body: Center(
+              child: CircularProgressIndicator(color: AppStyle.red900),
+            ),
+          );
         }
       },
     );
