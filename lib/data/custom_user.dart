@@ -35,6 +35,9 @@ class CustomUser {
   late List<String> preferenceFields;
   late List<String> accountFields;
 
+  late List<String> likedUserIDS;
+  late List<String> dislikedUserIDS;
+
   CustomUser() {
     uid = "";
     firstName = "";
@@ -68,6 +71,8 @@ class CustomUser {
     accountFields = [];
     buildPreferenceFieldsList();
     buildAccountFieldsList();
+    likedUserIDS = [];
+    dislikedUserIDS = [];
   }
 
   String get getUid {
@@ -353,5 +358,37 @@ class CustomUser {
     accountFields.add("Smoking Preference");
     accountFields.add("Weed Preference");
     accountFields.add("Drugs Preference");
+  }
+
+  List<String> get getLikedUserIDS {
+    return likedUserIDS;
+  }
+
+  void addLikedUserID(String id) {
+    likedUserIDS.add(id);
+  }
+
+  void removeLikedUserID(String id) {
+    likedUserIDS.remove(id);
+  }
+
+  List<String> get getDislikedUserIDS {
+    return dislikedUserIDS;
+  }
+
+  void addDislikedUserID(String id) {
+    dislikedUserIDS.add(id);
+  }
+
+  void removeDislikedUserID(String id) {
+    dislikedUserIDS.remove(id);
+  }
+
+  set setLikedUserIDS(List<String> ids) {
+    likedUserIDS = ids;
+  }
+
+  set setDislikedUserIDS(List<String> ids) {
+    dislikedUserIDS = ids;
   }
 }

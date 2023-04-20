@@ -55,6 +55,8 @@ class FirebaseRegistrationHelper {
       'Drugs Preference': currentUser.getDrugPreference,
       'Weed Preference': currentUser.getWeedPreference,
       'Personality Type': currentUser.getPersonalityType,
+      'Liked User IDS': [],
+      'Disliked User IDS': [],
     });
   }
 

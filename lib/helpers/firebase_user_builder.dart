@@ -43,6 +43,9 @@ class FirebaseUserBuilder {
       user.setSmokePreference = data.get('Smoking Preference');
       user.setDrugPreference = data.get('Drugs Preference');
       user.setPersonalityType = data.get('Personality Type');
+      user.setLikedUserIDS = decodeDynamicList(data.get('Liked User IDS'));
+      user.setDislikedUserIDS =
+          decodeDynamicList(data.get('Disliked User IDS'));
 
       FirebaseStorageManager storageManager = FirebaseStorageManager(userID);
 

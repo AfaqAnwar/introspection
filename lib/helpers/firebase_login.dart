@@ -41,6 +41,9 @@ class FirebaseLoginHelper {
     currentUser.setSmokePreference = data.get('Smoking Preference');
     currentUser.setDrugPreference = data.get('Drugs Preference');
     currentUser.setPersonalityType = data.get('Personality Type');
+    currentUser.setLikedUserIDS = decodeDynamicList(data.get('Liked User IDS'));
+    currentUser.setDislikedUserIDS =
+        decodeDynamicList(data.get('Disliked User IDS'));
   }
 
   CustomUser getCurrentUser() {
@@ -48,10 +51,10 @@ class FirebaseLoginHelper {
   }
 
   List<String> decodeDynamicList(List<dynamic> data) {
-    List<String> ethnicities = [];
+    List<String> dataAsString = [];
     for (int i = 0; i < data.length; i++) {
-      ethnicities.add(data[i].toString());
+      dataAsString.add(data[i].toString());
     }
-    return ethnicities;
+    return dataAsString;
   }
 }

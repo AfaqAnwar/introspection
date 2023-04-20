@@ -94,6 +94,12 @@ class FirebaseUpdater {
       case "Personality Type":
         ref.update({'Personality Type': currentUser.getPersonalityType});
         break;
+      case "Liked User IDS":
+        ref.update({'Liked User IDS': currentUser.getLikedUserIDS});
+        break;
+      case "Disliked User IDS":
+        ref.update({'Disliked User IDS': currentUser.getDislikedUserIDS});
+        break;
     }
 
     return "Success";
