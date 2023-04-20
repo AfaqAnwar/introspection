@@ -21,6 +21,16 @@ class ProfileTab extends StatefulWidget {
 }
 
 class _ProfileTabState extends State<ProfileTab> {
+  late String firstName;
+  late String lastName;
+
+  @override
+  void initState() {
+    firstName = widget.currentUser.getFirstName;
+    lastName = widget.currentUser.getLastName;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -93,7 +103,10 @@ class _ProfileTabState extends State<ProfileTab> {
                       MaterialPageRoute(
                           builder: (context) => PersonalInformationPage(
                               currentUser: widget.currentUser)),
-                    );
+                    ).then((value) => setState(() {
+                          firstName = widget.currentUser.getFirstName;
+                          lastName = widget.currentUser.getLastName;
+                        }));
                   }),
               ProfileRowTile(
                   text: "Preferences",
