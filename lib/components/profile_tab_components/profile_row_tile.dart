@@ -9,7 +9,8 @@ class ProfileRowTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
+      enableFeedback: false,
       onTap: onTap,
       child: Column(children: [
         const SizedBox(height: 10),
