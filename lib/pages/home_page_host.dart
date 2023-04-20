@@ -27,7 +27,6 @@ class _HomePageHostState extends State<HomePageHost>
     _pageController = PageController(initialPage: 1);
     potentialMatches = [];
     matches = [];
-    getMatches();
     super.initState();
   }
 
