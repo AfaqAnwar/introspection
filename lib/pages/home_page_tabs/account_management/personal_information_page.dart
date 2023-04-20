@@ -256,10 +256,42 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
                     fields);
                 break;
             }
-          }));
+          },
+          icon: getIcon(field)));
     }
 
     return tiles;
+  }
+
+  IconData getIcon(String field) {
+    switch (field) {
+      case "Name":
+        return CupertinoIcons.person_alt;
+      case "Height":
+        return Icons.height;
+      case "Hometown":
+        return CupertinoIcons.house_fill;
+      case "Work":
+        return CupertinoIcons.briefcase_fill;
+      case "Job Title":
+        return CupertinoIcons.briefcase_fill;
+      case "School":
+        return Icons.school;
+      case "Education Level":
+        return CupertinoIcons.book_fill;
+      case "Political Belief":
+        return CupertinoIcons.flag_fill;
+      case "Alcohol Preference":
+        return Icons.local_bar;
+      case "Smoking Preference":
+        return Icons.smoking_rooms;
+      case "Weed Preference":
+        return Icons.grass;
+      case "Drugs Preference":
+        return Icons.medical_services;
+      default:
+        return CupertinoIcons.heart_fill;
+    }
   }
 
   bool checkIfUserIsLoggedIn() {

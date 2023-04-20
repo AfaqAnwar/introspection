@@ -1,48 +1,43 @@
 import 'package:datingapp/components/registration_authentication_components/registration_textfield.dart';
 import 'package:datingapp/data/custom_user.dart';
 import 'package:datingapp/pages/registration/registration_tabs/information_tab.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class EmailTab extends StatefulWidget {
+class PasswordPage extends StatefulWidget {
   final CustomUser currentUser;
   final Function() updateIndex;
-  const EmailTab(
+  const PasswordPage(
       {super.key, required this.currentUser, required this.updateIndex});
 
   @override
-  State<EmailTab> createState() => EmailTabState();
+  State<PasswordPage> createState() => PasswordPageState();
 }
 
-class EmailTabState extends State<EmailTab> with InformationTab {
-  final emailTextController = TextEditingController();
+class PasswordPageState extends State<PasswordPage> with InformationTab {
+  final password = TextEditingController();
+  final confirmedPassword = TextEditingController();
 
   String errorMessage = "";
 
   @override
   void initState() {
     super.initState();
-    if (widget.currentUser.firstName.isNotEmpty) {
-      emailTextController.text = widget.currentUser.getEmail;
-    }
   }
 
   @override
   bool validate() {
-    if (!emailTextController.text.toString().trim().contains("@")) {
-      errorMessage = "Please enter a valid email address.";
+    if (password.text.trim().isEmpty) {
+      errorMessage = "Please enter a password.";
       return false;
-    } else if (!emailTextController.text.toString().trim().contains(".")) {
-      errorMessage = "Please enter a valid email address.";
+    } else if (confirmedPassword.text.trim().isEmpty) {
+      errorMessage = "Please confirm your password.";
+      return false;
+    } else if (password.text.trim() != confirmedPassword.text.trim()) {
+      errorMessage = "Passwords do not match.";
       return false;
     }
     return true;
-  }
-
-  @override
-  void updateUserInformation() {
-    if (validate() == true) {
-      widget.currentUser.setEmail = emailTextController.text.toString().trim();
-    }
   }
 
   @override
@@ -51,14 +46,19 @@ class EmailTabState extends State<EmailTab> with InformationTab {
   }
 
   @override
-  bool hasChanged() {
-    return widget.currentUser.getEmail !=
-        emailTextController.text.toString().trim();
+  String toStringShort() {
+    return errorMessage;
   }
 
   @override
-  String toStringShort() {
-    return errorMessage;
+  Future updateUserInformation() async {
+    await FirebaseAuth.instance.currentUser!
+        .updatePassword(password.text.trim());
+  }
+
+  @override
+  bool hasChanged() {
+    return true;
   }
 
   @override
@@ -71,7 +71,7 @@ class EmailTabState extends State<EmailTab> with InformationTab {
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 25.0),
               child: Text(
-                "What's your email?",
+                "Please enter a password.",
                 textAlign: TextAlign.left,
                 style: TextStyle(
                   color: Colors.black,
@@ -85,10 +85,12 @@ class EmailTabState extends State<EmailTab> with InformationTab {
         ]),
         const SizedBox(height: 25),
         RegistrationTextField(
-            controller: emailTextController,
-            hintText: "Email",
-            obscureText: false),
-        const SizedBox(height: 100),
+            controller: password, hintText: "Password", obscureText: true),
+        const SizedBox(height: 50),
+        RegistrationTextField(
+            controller: confirmedPassword,
+            hintText: "Confirm Password",
+            obscureText: true),
       ],
     );
   }

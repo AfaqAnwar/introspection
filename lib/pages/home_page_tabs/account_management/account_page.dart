@@ -1,23 +1,24 @@
+import 'package:datingapp/auth/reauth.dart';
 import 'package:datingapp/components/profile_tab_components/profile_user_field_tile.dart';
 import 'package:datingapp/data/custom_user.dart';
 import 'package:datingapp/helpers/firebase_updater.dart';
-import 'package:datingapp/pages/registration/registration_tabs/basic_information/children_tab.dart';
-import 'package:datingapp/pages/registration/registration_tabs/basic_information/gender_preference_tab.dart';
+import 'package:datingapp/pages/home_page_tabs/account_management/password_page.dart';
 import 'package:datingapp/pages/registration/registration_tabs/information_tab.dart';
+import 'package:datingapp/pages/registration/registration_tabs/initial_information/email_tab.dart';
 import 'package:datingapp/style/app_style.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class PreferencesPage extends StatefulWidget {
+class AccountPage extends StatefulWidget {
   final CustomUser currentUser;
-  const PreferencesPage({super.key, required this.currentUser});
+  const AccountPage({super.key, required this.currentUser});
 
   @override
-  State<PreferencesPage> createState() => _PreferencesPageState();
+  State<AccountPage> createState() => _AccountPageState();
 }
 
-class _PreferencesPageState extends State<PreferencesPage> {
+class _AccountPageState extends State<AccountPage> {
   late List<Widget> tiles;
   late String error;
 
@@ -29,7 +30,7 @@ class _PreferencesPageState extends State<PreferencesPage> {
   }
 
   Future setTiles() async {
-    tiles = buildTiles(widget.currentUser.getPreferenceFields);
+    tiles = buildTiles(["Email", "Password"]);
     return true;
   }
 
@@ -51,7 +52,7 @@ class _PreferencesPageState extends State<PreferencesPage> {
                     onPressed: () {
                       Navigator.pop(context);
                     }),
-                title: Text("Preferences",
+                title: Text("Account Management",
                     style: TextStyle(
                         fontSize: 30,
                         fontWeight: FontWeight.bold,
@@ -80,26 +81,25 @@ class _PreferencesPageState extends State<PreferencesPage> {
           text: field,
           onTap: () {
             switch (field) {
-              case "Gender Preference":
+              case "Email":
                 List<String> fields = [];
-                fields.add("Gender Preference");
-                GlobalKey<GenderPreferenceTabState> key =
-                    GlobalKey<GenderPreferenceTabState>();
+                fields.add("Email");
+                GlobalKey<EmailTabState> key = GlobalKey<EmailTabState>();
                 pushToPage(
-                    GenderPreferenceTab(
+                    EmailTab(
                         key: key,
                         currentUser: widget.currentUser,
                         updateIndex: () {}),
                     key,
                     fields);
                 break;
-              case "Wants Children":
+              case "Password":
                 List<String> fields = [];
-                fields.add("Wants Children");
-                fields.add("Has Children");
-                GlobalKey<ChildrenTabState> key = GlobalKey<ChildrenTabState>();
+                fields.add("Password");
+                GlobalKey<PasswordPageState> key =
+                    GlobalKey<PasswordPageState>();
                 pushToPage(
-                    ChildrenTab(
+                    PasswordPage(
                         key: key,
                         currentUser: widget.currentUser,
                         updateIndex: () {}),
@@ -108,16 +108,18 @@ class _PreferencesPageState extends State<PreferencesPage> {
                 break;
             }
           },
-          icon: getIcons(field)));
+          icon: getIcon(field)));
     }
 
     return tiles;
   }
 
-  IconData getIcons(String field) {
+  IconData getIcon(String field) {
     switch (field) {
-      case "Gender Preference":
-        return CupertinoIcons.person_crop_circle_fill_badge_checkmark;
+      case "Email":
+        return CupertinoIcons.mail_solid;
+      case "Password":
+        return CupertinoIcons.lock_fill;
       default:
         return CupertinoIcons.heart_fill;
     }
@@ -204,10 +206,27 @@ class _PreferencesPageState extends State<PreferencesPage> {
                                               FirebaseUpdater(
                                                   widget.currentUser);
                                           for (var field in fields) {
-                                            InformationTab
-                                                .staticUpdateUserInformation();
-                                            await updater
-                                                .updateUserDetails(field);
+                                            Reauth reauth = Reauth();
+                                            await reauth.buildPopUp(context);
+                                            if (field == "Email") {
+                                              if (!reauth.didReauthFail()) {
+                                                InformationTab
+                                                    .staticUpdateUserInformation();
+                                                await updater
+                                                    .updateUserDetails(field);
+                                                await FirebaseAuth
+                                                    .instance.currentUser!
+                                                    .updateEmail(widget
+                                                        .currentUser.getEmail);
+                                              }
+                                            }
+
+                                            if (field == "Password") {
+                                              if (!reauth.didReauthFail()) {
+                                                InformationTab
+                                                    .staticUpdateUserInformation();
+                                              }
+                                            }
                                           }
                                         }
                                         Future.delayed(

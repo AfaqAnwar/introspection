@@ -3,7 +3,8 @@ import 'dart:io';
 import 'package:datingapp/components/profile_tab_components/profile_row_tile.dart';
 import 'package:datingapp/components/profile_tab_components/styled_button_custom_size.dart';
 import 'package:datingapp/data/custom_user.dart';
-import 'package:datingapp/pages/home_page_tabs/account_management/personal_information.dart';
+import 'package:datingapp/pages/home_page_tabs/account_management/account_page.dart';
+import 'package:datingapp/pages/home_page_tabs/account_management/personal_information_page.dart';
 import 'package:datingapp/pages/home_page_tabs/account_management/preferences_page.dart';
 import 'package:datingapp/style/app_style.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -72,7 +73,16 @@ class _ProfileTabState extends State<ProfileTab> {
                 color: Colors.grey[300],
               ),
               ProfileRowTile(
-                  text: "Account", icon: CupertinoIcons.settings, onTap: () {}),
+                  text: "Account",
+                  icon: CupertinoIcons.settings,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              AccountPage(currentUser: widget.currentUser)),
+                    );
+                  }),
               ProfileRowTile(
                   text: "Personal Information",
                   icon: CupertinoIcons.person_solid,

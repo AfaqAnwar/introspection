@@ -70,7 +70,7 @@ class Reauth {
 
   Future<dynamic> buildPopUp(BuildContext originalContext) {
     return showDialog(
-        barrierDismissible: true,
+        barrierDismissible: false,
         context: originalContext,
         builder: (newContext) {
           return BackdropFilter(
