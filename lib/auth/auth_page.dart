@@ -1,5 +1,5 @@
 import 'package:datingapp/data/custom_user.dart';
-import 'package:datingapp/helpers/firebase_login.dart';
+import 'package:datingapp/helpers/firebase_login_helper.dart';
 import 'package:datingapp/helpers/firebase_storage_manager.dart';
 import 'package:datingapp/pages/home_page_host.dart';
 import 'package:datingapp/pages/personaility_chat/personailty_chat_page.dart';

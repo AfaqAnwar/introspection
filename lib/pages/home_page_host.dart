@@ -1,5 +1,6 @@
 import 'package:datingapp/data/custom_user.dart';
 import 'package:datingapp/helpers/discovery_manager.dart';
+import 'package:datingapp/helpers/firebase_user_builder.dart';
 import 'package:datingapp/pages/home_page_tabs/account_management/profile_tab.dart';
 import 'package:datingapp/pages/home_page_tabs/discover_tab.dart';
 import 'package:datingapp/pages/home_page_tabs/message_tab.dart';
@@ -19,12 +20,14 @@ class _HomePageHostState extends State<HomePageHost>
   late PageController _pageController;
   var currentIndex = 1;
   late List<CustomUser> potentialMatches;
+  late List<CustomUser> matches;
 
   @override
   void initState() {
     super.initState();
     _pageController = PageController(initialPage: 1);
     potentialMatches = [];
+    matches = [];
   }
 
   @override
@@ -40,6 +43,18 @@ class _HomePageHostState extends State<HomePageHost>
     DiscoveryManager discoveryManager = DiscoveryManager(widget.currentUser);
     await discoveryManager.discover();
     potentialMatches = discoveryManager.getPotentialMatches();
+    await buildMatches().then((value) => matches = value);
+  }
+
+  Future<List<CustomUser>> buildMatches() async {
+    List<CustomUser> matches = [];
+    for (var match in widget.currentUser.getMatchedUserIDS) {
+      FirebaseUserBuilder builder = FirebaseUserBuilder(match);
+      CustomUser user = CustomUser();
+      await builder.buildUser().then((value) => user = value);
+      matches.add(user);
+    }
+    return matches;
   }
 
   Widget buildContentOfTab(int index) {
@@ -47,7 +62,7 @@ class _HomePageHostState extends State<HomePageHost>
       physics: const NeverScrollableScrollPhysics(),
       controller: _pageController,
       children: <Widget>[
-        const MessageTab(),
+        MessageTab(matches: matches),
         DiscoverTab(
             currentUser: widget.currentUser,
             potentialMatches: potentialMatches),
