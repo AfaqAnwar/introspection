@@ -72,7 +72,7 @@ class HometownTabState extends State<HometownTab> with InformationTab {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Wrap(
+        const Wrap(
           children: [
             Align(
               alignment: Alignment.centerLeft,

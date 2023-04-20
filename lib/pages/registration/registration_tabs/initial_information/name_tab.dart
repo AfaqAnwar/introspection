@@ -86,7 +86,7 @@ class NameTabState extends State<NameTab> with InformationTab {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Wrap(children: [
+        const Wrap(children: [
           Align(
             alignment: Alignment.centerLeft,
             child: Padding(

@@ -61,7 +61,7 @@ class GenderTabState extends State<GenderTab> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Wrap(
+        const Wrap(
           children: [
             Align(
               alignment: Alignment.centerLeft,

@@ -142,7 +142,7 @@ class _PersonailtyPredictionResultPage
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const SizedBox(height: 25),
-                  SafeArea(
+                  const SafeArea(
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: Wrap(children: [
@@ -163,7 +163,7 @@ class _PersonailtyPredictionResultPage
                     ),
                   ),
                   const SizedBox(height: 25),
-                  Align(
+                  const Align(
                     alignment: Alignment.centerLeft,
                     child: Wrap(children: [
                       Padding(

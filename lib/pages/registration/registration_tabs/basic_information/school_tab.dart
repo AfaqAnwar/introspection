@@ -61,7 +61,7 @@ class SchoolTabState extends State<SchoolTab> with InformationTab {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Wrap(children: [
+        const Wrap(children: [
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 25.0),
             child: Text(

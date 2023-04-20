@@ -97,7 +97,7 @@ class EthnicityTabState extends State<EthnicityTab> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Wrap(
+        const Wrap(
           children: [
             Align(
               alignment: Alignment.centerLeft,

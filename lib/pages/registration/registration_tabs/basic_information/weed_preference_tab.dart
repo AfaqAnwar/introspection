@@ -69,7 +69,7 @@ class WeedPreferenceTabState extends State<WeedPreferenceTab>
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Wrap(
+        const Wrap(
           children: [
             Align(
               alignment: Alignment.centerLeft,

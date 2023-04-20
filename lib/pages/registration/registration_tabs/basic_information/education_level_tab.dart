@@ -71,7 +71,7 @@ class EducationLevelTabState extends State<EducationLevelTab>
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Wrap(
+        const Wrap(
           children: [
             Align(
               alignment: Alignment.centerLeft,
