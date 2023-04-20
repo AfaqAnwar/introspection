@@ -1,25 +1,37 @@
 class PersonalityClassifer {
   late Map<String, double> personalityMap;
-  late int statusCode;
+  late int extroverted;
+  late int introverted;
+  late int sensing;
+  late int intuition;
+  late int thinking;
+  late int feeling;
+  late int judging;
+  late int perceiving;
   late String extraversionIntroversion;
   late String sensingIntuition;
   late String thinkingFeeling;
   late String judgingPerceiving;
+  late String personalityType;
 
   PersonalityClassifer(Map<String, double> map) {
     personalityMap = map;
+    extroverted = 0;
+    introverted = 0;
+    sensing = 0;
+    intuition = 0;
+    thinking = 0;
+    feeling = 0;
+    judging = 0;
+    perceiving = 0;
+    extraversionIntroversion = "";
+    sensingIntuition = "";
+    thinkingFeeling = "";
+    judgingPerceiving = "";
+    personalityType = "";
   }
-  String classifyPersonality() {
-    String personality = "";
-    int extroverted = 0;
-    int introverted = 0;
-    int intuition = 0;
-    int sensing = 0;
-    int feeling = 0;
-    int thinking = 0;
-    int judging = 0;
-    int perceiving = 0;
 
+  String classifyPersonality() {
     for (var key in personalityMap.keys) {
       switch (key) {
         case "extraversion":
@@ -270,179 +282,42 @@ class PersonalityClassifer {
       }
     }
 
-    //Extrovert
+    calculatePersonality();
+    return getPersonalityType;
+  }
+
+  void calculatePersonality() {
     if (extroverted > introverted) {
-      personality += "E";
-
-      //Extrovert Sensing
-      if (sensing > intuition) {
-        personality += "S";
-
-        //Extrovert Sensing Thinking
-        if (thinking > feeling) {
-          personality += "T";
-
-          //Extrovert Sensing Thinking Judging
-          if (judging > perceiving) {
-            personality += "J";
-          }
-          //Extrovert Sensing Thinking Perceiving
-          else if (perceiving > judging) {
-            personality += "P";
-          }
-          //Extrovert Sensing Thinking Perceiving
-          else if (judging == perceiving) {
-            personality += "J";
-          }
-        }
-
-        //Extrovert Sensing Feeling
-        else if (feeling > thinking) {
-          personality += "F";
-
-          //Extrovert Sensing Feeling Judging
-          if (judging > perceiving) {
-            personality += "J";
-          }
-          //Extrovert Sensing Feeling Perceiving
-          else if (perceiving > judging) {
-            personality += "P";
-          }
-          //Extrovert Sensing Feeling Judging
-          else if (judging == perceiving) {
-            personality += "J";
-          }
-        }
-      }
-      //Extrovert Intuition
-      else if (intuition > sensing) {
-        personality += "N";
-
-        //Extrovert Intuition Thinking
-        if (thinking > feeling) {
-          personality += "T";
-
-          //Extrovert Intuition Thinking Judging
-          if (judging > perceiving) {
-            personality += "J";
-          }
-          //Extrovert Intuition Thinking Perceiving
-          else if (perceiving > judging) {
-            personality += "P";
-          }
-          //Extrovert Intuition Thinking Perceiving
-          else if (judging == perceiving) {
-            personality += "J";
-          }
-        }
-
-        //Extrovert Intuition Feeling
-        else if (feeling > thinking) {
-          personality += "F";
-
-          //Extrovert Intuition Feeling Judging
-          if (judging > perceiving) {
-            personality += "J";
-          }
-          //Extrovert Intuition Feeling Perceiving
-          else if (perceiving > judging) {
-            personality += "P";
-          }
-          //Extrovert Intuition Feeling Judging
-          else if (judging == perceiving) {
-            personality += "J";
-          }
-        }
-      } else if (introverted > extroverted) {
-        personality += "I";
-      }
-
-      //Introvert
-      if (introverted > extroverted) {
-        personality += "I";
-
-        //Introvert Sensing
-        if (sensing > intuition) {
-          personality += "S";
-
-          //Introvert Sensing Thinking
-          if (thinking > feeling) {
-            personality += "T";
-
-            //Introvert Sensing Thinking Judging
-            if (judging > perceiving) {
-              personality += "J";
-            }
-            //Introvert Sensing Thinking Perceiving
-            else if (perceiving > judging) {
-              personality += "P";
-            }
-            //Introvert Sensing Thinking Perceiving
-            else if (judging == perceiving) {
-              personality += "J";
-            }
-          }
-
-          //Introvert Sensing Feeling
-          else if (feeling > thinking) {
-            personality += "F";
-
-            //Introvert Sensing Feeling Judging
-            if (judging > perceiving) {
-              personality += "J";
-            }
-            //Introvert Sensing Feeling Perceiving
-            else if (perceiving > judging) {
-              personality += "P";
-            }
-            //Introvert Sensing Feeling Judging
-            else if (judging == perceiving) {
-              personality += "J";
-            }
-          }
-        }
-        //Introvert Intuition
-        else if (intuition > sensing) {
-          personality += "N";
-
-          //Introvert Intuition Thinking
-          if (thinking > feeling) {
-            personality += "T";
-
-            //Introvert Intuition Thinking Judging
-            if (judging > perceiving) {
-              personality += "J";
-            }
-            //Introvert Intuition Thinking Perceiving
-            else if (perceiving > judging) {
-              personality += "P";
-            }
-            //Introvert Intuition Thinking Perceiving
-            else if (judging == perceiving) {
-              personality += "J";
-            }
-          }
-
-          //Introvert Intuition Feeling
-          else if (feeling > thinking) {
-            personality += "F";
-
-            //Introvert Intuition Feeling Judging
-            if (judging > perceiving) {
-              personality += "J";
-            }
-            //Introvert Intuition Feeling Perceiving
-            else if (perceiving > judging) {
-              personality += "P";
-            }
-            //Introvert Intuition Feeling Judging
-            else if (judging == perceiving) {
-              personality += "J";
-            }
-          }
-        }
-      }
+      extraversionIntroversion += "E";
+    } else {
+      extraversionIntroversion += "I";
     }
-    return personality;
+
+    if (sensing > intuition) {
+      sensingIntuition += "S";
+    } else {
+      sensingIntuition += "N";
+    }
+
+    if (thinking > feeling) {
+      thinkingFeeling += "T";
+    } else {
+      thinkingFeeling += "F";
+    }
+
+    if (judging > perceiving) {
+      judgingPerceiving += "J";
+    } else {
+      judgingPerceiving += "P";
+    }
+
+    personalityType = extraversionIntroversion +
+        sensingIntuition +
+        thinkingFeeling +
+        judgingPerceiving;
+  }
+
+  get getPersonalityType {
+    return personalityType;
   }
 }
