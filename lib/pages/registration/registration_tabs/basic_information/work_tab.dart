@@ -48,7 +48,7 @@ class WorkTabState extends State<WorkTab> with InformationTab {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Wrap(
+        Wrap(
           children: [
             Align(
               alignment: Alignment.centerLeft,

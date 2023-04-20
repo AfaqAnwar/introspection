@@ -65,7 +65,7 @@ class PasswordPageState extends State<PasswordPage> with InformationTab {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Wrap(children: [
+        Wrap(children: [
           Align(
             alignment: Alignment.centerLeft,
             child: Padding(
