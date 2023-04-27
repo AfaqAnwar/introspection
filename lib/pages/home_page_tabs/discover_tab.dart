@@ -98,15 +98,15 @@ class _DiscoverTabState extends State<DiscoverTab>
               ],
             ),
           ),
-          secondaryBackground: const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.0),
+          secondaryBackground: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Center(
                   child: Icon(
                     CupertinoIcons.heart_slash_fill,
-                    color: Colors.white,
+                    color: AppStyle.red900,
                     size: 100,
                   ),
                 ),
