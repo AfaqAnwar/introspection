@@ -11,7 +11,7 @@ class FirebaseUpdater {
 
   Future updateUserDetails(String field) async {
     DocumentReference ref = FirebaseFirestore.instance
-        .collection('users')
+        .collection('custom users')
         .doc(FirebaseAuth.instance.currentUser!.uid);
     switch (field) {
       case "First Name":
@@ -109,7 +109,7 @@ class FirebaseUpdater {
 
   Future updateSpecifiedUsersDetails(CustomUser user, String field) async {
     DocumentReference ref =
-        FirebaseFirestore.instance.collection('users').doc(user.getUid);
+        FirebaseFirestore.instance.collection('custom users').doc(user.getUid);
     switch (field) {
       case "First Name":
         ref.update({'First Name': user.getFirstName});

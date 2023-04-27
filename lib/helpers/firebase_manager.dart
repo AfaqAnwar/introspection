@@ -29,11 +29,11 @@ class FirebaseManager {
         List<dynamic> users = [];
         users.add(FirebaseAuth.instance.currentUser!.uid);
         ref.doc(personality).set({
-          'users': users,
+          'custom users': users,
         });
       } else {
         ref.doc(personality).update({
-          'users':
+          'custom users':
               FieldValue.arrayUnion([FirebaseAuth.instance.currentUser!.uid])
         });
       }

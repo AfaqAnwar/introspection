@@ -11,7 +11,7 @@ class FirebaseStorageManager {
 
   Future<Map<int, XFile>> getImages() async {
     final storageRef = FirebaseStorage.instance.ref();
-    String path = "users/$userID";
+    String path = "custom users/$userID";
     final pathReference = storageRef.child(path);
 
     Map<int, XFile> images = {};

@@ -60,7 +60,8 @@ class FirebaseUserBuilder {
   }
 
   CollectionReference getCollectionReference() {
-    CollectionReference ref = FirebaseFirestore.instance.collection('users');
+    CollectionReference ref =
+        FirebaseFirestore.instance.collection('custom users');
     return ref;
   }
 

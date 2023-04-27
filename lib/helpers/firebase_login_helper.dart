@@ -12,7 +12,7 @@ class FirebaseLoginHelper {
   Future<void> populateUserData() async {
     var firebaseUser = FirebaseAuth.instance.currentUser;
     DocumentSnapshot data = await FirebaseFirestore.instance
-        .collection('users')
+        .collection('custom users')
         .doc(firebaseUser!.uid)
         .get();
     currentUser.setUid = firebaseUser.uid;

@@ -5,6 +5,7 @@ import 'package:datingapp/data/custom_user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_firebase_chat_core/flutter_firebase_chat_core.dart';
+// ignore: depend_on_referenced_packages
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 
 class FirebaseRegistrationHelper {
@@ -26,7 +27,7 @@ class FirebaseRegistrationHelper {
 
   Future addUserDetails() async {
     DocumentReference ref = FirebaseFirestore.instance
-        .collection('users')
+        .collection('custom users')
         .doc(FirebaseAuth.instance.currentUser!.uid);
     List<dynamic> ethnicities = currentUser.getEthnicities;
     ref.set({
@@ -83,9 +84,9 @@ class FirebaseRegistrationHelper {
   Future<String> addToChatCore() async {
     await FirebaseChatCore.instance.createUserInFirestore(types.User(
       firstName: currentUser.getFirstName,
-      id: "chat${currentUser.getUid}",
+      id: currentUser.getUid,
       imageUrl: FirebaseStorage.instance
-          .ref('users/${FirebaseAuth.instance.currentUser!.uid}/0')
+          .ref('custom users/${FirebaseAuth.instance.currentUser!.uid}/0')
           .fullPath,
       lastName: currentUser.getLastName,
     ));
