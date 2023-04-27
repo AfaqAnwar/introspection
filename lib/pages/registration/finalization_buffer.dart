@@ -150,6 +150,7 @@ class FinalizationBufferState extends State<FinalizationBuffer>
       if (value == "Success") {
         await helper.addUserDetails();
         await helper.uploadUserImages();
+        await helper.addToChatCore();
       } else {
         dismissProgressIndicator();
         showErrorIndicator(value);

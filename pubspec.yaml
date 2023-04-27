@@ -58,6 +58,13 @@ dependencies:
   equatable: ^2.0.5
   age_calculator: ^1.0.0
   flutter_cache_manager: ^3.3.0
+  flutter_chat_ui: ^1.6.6
+  flutter_firebase_chat_core: ^1.6.4
+  file_picker: ^5.2.11
+  mime: ^1.0.4
+  open_filex: ^4.3.2
+  path_provider: ^2.0.14
+  http: ^0.13.5
 
 dev_dependencies:
   flutter_test:

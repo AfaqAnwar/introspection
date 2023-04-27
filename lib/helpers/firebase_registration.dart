@@ -4,6 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:datingapp/data/custom_user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter_firebase_chat_core/flutter_firebase_chat_core.dart';
+import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 
 class FirebaseRegistrationHelper {
   late CustomUser currentUser;
@@ -76,5 +78,17 @@ class FirebaseRegistrationHelper {
     } catch (error) {
       return error.toString();
     }
+  }
+
+  Future<String> addToChatCore() async {
+    await FirebaseChatCore.instance.createUserInFirestore(types.User(
+      firstName: currentUser.getFirstName,
+      id: "chat${currentUser.getUid}",
+      imageUrl: FirebaseStorage.instance
+          .ref('users/${FirebaseAuth.instance.currentUser!.uid}/0')
+          .fullPath,
+      lastName: currentUser.getLastName,
+    ));
+    return "Success";
   }
 }
