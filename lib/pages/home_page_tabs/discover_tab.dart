@@ -2,6 +2,7 @@ import 'package:datingapp/data/custom_user.dart';
 import 'package:datingapp/helpers/firebase_updater.dart';
 import 'package:datingapp/style/app_style.dart';
 import 'package:datingapp/widgets/user_card.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class DiscoverTab extends StatefulWidget {
@@ -76,6 +77,36 @@ class _DiscoverTabState extends State<DiscoverTab>
     List<Widget> userCards = [];
     for (var i = 0; i < widget.potentialMatches.length; i++) {
       userCards.add(Dismissible(
+          background: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Center(
+                  child: Icon(
+                    CupertinoIcons.heart_fill,
+                    color: AppStyle.red900,
+                    size: 100,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          secondaryBackground: const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Center(
+                  child: Icon(
+                    CupertinoIcons.heart_slash_fill,
+                    color: Colors.white,
+                    size: 100,
+                  ),
+                ),
+              ],
+            ),
+          ),
           onDismissed: (direction) async {
             FirebaseUpdater updater = FirebaseUpdater(widget.currentUser);
             if (direction == DismissDirection.endToStart) {
