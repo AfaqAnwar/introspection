@@ -16,10 +16,10 @@ class HomePageHost extends StatefulWidget {
       required this.matches});
 
   @override
-  State<HomePageHost> createState() => _HomePageHostState();
+  State<HomePageHost> createState() => HomePageHostState();
 }
 
-class _HomePageHostState extends State<HomePageHost>
+class HomePageHostState extends State<HomePageHost>
     with AutomaticKeepAliveClientMixin {
   late PageController _pageController;
   var currentIndex = 1;
@@ -50,8 +50,10 @@ class _HomePageHostState extends State<HomePageHost>
       children: <Widget>[
         MessageTab(currentUser: widget.currentUser, matches: matches),
         DiscoverTab(
-            currentUser: widget.currentUser,
-            potentialMatches: potentialMatches),
+          currentUser: widget.currentUser,
+          potentialMatches: potentialMatches,
+          homePageHostKey: widget.key as GlobalKey<HomePageHostState>,
+        ),
         ProfileTab(
           currentUser: widget.currentUser,
         ),
@@ -62,6 +64,10 @@ class _HomePageHostState extends State<HomePageHost>
         })
       },
     );
+  }
+
+  setMatches(List<CustomUser> matches) {
+    this.matches = matches;
   }
 
   @override

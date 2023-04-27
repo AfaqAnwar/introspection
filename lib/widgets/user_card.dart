@@ -38,119 +38,106 @@ class _UserCardState extends State<UserCard> {
         '${widget.user.getDob.split('-')[2]}-${widget.user.getDob.split('-')[0]}-${widget.user.getDob.split('-')[1]}';
 
     return Padding(
-      padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
-      child: SizedBox(
-        height: MediaQuery.of(context).size.height / 1.4,
-        width: MediaQuery.of(context).size.width,
-        child: GestureDetector(
-          onTap: () {
-            if (mounted) {
-              setState(() {
-                if (_visible == false) {
-                  _visible = !_visible;
-                  _textVisible = _visible;
-                  _timer = Timer(const Duration(milliseconds: 8000), () {
+        padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
+        child: SizedBox(
+            height: MediaQuery.of(context).size.height / 1.4,
+            width: MediaQuery.of(context).size.width,
+            child: GestureDetector(
+                onTap: () {
+                  if (mounted) {
                     setState(() {
-                      _visible = !_visible;
-                      _textVisible = _visible;
+                      if (_visible == false) {
+                        _visible = !_visible;
+                        _textVisible = _visible;
+                        _timer = Timer(const Duration(milliseconds: 8000), () {
+                          setState(() {
+                            _visible = !_visible;
+                            _textVisible = _visible;
+                          });
+                        });
+                      }
                     });
-                  });
-                }
-              });
-            }
-          },
-          child: Stack(children: [
-            Container(
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      fit: BoxFit.cover, image: FileImage(File(xFilePath))),
-                  borderRadius: BorderRadius.circular(10.0),
-                  boxShadow: [
-                    BoxShadow(
-                      color: AppStyle.red900,
-                      spreadRadius: 1,
-                      blurRadius: 6,
-                      offset: const Offset(2, 3),
-                    )
-                  ]),
-            ),
-            Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5.0),
-                  gradient: const LinearGradient(
-                    colors: [
-                      Color.fromARGB(200, 0, 0, 0),
-                      Color.fromARGB(0, 0, 0, 0)
-                    ],
-                    begin: Alignment.bottomCenter,
-                    end: Alignment.topCenter,
-                  )),
-            ),
-            Positioned(
-              bottom: 30,
-              left: 20,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
+                  }
+                },
+                child: Stack(children: [
+                  Card(
+                    child: Container(
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: FileImage(File(xFilePath))),
+                          borderRadius: BorderRadius.circular(10.0),
+                          boxShadow: [
+                            BoxShadow(
+                              color: AppStyle.red900,
+                              spreadRadius: 1,
+                              blurRadius: 6,
+                              offset: const Offset(2, 3),
+                            )
+                          ]),
+                    ),
+                  ),
                   AnimatedOpacity(
                     opacity: _textVisible ? 1.0 : 0.0,
                     duration: const Duration(milliseconds: 250),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          widget.user.getFirstName,
-                          style: Theme.of(context)
-                              .textTheme
-                              .displayMedium!
-                              .copyWith(color: Colors.white),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                                '${AgeCalculator.age(DateTime.parse(parsedDOB)).years},',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .displaySmall!
-                                    .copyWith(color: Colors.white)),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            Text(
-                              widget.user.jobTitle,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .displaySmall!
-                                  .copyWith(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.normal),
-                            ),
-                          ],
-                        ),
-                      ],
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5.0),
+                          gradient: const LinearGradient(
+                            colors: [
+                              Color.fromARGB(200, 0, 0, 0),
+                              Color.fromARGB(0, 0, 0, 0)
+                            ],
+                            begin: Alignment.bottomCenter,
+                            end: Alignment.topCenter,
+                          )),
                     ),
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  AnimatedOpacity(
-                    opacity: _visible ? 1.0 : 0.0,
-                    duration: const Duration(milliseconds: 250),
-                    child: Row(
-                      children: buildUserImages(),
+                  Column(children: [
+                    const Spacer(),
+                    AnimatedOpacity(
+                      opacity: _textVisible ? 1.0 : 0.0,
+                      duration: const Duration(milliseconds: 250),
+                      child: Wrap(children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 20, bottom: 10),
+                          child: Text(
+                            '${widget.user.getFirstName}, ${AgeCalculator.age(DateTime.parse(parsedDOB)).years}',
+                            style: const TextStyle(
+                                fontSize: 48,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'Modern-Era',
+                                color: Colors.white),
+                            textAlign: TextAlign.start,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 20, bottom: 10),
+                          child: Text(
+                            widget.user.jobTitle,
+                            style: const TextStyle(
+                                fontSize: 32,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'Modern-Era',
+                                color: Colors.white),
+                            textAlign: TextAlign.start,
+                          ),
+                        ),
+                        AnimatedOpacity(
+                          opacity: _visible ? 1.0 : 0.0,
+                          duration: const Duration(milliseconds: 250),
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.only(left: 20, bottom: 20),
+                            child: Row(
+                              children: buildUserImages(),
+                            ),
+                          ),
+                        ),
+                      ]),
                     ),
-                  )
-                ],
-              ),
-            )
-          ]),
-        ),
-      ),
-    );
+                  ])
+                ]))));
   }
 
   List<Widget> buildUserImages() {

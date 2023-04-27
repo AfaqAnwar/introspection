@@ -4,6 +4,7 @@ import 'package:datingapp/data/custom_user.dart';
 import 'package:datingapp/pages/home_page_tabs/messaging/chat_page.dart';
 import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/material.dart';
+// ignore: depend_on_referenced_packages
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:flutter_firebase_chat_core/flutter_firebase_chat_core.dart';
 
@@ -68,7 +69,11 @@ class _MessageTabState extends State<MessageTab> {
                 margin: const EdgeInsets.only(
                   bottom: 200,
                 ),
-                child: const Text('No users'),
+                child: const Text('No Matches Yet',
+                    style: TextStyle(
+                        fontSize: 14,
+                        fontFamily: 'Modern-Era',
+                        color: Colors.black)),
               );
             }
 

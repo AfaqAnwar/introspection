@@ -1,5 +1,7 @@
 import 'package:datingapp/data/custom_user.dart';
 import 'package:datingapp/helpers/firebase_updater.dart';
+import 'package:datingapp/helpers/firebase_user_builder.dart';
+import 'package:datingapp/pages/home_page_host.dart';
 import 'package:datingapp/style/app_style.dart';
 import 'package:datingapp/widgets/user_card.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,9 +10,13 @@ import 'package:flutter/material.dart';
 class DiscoverTab extends StatefulWidget {
   final CustomUser currentUser;
   final List<CustomUser> potentialMatches;
+  final GlobalKey<HomePageHostState> homePageHostKey;
 
   const DiscoverTab(
-      {super.key, required this.potentialMatches, required this.currentUser});
+      {super.key,
+      required this.potentialMatches,
+      required this.currentUser,
+      required this.homePageHostKey});
 
   @override
   State<DiscoverTab> createState() => _DiscoverTabState();
@@ -125,6 +131,9 @@ class _DiscoverTabState extends State<DiscoverTab>
                 await updater.updateUserDetails("Matched User IDS");
                 await updater.updateSpecifiedUsersDetails(
                     widget.potentialMatches[i], "Matched User IDS");
+
+                widget.homePageHostKey.currentState!
+                    .setMatches(await buildMatches());
               }
               widget.currentUser
                   .addLikedUserID(widget.potentialMatches[i].getUid);
@@ -144,5 +153,18 @@ class _DiscoverTabState extends State<DiscoverTab>
 
   bool checkIfLikeIsMutual(CustomUser likedUser) {
     return likedUser.getLikedUserIDS.contains(widget.currentUser.getUid);
+  }
+
+  Future<List<CustomUser>> buildMatches() async {
+    List<CustomUser> matches = [];
+    if (widget.currentUser.getMatchedUserIDS.isEmpty) return matches;
+    for (var match in widget.currentUser.getMatchedUserIDS) {
+      FirebaseUserBuilder builder = FirebaseUserBuilder(match);
+      CustomUser user = CustomUser();
+      await builder.buildUser().then((value) => user = value);
+      matches.add(user);
+    }
+
+    return matches;
   }
 }

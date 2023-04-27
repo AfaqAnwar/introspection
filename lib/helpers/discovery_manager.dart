@@ -29,7 +29,7 @@ class DiscoveryManager {
         for (var doc in querySnapshot.docs) {
           String personalityType = doc.id;
           if (compatiblePersonalities.contains(personalityType)) {
-            for (var id in doc.get("users")) {
+            for (var id in doc.get("custom users")) {
               if (!hasAlreadyBeenSeen(id) && id != currentUser.getUid) {
                 idsOfPotentialMatches.add(id);
               }

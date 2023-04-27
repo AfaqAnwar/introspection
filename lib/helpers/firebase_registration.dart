@@ -71,7 +71,7 @@ class FirebaseRegistrationHelper {
         if (currentUser.getImages[i] != null) {
           File file = File(currentUser.getImages[i]!.path);
           await firebaseStorage
-              .ref('users/${FirebaseAuth.instance.currentUser!.uid}/ $i')
+              .ref('custom users/${FirebaseAuth.instance.currentUser!.uid}/ $i')
               .putFile(file);
         }
       }
@@ -82,9 +82,10 @@ class FirebaseRegistrationHelper {
   }
 
   Future<String> addToChatCore() async {
-    await FirebaseChatCore.instance.createUserInFirestore(types.User(
+    FirebaseChatCore firebaseChatCore = FirebaseChatCore.instance;
+    await firebaseChatCore.createUserInFirestore(types.User(
       firstName: currentUser.getFirstName,
-      id: currentUser.getUid,
+      id: FirebaseAuth.instance.currentUser!.uid,
       imageUrl: FirebaseStorage.instance
           .ref('custom users/${FirebaseAuth.instance.currentUser!.uid}/0')
           .fullPath,

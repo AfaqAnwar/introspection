@@ -62,6 +62,7 @@ class _FutureHomeBufferBuilderState extends State<FutureHomeBufferBuilder> {
                 context,
                 MaterialPageRoute(
                     builder: (context) => HomePageHost(
+                        key: GlobalKey<HomePageHostState>(),
                         currentUser: widget.currentUser,
                         potentialMatches: potentialMatches,
                         matches: matches)));
