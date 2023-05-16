@@ -1,9 +1,9 @@
-import 'package:Introspection/data/custom_user.dart';
-import 'package:Introspection/helpers/firebase_updater.dart';
-import 'package:Introspection/helpers/firebase_user_builder.dart';
-import 'package:Introspection/pages/home_page_host.dart';
-import 'package:Introspection/style/app_style.dart';
-import 'package:Introspection/widgets/user_card.dart';
+import 'package:introspection/data/custom_user.dart';
+import 'package:introspection/helpers/firebase_updater.dart';
+import 'package:introspection/helpers/firebase_user_builder.dart';
+import 'package:introspection/pages/home_page_host.dart';
+import 'package:introspection/style/app_style.dart';
+import 'package:introspection/widgets/user_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

@@ -53,18 +53,18 @@ class DefaultFirebaseOptions {
     apiKey: 'AIzaSyBXjSwLD59Mmg4Crzfr404TTXXGaUKy6vc',
     appId: '1:520192384840:android:569a4302ed9352377ddd7d',
     messagingSenderId: '520192384840',
-    projectId: 'Introspection-cabc7',
-    storageBucket: 'Introspection-cabc7.appspot.com',
+    projectId: 'introspection-cabc7',
+    storageBucket: 'introspection-cabc7.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyBM9yWlXordwonU7jN2c7koVolNYPJC22E',
     appId: '1:520192384840:ios:e6532482e78ae1ff7ddd7d',
     messagingSenderId: '520192384840',
-    projectId: 'Introspection-cabc7',
-    storageBucket: 'Introspection-cabc7.appspot.com',
+    projectId: 'introspection-cabc7',
+    storageBucket: 'introspection-cabc7.appspot.com',
     iosClientId:
         '520192384840-p41l38cn60l1hpsvsk5oo50esndetc0u.apps.googleusercontent.com',
-    iosBundleId: 'com.example.Introspection',
+    iosBundleId: 'com.example.introspection',
   );
 }

@@ -2,9 +2,9 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:age_calculator/age_calculator.dart';
-import 'package:Introspection/data/custom_user.dart';
-import 'package:Introspection/style/app_style.dart';
-import 'package:Introspection/widgets/widgets.dart';
+import 'package:introspection/data/custom_user.dart';
+import 'package:introspection/style/app_style.dart';
+import 'package:introspection/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 

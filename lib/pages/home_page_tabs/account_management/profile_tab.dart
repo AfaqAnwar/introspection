@@ -1,13 +1,13 @@
 import 'dart:io';
 
-import 'package:Introspection/components/profile_tab_components/profile_row_tile.dart';
-import 'package:Introspection/components/profile_tab_components/styled_button_custom_size.dart';
-import 'package:Introspection/data/custom_user.dart';
-import 'package:Introspection/pages/home_page_tabs/account_management/account_page.dart';
-import 'package:Introspection/pages/home_page_tabs/account_management/personal_information_page.dart';
-import 'package:Introspection/pages/home_page_tabs/account_management/preferences_page.dart';
-import 'package:Introspection/pages/signin_signup/login_page.dart';
-import 'package:Introspection/style/app_style.dart';
+import 'package:introspection/components/profile_tab_components/profile_row_tile.dart';
+import 'package:introspection/components/profile_tab_components/styled_button_custom_size.dart';
+import 'package:introspection/data/custom_user.dart';
+import 'package:introspection/pages/home_page_tabs/account_management/account_page.dart';
+import 'package:introspection/pages/home_page_tabs/account_management/personal_information_page.dart';
+import 'package:introspection/pages/home_page_tabs/account_management/preferences_page.dart';
+import 'package:introspection/pages/signin_signup/login_page.dart';
+import 'package:introspection/style/app_style.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

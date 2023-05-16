@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:Introspection/data/custom_user.dart';
-import 'package:Introspection/helpers/firebase_storage_manager.dart';
+import 'package:introspection/data/custom_user.dart';
+import 'package:introspection/helpers/firebase_storage_manager.dart';
 import 'package:image_picker/image_picker.dart';
 
 class FirebaseUserBuilder {

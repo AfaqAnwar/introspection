@@ -1,4 +1,4 @@
-import 'package:Introspection/components/chat_page_components/typing_indicator/typing_indicator.dart';
+import 'package:introspection/components/chat_page_components/typing_indicator/typing_indicator.dart';
 
 class ChatBubble {
   // Chat bubbles would have the following the text prompt and if they are the current user

@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:Introspection/data/custom_user.dart';
+import 'package:introspection/data/custom_user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class FirebaseUpdater {

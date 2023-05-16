@@ -1,6 +1,6 @@
 {
-  "name": "Introspection",
-  "short_name": "Introspection",
+  "name": "introspection",
+  "short_name": "introspection",
   "start_url": ".",
   "display": "standalone",
   "background_color": "#0175C2",

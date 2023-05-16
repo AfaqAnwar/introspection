@@ -1,8 +1,8 @@
 import 'dart:ui';
 
 import 'package:another_flushbar/flushbar.dart';
-import 'package:Introspection/components/registration_authentication_components/password_button.dart';
-import 'package:Introspection/components/registration_authentication_components/password_textfield.dart';
+import 'package:introspection/components/registration_authentication_components/password_button.dart';
+import 'package:introspection/components/registration_authentication_components/password_textfield.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 

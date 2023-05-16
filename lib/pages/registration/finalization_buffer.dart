@@ -1,12 +1,12 @@
 import 'dart:ui';
 
 import 'package:another_flushbar/flushbar.dart';
-import 'package:Introspection/components/registration_authentication_components/password_button.dart';
-import 'package:Introspection/components/registration_authentication_components/password_textfield.dart';
-import 'package:Introspection/data/custom_user.dart';
-import 'package:Introspection/helpers/firebase_registration.dart';
-import 'package:Introspection/pages/personaility_chat/personailty_chat_page.dart';
-import 'package:Introspection/style/app_style.dart';
+import 'package:introspection/components/registration_authentication_components/password_button.dart';
+import 'package:introspection/components/registration_authentication_components/password_textfield.dart';
+import 'package:introspection/data/custom_user.dart';
+import 'package:introspection/helpers/firebase_registration.dart';
+import 'package:introspection/pages/personaility_chat/personailty_chat_page.dart';
+import 'package:introspection/style/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart';

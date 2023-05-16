@@ -13,7 +13,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Introspection</string>
+	<string>introspection</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -65,13 +65,13 @@
 	<string>appTrackingTransparency</string>
 	<!-- Permissions lists ends here -->
 	<!-- Permission options for the `photos` group -->
-    <key>NSPhotoLibraryUsageDescription</key>
-    <string>photos</string>
-    <key>NSPhotoLibraryUsageDescription</key>
-    <string>Need to upload image</string>
-    <key>NSCameraUsageDescription</key>
-    <string>Need to upload image</string>
-    <key>NSMicrophoneUsageDescription</key>
-    <string>Need to upload image</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>photos</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Need to upload image</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Need to upload image</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Need to upload image</string>
 </dict>
 </plist>
