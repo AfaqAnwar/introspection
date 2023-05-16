@@ -1,5 +1,5 @@
-import 'package:datingapp/components/chat_page_components/typing_indicator/animated_bubble.dart';
-import 'package:datingapp/components/chat_page_components/typing_indicator/circle_bubble.dart';
+import 'package:Introspection/components/chat_page_components/typing_indicator/animated_bubble.dart';
+import 'package:Introspection/components/chat_page_components/typing_indicator/circle_bubble.dart';
 import 'package:flutter/material.dart';
 
 class TypingIndicator extends StatefulWidget {

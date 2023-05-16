@@ -1,9 +1,9 @@
-import 'package:datingapp/data/custom_user.dart';
-import 'package:datingapp/helpers/firebase_manager.dart';
-import 'package:datingapp/helpers/firebase_updater.dart';
-import 'package:datingapp/helpers/personality_classifier.dart';
-import 'package:datingapp/pages/future_home_buffer_builder.dart';
-import 'package:datingapp/style/app_style.dart';
+import 'package:Introspection/data/custom_user.dart';
+import 'package:Introspection/helpers/firebase_manager.dart';
+import 'package:Introspection/helpers/firebase_updater.dart';
+import 'package:Introspection/helpers/personality_classifier.dart';
+import 'package:Introspection/pages/future_home_buffer_builder.dart';
+import 'package:Introspection/style/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:convert';

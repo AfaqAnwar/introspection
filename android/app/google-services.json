@@ -1,15 +1,15 @@
 {
   "project_info": {
     "project_number": "520192384840",
-    "project_id": "datingapp-cabc7",
-    "storage_bucket": "datingapp-cabc7.appspot.com"
+    "project_id": "Introspection-cabc7",
+    "storage_bucket": "Introspection-cabc7.appspot.com"
   },
   "client": [
     {
       "client_info": {
         "mobilesdk_app_id": "1:520192384840:android:569a4302ed9352377ddd7d",
         "android_client_info": {
-          "package_name": "com.example.datingapp"
+          "package_name": "com.example.Introspection"
         }
       },
       "oauth_client": [

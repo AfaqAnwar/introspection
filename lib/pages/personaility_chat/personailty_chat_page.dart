@@ -1,11 +1,11 @@
 import 'dart:ui';
 
 import 'package:another_flushbar/flushbar.dart';
-import 'package:datingapp/components/chat_page_components/chat_bubble.dart';
-import 'package:datingapp/components/chat_page_components/typing_indicator/typing_indicator.dart';
-import 'package:datingapp/data/custom_user.dart';
-import 'package:datingapp/pages/personaility_chat/personailty_prediction_result_page.dart';
-import 'package:datingapp/style/app_style.dart';
+import 'package:Introspection/components/chat_page_components/chat_bubble.dart';
+import 'package:Introspection/components/chat_page_components/typing_indicator/typing_indicator.dart';
+import 'package:Introspection/data/custom_user.dart';
+import 'package:Introspection/pages/personaility_chat/personailty_prediction_result_page.dart';
+import 'package:Introspection/style/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:openai_client/openai_client.dart' hide Color;
 // ignore: implementation_imports

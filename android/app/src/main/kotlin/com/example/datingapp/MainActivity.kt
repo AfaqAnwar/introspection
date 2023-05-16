@@ -1,4 +1,4 @@
-package com.example.datingapp
+package com.example.Introspection
 
 import io.flutter.embedding.android.FlutterActivity
 

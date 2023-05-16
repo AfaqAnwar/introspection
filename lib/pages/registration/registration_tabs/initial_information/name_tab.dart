@@ -1,6 +1,6 @@
-import 'package:datingapp/components/registration_authentication_components/registration_textfield.dart';
-import 'package:datingapp/data/custom_user.dart';
-import 'package:datingapp/pages/registration/registration_tabs/information_tab.dart';
+import 'package:Introspection/components/registration_authentication_components/registration_textfield.dart';
+import 'package:Introspection/data/custom_user.dart';
+import 'package:Introspection/pages/registration/registration_tabs/information_tab.dart';
 import 'package:flutter/material.dart';
 
 class NameTab extends StatefulWidget {

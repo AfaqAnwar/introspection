@@ -1,6 +1,6 @@
-import 'package:datingapp/pages/registration/register_page_host.dart';
-import 'package:datingapp/pages/signin_signup/login_page.dart';
-import 'package:datingapp/style/app_style.dart';
+import 'package:Introspection/pages/registration/register_page_host.dart';
+import 'package:Introspection/pages/signin_signup/login_page.dart';
+import 'package:Introspection/style/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart';

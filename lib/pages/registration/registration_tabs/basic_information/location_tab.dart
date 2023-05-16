@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:datingapp/data/custom_user.dart';
-import 'package:datingapp/style/app_style.dart';
+import 'package:Introspection/data/custom_user.dart';
+import 'package:Introspection/style/app_style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

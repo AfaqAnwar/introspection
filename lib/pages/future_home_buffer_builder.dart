@@ -1,8 +1,8 @@
-import 'package:datingapp/data/custom_user.dart';
-import 'package:datingapp/helpers/discovery_manager.dart';
-import 'package:datingapp/helpers/firebase_user_builder.dart';
-import 'package:datingapp/pages/home_page_host.dart';
-import 'package:datingapp/style/app_style.dart';
+import 'package:Introspection/data/custom_user.dart';
+import 'package:Introspection/helpers/discovery_manager.dart';
+import 'package:Introspection/helpers/firebase_user_builder.dart';
+import 'package:Introspection/pages/home_page_host.dart';
+import 'package:Introspection/style/app_style.dart';
 import 'package:flutter/material.dart';
 
 class FutureHomeBufferBuilder extends StatefulWidget {

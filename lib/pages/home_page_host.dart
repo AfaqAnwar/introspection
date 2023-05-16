@@ -1,8 +1,8 @@
-import 'package:datingapp/data/custom_user.dart';
-import 'package:datingapp/pages/home_page_tabs/account_management/profile_tab.dart';
-import 'package:datingapp/pages/home_page_tabs/discover_tab.dart';
-import 'package:datingapp/pages/home_page_tabs/messaging/message_tab.dart';
-import 'package:datingapp/style/app_style.dart';
+import 'package:Introspection/data/custom_user.dart';
+import 'package:Introspection/pages/home_page_tabs/account_management/profile_tab.dart';
+import 'package:Introspection/pages/home_page_tabs/discover_tab.dart';
+import 'package:Introspection/pages/home_page_tabs/messaging/message_tab.dart';
+import 'package:Introspection/style/app_style.dart';
 import 'package:flutter/material.dart';
 
 class HomePageHost extends StatefulWidget {

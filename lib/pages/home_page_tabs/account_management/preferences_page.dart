@@ -1,10 +1,10 @@
-import 'package:datingapp/components/profile_tab_components/profile_user_field_tile.dart';
-import 'package:datingapp/data/custom_user.dart';
-import 'package:datingapp/helpers/firebase_updater.dart';
-import 'package:datingapp/pages/registration/registration_tabs/basic_information/children_tab.dart';
-import 'package:datingapp/pages/registration/registration_tabs/basic_information/gender_preference_tab.dart';
-import 'package:datingapp/pages/registration/registration_tabs/information_tab.dart';
-import 'package:datingapp/style/app_style.dart';
+import 'package:Introspection/components/profile_tab_components/profile_user_field_tile.dart';
+import 'package:Introspection/data/custom_user.dart';
+import 'package:Introspection/helpers/firebase_updater.dart';
+import 'package:Introspection/pages/registration/registration_tabs/basic_information/children_tab.dart';
+import 'package:Introspection/pages/registration/registration_tabs/basic_information/gender_preference_tab.dart';
+import 'package:Introspection/pages/registration/registration_tabs/information_tab.dart';
+import 'package:Introspection/style/app_style.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
