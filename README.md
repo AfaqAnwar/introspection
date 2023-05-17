@@ -30,16 +30,15 @@ _GPT API keys, Rapid API keys & Google Maps API keys are all depricated and will
 
 If you experience the following error when building for iOS
 ```
-Error (Xcode): Building for iOS Simulator, but linking in object file built for iOS, file
+Building for iOS Simulator, but linking in object file built for iOS, file
 './introspection/ios/Pods/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/GoogleMaps' for
 architecture arm64
 
 
-Error (Xcode): Linker command failed with exit code 1 (use -v to see invocation)
+Linker command failed with exit code 1 (use -v to see invocation)
 
 
 Could not build the application for the simulator.
-Error launching application on iPhone 14 Pro Max.
 ```
 Please follow the following steps.
 
