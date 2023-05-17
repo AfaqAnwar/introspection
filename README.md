@@ -27,6 +27,14 @@ _Due to this project being directly corellated with a custom Firebase project, i
 
 _GPT API keys, Rapid API keys & Google Maps API keys are all depricated and will need to be replaced if running locally._
 
+## Screenshots
+
+Here are a few screenshots of the overall major components of the applications, there are plenty of more features not shown including registration components and animations.
+
+All features are fully functional including peer to peer chat!
+
+<img src = "https://github.com/AfaqAnwar/introspection/blob/main/screenshots/login_page.png?raw=true" width="30%" height="30%"> <img src = "https://github.com/AfaqAnwar/introspection/blob/main/screenshots/register_buffer.png?raw=true" width="30%" height="30%"> <img src = "https://github.com/AfaqAnwar/introspection/blob/main/screenshots/name_register.png?raw=true" width="30%" height="30%"> <img src = "https://github.com/AfaqAnwar/introspection/blob/main/screenshots/email_register.png?raw=true" width="30%" height="30%"> <img src = "https://github.com/AfaqAnwar/introspection/blob/main/screenshots/age_register.png?raw=true" width="30%" height="30%"> <img src = "https://github.com/AfaqAnwar/introspection/blob/main/screenshots/map_register.png?raw=true" width="30%" height="30%"> <img src = "https://github.com/AfaqAnwar/introspection/blob/main/screenshots/photos_register.png?raw=true" width="30%" height="30%"> <img src = "https://github.com/AfaqAnwar/introspection/blob/main/screenshots/chatbot_register.png?raw=true" width="30%" height="30%"> <img src = "https://github.com/AfaqAnwar/introspection/blob/main/screenshots/chat_type_register.png?raw=true" width="30%" height="30%"> <img src = "https://github.com/AfaqAnwar/introspection/blob/main/screenshots/chat_start_register.png?raw=true" width="30%" height="30%"> <img src = "https://github.com/AfaqAnwar/introspection/blob/main/screenshots/personality_classification.png?raw=true" width="30%" height="30%"> <img src = "https://github.com/AfaqAnwar/introspection/blob/main/screenshots/discover_page.png?raw=true" width="30%" height="30%"> <img src = "https://github.com/AfaqAnwar/introspection/blob/main/screenshots/profile_page.png?raw=true" width="30%" height="30%"> <img src = "https://github.com/AfaqAnwar/introspection/blob/main/screenshots/matches_page.png?raw=true" width="30%" height="30%"> <img src = "https://github.com/AfaqAnwar/introspection/blob/main/screenshots/chat_page.png?raw=true" width="30%" height="30%">
+
 ## Build Error Handling
 
 If you experience the following error when building for iOS
@@ -106,10 +114,10 @@ Simply navigate to the ```ios/runner/info.plist``` file and place the following 
 	<string>Need to upload image</string>
 ```
 
-## Screenshots
+## Resources & APIs Utilized
 
-Here are a few screenshots of the overall major components of the applications, there are plenty of more features not shown including registration components and animations.
+- [OpenAI API (Chat GPT 3.5)](https://openai.com/blog/openai-api)
+- [Rapid API - Big Five Personality Insights by Symanto](https://rapidapi.com/symanto-symanto-default/api/big-five-personality-insights)
+- [Google Maps API](https://developers.google.com/maps/documentation/javascript/get-api-key)
 
-All features are fully functional including peer to peer chat!
-
-<img src = "https://github.com/AfaqAnwar/introspection/blob/main/screenshots/login_page.png?raw=true" width="30%" height="30%"> <img src = "https://github.com/AfaqAnwar/introspection/blob/main/screenshots/register_buffer.png?raw=true" width="30%" height="30%"> <img src = "https://github.com/AfaqAnwar/introspection/blob/main/screenshots/name_register.png?raw=true" width="30%" height="30%"> <img src = "https://github.com/AfaqAnwar/introspection/blob/main/screenshots/email_register.png?raw=true" width="30%" height="30%"> <img src = "https://github.com/AfaqAnwar/introspection/blob/main/screenshots/age_register.png?raw=true" width="30%" height="30%"> <img src = "https://github.com/AfaqAnwar/introspection/blob/main/screenshots/map_register.png?raw=true" width="30%" height="30%"> <img src = "https://github.com/AfaqAnwar/introspection/blob/main/screenshots/photos_register.png?raw=true" width="30%" height="30%"> <img src = "https://github.com/AfaqAnwar/introspection/blob/main/screenshots/chatbot_register.png?raw=true" width="30%" height="30%"> <img src = "https://github.com/AfaqAnwar/introspection/blob/main/screenshots/chat_type_register.png?raw=true" width="30%" height="30%"> <img src = "https://github.com/AfaqAnwar/introspection/blob/main/screenshots/chat_start_register.png?raw=true" width="30%" height="30%"> <img src = "https://github.com/AfaqAnwar/introspection/blob/main/screenshots/personality_classification.png?raw=true" width="30%" height="30%"> <img src = "https://github.com/AfaqAnwar/introspection/blob/main/screenshots/discover_page.png?raw=true" width="30%" height="30%"> <img src = "https://github.com/AfaqAnwar/introspection/blob/main/screenshots/profile_page.png?raw=true" width="30%" height="30%"> <img src = "https://github.com/AfaqAnwar/introspection/blob/main/screenshots/matches_page.png?raw=true" width="30%" height="30%"> <img src = "https://github.com/AfaqAnwar/introspection/blob/main/screenshots/chat_page.png?raw=true" width="30%" height="30%">
+All other dependencies not listed can be found in the pubspec.yaml file.
