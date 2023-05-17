@@ -1,10 +1,10 @@
-import 'package:introspection/data/custom_user.dart';
-import 'package:introspection/helpers/firebase_login_helper.dart';
-import 'package:introspection/helpers/firebase_storage_manager.dart';
-import 'package:introspection/pages/future_home_buffer_builder.dart';
-import 'package:introspection/pages/personaility_chat/personailty_chat_page.dart';
-import 'package:introspection/pages/signin_signup/login_page.dart';
-import 'package:introspection/style/app_style.dart';
+import 'package:datingapp/data/custom_user.dart';
+import 'package:datingapp/helpers/firebase_login_helper.dart';
+import 'package:datingapp/helpers/firebase_storage_manager.dart';
+import 'package:datingapp/pages/future_home_buffer_builder.dart';
+import 'package:datingapp/pages/personaility_chat/personailty_chat_page.dart';
+import 'package:datingapp/pages/signin_signup/login_page.dart';
+import 'package:datingapp/style/app_style.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';

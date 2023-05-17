@@ -1,5 +1,5 @@
-import 'package:introspection/components/registration_authentication_components/photo_picker_box.dart';
-import 'package:introspection/data/custom_user.dart';
+import 'package:datingapp/components/registration_authentication_components/photo_picker_box.dart';
+import 'package:datingapp/data/custom_user.dart';
 import 'package:flutter/material.dart';
 import 'package:reorderables/reorderables.dart';
 

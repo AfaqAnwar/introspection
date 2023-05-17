@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:introspection/data/custom_user.dart';
-import 'package:introspection/pages/home_page_tabs/messaging/chat_page.dart';
-import 'package:introspection/style/app_style.dart';
+import 'package:datingapp/data/custom_user.dart';
+import 'package:datingapp/pages/home_page_tabs/messaging/chat_page.dart';
+import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/material.dart';
 // ignore: depend_on_referenced_packages
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;

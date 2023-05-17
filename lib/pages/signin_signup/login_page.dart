@@ -1,9 +1,9 @@
-import 'package:introspection/auth/auth_page.dart';
-import 'package:introspection/components/login_page_components/login_textfield.dart';
-import 'package:introspection/components/login_page_components/login_tile.dart';
-import 'package:introspection/components/login_page_components/styled_button.dart';
-import 'package:introspection/pages/registration/register_load.dart';
-import 'package:introspection/style/app_style.dart';
+import 'package:datingapp/auth/auth_page.dart';
+import 'package:datingapp/components/login_page_components/login_textfield.dart';
+import 'package:datingapp/components/login_page_components/login_tile.dart';
+import 'package:datingapp/components/login_page_components/styled_button.dart';
+import 'package:datingapp/pages/registration/register_load.dart';
+import 'package:datingapp/style/app_style.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

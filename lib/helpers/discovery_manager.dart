@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:introspection/data/custom_user.dart';
-import 'package:introspection/helpers/firebase_user_builder.dart';
+import 'package:datingapp/data/custom_user.dart';
+import 'package:datingapp/helpers/firebase_user_builder.dart';
 import 'package:flutter/services.dart';
 
 class DiscoveryManager {

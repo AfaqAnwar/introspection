@@ -1,4 +1,4 @@
-# Introspection <img src="https://github.com/AfaqAnwar/introspection/assets/50127276/09fe4c85-a41e-4cfb-9241-26b9e35e0dcc" width="3%" height="3%">
+# datingapp <img src="https://github.com/AfaqAnwar/datingapp/assets/50127276/09fe4c85-a41e-4cfb-9241-26b9e35e0dcc" width="3%" height="3%">
 
 Cross platform mobile dating application that allows users to be classified and matched based on their personality.
 
@@ -7,11 +7,12 @@ Users have a chance to chat with our AI chatbot (GPT 3.5) that asks questions in
 This project was created for our Senior Project @ NYIT.
 
 Created By:
-* Afaq Anwar
-* Sanzida Sultana
-* Miguel Delgado
-* Valerie Li
-* Prestion Taylor
+
+- Afaq Anwar
+- Sanzida Sultana
+- Miguel Delgado
+- Valerie Li
+- Prestion Taylor
 
 ## Guide To Run Project Locally
 

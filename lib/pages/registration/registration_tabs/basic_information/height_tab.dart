@@ -1,6 +1,6 @@
-import 'package:introspection/components/registration_authentication_components/cupertino_picker_object.dart';
-import 'package:introspection/data/custom_user.dart';
-import 'package:introspection/pages/registration/registration_tabs/information_tab.dart';
+import 'package:datingapp/components/registration_authentication_components/cupertino_picker_object.dart';
+import 'package:datingapp/data/custom_user.dart';
+import 'package:datingapp/pages/registration/registration_tabs/information_tab.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

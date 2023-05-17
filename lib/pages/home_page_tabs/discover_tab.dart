@@ -1,9 +1,9 @@
-import 'package:introspection/data/custom_user.dart';
-import 'package:introspection/helpers/firebase_updater.dart';
-import 'package:introspection/helpers/firebase_user_builder.dart';
-import 'package:introspection/pages/home_page_host.dart';
-import 'package:introspection/style/app_style.dart';
-import 'package:introspection/widgets/user_card.dart';
+import 'package:datingapp/data/custom_user.dart';
+import 'package:datingapp/helpers/firebase_updater.dart';
+import 'package:datingapp/helpers/firebase_user_builder.dart';
+import 'package:datingapp/pages/home_page_host.dart';
+import 'package:datingapp/style/app_style.dart';
+import 'package:datingapp/widgets/user_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

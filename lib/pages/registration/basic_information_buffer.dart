@@ -1,4 +1,4 @@
-import 'package:introspection/style/app_style.dart';
+import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart';

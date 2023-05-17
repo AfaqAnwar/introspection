@@ -1,6 +1,6 @@
-import 'package:introspection/pages/registration/register_page_host.dart';
-import 'package:introspection/pages/signin_signup/login_page.dart';
-import 'package:introspection/style/app_style.dart';
+import 'package:datingapp/pages/registration/register_page_host.dart';
+import 'package:datingapp/pages/signin_signup/login_page.dart';
+import 'package:datingapp/style/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart';
@@ -92,7 +92,7 @@ class _RegisterLoadState extends State<RegisterLoad>
                     child: Wrap(children: [
                       Center(
                         child: Text(
-                          "Welcome To introspection",
+                          "Welcome To datingapp",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: AppStyle.red800,

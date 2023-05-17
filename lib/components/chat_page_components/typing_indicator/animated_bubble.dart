@@ -1,4 +1,4 @@
-import 'package:introspection/components/chat_page_components/typing_indicator/flashing_circle.dart';
+import 'package:datingapp/components/chat_page_components/typing_indicator/flashing_circle.dart';
 import 'package:flutter/material.dart';
 
 class AnimatedBubble extends StatelessWidget {
