@@ -1,4 +1,4 @@
-# Introspection <img src="https://github.com/AfaqAnwar/datingapp/assets/50127276/09fe4c85-a41e-4cfb-9241-26b9e35e0dcc" width="3%" height="3%">
+# Introspection <img src="https://github.com/AfaqAnwar/introspection/blob/main/assets/images/logo.png?raw=true" width="3%" height="3%">
 
 Cross platform mobile dating application that allows users to be classified and matched based on their personality.
 
