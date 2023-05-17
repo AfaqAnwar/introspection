@@ -43,14 +43,13 @@ Error launching application on iPhone 14 Pro Max.
 ```
 Please follow the following steps.
 
-Delete the app in the ios Simulator.
-Run 'flutter clean'
-Run 'flutter pub get'
-
-- Delete IOS Folder in Project and run the following.
+- Delete the app in the ios Simulator and run the following commands.
+- ```flutter clean```
+- ```flutter pub get```
+- Delete IOS Folder in Project and run the following commands.
 - ```flutter create .```
 - ```flutter upgrade```
-- CD into the ios Folder and run the following.
+- CD into the ios Folder and run the following commands.
 - ```pod install```
 - ```pod update```
 
@@ -68,7 +67,7 @@ import GoogleMaps
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
-    GMSServices.provideAPIKey("AIzaSyCPry6wkb-6ghaZibqiax-PQ1ie22jKxKE")
+    GMSServices.provideAPIKey("PASTE_API_KEY_HERE")
     GeneratedPluginRegistrant.register(with: self)
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
